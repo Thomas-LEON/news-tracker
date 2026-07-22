@@ -61,12 +61,12 @@ def generate_executive_summary(articles):
         
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
-        ## [Titre de l'incident]
+        ## [Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible]
 
-        [Introduction courte de 1 ou 2 phrases adressant le probleme]
+        [Introduction courte de 1 ou 2 phrases adressant le probleme. Tu dois EXPLICITEMENT nommer les entreprises impactees, la date precise de l'evenement, et s'il s'agit d'un service cloud, sa localite exacte (ex: region AWS us-east-1, Azure West Europe, etc.)]
 
         **Overview**
-        [Un paragraphe resumant la situation globale de l'incident]
+        [Un paragraphe resumant la situation globale de l'incident, en rappelant les acteurs, la date exacte, et les details d'infrastructure cloud si applicable]
 
         **The Breach Mechanism**
         [Explication contextuelle du mecanisme]
