@@ -57,11 +57,13 @@ def generate_executive_summary(articles):
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI).
-        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier l'incident ou la menace la plus critique (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille.
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier le TOP 1 a 5 des incidents ou menaces les plus critiques (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille pour CHACUN d'entre eux. S'il n'y a qu'une ou deux actus vraiment pertinentes, n'en fais qu'une ou deux. S'il y en a plus, vas jusqu'a 5.
         
-        Tu DOIS IMPERATIVEMENT respecter LA STRUCTURE EXACTE suivante, qui est le format standard de direction :
+        Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
-        [Introduction courte de 1 ou 2 phrases adressant le probleme et l'objectif du mail]
+        ## [Titre de l'incident]
+
+        [Introduction courte de 1 ou 2 phrases adressant le probleme]
 
         **Overview**
         [Un paragraphe resumant la situation globale de l'incident]
@@ -87,7 +89,7 @@ def generate_executive_summary(articles):
         (Adapte les propositions de controles a la nature exacte de la menace !)
 
         **Conclusion**
-        [Une conclusion courte sur la lecon a tirer]
+        [Une conclusion courte sur la lecon a tirer de cet incident]
 
         **Further Reading**
         [Lien(s) pertinent(s) additionnel(s) si possible]
@@ -96,8 +98,9 @@ def generate_executive_summary(articles):
         [1. Lien de la source 1]
         [2. Lien de la source 2]
         
-        Redige ce rapport en Anglais. Utilise un ton tres professionnel, "Executive", analytique et concis.
-        Utilise des footnotes (indices comme ceci : ¹ ²) dans le texte pour lier aux sources de la section Footnotes.
+        Redige l'integralite du rapport en Anglais. Utilise un ton tres professionnel, "Executive", analytique et concis.
+        Utilise des footnotes (indices comme ceci : ¹ ²) dans le texte pour lier aux sources de la section Footnotes de chaque incident.
+        N'oublie pas de bien separer chaque incident avec '---'.
         
         Voici les articles bruts :
         """
