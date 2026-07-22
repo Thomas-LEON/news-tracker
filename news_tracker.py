@@ -56,24 +56,48 @@ def generate_executive_summary(articles):
         client = genai.Client(api_key=API_KEY, http_options={'client_args': {'verify': False}})
         
         prompt = """
-        Tu es un expert en Threat Intelligence et analyste des risques lies aux technologies emergentes (IA, Cyberattaques, etc.).
-        Voici une liste brute d'articles recuperes aujourd'hui. Ton role est de filtrer cette liste pour ne garder que le TOP 1 a 5 des incidents les plus critiques pour ton metier. (Typiquement : failles dans des modeles d'IA, attaques sur des entreprises tech, nouvelles methodes de menaces).
+        Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI).
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier l'incident ou la menace la plus critique (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille.
         
-        Pour chaque incident retenu, redige un 'Executive Summary' en francais, oriente 'Business & Risk'.
+        Tu DOIS IMPERATIVEMENT respecter LA STRUCTURE EXACTE suivante, qui est le format standard de direction :
+
+        [Introduction courte de 1 ou 2 phrases adressant le probleme et l'objectif du mail]
+
+        **Overview**
+        [Un paragraphe resumant la situation globale de l'incident]
+
+        **The Breach Mechanism**
+        [Explication contextuelle du mecanisme]
+        - [Point 1 : Titre en gras et explication]
+        - [Point 2 : Titre en gras et explication]
+        - ...
+
+        **Impact and Consequences**
+        - [Impact 1 : Titre en gras et explication]
+        - [Impact 2 : Titre en gras et explication]
+        - ...
+
+        **Proposed Control: Mitigating Threats**
+        To address the vulnerabilities exposed by this incident, I propose the implementation of the following control framework:
+        - I. Governance & Containment (Prevention): [Action proposee]
+        - II. Identity & Access Management (Containment): [Action proposee]
+        - III. Infrastructure Intelligence (Detection): [Action proposee]
+        - IV. Operational Resilience: [Action proposee]
+        - V. Simulation environment: [Action proposee]
+        (Adapte les propositions de controles a la nature exacte de la menace !)
+
+        **Conclusion**
+        [Une conclusion courte sur la lecon a tirer]
+
+        **Further Reading**
+        [Lien(s) pertinent(s) additionnel(s) si possible]
+
+        **Footnotes**
+        [1. Lien de la source 1]
+        [2. Lien de la source 2]
         
-        REGLES IMPORTANTES :
-        1. Le resume doit inclure les 5W (Who, What, When, Where, Why/How) de maniere fluide et naturelle. NE FAIS PAS de liste 'Who: ... What: ...'. Le format doit etre executif, pro, sous forme de 1 a 2 paragraphes max.
-        2. Ajoute les sources en footnotes au format Markdown (ex: [^1]).
-        
-        Format attendu pour chaque point :
-        
-        ### [Titre de l'incident / Menace]
-        **Executive Summary:**
-        [Ton resume executif fluide integrant les 5W]
-        
-        ---
-        
-        [A la toute fin de ton texte, insere les references des footnotes avec les URLs d'origine]
+        Redige ce rapport en Anglais. Utilise un ton tres professionnel, "Executive", analytique et concis.
+        Utilise des footnotes (indices comme ceci : ¹ ²) dans le texte pour lier aux sources de la section Footnotes.
         
         Voici les articles bruts :
         """
@@ -83,11 +107,21 @@ def generate_executive_summary(articles):
             clean_summary = soup.get_text()[:400]
             prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Extrait: {clean_summary}\n"
             
-        response = client.models.generate_content(
-            model='gemini-3.1-flash-lite',
-            contents=prompt,
-        )
-        return response.text
+        models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+        
+        for model_name in models_to_try:
+            try:
+                print(f"Tentative de generation avec le modele {model_name}...")
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                )
+                return response.text
+            except Exception as e:
+                print(f"Echec avec le modele {model_name}: {e}")
+                continue
+                
+        return "Erreur : Impossible de generer le rapport avec les modeles Gemini disponibles (3.6, 3.5, 3.1-lite)."
         
     except Exception as e:
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
