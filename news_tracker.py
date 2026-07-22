@@ -84,7 +84,7 @@ def generate_executive_summary(articles):
             prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Extrait: {clean_summary}\n"
             
         response = client.models.generate_content(
-            model='gemini-3.1-flash',
+            model='gemini-3.1-flash-lite',
             contents=prompt,
         )
         return response.text
