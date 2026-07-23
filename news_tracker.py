@@ -67,7 +67,7 @@ def generate_executive_summary(articles):
         
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
-        ## [Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible]
+        ## Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible
 
         **Incident Metadata:**
         - **Impacted Country:** [Pays impacte, ou "Global" / "Unknown"]
