@@ -69,78 +69,69 @@ def fetch_latest_report():
         if driver:
             driver.quit()
 
-# =====================================================================
+ =====================================================================
 # 🧠 2. Génération par l'IA (gemma-4-26b)
 # =====================================================================
-# On cache l'authentification pour éviter de refaire la danse des tokens
 @st.cache_resource
 def init_llm_auth():
     return get_auth_context()
-
-# On cache le résumé basé sur le contenu brut (si le fichier Github ne change pas, l'IA n'est pas rappelée)
 @st.cache_data(ttl=86400)
 def generate_executive_summary(content, _auth_context):
     chat = LLMChat(
-        model_id="gemma-4-26b", # Le modèle choisi
+        model_id="gemma-4-26b",
         auth_context=_auth_context,
-        high_reasoning_effort=False, # Pas besoin de bloquer 3 minutes, la synthèse est une tâche rapide
-        web_search=False # Le rapport vient déjà de GitHub
+        high_reasoning_effort=False,
+        web_search=False
     )
     
-    # Le Prompt de formatage JSON Strict
-    system_prompt = """Tu es un expert CTI qui rédige des rapports pour le Comex.
-    Analyse le rapport technique fourni par l'utilisateur et génère UNIQUEMENT un objet JSON valide avec cette structure stricte.
-    Ne renvoie aucun autre texte (pas de markdown "Voici le json", juste les accolades).
+    # Prompt renforcé pour interdire le bavardage
+    system_prompt = """Tu es un expert CTI. Analyse le rapport technique et génère UNIQUEMENT un objet JSON valide.
+    RÈGLES ABSOLUES :
+    - Ne dis pas "Bonjour" ou "Voici le rapport".
+    - Ne mets pas de texte en dehors des accolades { et }.
+    - Vérifie que toutes les guillemets sont fermées.
     
+    Structure attendue :
     {
       "threat_level": "FAIBLE, MODÉRÉ, ÉLEVÉ ou CRITIQUE",
-      "attack_vectors": "Ex: Ransomware, 0-Day...",
+      "attack_vectors": "Ex: Ransomware",
       "status": "Ex: Surveillance renforcée",
       "subjects": [
         {
-          "preview": "Une seule phrase d'accroche très courte résumant le sujet.",
-          "details": "L'explication détaillée de l'impact business et technique pour le Comex.",
-          "link": "L'URL source trouvée dans le rapport (si aucune, mets une chaine vide)"
+          "preview": "Phrase d'accroche très courte.",
+          "details": "L'explication détaillée.",
+          "link": "URL ou vide"
         }
       ]
     }
     """
     chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
+    raw_response = chat.say(f"Voici le rapport brut :\n\n{content}")
     
-    # On envoie le rapport technique
-    raw_response = chat.say(f"Voici le rapport technique du jour à synthétiser :\n\n{content}")
-    
-    # Extraction sécurisée du JSON au cas où le LLM bavarde un peu
+    # Extraction du JSON et renvoi de la réponse brute pour le debug
     try:
         json_match = re.search(r'\{.*\}', raw_response, re.DOTALL)
         if json_match:
-            return json.loads(json_match.group(0))
-        return json.loads(raw_response)
+            return json.loads(json_match.group(0)), raw_response
+        return json.loads(raw_response), raw_response
     except json.JSONDecodeError:
-        return None # Retournera None si l'IA a fait n'importe quoi
-
+        return None, raw_response # L'IA a échoué à faire du JSON
 # =====================================================================
 # 🖥️ 3. Interface Utilisateur
 # =====================================================================
 st.markdown('<h1 class="main-title">Executive Threat Intel Dashboard</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Aperçu quotidien des cybermenaces globales et recommandations stratégiques.</p>', unsafe_allow_html=True)
-
-# Lancement des tuyauteries en arrière-plan
 with st.spinner("📥 Synchronisation avec la source de renseignement..."):
     filename, content = fetch_latest_report()
-
 if not filename:
     st.error(content)
     st.stop()
-
 with st.spinner(f"🧠 L'IA (gemma-4-26b) génère l'Executive Summary pour le rapport : {filename}..."):
     auth_ctx = init_llm_auth()
-    summary = generate_executive_summary(content, auth_ctx)
-
-# Si l'IA a bien réussi à générer son JSON
+    # On récupère maintenant le summary ET la réponse brute
+    summary, raw_response = generate_executive_summary(content, auth_ctx)
+# --- SUCCÈS : L'IA a bien fait son JSON ---
 if summary:
-    # --- 1. LES KPI ---
-    # Couleurs dynamiques selon le niveau de menace
     tl_color = "#dc3545" if summary["threat_level"].upper() in ["ÉLEVÉ", "CRITIQUE"] else ("#ffc107" if "MOD" in summary["threat_level"].upper() else "#28a745")
     
     col1, col2, col3 = st.columns(3)
@@ -165,10 +156,7 @@ if summary:
             <h2 style="margin:0; color: #0d6efd; font-size: 1.5rem; padding-top: 5px;">{summary.get('status', '-')}</h2>
         </div>
         """, unsafe_allow_html=True)
-
     st.markdown("<br><br>", unsafe_allow_html=True)
-
-    # --- 2. LES SUJETS DU JOUR (Expanders demandés par le boss) ---
     st.markdown("### 📌 Synthèse Stratégique du Jour")
     
     subjects = summary.get("subjects", [])
@@ -176,19 +164,23 @@ if summary:
         st.info("Aucun sujet stratégique identifié aujourd'hui.")
         
     for sub in subjects:
-        # L'expander affiche uniquement la phrase "preview"
         with st.expander(f"🔹 {sub.get('preview', 'Sujet non défini')}"):
-            # Quand on clique, on voit les détails
             st.write(sub.get('details', ''))
-            
-            # Et le lien si l'IA l'a trouvé
             link = sub.get('link', '')
             if link and link.startswith("http"):
                 st.markdown(f"[🔗 Consulter la source originale]({link})")
-
+# --- ÉCHEC : Le modèle n'a pas renvoyé de JSON valide ---
 else:
-    st.error("🚨 L'IA n'a pas réussi à générer une synthèse valide aujourd'hui. Voici le rapport brut :")
-
+    st.error("🚨 L'IA a répondu, mais n'a pas respecté la structure attendue pour remplir le Dashboard.")
+    
+    # Bouton magique pour réessayer (vide le cache de l'IA et recharge la page)
+    if st.button("🔄 Re-générer l'analyse (Réessayer)"):
+        generate_executive_summary.clear()
+        st.rerun()
+        
+    # Le panneau Debug pour voir ce que l'IA a vraiment dit
+    with st.expander("🛠️ Mode Debug : Voir la réponse brute de l'IA"):
+        st.text(raw_response)
 # --- 3. ANNEXE TECHNIQUE ---
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.divider()
