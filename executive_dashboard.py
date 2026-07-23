@@ -63,26 +63,32 @@ REPO_NAME = "news-tracker"
 REPORTS_PATH = "reports"
 API_URL = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{REPORTS_PATH}"
 
-@st.cache_data(ttl=1800) # Met en cache pendant 30 minutes pour éviter de spammer l'API
+import urllib.request
+
+@st.cache_data(ttl=1800)
 def fetch_latest_report():
     try:
-        # 1. Lister les fichiers dans le dossier
-        response = requests.get(API_URL)
+        # 1. On récupère les proxys configurés sur ton Windows
+        system_proxies = urllib.request.getproxies()
+        
+        # 2. Lister les fichiers (avec proxies et verify=False pour passer le firewall corporate)
+        # ⚠️ verify=False ignore l'erreur SSL du proxy d'entreprise
+        response = requests.get(API_URL, proxies=system_proxies, verify=False)
         response.raise_for_status()
         files = response.json()
         
-        # 2. Filtrer les .md
+        # 3. Filtrer les .md
         md_files = [f for f in files if f['name'].endswith('.md')]
         if not md_files:
             return None, "Aucun rapport Markdown trouvé dans le repository."
             
-        # 3. Trouver le plus récent (tri alphabétique inversé, idéal si nommé par date)
+        # 4. Trouver le plus récent
         md_files.sort(key=lambda x: x['name'], reverse=True)
         latest_file = md_files[0]
         
-        # 4. Télécharger le contenu brut
+        # 5. Télécharger le contenu brut
         raw_url = latest_file['download_url']
-        report_resp = requests.get(raw_url)
+        report_resp = requests.get(raw_url, proxies=system_proxies, verify=False)
         report_resp.raise_for_status()
         
         return latest_file['name'], report_resp.text
