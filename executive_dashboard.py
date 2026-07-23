@@ -9,29 +9,44 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 # =====================================================================
-# 🛠️ Configuration du Dashboard
+# 🛠️ Configuration du Dashboard (Design Corporate Neutre)
 # =====================================================================
 st.set_page_config(
     page_title="Executive Threat Intel",
-    page_icon="🛡️",
+    page_icon="🎯",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
+# Palette basée sur le Vert Émeraude corporate sans logo
 st.markdown("""
 <style>
-    .stApp { background-color: #f8f9fa; color: #212529; }
+    .stApp { background-color: #f4f6f8; color: #2D2D2D; }
     h1, h2, h3 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1a1a1a; }
-    .main-title { font-weight: 800; margin-bottom: 0px; font-size: 2.5rem; }
-    .sub-title { color: #6c757d; font-size: 1.2rem; margin-bottom: 2rem; }
-    .metric-card { background-color: white; border-radius: 6px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    
+    .main-title { font-weight: 800; margin-bottom: 0px; font-size: 2.5rem; color: #00915A; } /* Vert Corporate */
+    .sub-title { color: #6c757d; font-size: 1.1rem; margin-bottom: 2rem; font-style: italic; }
+    
+    /* Boîte pour l'Executive Brief */
+    .exec-brief-box {
+        background-color: white; 
+        border-left: 5px solid #00915A; 
+        padding: 25px; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+        border-radius: 4px; 
+        font-size: 1.15rem; 
+        line-height: 1.6;
+        color: #2D2D2D;
+    }
+    
+    /* Design des Expanders */
+    .streamlit-expanderHeader { font-weight: 600; font-size: 1.15rem; color: #2D2D2D; }
     #MainMenu {visibility: hidden;} footer {visibility: hidden;}
-    .streamlit-expanderHeader { font-weight: 600; font-size: 1.1rem; color: #0d6efd; }
 </style>
 """, unsafe_allow_html=True)
 
 # =====================================================================
-# 📡 1. Récupération des Données
+# 📡 1. Récupération des Données (via Chrome Headless)
 # =====================================================================
 @st.cache_data(ttl=1800)
 def fetch_latest_report():
@@ -66,132 +81,135 @@ def fetch_latest_report():
             driver.quit()
 
 # =====================================================================
-# ⚙️ 2. Parsing Robuste (Python Natif, 0% IA)
+# ⚙️ 2. Parsing Hyper-Détaillé (Python Natif)
 # =====================================================================
 def parse_markdown_subjects(content):
-    """ Extrait nativement les sujets sans faire appel à l'IA pour garantir 100% de fiabilité """
+    """ Extrait toutes les informations clés de tes propres analyses markdown """
     subjects = []
-    # On découpe le document par les balises d'incident que tu utilises
     sections = re.split(r'## Titre de l\'incident :', content)
     
     for section in sections[1:]:
         lines = section.strip().split('\n')
         if not lines: continue
         
-        # Le titre est la première ligne
         preview = lines[0].strip()
         
-        # On attrape le paragraphe Overview
-        overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
-        details = overview_match.group(1).strip() if overview_match else "Pas de résumé."
+        # Extraction des Métadonnées
+        country_match = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
+        country = country_match.group(1).strip() if country_match else ""
         
-        # CORRECTION ICI : On cherche simplement le premier lien HTTP/HTTPS
+        companies_match = re.search(r'\*\*List of Companies Impacted:\*\*\s*(.*?)\n', section)
+        companies = companies_match.group(1).strip() if companies_match else ""
+        
+        overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
+        overview = overview_match.group(1).strip() if overview_match else ""
+        
+        control_match = re.search(r'\*\*Proposed Control: Mitigating Threats\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
+        control = control_match.group(1).strip() if control_match else ""
+        
         link_match = re.search(r'(https?://[^\s]+)', section)
         link = link_match.group(1).strip() if link_match else ""
         
-        subjects.append({"preview": preview, "details": details, "link": link})
+        subjects.append({
+            "preview": preview,
+            "country": country,
+            "companies": companies,
+            "overview": overview,
+            "control": control,
+            "link": link
+        })
         
     return subjects
+
 # =====================================================================
-# 🧠 3. IA : Uniquement pour les 3 encarts (LLM Interne)
+# 🧠 3. IA : Rédaction de l'Executive Brief (Narratif)
 # =====================================================================
 @st.cache_resource
 def init_llm_auth():
     return get_auth_context()
 
 @st.cache_data(ttl=86400)
-def generate_executive_kpis(content, _auth_context):
+def generate_executive_brief(content, _auth_context):
     models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
     
-    system_prompt = """Tu es un expert CTI. Analyse ce rapport technique et génère UNIQUEMENT un JSON avec 3 clés.
-    
-    EXEMPLE DE RÉPONSE STRICTE :
-    {
-      "threat_level": "ÉLEVÉ",
-      "attack_vectors": "Ex: 0-Day, Distillation IA, Phishing",
-      "status": "Ex: Patch Urgent Requis"
-    }
+    system_prompt = """Tu es un expert CTI rédigeant un "Executive Brief" pour le Comex.
+    Rédige UN SEUL paragraphe percutant (max 3 ou 4 phrases) qui résume le paysage des menaces globales du rapport fourni.
+    Va droit au but : quels sont les risques majeurs et l'impact potentiel. 
+    RÈGLES ABSOLUES :
+    - Ne dis pas "Bonjour" ni "Voici le résumé". Commence directement par le contenu.
+    - Utilise un ton ultra-professionnel, neutre et stratégique.
     """
     
     for model_id in models_to_try:
         try:
-            # On désactive le Reasoning pour ça, c'est trop basique pour nécessiter 2 minutes de réflexion
             chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=False, web_search=False)
             chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
             
-            raw_response = chat.say(f"Donne le niveau de menace global pour ce rapport :\n\n{content}")
-            
-            json_match = re.search(r'\{.*\}', raw_response, re.DOTALL)
-            if json_match:
-                return json.loads(json_match.group(0))
-            return json.loads(raw_response)
+            raw_response = chat.say(f"Rédige l'Executive Brief pour ce rapport :\n\n{content}")
+            # Si on a récupéré une phrase de plus de 20 caractères, c'est bon !
+            if raw_response and len(raw_response) > 20:
+                return raw_response
         except Exception:
-            continue # Si ça plante, on tente le modèle suivant
+            continue
             
-    return {} # Si tout échoue, renvoie un dictionnaire vide
+    return "L'intelligence artificielle n'est actuellement pas disponible pour résumer ce rapport."
 
 # =====================================================================
 # 🖥️ 4. Interface Utilisateur
 # =====================================================================
-st.markdown('<h1 class="main-title">Executive Threat Intel Dashboard</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Aperçu quotidien des cybermenaces globales et recommandations stratégiques.</p>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">Daily Cyber Threat Briefing</h1>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Aperçu stratégique des cybermenaces globales et de leurs impacts sectoriels.</p>', unsafe_allow_html=True)
 
-with st.spinner("📥 Récupération du rapport GitHub en cours..."):
+with st.spinner("📥 Importation des données de renseignement..."):
     filename, content = fetch_latest_report()
 
 if not filename:
     st.error(content)
     st.stop()
 
-# Extraction 100% sûre en Python (zéro temps d'attente)
 native_subjects = parse_markdown_subjects(content)
 
-with st.spinner("🧠 Évaluation de la criticité globale par l'IA..."):
+# --- 1. L'EXECUTIVE BRIEF (Généré par l'IA) ---
+with st.spinner("🧠 Rédaction du Brief Stratégique par l'IA..."):
     auth_ctx = init_llm_auth()
-    kpis = generate_executive_kpis(content, auth_ctx) or {}
+    exec_brief = generate_executive_brief(content, auth_ctx)
 
-# --- AFFICHER LES KPI (IA) ---
-tl_val = str(kpis.get("threat_level", "À ÉVALUER")).upper()
-tl_color = "#dc3545" if any(x in tl_val for x in ["ÉLEVÉ", "ELEVE", "CRITIQUE", "HIGH"]) else ("#ffc107" if "MOD" in tl_val else "#28a745")
-
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.markdown(f"""
-    <div class="metric-card" style="border-left: 5px solid {tl_color};">
-        <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Niveau de Menace</h4>
-        <h2 style="margin:0; color: {tl_color};">{tl_val}</h2>
-    </div>
-    """, unsafe_allow_html=True)
-with col2:
-    st.markdown(f"""
-    <div class="metric-card" style="border-left: 5px solid #343a40;">
-        <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Vecteurs Principaux</h4>
-        <h2 style="margin:0; color: #343a40; font-size: 1.5rem; padding-top: 5px;">{kpis.get('attack_vectors', '-')}</h2>
-    </div>
-    """, unsafe_allow_html=True)
-with col3:
-    st.markdown(f"""
-    <div class="metric-card" style="border-left: 5px solid #0d6efd;">
-        <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Statut / Recommandation</h4>
-        <h2 style="margin:0; color: #0d6efd; font-size: 1.5rem; padding-top: 5px;">{kpis.get('status', '-')}</h2>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("### 🎯 Executive Summary")
+st.markdown(f"<div class='exec-brief-box'>{exec_brief}</div>", unsafe_allow_html=True)
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 
-# --- AFFICHER LES SUJETS (Python Natif) ---
-st.markdown("### 📌 Synthèse Stratégique du Jour")
+# --- 2. LES DÉTAILS STRATÉGIQUES (Tirés de tes propres analyses) ---
+st.markdown("### 📋 Détail des Incidents Majeurs")
 
 if not native_subjects:
-    st.warning("Aucun incident détecté dans le rapport (vérifier le format Markdown).")
+    st.warning("Aucun incident détecté dans le format attendu.")
 else:
     for sub in native_subjects:
-        with st.expander(f"🔹 {sub['preview']}"):
-            st.write(sub['details'])
+        # L'Expander affiche le gros titre
+        with st.expander(f"🚨 {sub['preview']}"):
+            
+            # Les tags visuels pour les pays et entreprises
+            meta_html = "<div style='margin-bottom:15px; color:#6c757d; font-size:0.95rem;'>"
+            if sub['country']:
+                meta_html += f"🌍 <b>Zone Géographique:</b> {sub['country']} &nbsp;&nbsp;|&nbsp;&nbsp; "
+            if sub['companies']:
+                meta_html += f"🏢 <b>Cibles / Secteurs:</b> {sub['companies']}"
+            meta_html += "</div>"
+            st.markdown(meta_html, unsafe_allow_html=True)
+            
+            # Ton Overview
+            st.markdown(f"**Contexte de l'incident :**\n{sub['overview']}")
+            
+            # Tes recommandations (Proposed Controls)
+            if sub['control']:
+                st.markdown(f"**🛡️ Contrôles Proposés :**\n{sub['control']}")
+                
+            # Le lien source
             if sub['link']:
-                st.markdown(f"[🔗 Consulter la source originale]({sub['link']})")
+                st.markdown(f"<br>[🔗 Consulter la source de l'incident]({sub['link']})", unsafe_allow_html=True)
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.divider()
-with st.expander("⚙️ Afficher le rapport technique brut complet (Annexe SOC)"):
+with st.expander("⚙️ Afficher le rapport brut original"):
     st.markdown(content)
