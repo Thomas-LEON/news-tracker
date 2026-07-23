@@ -69,29 +69,24 @@ def fetch_latest_report():
         if driver:
             driver.quit()
 
-#=====================================================================
-# 🧠 2. Génération par l'IA (gemma-4-26b)
+# =====================================================================
+# 🧠 2. Génération par l'IA (Avec système de Fallback et Reasoning)
 # =====================================================================
 @st.cache_resource
 def init_llm_auth():
     return get_auth_context()
+
 @st.cache_data(ttl=86400)
 def generate_executive_summary(content, _auth_context):
-    chat = LLMChat(
-        model_id="gemma-4-26b",
-        auth_context=_auth_context,
-        high_reasoning_effort=False,
-        web_search=False
-    )
+    # L'ordre de priorité : on commence par les plus puissants
+    models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
     
-        # Prompt renforcé avec un "One-Shot Example" pour forcer le comportement
     system_prompt = """Tu es un expert CTI qui rédige des rapports pour le Comex.
-    Analyse le rapport technique fourni par l'utilisateur et génère UNIQUEMENT un objet JSON valide.
+    Analyse le rapport technique et génère UNIQUEMENT un objet JSON valide.
     
     RÈGLES ABSOLUES :
-    1. Ne dis JAMAIS "Bonjour" ou "Voici le résumé". Renvoie UNIQUEMENT les accolades JSON { }.
-    2. Tu DOIS extraire et lister TOUS les sujets traités dans le rapport (pas seulement le premier !).
-    3. Respecte scrupuleusement la structure ci-dessous.
+    1. Ne dis JAMAIS "Bonjour". Renvoie UNIQUEMENT les accolades JSON { }.
+    2. Tu DOIS extraire et lister TOUS les sujets traités dans le rapport. Ne t'arrête pas au premier.
     
     EXEMPLE DE RÉPONSE ATTENDUE :
     {
@@ -100,29 +95,47 @@ def generate_executive_summary(content, _auth_context):
       "status": "Alerte globale",
       "subjects": [
         {
-          "preview": "Vulnérabilité critique dans le VPN Pulse Secure",
-          "details": "Une faille 0-day permet l'exécution de code à distance, patch urgent requis.",
-          "link": "https://lien-source-trouve.com"
-        },
-        {
-          "preview": "Nouvelle campagne de Phishing visant le secteur bancaire",
-          "details": "Des emails frauduleux usurpent l'identité de partenaires financiers.",
-          "link": ""
+          "preview": "Vulnérabilité critique Pulse Secure",
+          "details": "Faille 0-day permettant l'exécution de code à distance, patch urgent requis.",
+          "link": "https://source.com"
         }
       ]
     }
     """
-    chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
-    raw_response = chat.say(f"Voici le rapport brut :\n\n{content}")
     
-    # Extraction du JSON et renvoi de la réponse brute pour le debug
-    try:
-        json_match = re.search(r'\{.*\}', raw_response, re.DOTALL)
-        if json_match:
-            return json.loads(json_match.group(0)), raw_response
-        return json.loads(raw_response), raw_response
-    except json.JSONDecodeError:
-        return None, raw_response # L'IA a échoué à faire du JSON
+    last_raw_response = ""
+    
+    # --- BOUCLE DE FALLBACK ---
+    for model_id in models_to_try:
+        try:
+            # On instancie le chat avec le modèle en cours et ton idée de "Reasoning"
+            chat = LLMChat(
+                model_id=model_id,
+                auth_context=_auth_context,
+                high_reasoning_effort=True, # Donne le temps à l'IA de planifier sa réponse sans couper
+                web_search=False
+            )
+            chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
+            
+            # On lance l'inférence
+            raw_response = chat.say(f"Synthétise TOUT le rapport suivant en JSON :\n\n{content}")
+            last_raw_response = raw_response
+            
+            # Extraction JSON robuste
+            json_match = re.search(r'\{.*\}', raw_response, re.DOTALL)
+            if json_match:
+                return json.loads(json_match.group(0)), raw_response
+            else:
+                return json.loads(raw_response), raw_response
+                
+        except Exception as e:
+            # Si le JSON est mal formé ou si l'API coupe au milieu (Token limit)
+            # On ignore l'erreur, la boucle continue avec le prochain modèle de la liste !
+            print(f"⚠️ Échec avec le modèle {model_id}, passage au suivant... (Erreur: {str(e)})")
+            continue
+            
+    # Si TOUS les modèles ont échoué, on renvoie une erreur propre
+    return None, last_raw_response
 # =====================================================================
 # 🖥️ 3. Interface Utilisateur
 # =====================================================================
