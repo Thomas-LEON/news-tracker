@@ -1,183 +1,196 @@
 import streamlit as st
-import requests
 import json
-from llm import ConfigLoader  # On réutilise ta propre config !
+import re
+
+# Imports spécifiques (llm et selenium)
+from llm import get_auth_context, LLMChat, ConfigLoader
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+
 # =====================================================================
-# 🛠️ Configuration du Dashboard Executive
+# 🛠️ Configuration du Dashboard
 # =====================================================================
 st.set_page_config(
     page_title="Executive Threat Intel",
     page_icon="🛡️",
     layout="wide",
-    initial_sidebar_state="collapsed" # On cache la sidebar pour un look plus épuré
+    initial_sidebar_state="collapsed"
 )
 
-# =====================================================================
-# 🎨 Style CSS "Corporate & Clean"
-# =====================================================================
 st.markdown("""
 <style>
-    /* Fond très clair et lisible */
-    .stApp {
-        background-color: #f8f9fa;
-        color: #212529;
-    }
+    .stApp { background-color: #f8f9fa; color: #212529; }
+    h1, h2, h3 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1a1a1a; }
+    .main-title { font-weight: 800; margin-bottom: 0px; font-size: 2.5rem; }
+    .sub-title { color: #6c757d; font-size: 1.2rem; margin-bottom: 2rem; }
+    .metric-card { background-color: white; border-radius: 6px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    #MainMenu {visibility: hidden;} footer {visibility: hidden;}
     
-    /* Titres avec une police très "Business" */
-    h1, h2, h3 {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        color: #1a1a1a;
-    }
-    
-    .main-title {
-        font-weight: 800;
-        margin-bottom: 0px;
-        font-size: 2.5rem;
-    }
-    
-    .sub-title {
-        color: #6c757d;
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-    }
-    
-    /* Cartes d'indicateurs (KPI) */
-    .metric-card {
-        background-color: white;
-        border-radius: 6px;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        border-left: 5px solid #0d6efd;
-    }
-    
-    /* On cache les logos Streamlit pour faire plus pro */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+    /* Style pour rendre les titres des Expanders plus "Executive" */
+    .streamlit-expanderHeader { font-weight: 600; font-size: 1.1rem; color: #0d6efd; }
 </style>
 """, unsafe_allow_html=True)
 
 # =====================================================================
-# 📡 Fonction de récupération GitHub (avec cache)
+# 📡 1. Récupération des Données (via Chrome Headless)
 # =====================================================================
-REPO_OWNER = "Thomas-LEON"
-REPO_NAME = "news-tracker"
-REPORTS_PATH = "reports"
-API_URL = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{REPORTS_PATH}"
-
-import urllib.request
-
 @st.cache_data(ttl=1800)
 def fetch_latest_report():
     driver = None
     try:
-        # On utilise exactement ton ChromeDriver configuré dans llm.py
         chromedriver_path = ConfigLoader.get_chromedriver_path()
-        
         options = ChromeOptions()
-        options.add_argument("--headless") # Mode invisible (la fenêtre ne s'ouvre pas)
+        options.add_argument("--headless")
         options.add_argument("--disable-extensions")
         
         service = ChromeService(executable_path=chromedriver_path)
         driver = webdriver.Chrome(service=service, options=options)
         
-        # 1. Chrome va chercher la liste des fichiers (Chrome passe le proxy tout seul !)
-        api_url = "https://api.github.com/repos/Thomas-LEON/news-tracker/contents/reports"
-        driver.get(api_url)
-        
-        # Chrome affiche le JSON brut dans la balise <body>
+        # Récupération de la liste des fichiers
+        driver.get("https://api.github.com/repos/Thomas-LEON/news-tracker/contents/reports")
         json_text = driver.find_element("tag name", "body").text
         files = json.loads(json_text)
         
-        # 2. Filtrer les .md et trouver le plus récent
         md_files = [f for f in files if isinstance(f, dict) and f.get('name', '').endswith('.md')]
         if not md_files:
-            return None, "Aucun rapport Markdown trouvé dans le repository."
+            return None, "Aucun rapport trouvé."
             
         md_files.sort(key=lambda x: x['name'], reverse=True)
         latest_file = md_files[0]
         
-        # 3. Chrome va chercher le contenu brut du rapport
+        # Récupération du contenu
         driver.get(latest_file['download_url'])
         content = driver.find_element("tag name", "body").text
-        
         return latest_file['name'], content
-        
     except Exception as e:
-        return None, f"Erreur de synchronisation via Chrome : {str(e)}"
+        return None, f"Erreur Chrome : {str(e)}"
     finally:
         if driver:
-            driver.quit() # On ferme Chrome proprement en arrière-plan
+            driver.quit()
 
 # =====================================================================
-# 🖥️ Interface Utilisateur (UI)
+# 🧠 2. Génération par l'IA (gemma-4-26b)
 # =====================================================================
+# On cache l'authentification pour éviter de refaire la danse des tokens
+@st.cache_resource
+def init_llm_auth():
+    return get_auth_context()
 
+# On cache le résumé basé sur le contenu brut (si le fichier Github ne change pas, l'IA n'est pas rappelée)
+@st.cache_data(ttl=86400)
+def generate_executive_summary(content, _auth_context):
+    chat = LLMChat(
+        model_id="gemma-4-26b", # Le modèle choisi
+        auth_context=_auth_context,
+        high_reasoning_effort=False, # Pas besoin de bloquer 3 minutes, la synthèse est une tâche rapide
+        web_search=False # Le rapport vient déjà de GitHub
+    )
+    
+    # Le Prompt de formatage JSON Strict
+    system_prompt = """Tu es un expert CTI qui rédige des rapports pour le Comex.
+    Analyse le rapport technique fourni par l'utilisateur et génère UNIQUEMENT un objet JSON valide avec cette structure stricte.
+    Ne renvoie aucun autre texte (pas de markdown "Voici le json", juste les accolades).
+    
+    {
+      "threat_level": "FAIBLE, MODÉRÉ, ÉLEVÉ ou CRITIQUE",
+      "attack_vectors": "Ex: Ransomware, 0-Day...",
+      "status": "Ex: Surveillance renforcée",
+      "subjects": [
+        {
+          "preview": "Une seule phrase d'accroche très courte résumant le sujet.",
+          "details": "L'explication détaillée de l'impact business et technique pour le Comex.",
+          "link": "L'URL source trouvée dans le rapport (si aucune, mets une chaine vide)"
+        }
+      ]
+    }
+    """
+    chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
+    
+    # On envoie le rapport technique
+    raw_response = chat.say(f"Voici le rapport technique du jour à synthétiser :\n\n{content}")
+    
+    # Extraction sécurisée du JSON au cas où le LLM bavarde un peu
+    try:
+        json_match = re.search(r'\{.*\}', raw_response, re.DOTALL)
+        if json_match:
+            return json.loads(json_match.group(0))
+        return json.loads(raw_response)
+    except json.JSONDecodeError:
+        return None # Retournera None si l'IA a fait n'importe quoi
+
+# =====================================================================
+# 🖥️ 3. Interface Utilisateur
+# =====================================================================
 st.markdown('<h1 class="main-title">Executive Threat Intel Dashboard</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Aperçu quotidien des cybermenaces globales et recommandations stratégiques.</p>', unsafe_allow_html=True)
 
-# Récupération des données
-with st.spinner("Synchronisation des données de renseignement en cours..."):
+# Lancement des tuyauteries en arrière-plan
+with st.spinner("📥 Synchronisation avec la source de renseignement..."):
     filename, content = fetch_latest_report()
 
 if not filename:
     st.error(content)
     st.stop()
 
-# --- Section : Executive Summary (Mock) ---
-st.markdown(f"**Source de données active :** `{filename}`")
+with st.spinner(f"🧠 L'IA (gemma-4-26b) génère l'Executive Summary pour le rapport : {filename}..."):
+    auth_ctx = init_llm_auth()
+    summary = generate_executive_summary(content, auth_ctx)
 
-# Ces KPI sont "statiques" pour le moment, c'est ici que l'API LLM viendra briller plus tard
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.markdown("""
-    <div class="metric-card" style="border-left-color: #dc3545;">
-        <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Niveau de Menace Actuel</h4>
-        <h2 style="margin:0; color: #dc3545;">ÉLEVÉ</h2>
-    </div>
-    """, unsafe_allow_html=True)
-with col2:
-    st.markdown("""
-    <div class="metric-card" style="border-left-color: #ffc107;">
-        <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Vecteurs d'Attaque Majeurs</h4>
-        <h2 style="margin:0; color: #343a40;">À évaluer</h2>
-    </div>
-    """, unsafe_allow_html=True)
-with col3:
-    st.markdown("""
-    <div class="metric-card" style="border-left-color: #0d6efd;">
-        <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Statut des Opérations</h4>
-        <h2 style="margin:0; color: #0d6efd;">Analyse en cours</h2>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# --- Section : Contenu Brut ---
-st.markdown("### 📄 Rapport d'Analyse (Vue Détaillée)")
-
-# On utilise un Expander pour ne pas effrayer les C-Level avec un mur de texte technique
-# Ils peuvent le déplier s'ils veulent voir la technique
-with st.container():
-    st.markdown("""
-    <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-    """, unsafe_allow_html=True)
+# Si l'IA a bien réussi à générer son JSON
+if summary:
+    # --- 1. LES KPI ---
+    # Couleurs dynamiques selon le niveau de menace
+    tl_color = "#dc3545" if summary["threat_level"].upper() in ["ÉLEVÉ", "CRITIQUE"] else ("#ffc107" if "MOD" in summary["threat_level"].upper() else "#28a745")
     
-    st.markdown(content) # Affiche le markdown directement depuis Github
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 5px solid {tl_color};">
+            <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Niveau de Menace</h4>
+            <h2 style="margin:0; color: {tl_color};">{summary.get('threat_level', 'INCONNU')}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 5px solid #343a40;">
+            <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Vecteurs d'Attaque</h4>
+            <h2 style="margin:0; color: #343a40; font-size: 1.5rem; padding-top: 5px;">{summary.get('attack_vectors', '-')}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    with col3:
+        st.markdown(f"""
+        <div class="metric-card" style="border-left: 5px solid #0d6efd;">
+            <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Statut / Recommandation</h4>
+            <h2 style="margin:0; color: #0d6efd; font-size: 1.5rem; padding-top: 5px;">{summary.get('status', '-')}</h2>
+        </div>
+        """, unsafe_allow_html=True)
 
-# =====================================================================
-# 💡 Vision pour la V2 (LLM Integration)
-# =====================================================================
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # --- 2. LES SUJETS DU JOUR (Expanders demandés par le boss) ---
+    st.markdown("### 📌 Synthèse Stratégique du Jour")
+    
+    subjects = summary.get("subjects", [])
+    if not subjects:
+        st.info("Aucun sujet stratégique identifié aujourd'hui.")
+        
+    for sub in subjects:
+        # L'expander affiche uniquement la phrase "preview"
+        with st.expander(f"🔹 {sub.get('preview', 'Sujet non défini')}"):
+            # Quand on clique, on voit les détails
+            st.write(sub.get('details', ''))
+            
+            # Et le lien si l'IA l'a trouvé
+            link = sub.get('link', '')
+            if link and link.startswith("http"):
+                st.markdown(f"[🔗 Consulter la source originale]({link})")
+
+else:
+    st.error("🚨 L'IA n'a pas réussi à générer une synthèse valide aujourd'hui. Voici le rapport brut :")
+
+# --- 3. ANNEXE TECHNIQUE ---
+st.markdown("<br><br>", unsafe_allow_html=True)
 st.divider()
-with st.expander("Stratégie pour la V2 (Résumés par IA)"):
-    st.info("""
-    **Ce que fera le LLM interne dans la V2 :**
-    1. Il lira le gros bloc de texte technique ci-dessus en arrière-plan.
-    2. Il en déduira dynamiquement le "Niveau de Menace" (Elevé/Modéré/Faible).
-    3. Il écrira 3 "Bullet Points" exécutifs spécifiquement pour le board de direction (Impact financier, risques, recommandations).
-    4. On injectera ces résultats dans les KPI en haut, et on masquera le texte technique dans un onglet "Annexe".
-    """)
+with st.expander("⚙️ Afficher le rapport technique brut complet (Annexe SOC)"):
+    st.markdown(content)
