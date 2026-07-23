@@ -2,51 +2,108 @@ import streamlit as st
 import json
 import re
 
-# Imports spécifiques (llm et selenium)
 from llm import get_auth_context, LLMChat, ConfigLoader
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 # =====================================================================
-# 🛠️ Configuration du Dashboard (Design Corporate Neutre)
+# PAGE CONFIG
 # =====================================================================
 st.set_page_config(
-    page_title="Executive Threat Intel",
+    page_title="Daily Cyber Threat Briefing",
     page_icon="🎯",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Palette basée sur le Vert Émeraude corporate sans logo
+# =====================================================================
+# DESIGN SYSTEM (Corporate Neutral — Emerald Accent)
+# =====================================================================
 st.markdown("""
 <style>
-    .stApp { background-color: #f4f6f8; color: #2D2D2D; }
-    h1, h2, h3 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1a1a1a; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     
-    .main-title { font-weight: 800; margin-bottom: 0px; font-size: 2.5rem; color: #00915A; } /* Vert Corporate */
-    .sub-title { color: #6c757d; font-size: 1.1rem; margin-bottom: 2rem; font-style: italic; }
-    
-    /* Boîte pour l'Executive Brief */
-    .exec-brief-box {
-        background-color: white; 
-        border-left: 5px solid #00915A; 
-        padding: 25px; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-        border-radius: 4px; 
-        font-size: 1.15rem; 
-        line-height: 1.6;
-        color: #2D2D2D;
+    .stApp { background-color: #f4f6f8; font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, p, span, div { font-family: 'Inter', sans-serif; }
+
+    /* Header */
+    .dashboard-header {
+        padding: 30px 0 10px 0;
     }
+    .dashboard-header h1 {
+        font-size: 2.2rem; font-weight: 800; color: #1a1a1a; margin-bottom: 2px;
+    }
+    .dashboard-header p {
+        color: #6c757d; font-size: 1rem; margin-top: 0;
+    }
+
+    /* Traffic Light Banner */
+    .traffic-banner {
+        padding: 18px 25px; border-radius: 6px; margin-bottom: 30px;
+        display: flex; align-items: center; gap: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .traffic-banner .dot {
+        width: 16px; height: 16px; border-radius: 50%; display: inline-block;
+        box-shadow: 0 0 8px currentColor;
+    }
+    .traffic-banner .label {
+        font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .traffic-banner .bluf-text {
+        font-size: 1.05rem; line-height: 1.6; margin-top: 8px;
+    }
+    .banner-red    { background-color: #fff5f5; border-left: 5px solid #dc3545; }
+    .banner-red .dot { background-color: #dc3545; color: #dc3545; }
+    .banner-red .label { color: #dc3545; }
+    .banner-amber  { background-color: #fff9e6; border-left: 5px solid #e6a817; }
+    .banner-amber .dot { background-color: #e6a817; color: #e6a817; }
+    .banner-amber .label { color: #e6a817; }
+    .banner-green  { background-color: #f0faf4; border-left: 5px solid #00915A; }
+    .banner-green .dot { background-color: #00915A; color: #00915A; }
+    .banner-green .label { color: #00915A; }
+
+    /* Pillar Cards */
+    .pillar-card {
+        background-color: white; border-radius: 6px; padding: 22px 25px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05); height: 100%; 
+        border-top: 4px solid #00915A;
+    }
+    .pillar-card h4 {
+        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px;
+        color: #6c757d; margin-bottom: 12px; font-weight: 600;
+    }
+    .pillar-card .pillar-body {
+        font-size: 0.95rem; line-height: 1.7; color: #2D2D2D;
+    }
+
+    /* Section Titles */
+    .section-title {
+        font-size: 1.1rem; font-weight: 700; color: #1a1a1a;
+        margin-top: 35px; margin-bottom: 15px;
+        padding-bottom: 8px; border-bottom: 2px solid #00915A;
+        display: inline-block;
+    }
+
+    /* Expander styling */
+    .streamlit-expanderHeader { font-weight: 600; font-size: 1.05rem; color: #2D2D2D; }
     
-    /* Design des Expanders */
-    .streamlit-expanderHeader { font-weight: 600; font-size: 1.15rem; color: #2D2D2D; }
+    /* Metadata tags */
+    .meta-tag {
+        display: inline-block; background-color: #e9ecef; color: #495057;
+        padding: 3px 10px; border-radius: 3px; font-size: 0.8rem; margin-right: 6px;
+        font-weight: 500;
+    }
+
+    /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;} footer {visibility: hidden;}
+    header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
 # =====================================================================
-# 📡 1. Récupération des Données (via Chrome Headless)
+# 📡 1. DATA FETCHING (Chrome Headless — Proxy Bypass)
 # =====================================================================
 @st.cache_data(ttl=1800)
 def fetch_latest_report():
@@ -66,7 +123,7 @@ def fetch_latest_report():
         
         md_files = [f for f in files if isinstance(f, dict) and f.get('name', '').endswith('.md')]
         if not md_files:
-            return None, "Aucun rapport trouvé."
+            return None, "No reports found in the repository."
             
         md_files.sort(key=lambda x: x['name'], reverse=True)
         latest_file = md_files[0]
@@ -75,18 +132,17 @@ def fetch_latest_report():
         content = driver.find_element("tag name", "body").text
         return latest_file['name'], content
     except Exception as e:
-        return None, f"Erreur Chrome : {str(e)}"
+        return None, f"Data sync error: {str(e)}"
     finally:
         if driver:
             driver.quit()
 
 # =====================================================================
-# ⚙️ 2. Parsing Hyper-Détaillé (Python Natif)
+# ⚙️ 2. NATIVE MARKDOWN PARSER (Python — 100% Reliable)
 # =====================================================================
-def parse_markdown_subjects(content):
-    """ Extrait toutes les informations clés de tes propres analyses markdown """
+def parse_incidents(content):
     subjects = []
-    sections = re.split(r'## Titre de l\'incident :', content)
+    sections = re.split(r'## Titre de l\'incident\s*:', content)
     
     for section in sections[1:]:
         lines = section.strip().split('\n')
@@ -94,35 +150,36 @@ def parse_markdown_subjects(content):
         
         preview = lines[0].strip()
         
-        # Extraction des Métadonnées
         country_match = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
         country = country_match.group(1).strip() if country_match else ""
         
         companies_match = re.search(r'\*\*List of Companies Impacted:\*\*\s*(.*?)\n', section)
         companies = companies_match.group(1).strip() if companies_match else ""
         
-        overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
+        overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
         overview = overview_match.group(1).strip() if overview_match else ""
         
-        control_match = re.search(r'\*\*Proposed Control: Mitigating Threats\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
+        breach_match = re.search(r'\*\*The Breach Mechanism\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
+        breach = breach_match.group(1).strip() if breach_match else ""
+        
+        impact_match = re.search(r'\*\*Impact and Consequences\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
+        impact = impact_match.group(1).strip() if impact_match else ""
+        
+        control_match = re.search(r'\*\*Proposed Control.*?\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
         control = control_match.group(1).strip() if control_match else ""
         
         link_match = re.search(r'(https?://[^\s]+)', section)
         link = link_match.group(1).strip() if link_match else ""
         
         subjects.append({
-            "preview": preview,
-            "country": country,
-            "companies": companies,
-            "overview": overview,
-            "control": control,
-            "link": link
+            "preview": preview, "country": country, "companies": companies,
+            "overview": overview, "breach": breach, "impact": impact,
+            "control": control, "link": link
         })
-        
     return subjects
 
 # =====================================================================
-# 🧠 3. IA : Rédaction de l'Executive Brief (Narratif)
+# 🧠 3. AI ENGINE (Executive Brief Generation)
 # =====================================================================
 @st.cache_resource
 def init_llm_auth():
@@ -132,84 +189,169 @@ def init_llm_auth():
 def generate_executive_brief(content, _auth_context):
     models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
     
-    system_prompt = """Tu es un expert CTI rédigeant un "Executive Brief" pour le Comex.
-    Rédige UN SEUL paragraphe percutant (max 3 ou 4 phrases) qui résume le paysage des menaces globales du rapport fourni.
-    Va droit au but : quels sont les risques majeurs et l'impact potentiel. 
-    RÈGLES ABSOLUES :
-    - Ne dis pas "Bonjour" ni "Voici le résumé". Commence directement par le contenu.
-    - Utilise un ton ultra-professionnel, neutre et stratégique.
+    system_prompt = """You are a senior Cyber Threat Intelligence analyst writing a daily brief for the Board of Directors.
+    Analyze the technical report and produce ONLY a valid JSON object. No greetings, no markdown, just the JSON braces.
+
+    ABSOLUTE RULES:
+    - Write everything in ENGLISH.
+    - Use BUSINESS language. NEVER use technical jargon (no CVE numbers, no hashes, no malware family names).
+    - Be concise and impactful. Executives have 30 seconds.
+
+    STRICT JSON STRUCTURE:
+    {
+      "traffic_light": "RED or AMBER or GREEN",
+      "bluf": "One or two sentences. The single most important takeaway for the board. What is happening and does it affect us.",
+      "threat_landscape": "Two or three bullet points separated by newlines. Who is attacking, why, and how fast is the threat evolving.",
+      "business_impact": "Two or three bullet points separated by newlines. Financial, operational, legal and reputational risks in business terms.",
+      "recommendations": "Two or three bullet points separated by newlines. Clear actions or decisions required from leadership."
+    }
     """
     
     for model_id in models_to_try:
         try:
-            chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=False, web_search=False)
+            chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=True, web_search=False)
             chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
+            raw = chat.say(f"Produce the executive brief JSON for this report:\n\n{content}")
             
-            raw_response = chat.say(f"Rédige l'Executive Brief pour ce rapport :\n\n{content}")
-            # Si on a récupéré une phrase de plus de 20 caractères, c'est bon !
-            if raw_response and len(raw_response) > 20:
-                return raw_response
+            json_match = re.search(r'\{.*\}', raw, re.DOTALL)
+            if json_match:
+                parsed = json.loads(json_match.group(0))
+                if "bluf" in parsed:
+                    return parsed, raw
+            return json.loads(raw), raw
         except Exception:
             continue
-            
-    return "L'intelligence artificielle n'est actuellement pas disponible pour résumer ce rapport."
+    return None, ""
 
 # =====================================================================
-# 🖥️ 4. Interface Utilisateur
+# 🖥️ 4. USER INTERFACE
 # =====================================================================
-st.markdown('<h1 class="main-title">Daily Cyber Threat Briefing</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Aperçu stratégique des cybermenaces globales et de leurs impacts sectoriels.</p>', unsafe_allow_html=True)
 
-with st.spinner("📥 Importation des données de renseignement..."):
+# --- HEADER ---
+st.markdown("""
+<div class="dashboard-header">
+    <h1>🎯 Daily Cyber Threat Briefing</h1>
+    <p>Strategic overview of global cyber threats and their operational impact.</p>
+</div>
+""", unsafe_allow_html=True)
+
+# --- DATA LOADING ---
+with st.spinner("Synchronising intelligence feed..."):
     filename, content = fetch_latest_report()
 
 if not filename:
     st.error(content)
     st.stop()
 
-native_subjects = parse_markdown_subjects(content)
+incidents = parse_incidents(content)
 
-# --- 1. L'EXECUTIVE BRIEF (Généré par l'IA) ---
-with st.spinner("🧠 Rédaction du Brief Stratégique par l'IA..."):
+# Extract date from filename for display
+report_date = filename.replace(".md", "").replace("_", " ")
+st.caption(f"📅 Source: `{filename}` — {len(incidents)} incident(s) identified")
+
+with st.spinner("AI is drafting the Executive Summary..."):
     auth_ctx = init_llm_auth()
-    exec_brief = generate_executive_brief(content, auth_ctx)
+    brief, raw_ai = generate_executive_brief(content, auth_ctx)
 
-st.markdown("### 🎯 Executive Summary")
-st.markdown(f"<div class='exec-brief-box'>{exec_brief}</div>", unsafe_allow_html=True)
+# =====================================================================
+# SECTION A — THE BLUF + TRAFFIC LIGHT
+# =====================================================================
+if brief and isinstance(brief, dict) and "bluf" in brief:
+    
+    tl = str(brief.get("traffic_light", "AMBER")).upper()
+    if "RED" in tl:
+        banner_class, tl_label = "banner-red", "HIGH THREAT"
+    elif "GREEN" in tl:
+        banner_class, tl_label = "banner-green", "LOW THREAT"
+    else:
+        banner_class, tl_label = "banner-amber", "ELEVATED THREAT"
+    
+    st.markdown(f"""
+    <div class="traffic-banner {banner_class}">
+        <div>
+            <span class="dot"></span>&nbsp;
+            <span class="label">{tl_label}</span>
+            <div class="bluf-text">{brief.get('bluf', '')}</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # =================================================================
+    # SECTION B — THE 3 PILLARS
+    # =================================================================
+    st.markdown('<div class="section-title">📊 Strategic Assessment</div>', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        landscape_text = brief.get("threat_landscape", "—").replace("\n", "<br>")
+        st.markdown(f"""
+        <div class="pillar-card">
+            <h4>🌍 Threat Landscape</h4>
+            <div class="pillar-body">{landscape_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-st.markdown("<br><br>", unsafe_allow_html=True)
+    with col2:
+        impact_text = brief.get("business_impact", "—").replace("\n", "<br>")
+        st.markdown(f"""
+        <div class="pillar-card">
+            <h4>📉 Business & Operational Impact</h4>
+            <div class="pillar-body">{impact_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-# --- 2. LES DÉTAILS STRATÉGIQUES (Tirés de tes propres analyses) ---
-st.markdown("### 📋 Détail des Incidents Majeurs")
+    with col3:
+        reco_text = brief.get("recommendations", "—").replace("\n", "<br>")
+        st.markdown(f"""
+        <div class="pillar-card">
+            <h4>🛡️ Actionable Intelligence</h4>
+            <div class="pillar-body">{reco_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-if not native_subjects:
-    st.warning("Aucun incident détecté dans le format attendu.")
 else:
-    for sub in native_subjects:
-        # L'Expander affiche le gros titre
+    st.warning("⚠️ The AI could not generate a valid brief. Displaying raw intelligence below.")
+    if st.button("🔄 Retry AI Generation"):
+        generate_executive_brief.clear()
+        st.rerun()
+    if raw_ai:
+        with st.expander("🛠️ Debug: Raw AI Response"):
+            st.text(raw_ai)
+
+# =====================================================================
+# SECTION C — TECHNICAL APPENDIX (Expanders)
+# =====================================================================
+st.markdown('<div class="section-title">📋 Incident Deep Dive — Technical Appendix</div>', unsafe_allow_html=True)
+
+if not incidents:
+    st.info("No incidents detected in the expected Markdown format.")
+else:
+    for sub in incidents:
         with st.expander(f"🚨 {sub['preview']}"):
             
-            # Les tags visuels pour les pays et entreprises
-            meta_html = "<div style='margin-bottom:15px; color:#6c757d; font-size:0.95rem;'>"
+            # Metadata tags
+            tags_html = ""
             if sub['country']:
-                meta_html += f"🌍 <b>Zone Géographique:</b> {sub['country']} &nbsp;&nbsp;|&nbsp;&nbsp; "
+                tags_html += f'<span class="meta-tag">🌍 {sub["country"]}</span>'
             if sub['companies']:
-                meta_html += f"🏢 <b>Cibles / Secteurs:</b> {sub['companies']}"
-            meta_html += "</div>"
-            st.markdown(meta_html, unsafe_allow_html=True)
+                tags_html += f'<span class="meta-tag">🏢 {sub["companies"]}</span>'
+            if tags_html:
+                st.markdown(f"<div style='margin-bottom:15px;'>{tags_html}</div>", unsafe_allow_html=True)
             
-            # Ton Overview
-            st.markdown(f"**Contexte de l'incident :**\n{sub['overview']}")
-            
-            # Tes recommandations (Proposed Controls)
+            if sub['overview']:
+                st.markdown(f"**Overview**\n\n{sub['overview']}")
+            if sub['breach']:
+                st.markdown(f"**Breach Mechanism**\n\n{sub['breach']}")
+            if sub['impact']:
+                st.markdown(f"**Impact & Consequences**\n\n{sub['impact']}")
             if sub['control']:
-                st.markdown(f"**🛡️ Contrôles Proposés :**\n{sub['control']}")
-                
-            # Le lien source
+                st.markdown(f"**Proposed Controls**\n\n{sub['control']}")
             if sub['link']:
-                st.markdown(f"<br>[🔗 Consulter la source de l'incident]({sub['link']})", unsafe_allow_html=True)
+                st.markdown(f"\n[🔗 Read the full source article]({sub['link']})")
 
-st.markdown("<br><br>", unsafe_allow_html=True)
+# --- RAW DATA ---
+st.markdown("<br>", unsafe_allow_html=True)
 st.divider()
-with st.expander("⚙️ Afficher le rapport brut original"):
+with st.expander("⚙️ View Raw Intelligence Report"):
     st.markdown(content)
