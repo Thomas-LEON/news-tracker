@@ -1,57 +1,57 @@
 # Standard Operating Procedure (SOP) - Daily Threat Intel Tracker
 
-## 1. Objectif du Projet
-Le projet **News Tracker** est un outil automatisé de Threat Intelligence conçu pour les analystes de risques cyber (Emerging Tech & AI). 
-Il collecte quotidiennement les dernières actualités de cybersécurité via des flux RSS, filtre les événements les plus critiques (jusqu'au TOP 10) et génère automatiquement un rapport "Executive Summary" ultra-structuré grâce à l'Intelligence Artificielle (Google Gemini).
+## 1. Project Objective
+The **News Tracker** project is an automated Threat Intelligence tool designed for cyber risk analysts (Emerging Tech & AI).
+It daily collects the latest cybersecurity news via RSS feeds, filters the most critical events (up to the TOP 10), and automatically generates a highly structured "Executive Summary" report using Artificial Intelligence (Google Gemini).
 
-## 2. Architecture et Composants
-- `news_tracker.py` : Script Python principal contenant la logique d'extraction (RSS), d'appel à l'API LLM et de formatage.
-- `requirements.txt` : Liste des dépendances Python (google-genai, beautifulsoup4, feedparser, httpx, certifi).
-- `.github/workflows/daily-tracker.yml` : Workflow GitHub Actions assurant l'exécution quotidienne du script.
-- `reports/` : Dossier généré automatiquement contenant les rapports quotidiens au format Markdown.
+## 2. Architecture and Components
+- `news_tracker.py`: Main Python script containing the extraction logic (RSS), LLM API calls, and formatting.
+- `requirements.txt`: List of Python dependencies (google-genai, beautifulsoup4, feedparser, httpx, certifi).
+- `.github/workflows/daily-tracker.yml`: GitHub Actions workflow ensuring the daily execution of the script.
+- `reports/`: Automatically generated folder containing daily reports in Markdown format.
 
-## 3. Déclenchement et Exécution
+## 3. Triggering and Execution
 
-### Exécution Automatique (Standard)
-L'outil s'exécute de manière autonome tous les jours le matin via GitHub Actions.
-1. Le script s'exécute sur les serveurs GitHub.
-2. Il récupère les flux RSS des 24 dernières heures.
-3. Il génère le rapport avec l'API Gemini.
-4. Il "commit" et "push" automatiquement le nouveau fichier dans le dossier `reports/` du dépôt GitHub.
+### Automated Execution (Standard)
+The tool runs autonomously every day in the morning via GitHub Actions.
+1. The script runs on GitHub servers.
+2. It fetches RSS feeds from the last 24 hours.
+3. It generates the report using the Gemini API.
+4. It automatically commits and pushes the new file to the `reports/` folder of the GitHub repository.
 
-### Exécution Manuelle (Ad-hoc)
-**Sur GitHub :**
-1. Aller dans l'onglet **Actions**.
-2. Sélectionner **Daily Threat Intel Tracker** à gauche.
-3. Cliquer sur **Run workflow**.
+### Manual Execution (Ad-hoc)
+**On GitHub:**
+1. Go to the **Actions** tab.
+2. Select **Daily Threat Intel Tracker** on the left.
+3. Click on **Run workflow**.
 
-**En Local :**
-1. Assurez-vous d'avoir Python installé et les dépendances (`pip install -r requirements.txt`).
-2. Définissez votre variable d'environnement : `set GEMINI_API_KEY=votre_cle_api`
-3. Lancez le script : `python news_tracker.py`
+**Locally:**
+1. Ensure Python is installed along with dependencies (`pip install -r requirements.txt`).
+2. Set your environment variable: `set GEMINI_API_KEY=your_api_key`
+3. Run the script: `python news_tracker.py`
 
-## 4. Maintenance et Configuration
+## 4. Maintenance and Configuration
 
-### Ajouter de nouvelles sources d'information (RSS)
-1. Ouvrir `news_tracker.py`.
-2. Localiser la liste `RSS_FEEDS`.
-3. Ajouter l'URL du nouveau flux RSS dans la liste.
+### Adding New Information Sources (RSS)
+1. Open `news_tracker.py`.
+2. Locate the `RSS_FEEDS` list.
+3. Add the URL of the new RSS feed to the list.
 
-### Modifier le comportement de l'IA (Prompt ou Modèle)
-1. Ouvrir `news_tracker.py`.
-2. **Pour changer le format** : Modifier la variable `prompt` (attention à bien respecter les instructions existantes de formatage Markdown).
-3. **Pour changer la constante/créativité** : Ajuster la valeur `temperature=0.2` (0.0 = très strict, 1.0 = créatif).
-4. L'outil utilise un système de "fallback" de modèles (`gemini-3.6-flash` > `gemini-3.5-flash` > `gemini-3.1-flash-lite`). Ce tableau peut être modifié.
+### Modifying AI Behavior (Prompt or Model)
+1. Open `news_tracker.py`.
+2. **To change the format**: Modify the `prompt` variable (be careful to follow the existing Markdown formatting instructions).
+3. **To change consistency/creativity**: Adjust the `temperature=0.2` value in the `config` object (0.0 = very strict, 1.0 = creative).
+4. The tool uses a model fallback system (`gemini-3.6-flash` > `gemini-3.5-flash` > `gemini-3.1-flash-lite`). This array can be modified.
 
-### Gestion de la Clé API
-La clé de l'API Google Gemini doit être stockée de manière sécurisée :
-- **Sur GitHub** : Allez dans *Settings > Secrets and variables > Actions*, et assurez-vous que `GEMINI_API_KEY` est bien renseigné.
+### API Key Management
+The Google Gemini API key must be securely stored:
+- **On GitHub**: Go to *Settings > Secrets and variables > Actions*, and ensure `GEMINI_API_KEY` is properly set.
 
-## 5. Dépannage (Troubleshooting)
+## 5. Troubleshooting
 
-- **L'Action GitHub échoue sur l'API Gemini** : Vérifiez que la clé `GEMINI_API_KEY` n'a pas expiré et que votre quota gratuit/payant n'est pas dépassé.
-- **Rapport généré mais non poussé sur GitHub (Erreur réseau/Git)** : Si le dépôt a été modifié manuellement pendant que l'Action tournait, cela peut créer un conflit. Lancez un `git pull --rebase` en local et poussez vos modifications pour resynchroniser la branche.
-- **Nombre d'articles incohérent** : L'IA est paramétrée en "High Recall" avec une température de 0.2. Si un jour il n'y a que 2 actualités, c'est que l'IA a jugé le reste des flux totalement hors-sujet. 
+- **GitHub Action fails on the Gemini API**: Verify that the `GEMINI_API_KEY` has not expired and your free/paid quota has not been exceeded.
+- **Report generated but not pushed to GitHub (Network/Git Error)**: If the repository was manually modified while the Action was running, this can create a conflict. Run a `git pull --rebase` locally and push your changes to resync the branch.
+- **Inconsistent number of articles**: The AI is set to "High Recall" with a temperature of 0.2. If there are only 2 news items on a given day, it means the AI judged the rest of the feeds as completely irrelevant to the threat scope.
 
 ---
-*Dernière mise à jour de la SOP : Juillet 2026*
+*Last update of the SOP: July 2026*
