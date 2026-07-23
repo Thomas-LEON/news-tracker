@@ -2,6 +2,7 @@ import os
 import datetime
 import feedparser
 from google import genai
+from google.genai import types
 from bs4 import BeautifulSoup
 import httpx
 import certifi
@@ -61,7 +62,8 @@ def generate_executive_summary(articles):
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI).
-        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier le TOP 1 a 10 des incidents ou menaces les plus critiques (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille pour CHACUN d'entre eux. S'il n'y a que 3 ou 4 actus vraiment pertinentes, n'en fais que 3 ou 4. Ne force pas jusqu'a 10 si le niveau de criticite n'y est pas, mais va jusqu'a 10 si c'est pertinent.
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier le TOP 1 a 10 des incidents ou menaces les plus critiques (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille pour CHACUN d'entre eux. 
+        CONSIGNE MAJEURE : Sois TRES INCLUSIF (High Recall). Si un article a le moindre potentiel d'interesser un analyste cyber, inclus-le dans le rapport. Il vaut mieux lister 8 a 10 incidents (meme si certains sont de criticite moyenne) plutot que d'en rater un seul vraiment interessant. N'hesite pas a aller jusqu'a 10.
         
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
@@ -127,6 +129,9 @@ def generate_executive_summary(articles):
                 response = client.models.generate_content(
                     model=model_name,
                     contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.2,
+                    )
                 )
                 return response.text
             except Exception as e:
