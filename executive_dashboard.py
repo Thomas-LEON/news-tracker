@@ -1,6 +1,10 @@
 import streamlit as st
 import requests
-
+import json
+from llm import ConfigLoader  # On réutilise ta propre config !
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 # =====================================================================
 # 🛠️ Configuration du Dashboard Executive
 # =====================================================================
@@ -67,34 +71,45 @@ import urllib.request
 
 @st.cache_data(ttl=1800)
 def fetch_latest_report():
+    driver = None
     try:
-        # 1. On récupère les proxys configurés sur ton Windows
-        system_proxies = urllib.request.getproxies()
+        # On utilise exactement ton ChromeDriver configuré dans llm.py
+        chromedriver_path = ConfigLoader.get_chromedriver_path()
         
-        # 2. Lister les fichiers (avec proxies et verify=False pour passer le firewall corporate)
-        # ⚠️ verify=False ignore l'erreur SSL du proxy d'entreprise
-        response = requests.get(API_URL, proxies=system_proxies, verify=False)
-        response.raise_for_status()
-        files = response.json()
+        options = ChromeOptions()
+        options.add_argument("--headless") # Mode invisible (la fenêtre ne s'ouvre pas)
+        options.add_argument("--disable-extensions")
         
-        # 3. Filtrer les .md
-        md_files = [f for f in files if f['name'].endswith('.md')]
+        service = ChromeService(executable_path=chromedriver_path)
+        driver = webdriver.Chrome(service=service, options=options)
+        
+        # 1. Chrome va chercher la liste des fichiers (Chrome passe le proxy tout seul !)
+        api_url = "https://api.github.com/repos/Thomas-LEON/news-tracker/contents/reports"
+        driver.get(api_url)
+        
+        # Chrome affiche le JSON brut dans la balise <body>
+        json_text = driver.find_element("tag name", "body").text
+        files = json.loads(json_text)
+        
+        # 2. Filtrer les .md et trouver le plus récent
+        md_files = [f for f in files if isinstance(f, dict) and f.get('name', '').endswith('.md')]
         if not md_files:
             return None, "Aucun rapport Markdown trouvé dans le repository."
             
-        # 4. Trouver le plus récent
         md_files.sort(key=lambda x: x['name'], reverse=True)
         latest_file = md_files[0]
         
-        # 5. Télécharger le contenu brut
-        raw_url = latest_file['download_url']
-        report_resp = requests.get(raw_url, proxies=system_proxies, verify=False)
-        report_resp.raise_for_status()
+        # 3. Chrome va chercher le contenu brut du rapport
+        driver.get(latest_file['download_url'])
+        content = driver.find_element("tag name", "body").text
         
-        return latest_file['name'], report_resp.text
+        return latest_file['name'], content
         
     except Exception as e:
-        return None, f"Erreur de synchronisation avec la source : {str(e)}"
+        return None, f"Erreur de synchronisation via Chrome : {str(e)}"
+    finally:
+        if driver:
+            driver.quit() # On ferme Chrome proprement en arrière-plan
 
 # =====================================================================
 # 🖥️ Interface Utilisateur (UI)
