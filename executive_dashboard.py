@@ -151,44 +151,71 @@ with st.spinner(f"🧠 L'IA (gemma-4-26b) génère l'Executive Summary pour le r
     # On récupère maintenant le summary ET la réponse brute
     summary, raw_response = generate_executive_summary(content, auth_ctx)
 # --- SUCCÈS : L'IA a bien fait son JSON ---
-if summary:
-    tl_color = "#dc3545" if summary["threat_level"].upper() in ["ÉLEVÉ", "CRITIQUE"] else ("#ffc107" if "MOD" in summary["threat_level"].upper() else "#28a745")
+# Si l'IA a bien réussi à générer un JSON (et que c'est bien un dictionnaire)
+if summary and isinstance(summary, dict):
     
+    # --- 1. SÉCURISATION DU NIVEAU DE MENACE ---
+    # On utilise .get() pour ne pas planter si la clé n'existe pas, et on force en majuscules
+    tl_val = summary.get("threat_level", summary.get("Niveau de menace", "INCONNU"))
+    tl_str = str(tl_val).upper()
+    
+    if any(x in tl_str for x in ["ÉLEVÉ", "ELEVE", "CRITIQUE", "HIGH"]):
+        tl_color = "#dc3545" # Rouge
+    elif "MOD" in tl_str:
+        tl_color = "#ffc107" # Orange
+    else:
+        tl_color = "#28a745" # Vert
+    
+    # --- 2. AFFICHAGE DES KPI ---
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown(f"""
         <div class="metric-card" style="border-left: 5px solid {tl_color};">
             <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Niveau de Menace</h4>
-            <h2 style="margin:0; color: {tl_color};">{summary.get('threat_level', 'INCONNU')}</h2>
+            <h2 style="margin:0; color: {tl_color};">{tl_str}</h2>
         </div>
         """, unsafe_allow_html=True)
     with col2:
+        val_vectors = str(summary.get('attack_vectors', summary.get('vecteurs', '-')))
         st.markdown(f"""
         <div class="metric-card" style="border-left: 5px solid #343a40;">
             <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Vecteurs d'Attaque</h4>
-            <h2 style="margin:0; color: #343a40; font-size: 1.5rem; padding-top: 5px;">{summary.get('attack_vectors', '-')}</h2>
+            <h2 style="margin:0; color: #343a40; font-size: 1.5rem; padding-top: 5px;">{val_vectors}</h2>
         </div>
         """, unsafe_allow_html=True)
     with col3:
+        val_status = str(summary.get('status', summary.get('statut', '-')))
         st.markdown(f"""
         <div class="metric-card" style="border-left: 5px solid #0d6efd;">
             <h4 style="margin:0; color: #6c757d; font-size: 0.85rem; text-transform: uppercase;">Statut / Recommandation</h4>
-            <h2 style="margin:0; color: #0d6efd; font-size: 1.5rem; padding-top: 5px;">{summary.get('status', '-')}</h2>
+            <h2 style="margin:0; color: #0d6efd; font-size: 1.5rem; padding-top: 5px;">{val_status}</h2>
         </div>
         """, unsafe_allow_html=True)
+
     st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # --- 3. LES SUJETS DU JOUR (Expanders) ---
     st.markdown("### 📌 Synthèse Stratégique du Jour")
     
-    subjects = summary.get("subjects", [])
-    if not subjects:
-        st.info("Aucun sujet stratégique identifié aujourd'hui.")
-        
-    for sub in subjects:
-        with st.expander(f"🔹 {sub.get('preview', 'Sujet non défini')}"):
-            st.write(sub.get('details', ''))
-            link = sub.get('link', '')
-            if link and link.startswith("http"):
-                st.markdown(f"[🔗 Consulter la source originale]({link})")
+    # On cherche "subjects" ou "sujets" au cas où l'IA a traduit la clé
+    subjects = summary.get("subjects", summary.get("sujets", []))
+    
+    if not subjects or not isinstance(subjects, list):
+        st.info("Aucun sujet stratégique identifié aujourd'hui ou format inattendu.")
+        with st.expander("🛠️ Mode Debug : Voir la réponse brute"):
+            st.json(summary) # Affiche le JSON brut pour comprendre ce que l'IA a fait
+            
+    else:
+        for sub in subjects:
+            if isinstance(sub, dict): # Sécurité
+                preview = sub.get('preview', sub.get('titre', 'Sujet non défini'))
+                details = sub.get('details', sub.get('details', ''))
+                link = sub.get('link', sub.get('lien', ''))
+                
+                with st.expander(f"🔹 {preview}"):
+                    st.write(details)
+                    if link and link.startswith("http"):
+                        st.markdown(f"[🔗 Consulter la source originale]({link})")
 # --- ÉCHEC : Le modèle n'a pas renvoyé de JSON valide ---
 else:
     st.error("🚨 L'IA a répondu, mais n'a pas respecté la structure attendue pour remplir le Dashboard.")
