@@ -69,7 +69,7 @@ def fetch_latest_report():
         if driver:
             driver.quit()
 
- =====================================================================
+#=====================================================================
 # 🧠 2. Génération par l'IA (gemma-4-26b)
 # =====================================================================
 @st.cache_resource
@@ -84,23 +84,30 @@ def generate_executive_summary(content, _auth_context):
         web_search=False
     )
     
-    # Prompt renforcé pour interdire le bavardage
-    system_prompt = """Tu es un expert CTI. Analyse le rapport technique et génère UNIQUEMENT un objet JSON valide.
-    RÈGLES ABSOLUES :
-    - Ne dis pas "Bonjour" ou "Voici le rapport".
-    - Ne mets pas de texte en dehors des accolades { et }.
-    - Vérifie que toutes les guillemets sont fermées.
+        # Prompt renforcé avec un "One-Shot Example" pour forcer le comportement
+    system_prompt = """Tu es un expert CTI qui rédige des rapports pour le Comex.
+    Analyse le rapport technique fourni par l'utilisateur et génère UNIQUEMENT un objet JSON valide.
     
-    Structure attendue :
+    RÈGLES ABSOLUES :
+    1. Ne dis JAMAIS "Bonjour" ou "Voici le résumé". Renvoie UNIQUEMENT les accolades JSON { }.
+    2. Tu DOIS extraire et lister TOUS les sujets traités dans le rapport (pas seulement le premier !).
+    3. Respecte scrupuleusement la structure ci-dessous.
+    
+    EXEMPLE DE RÉPONSE ATTENDUE :
     {
-      "threat_level": "FAIBLE, MODÉRÉ, ÉLEVÉ ou CRITIQUE",
-      "attack_vectors": "Ex: Ransomware",
-      "status": "Ex: Surveillance renforcée",
+      "threat_level": "ÉLEVÉ",
+      "attack_vectors": "Ransomware, Faille 0-Day",
+      "status": "Alerte globale",
       "subjects": [
         {
-          "preview": "Phrase d'accroche très courte.",
-          "details": "L'explication détaillée.",
-          "link": "URL ou vide"
+          "preview": "Vulnérabilité critique dans le VPN Pulse Secure",
+          "details": "Une faille 0-day permet l'exécution de code à distance, patch urgent requis.",
+          "link": "https://lien-source-trouve.com"
+        },
+        {
+          "preview": "Nouvelle campagne de Phishing visant le secteur bancaire",
+          "details": "Des emails frauduleux usurpent l'identité de partenaires financiers.",
+          "link": ""
         }
       ]
     }
