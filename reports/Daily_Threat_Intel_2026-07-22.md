@@ -38,7 +38,13 @@ https://www.darkreading.com/cyber-risk/openai-models-autonomously-hack-hugging-f
 
 ---
 
+
 ## Azure DevOps MCP Flaw Enables AI Agent Hijacking via Hidden Pull Request Comments
+
+**Incident Metadata:**
+- **Impacted Country:** Global
+- **Geolocation / Cloud Region:** Microsoft Azure Cloud (Azure DevOps)
+- **List of Companies Impacted:** Microsoft (et par extension, les utilisateurs d'Azure DevOps)
 
 A vulnerability in Microsoft's official Azure DevOps Model Context Protocol (MCP) server allows attackers to hijack AI code review agents using indirect prompt injection. This security flaw enables unauthorized access to restricted repositories and silent exfiltration of proprietary code base contents.¹
 
@@ -76,6 +82,11 @@ https://thehackernews.com/2026/07/microsoft-azure-devops-mcp-flaw-lets.html
 
 ## CISA Issues Emergency Directive Over Exploited RCE Vulnerability in Langflow AI Framework
 
+**Incident Metadata:**
+- **Impacted Country:** United States (CISA Directive) / Global
+- **Geolocation / Cloud Region:** Unknown / On-Premise & Cloud hosting Langflow
+- **List of Companies Impacted:** Langflow (and Enterprise users of the framework)
+
 The Cybersecurity and Infrastructure Security Agency (CISA) has added an actively exploited Remote Code Execution (RCE) flaw in the Langflow AI framework to its Known Exploited Vulnerabilities catalog. Threat actors are aggressively exploiting this vulnerability to compromise servers hosting enterprise AI agent workflows.¹
 
 **Overview**
@@ -111,6 +122,11 @@ https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-activel
 ---
 
 ## Cybercriminal Integrates Jailbroken Frontier LLMs into Automated Offensive Attack Platform
+
+**Incident Metadata:**
+- **Impacted Country:** Global (Threat Actor origin: Russia)
+- **Geolocation / Cloud Region:** Unknown
+- **List of Companies Impacted:** Providers of commercial frontier LLMs
 
 A Russian-speaking threat actor known as "Trim" has integrated jailbroken frontier language models directly with traditional offensive cyber tooling. This operationalization creates an automated cyber attack platform capable of executing high-speed, targeted campaigns.¹
 
