@@ -85,14 +85,13 @@ def parse_markdown_subjects(content):
         overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
         details = overview_match.group(1).strip() if overview_match else "Pas de résumé."
         
-        # On attrape le lien dans les footnotes (le caractère étrange avant http)
-        link_match = re.search(r'?\s*(https?://[^\s]+)', section)
+        # CORRECTION ICI : On cherche simplement le premier lien HTTP/HTTPS
+        link_match = re.search(r'(https?://[^\s]+)', section)
         link = link_match.group(1).strip() if link_match else ""
         
         subjects.append({"preview": preview, "details": details, "link": link})
         
     return subjects
-
 # =====================================================================
 # 🧠 3. IA : Uniquement pour les 3 encarts (LLM Interne)
 # =====================================================================
