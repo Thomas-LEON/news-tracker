@@ -17,7 +17,11 @@ RSS_FEEDS = [
     "https://www.bleepingcomputer.com/feed/",
     "https://www.darkreading.com/rss.xml",
     "https://www.cyberscoop.com/feed/",
-    "https://krebsonsecurity.com/feed/"
+    "https://krebsonsecurity.com/feed/",
+    "https://www.securityweek.com/feed/",
+    "https://www.infosecurity-magazine.com/rss/news/",
+    "https://techcrunch.com/category/security/feed/",
+    "https://feeds.arstechnica.com/arstechnica/security"
 ]
 # ---------------------
 
@@ -57,13 +61,18 @@ def generate_executive_summary(articles):
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI).
-        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier le TOP 1 a 5 des incidents ou menaces les plus critiques (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille pour CHACUN d'entre eux. S'il n'y a qu'une ou deux actus vraiment pertinentes, n'en fais qu'une ou deux. S'il y en a plus, vas jusqu'a 5.
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier le TOP 1 a 10 des incidents ou menaces les plus critiques (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille pour CHACUN d'entre eux. S'il n'y a que 3 ou 4 actus vraiment pertinentes, n'en fais que 3 ou 4. Ne force pas jusqu'a 10 si le niveau de criticite n'y est pas, mais va jusqu'a 10 si c'est pertinent.
         
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
         ## [Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible]
 
-        [Introduction courte de 1 ou 2 phrases adressant le probleme. Tu dois EXPLICITEMENT nommer les entreprises impactees, la date precise de l'evenement, et s'il s'agit d'un service cloud, sa localite exacte (ex: region AWS us-east-1, Azure West Europe, etc.)]
+        **Incident Metadata:**
+        - **Impacted Country:** [Pays impacte, ou "Global" / "Unknown"]
+        - **Geolocation / Cloud Region:** [Localite precise ou region Cloud impactee, si connue]
+        - **List of Companies Impacted:** [Entreprises touchees, si connues]
+
+        [Introduction courte de 1 ou 2 phrases adressant le probleme. Tu dois EXPLICITEMENT nommer les entreprises impactees et la date precise de l'evenement.]
 
         **Overview**
         [Un paragraphe resumant la situation globale de l'incident, en rappelant les acteurs, la date exacte, et les details d'infrastructure cloud si applicable]
