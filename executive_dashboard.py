@@ -194,40 +194,50 @@ def generate_executive_brief(content, _auth_context):
 
     ABSOLUTE RULES:
     - Write everything in ENGLISH.
-    - Use BUSINESS language. NEVER use technical jargon (no CVE numbers, no hashes, no malware family names).
+    - Use BUSINESS language. NEVER use technical jargon (no CVE numbers, no hashes).
     - Be concise and impactful. Executives have 30 seconds.
 
     STRICT JSON STRUCTURE:
     {
       "traffic_light": "RED or AMBER or GREEN",
-      "bluf": "One or two sentences. The single most important takeaway for the board. What is happening and does it affect us.",
-      "threat_landscape": "Two or three bullet points separated by newlines. Who is attacking, why, and how fast is the threat evolving.",
-      "business_impact": "Two or three bullet points separated by newlines. Financial, operational, legal and reputational risks in business terms.",
-      "recommendations": "Two or three bullet points separated by newlines. Clear actions or decisions required from leadership."
+      "bluf": "One or two sentences. The single most important takeaway for the board.",
+      "threat_landscape": ["Bullet point 1", "Bullet point 2"],
+      "business_impact": ["Bullet point 1", "Bullet point 2"],
+      "recommendations": ["Bullet point 1", "Bullet point 2"]
     }
     """
     
+    last_raw = ""
     for model_id in models_to_try:
         try:
             chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=True, web_search=False)
             chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
             raw = chat.say(f"Produce the executive brief JSON for this report:\n\n{content}")
+            last_raw = raw # On sauvegarde au cas où ça plante
             
             json_match = re.search(r'\{.*\}', raw, re.DOTALL)
             if json_match:
                 parsed = json.loads(json_match.group(0))
-                if "bluf" in parsed:
-                    return parsed, raw
+                # On accepte 'bluf' ou 'BLUF' (on convertit toutes les clés en minuscules)
+                parsed_lower = {k.lower(): v for k, v in parsed.items()}
+                if "bluf" in parsed_lower:
+                    return parsed_lower, raw
             return json.loads(raw), raw
-        except Exception:
+        except Exception as e:
+            print(f"Erreur avec {model_id} : {e}")
             continue
-    return None, ""
+            
+    return None, last_raw
+
+# Helper pour afficher proprement les listes (arrays) JSON
+def format_bullets(data_item):
+    if isinstance(data_item, list):
+        return "<br>".join([f"• {item}" for item in data_item])
+    return str(data_item).replace("\n", "<br>")
 
 # =====================================================================
 # 🖥️ 4. USER INTERFACE
 # =====================================================================
-
-# --- HEADER ---
 st.markdown("""
 <div class="dashboard-header">
     <h1>🎯 Daily Cyber Threat Briefing</h1>
@@ -235,7 +245,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- DATA LOADING ---
 with st.spinner("Synchronising intelligence feed..."):
     filename, content = fetch_latest_report()
 
@@ -244,8 +253,6 @@ if not filename:
     st.stop()
 
 incidents = parse_incidents(content)
-
-# Extract date from filename for display
 report_date = filename.replace(".md", "").replace("_", " ")
 st.caption(f"📅 Source: `{filename}` — {len(incidents)} incident(s) identified")
 
@@ -254,7 +261,7 @@ with st.spinner("AI is drafting the Executive Summary..."):
     brief, raw_ai = generate_executive_brief(content, auth_ctx)
 
 # =====================================================================
-# SECTION A — THE BLUF + TRAFFIC LIGHT
+# SECTION A & B — THE BLUF + PILLARS
 # =====================================================================
 if brief and isinstance(brief, dict) and "bluf" in brief:
     
@@ -276,37 +283,31 @@ if brief and isinstance(brief, dict) and "bluf" in brief:
     </div>
     """, unsafe_allow_html=True)
     
-    # =================================================================
-    # SECTION B — THE 3 PILLARS
-    # =================================================================
     st.markdown('<div class="section-title">📊 Strategic Assessment</div>', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        landscape_text = brief.get("threat_landscape", "—").replace("\n", "<br>")
         st.markdown(f"""
         <div class="pillar-card">
             <h4>🌍 Threat Landscape</h4>
-            <div class="pillar-body">{landscape_text}</div>
+            <div class="pillar-body">{format_bullets(brief.get('threat_landscape', '—'))}</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
-        impact_text = brief.get("business_impact", "—").replace("\n", "<br>")
         st.markdown(f"""
         <div class="pillar-card">
             <h4>📉 Business & Operational Impact</h4>
-            <div class="pillar-body">{impact_text}</div>
+            <div class="pillar-body">{format_bullets(brief.get('business_impact', '—'))}</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
-        reco_text = brief.get("recommendations", "—").replace("\n", "<br>")
         st.markdown(f"""
         <div class="pillar-card">
             <h4>🛡️ Actionable Intelligence</h4>
-            <div class="pillar-body">{reco_text}</div>
+            <div class="pillar-body">{format_bullets(brief.get('recommendations', '—'))}</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -316,8 +317,8 @@ else:
         generate_executive_brief.clear()
         st.rerun()
     if raw_ai:
-        with st.expander("🛠️ Debug: Raw AI Response"):
-            st.text(raw_ai)
+        with st.expander("🛠️ Debug: Raw AI Response (Click to view)"):
+            st.code(raw_ai, language="json")
 
 # =====================================================================
 # SECTION C — TECHNICAL APPENDIX (Expanders)
@@ -329,8 +330,6 @@ if not incidents:
 else:
     for sub in incidents:
         with st.expander(f"🚨 {sub['preview']}"):
-            
-            # Metadata tags
             tags_html = ""
             if sub['country']:
                 tags_html += f'<span class="meta-tag">🌍 {sub["country"]}</span>'
@@ -350,7 +349,6 @@ else:
             if sub['link']:
                 st.markdown(f"\n[🔗 Read the full source article]({sub['link']})")
 
-# --- RAW DATA ---
 st.markdown("<br>", unsafe_allow_html=True)
 st.divider()
 with st.expander("⚙️ View Raw Intelligence Report"):
