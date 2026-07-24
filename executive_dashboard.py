@@ -213,27 +213,37 @@ def generate_executive_brief(content, _auth_context):
             chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=True, web_search=False)
             chat.messages.append({"type": "plain", "role": "system", "content": system_prompt})
             raw = chat.say(f"Produce the executive brief JSON for this report:\n\n{content}")
-            last_raw = raw # On sauvegarde au cas où ça plante
             
-            json_match = re.search(r'\{.*\}', raw, re.DOTALL)
-            if json_match:
-                parsed = json.loads(json_match.group(0))
-                # On accepte 'bluf' ou 'BLUF' (on convertit toutes les clés en minuscules)
-                parsed_lower = {k.lower(): v for k, v in parsed.items()}
-                if "bluf" in parsed_lower:
-                    return parsed_lower, raw
-            return json.loads(raw), raw
+            # --- EXTRACTEUR JSON ROBUSTE ---
+            clean_json_str = ""
+            # 1. On cherche en priorité ce qui est à l'intérieur des balises ```json ... ```
+            block_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw, re.DOTALL | re.IGNORECASE)
+            
+            if block_match:
+                clean_json_str = block_match.group(1)
+            else:
+                # 2. Sinon, on prend du premier { au dernier }
+                fallback_match = re.search(r'\{.*\}', raw, re.DOTALL)
+                if fallback_match:
+                    clean_json_str = fallback_match.group(0)
+                else:
+                    clean_json_str = raw
+
+            parsed = json.loads(clean_json_str)
+            parsed_lower = {k.lower(): v for k, v in parsed.items()}
+            
+            if "bluf" in parsed_lower:
+                return parsed_lower, raw
+            
+            # Si on arrive ici, c'est que "bluf" n'était pas dans les clés
+            last_raw = f"{raw}\n\n[ERREUR PYTHON] : Le JSON a été lu, mais la clé 'bluf' est manquante."
+            
         except Exception as e:
-            print(f"Erreur avec {model_id} : {e}")
+            # On sauvegarde l'erreur exacte de décodage (très utile pour débugger)
+            last_raw = f"{raw}\n\n[ERREUR PYTHON LORS DU PARSING JSON] : {str(e)}"
             continue
             
     return None, last_raw
-
-# Helper pour afficher proprement les listes (arrays) JSON
-def format_bullets(data_item):
-    if isinstance(data_item, list):
-        return "<br>".join([f"• {item}" for item in data_item])
-    return str(data_item).replace("\n", "<br>")
 
 # =====================================================================
 # 🖥️ 4. USER INTERFACE
