@@ -2,7 +2,7 @@ name: Daily Threat Intel Tracker
 
 on:
   schedule:
-    - cron: '0 6 * * 1-5' # Tous les jours du Lundi au Vendredi à 06:00 UTC
+    - cron: '0 6 * * *' # Tous les jours du Lundi au Vendredi à 06:00 UTC
   workflow_dispatch: # Permet de lancer manuellement depuis l'interface GitHub
 
 jobs:
