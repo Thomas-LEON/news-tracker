@@ -61,10 +61,21 @@ def generate_executive_summary(articles):
         client = genai.Client(api_key=API_KEY, http_options={'client_args': {'verify': False}})
         
         prompt = """
-        Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI).
-        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier le TOP 1 a 10 des incidents ou menaces les plus critiques (ex: faille d'IA, attaque de supply chain, agent autonome) et de rediger un rapport detaille pour CHACUN d'entre eux. 
-        CONSIGNE MAJEURE : Sois TRES INCLUSIF (High Recall). Si un article a le moindre potentiel d'interesser un analyste cyber, inclus-le dans le rapport. Il vaut mieux lister 8 a 10 incidents (meme si certains sont de criticite moyenne) plutot que d'en rater un seul vraiment interessant. N'hesite pas a aller jusqu'a 10.
+        Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier un TOP 1 a 10 des incidents ou menaces, et de rediger un rapport detaille pour CHACUN d'entre eux.
         
+        CRITERES STRICTS D'INCLUSION (Un article doit valider l'un de ces points pour etre retenu) :
+        1. Impact direct / indirect Banque : Attaques ciblant le secteur financier, vos fournisseurs (Supply Chain, editeurs logiciels), ou fuites de donnees reglementees (RGPD).
+        2. Gros acteurs technologiques : Tout incident (meme sans impact immediat) impliquant les geants du Cloud (AWS, Azure, GCP), les leaders de l'IA (OpenAI, Anthropic, HuggingFace...), les grands du Web (Meta, Apple) ou de la Cyber (CrowdStrike, Palo Alto, etc.).
+        3. Infrastructures critiques : Failles majeures touchant des technos d'entreprise classiques (Windows, Linux, reseaux).
+        4. Alertes CVE (Failles) : A ne retenir UNIQUEMENT si la faille touche un grand nom de l'IA ou du Cloud.
+        
+        CRITERES STRICTS D'EXCLUSION (Ignore IMPERATIVEMENT ces articles, c'est du bruit) :
+        1. Ransomwares "classiques" touchant des entites non-strategiques (PME, mairies, hopitaux).
+        2. Fuites de donnees grand public (sites e-commerce, forums, jeux video).
+        3. Campagnes de phishing ou malwares generiques de masse.
+        4. Piratages de comptes de reseaux sociaux de celebrites/influenceurs.
+
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
         ## Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible
