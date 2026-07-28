@@ -1,83 +1,89 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Tracker
 
-An automated Threat Intelligence and Cybersecurity news tracker built for Risk Analysts and Security Professionals. 
+> **Automated Threat Intelligence pipeline leveraging Gemini AI and RSS feeds to generate daily, executive-ready cybersecurity briefings.**
 
-This tool autonomously scrapes top cybersecurity RSS feeds, analyzes the data using Google's Gemini AI, and generates a structured, executive-ready Markdown report highlighting the most critical threats of the last 24 hours.
+[![CI](https://github.com/Thomas-LEON/news-tracker/actions/workflows/daily-tracker.yml/badge.svg)](https://github.com/Thomas-LEON/news-tracker/actions)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## ✨ Features
+---
 
-- **Automated Daily Briefings:** Runs automatically via GitHub Actions every morning.
-- **AI-Powered Curation:** Leverages Google Gemini to filter the noise and isolate the TOP 10 most critical incidents (e.g., AI flaws, supply chain attacks, autonomous agent activities).
-- **Executive Formatting:** Outputs reports directly aligned with C-Level/Executive communication standards.
-- **Metadata Extraction:** Automatically extracts critical structured data for every incident:
-  - Impacted Country
-  - Geolocation / Cloud Region
-  - List of Companies Impacted
-- **High Recall Strategy:** Tuned to favor inclusivity (high recall) ensuring no potentially critical threat is missed.
+## 🤔 The Problem
 
-## 📁 Repository Structure
+Threat Intelligence analysts face massive information overload daily. Hundreds of cybersecurity articles, vulnerability disclosures, and incident reports are published every 24 hours. Sorting through the noise to find what actually impacts a specific sector (like the financial industry) or involves critical emerging tech (AI, Cloud) is a massive time sink.
 
-- `news_tracker.py`: Core logic for RSS parsing, AI prompt engineering, and Markdown report generation.
-- `.github/workflows/daily-tracker.yml`: GitHub Actions pipeline for daily automated execution.
-- `requirements.txt`: Python dependencies.
-- `SOP.md`: Standard Operating Procedure document detailing internal maintenance and troubleshooting.
-- `reports/`: Destination folder for the generated daily Markdown briefings.
+## ✅ What It Does
 
-## 🚀 Setup and Installation
+This tool automates the daily Threat Intel curation process. It runs autonomously every morning, scrapes the top cybersecurity RSS feeds, and uses **Google Gemini AI** with highly specific business rules to filter the noise and generate a structured **Executive Summary**.
 
-### 1. Prerequisites
-Ensure you have Python 3.10+ installed.
+```mermaid
+flowchart TD
+    A["📡 RSS Feeds\n(HackerNews, BleepingComputer, etc.)"] --> B{"🐍 Python Tracker Script\n(GitHub Actions Cron)"}
+    B --> C["🧠 Gemini AI\n(Strict Business Rules Filter)"]
+    C -->|"❌ Noise / Low Impact"| D["🗑️ Discarded"]
+    C -->|"✅ Critical Threat / Bank Impact"| E["📄 Markdown Report\n(Executive Format)"]
+    E --> F["🚀 Git Push to reports/"]
 
-### 2. Install Dependencies
+    style A fill:#4a9eff,color:#fff
+    style B fill:#f1c40f,color:#000
+    style C fill:#ff9f43,color:#fff
+    style D fill:#ee5a24,color:#fff
+    style E fill:#2ed573,color:#fff
+    style F fill:#9b59b6,color:#fff
+```
+
+---
+
+## 🛡️ AI Filtering & Anti-Duplicate Engine
+
+The LLM is explicitly prompted with **Strict Business Rules** to ensure extreme qualitative filtering:
+
+| Inclusion Criteria (High Priority) | Exclusion Criteria (Noise) |
+|---|---|
+| **Financial Sector / Supply Chain:** Direct attacks on banks or IT providers. | **Small Scale:** Ransomware hitting local SMEs or hospitals. |
+| **Big Tech / AI Leaders:** Any incident involving OpenAI, Azure, AWS, Anthropic. | **Consumer Breaches:** E-commerce or gaming databases. |
+| **Critical Infrastructure:** Major CVEs on Windows, Linux, or Enterprise Networks. | **Generic Noise:** Background phishing campaigns. |
+
+**Anti-Duplicate System:** The script automatically parses the past 3 days of generated reports and dynamically creates a blacklist to ensure the AI never writes about the same incident twice, even if RSS feeds push old articles.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Run Locally
 ```bash
 git clone https://github.com/Thomas-LEON/news-tracker.git
 cd news-tracker
 pip install -r requirements.txt
-```
 
-### 3. API Key Configuration
-This tool relies on Google Gemini API. Get an API key from Google AI Studio.
+# Export your API key
+export GEMINI_API_KEY="your_api_key_here"
 
-**For Local Usage:**
-Set the environment variable on your machine:
-```bash
-# Windows
-set GEMINI_API_KEY=your_api_key
-
-# Linux/Mac
-export GEMINI_API_KEY=your_api_key
-```
-
-**For GitHub Actions (Automated Mode):**
-Go to your repository settings on GitHub:
-1. Navigate to **Settings** > **Secrets and variables** > **Actions**.
-2. Create a new repository secret named `GEMINI_API_KEY` and paste your key.
-
-## 🛠️ Usage
-
-**Run Locally:**
-```bash
+# Generate today's report
 python news_tracker.py
 ```
-This will fetch the last 24h of news, interact with Gemini, and drop a new `.md` report inside the `reports/` directory.
 
-**Run via GitHub Actions:**
-The tool runs on a daily schedule automatically. To trigger it manually:
-1. Go to the **Actions** tab in this repository.
-2. Select **Daily Threat Intel Tracker**.
-3. Click **Run workflow**.
+### 2. Run Automatically (GitHub Actions)
+The repository includes a `.github/workflows/daily-tracker.yml` that runs every morning.
+1. Go to your repository **Settings** > **Secrets and variables** > **Actions**.
+2. Add a repository secret named `GEMINI_API_KEY`.
+3. The pipeline will automatically commit a new `.md` report to the `reports/` folder every day.
 
-## 📡 Current Information Sources
+---
 
-The script currently monitors the following high-quality cybersecurity RSS feeds:
-- The Hacker News
-- Bleeping Computer
-- Dark Reading
-- CyberScoop
-- Krebs on Security
-- SecurityWeek
-- InfoSecurity Magazine
-- TechCrunch Security
-- Ars Technica Security
+## 📁 Project Structure
 
-*(To add more, simply edit the `RSS_FEEDS` list in `news_tracker.py`).*
+```text
+news-tracker/
+├── .github/workflows/
+│   └── daily-tracker.yml        # GitHub Actions CI/CD Pipeline
+├── reports/                     # Auto-generated daily markdown reports
+├── news_tracker.py              # Core logic & AI prompt engineering
+├── requirements.txt             # Python dependencies
+├── SOP.md                       # Standard Operating Procedure (Internal Docs)
+└── README.md
+```
+
+---
+
+*Built by [Thomas LEON](https://www.linkedin.com/in/thomas-leon-893316262/) · Emerging Technologies & Threat Intelligence*
