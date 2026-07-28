@@ -1,6 +1,7 @@
 import os
 import datetime
 import feedparser
+import re
 from google import genai
 from google.genai import types
 from bs4 import BeautifulSoup
@@ -50,7 +51,28 @@ def fetch_recent_news():
             
     return recent_articles
 
-def generate_executive_summary(articles):
+def get_previously_covered_incidents(days=3):
+    """Recupere les titres des incidents traites dans les rapports des N derniers jours."""
+    covered = []
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+    if not os.path.exists(output_dir):
+        return covered
+        
+    now = datetime.datetime.now()
+    for i in range(days + 1):
+        target_date = (now - datetime.timedelta(days=i)).strftime("%Y-%m-%d")
+        filepath = os.path.join(output_dir, f"Daily_Threat_Intel_{target_date}.md")
+        if os.path.exists(filepath):
+            with open(filepath, 'r', encoding='utf-8') as f:
+                content = f.read()
+                titles = re.findall(r'^## (.*)', content, re.MULTILINE)
+                for t in titles:
+                    clean_t = t.strip()
+                    if clean_t:
+                        covered.append(clean_t)
+    return list(set(covered))
+
+def generate_executive_summary(articles, covered_incidents=None):
     """Utilise l'IA pour trier les articles et générer un Executive Summary."""
     if not articles:
         return "Aucun incident ou article majeur détecté dans les dernières 24 heures."
@@ -75,6 +97,7 @@ def generate_executive_summary(articles):
         2. Fuites de donnees grand public (sites e-commerce, forums, jeux video).
         3. Campagnes de phishing ou malwares generiques de masse.
         4. Piratages de comptes de reseaux sociaux de celebrites/influenceurs.
+        5. ACTUALITES ANCIENNES : Verifie bien que l'evenement s'est produit recemment. Exclut les resumes mensuels, ou les vieilles actualites remontees artificiellement dans le flux RSS.
 
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
@@ -132,6 +155,12 @@ def generate_executive_summary(articles):
             clean_summary = soup.get_text()[:400]
             prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Extrait: {clean_summary}\n"
             
+        if covered_incidents:
+            prompt += "\n\nCRITERE D'EXCLUSION ABSOLU (DOUBLONS DEJA TRAITES) :\n"
+            prompt += "Les incidents suivants ont DEJA ete traites dans nos rapports des jours precedents. Tu ne DOIS PAS les inclure dans ton rapport d'aujourd'hui (certains flux RSS font remonter de vieux articles). Ignore-les totalement :\n"
+            for ci in covered_incidents:
+                prompt += f"- {ci}\n"
+                
         models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
         
         for model_name in models_to_try:
@@ -159,8 +188,11 @@ def main():
     articles = fetch_recent_news()
     print(f"{len(articles)} articles trouves.")
     
+    print("Recherche des anciens rapports pour eviter les doublons...")
+    covered = get_previously_covered_incidents(days=3)
+    
     print("Analyse par l'IA et redaction de l'Executive Summary...")
-    report = generate_executive_summary(articles)
+    report = generate_executive_summary(articles, covered_incidents=covered)
     
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
