@@ -83,6 +83,9 @@ def parse_incidents(content):
         
         # La première ligne devient automatiquement le titre de l'incident (sans le ##)
         preview = lines[0].strip()
+        # Rétrocompatibilité : on supprime le préfixe s'il est présent dans les anciens rapports
+        preview = re.sub(r'^(?i)titre de l\'incident\s*:\s*', '', preview).strip()
+        
         country_match = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
         companies_match = re.search(r'\*\*List of Companies Impacted:\*\*\s*(.*?)\n', section)
         overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
