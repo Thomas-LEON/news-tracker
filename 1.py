@@ -4,11 +4,15 @@ import re
 import traceback
 import plotly.graph_objects as go
 import pandas as pd
+import os
+from google import genai
+from google.genai import types
+import httpx
 
-from llm import get_auth_context, LLMChat, ConfigLoader
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+
+API_KEY = os.environ.get("GEMINI_API_KEY", "VOTRE_CLE_API")
 
 # =====================================================================
 # PAGE CONFIG
@@ -36,13 +40,12 @@ st.markdown("""
 def fetch_recent_reports(limit=7):
     driver = None
     try:
-        chromedriver_path = ConfigLoader.get_chromedriver_path()
         options = ChromeOptions()
         options.add_argument("--headless")
         options.add_argument("--disable-extensions")
         
-        service = ChromeService(executable_path=chromedriver_path)
-        driver = webdriver.Chrome(service=service, options=options)
+        # Selenium 4.6+ gère automatiquement le ChromeDriver (Selenium Manager)
+        driver = webdriver.Chrome(options=options)
         
         driver.get("https://api.github.com/repos/Thomas-LEON/news-tracker/contents/reports")
         json_text = driver.find_element("tag name", "body").text
@@ -118,9 +121,7 @@ def extract_threat_score(content):
 # =====================================================================
 # 🧠 3. AI ENGINE (Qualitative BLUF Only)
 # =====================================================================
-@st.cache_resource
-def init_llm_auth():
-    return get_auth_context()
+# On retire init_llm_auth car on n'utilise plus llm.py
 
 def extract_key_recursive(data, target_keys):
     if isinstance(target_keys, str): target_keys = [target_keys]
@@ -138,17 +139,16 @@ def extract_key_recursive(data, target_keys):
     return None
 
 @st.cache_data(ttl=86400)
-def generate_executive_brief(condensed_text, report_date, _auth_context):
-    models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
+def generate_executive_brief(condensed_text, report_date):
     debug_logs = []
-    
-    for model_id in models_to_try:
-        log_entry = {"model": model_id, "raw_response": "", "error": None, "stage": "Init"}
-        try:
-            log_entry["stage"] = "1. API Call"
-            chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=True, web_search=False)
-            
-            mega_prompt = f"""You are a senior Cyber Threat Intelligence analyst briefing the Board of Directors.
+    model_id = "gemini-3.5-flash"
+    log_entry = {"model": model_id, "raw_response": "", "error": None, "stage": "Init"}
+    try:
+        log_entry["stage"] = "1. API Call"
+        # Même système de client que dans news_tracker.py pour contourner les erreurs SSL
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
+        
+        mega_prompt = f"""You are a senior Cyber Threat Intelligence analyst briefing the Board of Directors.
 READ the incidents below and WRITE a high-level strategic summary. Focus on Business Units impacted.
 
 ABSOLUTE RULES:
@@ -166,33 +166,38 @@ EXAMPLE OF EXACT EXPECTED OUTPUT:
 --- INCIDENTS TO ANALYZE FOR {report_date} ---
 {condensed_text}
 """
-            raw = chat.say(mega_prompt)
-            log_entry["raw_response"] = raw
-            
-            log_entry["stage"] = "2. JSON Extraction"
-            clean_json = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw, re.DOTALL | re.IGNORECASE)
-            clean_json_str = clean_json.group(1) if clean_json else (re.search(r'\{.*\}', raw, re.DOTALL).group(0) if re.search(r'\{.*\}', raw, re.DOTALL) else raw)
+        response = client.models.generate_content(
+            model=model_id,
+            contents=mega_prompt,
+            config=types.GenerateContentConfig(temperature=0.2)
+        )
+        raw = response.text
+        log_entry["raw_response"] = raw
+        
+        log_entry["stage"] = "2. JSON Extraction"
+        clean_json = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw, re.DOTALL | re.IGNORECASE)
+        clean_json_str = clean_json.group(1) if clean_json else (re.search(r'\{.*\}', raw, re.DOTALL).group(0) if re.search(r'\{.*\}', raw, re.DOTALL) else raw)
 
-            parsed = json.loads(clean_json_str)
+        parsed = json.loads(clean_json_str)
+        
+        log_entry["stage"] = "3. Validation"
+        bluf_val = extract_key_recursive(parsed, ["bluf", "bottom_line_up_front", "bottom_line", "summary", "executive_summary"])
+        
+        if bluf_val:
+            return {
+                "bluf": bluf_val,
+                "threat_landscape": extract_key_recursive(parsed, ["threat_landscape", "landscape"]) or [],
+                "business_impact": extract_key_recursive(parsed, ["business_impact", "impact"]) or [],
+                "recommendations": extract_key_recursive(parsed, ["recommendations", "actions"]) or []
+            }, debug_logs
+        else:
+            log_entry["error"] = f"Missing BLUF. Keys found: {list(parsed.keys()) if isinstance(parsed, dict) else type(parsed)}"
             
-            log_entry["stage"] = "3. Validation"
-            bluf_val = extract_key_recursive(parsed, ["bluf", "bottom_line_up_front", "bottom_line", "summary", "executive_summary"])
-            
-            if bluf_val:
-                return {
-                    "bluf": bluf_val,
-                    "threat_landscape": extract_key_recursive(parsed, ["threat_landscape", "landscape"]) or [],
-                    "business_impact": extract_key_recursive(parsed, ["business_impact", "impact"]) or [],
-                    "recommendations": extract_key_recursive(parsed, ["recommendations", "actions"]) or []
-                }, debug_logs
-            else:
-                log_entry["error"] = f"Missing BLUF. Keys found: {list(parsed.keys()) if isinstance(parsed, dict) else type(parsed)}"
-                
-        except Exception as e:
-            log_entry["error"] = f"Exception at [{log_entry['stage']}]: {str(e)}"
-            
-        debug_logs.append(log_entry)
-            
+    except Exception as e:
+        log_entry["error"] = f"Exception at [{log_entry['stage']}]: {str(e)}"
+        
+    debug_logs.append(log_entry)
+        
     return None, debug_logs
 
 def format_bullets(data_item):
@@ -324,8 +329,7 @@ for inc in incidents:
     condensed_report += f"  SUMMARY: {inc['overview']}\n\n"
 
 with st.spinner(f"🧠 Synthesizing executive brief for {report_date_clean}..."):
-    auth_ctx = init_llm_auth()
-    brief, debug_logs = generate_executive_brief(condensed_report, report_date_clean, auth_ctx)
+    brief, debug_logs = generate_executive_brief(condensed_report, report_date_clean)
 
 # --- THE BLUF & PILLARS ---
 if brief and isinstance(brief, dict) and "bluf" in brief:
