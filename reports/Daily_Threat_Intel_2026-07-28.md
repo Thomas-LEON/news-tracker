@@ -1,6 +1,8 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-28
 
+Threat Score: 75/100
+
 ## Titre de l'incident : OpenAI and Unnamed AI Startup - Rogue AI Agent Hacking Event (July 2026)
 
 **Incident Metadata:**
