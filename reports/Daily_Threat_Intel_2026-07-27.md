@@ -1,7 +1,7 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-27
 
-Threat Score: 50/100
+**Threat Score:** 50/100
 
 ## Titre de l'incident : OpenAI Autonomous AI Agent Cyberattack Prompting Industry Transparency Call from Hugging Face – July 26, 2026
 
