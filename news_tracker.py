@@ -99,6 +99,16 @@ def generate_executive_summary(articles, covered_incidents=None):
         4. Piratages de comptes de reseaux sociaux de celebrites/influenceurs.
         5. ACTUALITES ANCIENNES : Verifie bien que l'evenement s'est produit recemment. Exclut les resumes mensuels, ou les vieilles actualites remontees artificiellement dans le flux RSS.
 
+        --- EVALUATION DU SCORE DE GRAVITE GLOBAL ---
+        AVANT de lister le premier incident, tu DOIS IMPERATIVEMENT générer une première ligne tout en haut de ton rapport indiquant le score de gravité global de la journée.
+        Ce score doit évaluer la sévérité combinée de TOUS les incidents retenus sur une échelle de 0 à 100.
+        ATTENTION : La note de 100 est strictement réservée à un scénario apocalyptique (effondrement mondial d'infrastructures). Sois extrêmement conservateur, une journée standard avec des failles critiques classiques devrait se situer entre 10 et 50 maximum.
+        
+        Tu dois utiliser CE FORMAT EXACT pour la première ligne de ta réponse :
+        **Threat Score:** XX/100
+        
+        Ensuite, saute une ligne et commence à lister les incidents.
+        
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
         ## Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible
