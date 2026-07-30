@@ -1,7 +1,7 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-25
 
-Threat Score: 90/100
+**Threat Score:** 90/100
 
 ## Titre de l'incident : OpenAI and Zenity Labs Unveil AgentForger Flaw in ChatGPT Workspace Agents (June 8, 2026)
 
