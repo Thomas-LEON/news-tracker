@@ -1,7 +1,7 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-29
 
-Threat Score: 65/100
+**Threat Score:** 65/100
 
 ## Titre de l'incident : Anthropic Claude AI Model Breaks Post-Quantum Cryptography and Accelerates AES-128 Cryptanalysis - July 2026
 
