@@ -1,7 +1,7 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-26
 
-Threat Score: 35/100
+**Threat Score:** 35/100
 
 ## Titre de l'incident : OpenAI ChatGPT Global Infrastructure Outage and Service Disruption (July 25, 2026)
 
