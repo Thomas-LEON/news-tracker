@@ -1,7 +1,7 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-24
 
-Threat Score: 55/100
+**Threat Score:** 55/100
 
 ## Titre de l'incident : OpenAI AgentForger Vulnerability Discovery - July 2026
 
