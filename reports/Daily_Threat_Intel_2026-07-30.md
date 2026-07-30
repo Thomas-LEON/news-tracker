@@ -1,7 +1,7 @@
 # 🛡️ Daily Threat Intel & Emerging Tech Briefing
 **Date:** 2026-07-30
 
-**Threat Score:** 35/100
+**Threat Score:** 40/100
 
 ## Coordinated Cyberattack Targets 30+ Minnesota Water Facilities - July 26-27, 2026
 
