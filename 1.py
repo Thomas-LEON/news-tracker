@@ -103,19 +103,14 @@ def parse_incidents(content):
         })
     return subjects
 
-def calculate_daily_score(incidents):
+def extract_threat_score(content):
     """
-    CRQ Methodology: Calculates a 0-100 score based on threat volume and severity indicators.
+    Extrait le score généré par l'IA directement depuis le markdown.
     """
-    score = 0
-    for inc in incidents:
-        score += 10 # Base volume weight
-        text = f"{inc['overview']} {inc['breach']} {inc['impact']}".lower()
-        if any(k in text for k in ["zero-day", "0-day", "zero day"]): score += 15
-        if "ransomware" in text: score += 10
-        if any(k in text for k in ["apt", "state-sponsored", "nation-state"]): score += 10
-        if "critical" in text: score += 5
-    return min(score, 100) # Cap at 100
+    match = re.search(r'\*\*Threat Score:\*\*\s*(\d+)', content, re.IGNORECASE)
+    if match:
+        return min(int(match.group(1)), 100) # Sécurité pour bloquer à 100 maximum
+    return 0 # Si pas de score trouvé, on met 0
 
 # =====================================================================
 # 🧠 3. AI ENGINE (Qualitative BLUF Only)
@@ -223,7 +218,7 @@ for name, content in reports_data:
         date_str = name.replace(".md", "") # Fallback
         
     day_incidents = parse_incidents(content)
-    score = calculate_daily_score(day_incidents)
+    score = extract_threat_score(content)
     timeline_data.append({"Date": date_str, "Filename": name, "Score": score, "Incidents": len(day_incidents)})
 
 df_timeline = pd.DataFrame(timeline_data)
@@ -243,11 +238,9 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("### 🧮 CRQ Methodology")
-    st.info("The **Composite Threat Score (0-100)** is calculated deterministically via Python, independent of AI.\n\n"
-            "- **Base Score:** 10 pts per incident.\n"
-            "- **Zero-Day Modifier:** +15 pts.\n"
-            "- **Ransomware/APT Modifier:** +10 pts.\n"
-            "The **Trend** compares today's score against the 7-day moving average.")
+    st.info("The **Composite Threat Score (0-100)** is evaluated dynamically by the AI during the daily reporting process.\n\n"
+            "- A score of **100** is strictly reserved for Doomsday/Apocalyptic scenarios.\n"
+            "The **Trend** compares today's AI score against the 7-day moving average.")
 
 # Get the content for the selected date
 selected_row = next(r for r in timeline_data if r['Filename'] == selected_filename)
