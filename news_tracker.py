@@ -83,72 +83,71 @@ def generate_executive_summary(articles, covered_incidents=None):
         client = genai.Client(api_key=API_KEY, http_options={'client_args': {'verify': False}})
         
         prompt = """
-        Tu es un Strategic Advisor spécialisé en Threat Intelligence (Emerging Tech & AI) rapportant directement au Comex et à la C-Suite (CISO, CIO, CRO, CAIO) d'une institution BANCAIRE d'importance systémique (G-SIB).
-        Voici une liste d'articles récupérés aujourd'hui. Ton rôle est d'identifier un TOP 1 à 10 maximum des incidents ou menaces les plus critiques, et de rédiger un rapport détaillé pour CHACUN d'entre eux.
+        Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier un TOP 1 a 10 des incidents ou menaces, et de rediger un rapport detaille pour CHACUN d'entre eux.
         
-        CRITÈRES STRICTS D'INCLUSION (Un article doit valider l'un de ces points stratégiques pour être retenu) :
-        1. Impact systémique ou géopolitique Banque : Attaques ciblées contre le secteur financier, espionnage étatique, compromission grave de la Supply Chain logicielle, ou fuites majeures de données réglementées.
-        2. Risque fournisseurs & Big Tech (IA / Cloud) : Incidents majeurs touchant les géants du Cloud (AWS, Azure, GCP) ou de l'IA (OpenAI, Anthropic, Hugging Face) UNIQUEMENT s'ils impliquent une rupture de service globale, un empoisonnement de modèle (AI Poisoning), l'évasion d'agents autonomes ou une compromission d'infrastructure cloud.
-        3. Infrastructures critiques & Cloud-Native : Failles majeures permettant la compromission matérielle (Data Center, BMC/IPMI), l'évasion de machines virtuelles (VM Escape), ou la prise de contrôle d'hyperviseurs/orchestrateurs.
-        4. Décisionnel C-Level : La menace doit nécessiter un arbitrage stratégique, budgétaire, un changement d'architecture majeur, ou l'activation d'une cellule de crise.
+        CRITERES STRICTS D'INCLUSION (Un article doit valider l'un de ces points pour etre retenu) :
+        1. Impact direct / indirect Banque : Attaques ciblant le secteur financier, vos fournisseurs (Supply Chain, editeurs logiciels), ou fuites de donnees reglementees (RGPD).
+        2. Gros acteurs technologiques : Tout incident (meme sans impact immediat) impliquant les geants du Cloud (AWS, Azure, GCP), les leaders de l'IA (OpenAI, Anthropic, HuggingFace...), les grands du Web (Meta, Apple) ou de la Cyber (CrowdStrike, Palo Alto, etc.).
+        3. Infrastructures critiques : Failles majeures touchant des technos d'entreprise classiques (Windows, Linux, reseaux).
+        4. Alertes CVE (Failles) : A ne retenir UNIQUEMENT si la faille touche un grand nom de l'IA ou du Cloud.
         
-        CRITÈRES STRICTS D'EXCLUSION (Ignore IMPÉRATIVEMENT ces articles, c'est du bruit opérationnel) :
-        1. Hygiène IT et correctifs de routine : Patch Tuesdays, mises à jour massives de sécurité éditeurs (Apple iOS/macOS, Windows, Android, navigateurs web) SAUF si une exploitation active ciblée contre des exécutifs bancaires est avérée.
-        2. Failles applicatives ou bibliothèques isolées : Vulnérabilités logicielles (ex: Ruby on Rails, paquets Python/Node mineurs, plugins) se remédiant par une simple mise à jour de dépendance (DevSecOps de routine).
-        3. Élévations de privilèges locales (LPE) : Failles noyaux (ex: Linux kernel) ou locales ne permettant pas de sortir d'un conteneur, d'une VM, ou ne touchant pas directement le plan de contrôle Cloud.
-        4. Cybercriminalité non-stratégique : Ransomwares classiques sur des acteurs secondaires (PME, hôpitaux), fuites de données e-commerce, campagnes de phishing de masse, piratages de réseaux sociaux.
-        5. ACTUALITÉS ANCIENNES : Vérifie bien que l'événement s'est produit récemment. Exclus les résumés mensuels ou les vieilles alertes remontées dans le flux RSS.
-        
-        Pour CHAQUE incident retenu, tu DOIS IMPÉRATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Sépare chaque incident par une ligne de séparation horizontale (---).
-        
-        ## Titre de l'incident : Doit INCLURE les noms des acteurs impliqués (ex: OpenAI et HuggingFace) et la date la plus précise possible
-        
+        CRITERES STRICTS D'EXCLUSION (Ignore IMPERATIVEMENT ces articles, c'est du bruit) :
+        1. Ransomwares "classiques" touchant des entites non-strategiques (PME, mairies, hopitaux).
+        2. Fuites de donnees grand public (sites e-commerce, forums, jeux video).
+        3. Campagnes de phishing ou malwares generiques de masse.
+        4. Piratages de comptes de reseaux sociaux de celebrites/influenceurs.
+        5. ACTUALITES ANCIENNES : Verifie bien que l'evenement s'est produit recemment. Exclut les resumes mensuels, ou les vieilles actualites remontees artificiellement dans le flux RSS.
+
+        Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
+
+        ## Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible
+
         **Incident Metadata:**
-        - **Impacted Country:** [Pays impacté, ou "Global" / "Unknown"]
-        - **Geolocation / Cloud Region:** [Localité précise ou région Cloud impactée, si connue]
-        - **List of Companies Impacted:** [Entreprises touchées, si connues]
-        
-        [Introduction courte de 1 ou 2 phrases adressant le problème. Tu dois EXPLICITEMENT nommer les entreprises impactées et la date précise de l'événement.]
-        
+        - **Impacted Country:** [Pays impacte, ou "Global" / "Unknown"]
+        - **Geolocation / Cloud Region:** [Localite precise ou region Cloud impactee, si connue]
+        - **List of Companies Impacted:** [Entreprises touchees, si connues]
+
+        [Introduction courte de 1 ou 2 phrases adressant le probleme. Tu dois EXPLICITEMENT nommer les entreprises impactees et la date precise de l'evenement.]
+
         **Overview**
-        [Un paragraphe résumant la situation globale de l'incident, en rappelant les acteurs, la date exacte, et les détails d'infrastructure cloud si applicable]
-        
+        [Un paragraphe resumant la situation globale de l'incident, en rappelant les acteurs, la date exacte, et les details d'infrastructure cloud si applicable]
+
         **The Breach Mechanism**
-        [Explication contextuelle du mécanisme]
+        [Explication contextuelle du mecanisme]
         - [Point 1 : Titre en gras et explication]
         - [Point 2 : Titre en gras et explication]
         - ...
-        
+
         **Impact and Consequences**
-        - [Impact 1 : Titre en gras et explication axée sur le risque systémique, d'architecture ou stratégique]
-        - [Impact 2 : Titre en gras et explication axée sur le risque systémique, d'architecture ou stratégique]
+        - [Impact 1 : Titre en gras et explication]
+        - [Impact 2 : Titre en gras et explication]
         - ...
-        
+
         **Proposed Control: Mitigating Threats**
         To address the vulnerabilities exposed by this incident, I propose the implementation of the following control framework:
-        - I. Governance & Containment (Prevention): [Action stratégique / directive C-Level]
-        - II. Identity & Access Management (Containment): [Action stratégique / directive C-Level]
-        - III. Infrastructure Intelligence (Detection): [Action stratégique / directive C-Level]
-        - IV. Operational Resilience: [Action stratégique / directive C-Level]
-        - V. Simulation environment: [Action stratégique / directive C-Level]
-        (Adapte les propositions de contrôles pour qu'elles orientent l'architecture globale et la gouvernance, sans tomber dans les manipulations techniques de bas niveau !)
-        
+        - I. Governance & Containment (Prevention): [Action proposee]
+        - II. Identity & Access Management (Containment): [Action proposee]
+        - III. Infrastructure Intelligence (Detection): [Action proposee]
+        - IV. Operational Resilience: [Action proposee]
+        - V. Simulation environment: [Action proposee]
+        (Adapte les propositions de controles a la nature exacte de la menace !)
+
         **Conclusion**
-        [Une conclusion courte sur la leçon stratégique à tirer de cet incident pour le Groupe bancaire]
-        
+        [Une conclusion courte sur la lecon a tirer de cet incident]
+
         **Further Reading**
         [Lien(s) pertinent(s) additionnel(s) si possible]
-        
+
         **Footnotes**
-        [1] [Lien de la source 1]
-        [2] [Lien de la source 2]
+        [1. Lien de la source 1]
+        [2. Lien de la source 2]
         
-        Rédige l'intégralité du rapport en Anglais. Utilise un ton très professionnel, "Executive", analytique et concis.
+        Redige l'integralite du rapport en Anglais. Utilise un ton tres professionnel, "Executive", analytique et concis.
         Utilise des footnotes (indices comme ceci : ¹ ²) dans le texte pour lier aux sources de la section Footnotes de chaque incident.
-        N'oublie pas de bien séparer chaque incident avec '---'.
+        N'oublie pas de bien separer chaque incident avec '---'.
         
         Voici les articles bruts :
-
         """
         
         for i, art in enumerate(articles):
