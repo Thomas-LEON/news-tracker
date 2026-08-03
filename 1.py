@@ -20,12 +20,47 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Petit nettoyage Streamlit de base
+# Petit nettoyage Streamlit de base et CSS Feedly / Mobile Responsive
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;} 
     footer {visibility: hidden;} 
     header {visibility: hidden;}
+    
+    /* Typographie moderne et propre type Feedly */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Design des petits Badges "Super Executive" */
+    .exec-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .badge-red { background-color: #ffebee; color: #c62828; border: 1px solid #ef9a9a;}
+    .badge-blue { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9;}
+    .badge-green { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7;}
+    .badge-dark { background-color: #37474f; color: #ffffff; border: 1px solid #263238;}
+    
+    /* Responsivité Mobile Ultime */
+    @media (max-width: 768px) {
+        .block-container {
+            padding-top: 1rem !important;
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+        }
+        h1 { font-size: 1.8rem !important; }
+        h2 { font-size: 1.4rem !important; }
+        h3 { font-size: 1.2rem !important; }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -83,9 +118,8 @@ def parse_incidents(content):
         
         # La première ligne devient automatiquement le titre de l'incident (sans le ##)
         preview = lines[0].strip()
-        
-        # METHODE INDESTRUCTIBLE SANS LE (?i)
-        preview = re.sub(r'^titre de l\'incident\s*:\s*', '', preview, flags=re.IGNORECASE).strip()
+        # Rétrocompatibilité : on supprime le préfixe s'il est présent dans les anciens rapports
+        preview = re.sub(r'(?i)^titre de l\'incident\s*:\s*', '', preview).strip()
         
         country_match = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
         companies_match = re.search(r'\*\*List of Companies Impacted:\*\*\s*(.*?)\n', section)
@@ -149,19 +183,21 @@ def generate_executive_brief(condensed_text, report_date, _auth_context):
             log_entry["stage"] = "1. API Call"
             chat = LLMChat(model_id=model_id, auth_context=_auth_context, high_reasoning_effort=True, web_search=False)
             
-            mega_prompt = f"""You are a senior Cyber Threat Intelligence analyst briefing the Board of Directors.
+            mega_prompt = f"""You are a senior Cyber Threat Intelligence analyst briefing a Military General or the Board of Directors.
 READ the incidents below and WRITE a high-level strategic summary. Focus on Business Units impacted.
 
 ABSOLUTE RULES:
-- Write in ENGLISH. Use strictly BUSINESS language.
+- Write in ENGLISH. Use strictly BUSINESS and MILITARY strategic language.
 - YOU MUST USE THE EXACT KEYS AS THE EXAMPLE BELOW. DO NOT RENAME THEM.
+- Adopt a "Military General" briefing style: Present the raw facts clearly, then provide a visionary strategic outlook (e.g., "AI could become a severe threat to our quantum projects within 6 months"). 
+- Present the decision clearly, but leave the final decision to the leadership.
 
 EXAMPLE OF EXACT EXPECTED OUTPUT:
 {{
   "bluf": "A critical zero-day vulnerability is actively exploited, requiring immediate patching.",
   "threat_landscape": ["State-sponsored actors are targeting financial institutions."],
   "business_impact": ["Potential loss of sensitive PII leading to regulatory fines."],
-  "recommendations": ["Authorize emergency patching protocol."]
+  "recommendations": ["Authorize emergency patching protocol vs Passive Monitoring. Leadership decision required."]
 }}
 
 --- INCIDENTS TO ANALYZE FOR {report_date} ---
@@ -254,6 +290,12 @@ report_date_clean = selected_filename.replace(".md", "").replace("_", " ")
 incidents = parse_incidents(selected_content)
 current_score = selected_row['Score']
 
+# Extraction des métriques FAIR pour les afficher sous le score si elles existent
+auditable_metrics = ""
+metrics_match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*(.*?)\)\*', selected_content, re.IGNORECASE)
+if metrics_match:
+    auditable_metrics = metrics_match.group(1).strip()
+
 st.title("Strategic Cyber Threat Briefing")
 st.caption(f"Executive assessment for **{report_date_clean}** | {len(incidents)} actionable incidents analyzed")
 st.divider()
@@ -286,8 +328,11 @@ with col_gauge:
             }
         }
     ))
-    fig_gauge.update_layout(height=300, margin=dict(l=20, r=20, t=50, b=20))
+    fig_gauge.update_layout(height=280, margin=dict(l=20, r=20, t=50, b=10))
     st.plotly_chart(fig_gauge, use_container_width=True)
+    
+    if auditable_metrics:
+        st.markdown(f"<div style='text-align: center; font-size: 0.85rem; color: #666; margin-top: -15px;'><i>{auditable_metrics}</i></div>", unsafe_allow_html=True)
 
 with col_trend:
     fig_line = go.Figure()
@@ -331,12 +376,19 @@ with st.spinner(f"🧠 Synthesizing executive brief for {report_date_clean}...")
 # --- THE BLUF & PILLARS ---
 if brief and isinstance(brief, dict) and "bluf" in brief:
     
+    st.markdown("""
+        <span class='exec-badge badge-dark'>TOP SECRET</span>
+        <span class='exec-badge badge-red'>EXECUTIVE BRIEFING</span>
+        <span class='exec-badge badge-blue'>COMMAND EYES ONLY</span>
+    """, unsafe_allow_html=True)
+    
     with st.container(border=True):
-        st.subheader("Bottom Line Up Front")
+        st.subheader("Bottom Line Up Front (BLUF)")
         st.info(brief.get('bluf', ''))
     
     st.write("")
     
+    # Rendre les colonnes responsives nativement sur mobile
     col1, col2, col3 = st.columns(3)
     with col1:
         with st.container(border=True):
@@ -344,11 +396,11 @@ if brief and isinstance(brief, dict) and "bluf" in brief:
             st.markdown(format_bullets(brief.get("threat_landscape", "—")))
     with col2:
         with st.container(border=True):
-            st.markdown("#### 📉 Business Exposure")
+            st.markdown("#### 📉 Strategic Vision & Impact")
             st.markdown(format_bullets(brief.get("business_impact", "—")))
     with col3:
         with st.container(border=True):
-            st.markdown("#### 🛡️ Strategic Imperatives")
+            st.markdown("#### 🛡️ Decision Points")
             st.markdown(format_bullets(brief.get("recommendations", "—")))
 
 else:
@@ -356,26 +408,41 @@ else:
     if st.button("🔄 Retry Generation"):
         generate_executive_brief.clear()
         st.rerun()
-    if debug_logs:
-        for log in debug_logs:
-            with st.expander(f"❌ Echec sur {log['model']}"):
-                st.error(f"{log['error']}")
-                st.code(log['raw_response'], language="json")
 
-# --- TECHNICAL APPENDIX ---
+# --- TECHNICAL APPENDIX (FEEDLY UX) ---
 st.write("")
-st.subheader("📋 Restricted Access: Incident Deep Dive")
+st.subheader("📋 Intelligence Feed (Incident Deep Dive)")
 
 if not incidents:
     st.info("No actionable intelligence detected for this date.")
 else:
     for sub in incidents:
-        with st.expander(f"🔎 {sub['preview']}"):
-            st.markdown(f"**📍 Target Country:** {sub['country'] or 'N/A'} | **🏢 Target Sector:** {sub['companies'] or 'N/A'}")
+        with st.expander(f"📰 {sub['preview']}"):
+            
+            # Séparation claire des badges
+            country = sub['country'] if sub['country'] else "Global/Unknown"
+            sector = sub['companies'] if sub['companies'] else "Multiple/Unknown"
+            
+            st.markdown(f"""
+                <span class='exec-badge badge-blue'>🌍 REGION: {country}</span>
+                <span class='exec-badge badge-dark'>🏢 SECTOR: {sector}</span>
+            """, unsafe_allow_html=True)
+            
             st.divider()
             
-            if sub['overview']: st.markdown(f"**Operational Overview:**\n{sub['overview']}")
-            if sub['breach']: st.markdown(f"**Technical Vector:**\n{sub['breach']}")
-            if sub['impact']: st.markdown(f"**Consequences:**\n{sub['impact']}")
-            if sub['control']: st.markdown(f"**Mitigation:**\n{sub['control']}")
-            if sub['link']: st.markdown(f"\n[🔗 Original Intel Source]({sub['link']})")
+            # Affichage clair et aéré
+            if sub['overview']: 
+                st.markdown("##### 🔍 Operational Overview")
+                st.write(sub['overview'])
+            if sub['breach']: 
+                st.markdown("##### ⚙️ Technical Vector")
+                st.write(sub['breach'])
+            if sub['impact']: 
+                st.markdown("##### 💥 Consequences")
+                st.write(sub['impact'])
+            if sub['control']: 
+                st.markdown("##### 🛡️ Mitigation Options")
+                st.write(sub['control'])
+                
+            if sub['link']: 
+                st.markdown(f"\n[🔗 Go to Original Intel Source]({sub['link']})")
