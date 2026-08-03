@@ -5,10 +5,8 @@ import traceback
 import plotly.graph_objects as go
 import pandas as pd
 
-from llm import get_auth_context, LLMChat, ConfigLoader
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.chrome.options import Options as ChromeOptions
+from llm import get_auth_context, LLMChat
+import requests
 
 # =====================================================================
 # PAGE CONFIG
@@ -107,21 +105,20 @@ st.markdown("""
 # =====================================================================
 @st.cache_data(ttl=1800)
 def fetch_recent_reports(limit=7):
-    driver = None
     try:
-        chromedriver_path = ConfigLoader.get_chromedriver_path()
-        options = ChromeOptions()
-        options.add_argument("--headless")
-        options.add_argument("--disable-extensions")
+        import requests
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         
-        service = ChromeService(executable_path=chromedriver_path)
-        driver = webdriver.Chrome(service=service, options=options)
+        url = "https://api.github.com/repos/Thomas-LEON/news-tracker/contents/reports"
+        response = requests.get(url, verify=False)
         
-        driver.get("https://api.github.com/repos/Thomas-LEON/news-tracker/contents/reports")
-        json_text = driver.find_element("tag name", "body").text
-        files = json.loads(json_text)
-        
+        if response.status_code != 200:
+            return [], f"GitHub API Error: {response.status_code} - {response.text[:100]}"
+            
+        files = response.json()
         md_files = [f for f in files if isinstance(f, dict) and f.get('name', '').endswith('.md')]
+        
         if not md_files:
             return [], "No reports found."
             
@@ -130,16 +127,13 @@ def fetch_recent_reports(limit=7):
         
         reports_data = []
         for file_info in recent_files:
-            driver.get(file_info['download_url'])
-            content = driver.find_element("tag name", "body").text
-            reports_data.append((file_info['name'], content))
+            dl_response = requests.get(file_info['download_url'], verify=False)
+            if dl_response.status_code == 200:
+                reports_data.append((file_info['name'], dl_response.text))
             
         return reports_data, None
     except Exception as e:
         return [], f"Data sync error: {str(e)}"
-    finally:
-        if driver:
-            driver.quit()
 
 # =====================================================================
 # ⚙️ 2. NATIVE MARKDOWN PARSER & MATHEMATICAL SCORING
