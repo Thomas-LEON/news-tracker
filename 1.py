@@ -36,20 +36,58 @@ st.markdown("""
     /* Design des petits Badges "Super Executive" */
     .exec-badge {
         display: inline-block;
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 0.85rem;
+        padding: 3px 10px;
+        border-radius: 10px;
+        font-size: 0.78rem;
         font-weight: 600;
-        margin-right: 8px;
-        margin-bottom: 12px;
+        margin-right: 6px;
+        margin-bottom: 8px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        white-space: nowrap;
     }
-    .badge-red { background-color: #ffebee; color: #c62828; border: 1px solid #ef9a9a;}
-    .badge-blue { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9;}
-    .badge-green { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7;}
-    .badge-dark { background-color: #37474f; color: #ffffff; border: 1px solid #263238;}
-    
+    .badge-red    { background-color: #ffebee; color: #c62828; border: 1px solid #ef9a9a;}
+    .badge-blue   { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9;}
+    .badge-green  { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7;}
+    .badge-dark   { background-color: #37474f; color: #ffffff; border: 1px solid #263238;}
+    .badge-purple { background-color: #ede7f6; color: #4527a0; border: 1px solid #b39ddb;}
+    .badge-orange { background-color: #fff3e0; color: #e65100; border: 1px solid #ffcc80;}
+
+    /* CTI Chat Box - fixed height, scrollable */
+    .cti-chat-container {
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        height: 370px;
+        overflow-y: auto;
+        padding: 12px 16px;
+        background: #fafafa;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .cti-msg-user {
+        align-self: flex-end;
+        background: #1565c0;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 16px 16px 4px 16px;
+        max-width: 80%;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    .cti-msg-bot {
+        align-self: flex-start;
+        background: #ffffff;
+        color: #1a1a1a;
+        padding: 8px 14px;
+        border-radius: 16px 16px 16px 4px;
+        border: 1px solid #e0e0e0;
+        max-width: 85%;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
     /* Responsivité Mobile Ultime */
     @media (max-width: 768px) {
         .block-container {
@@ -121,23 +159,25 @@ def parse_incidents(content):
         # Rétrocompatibilité : on supprime le préfixe s'il est présent dans les anciens rapports
         preview = re.sub(r'(?i)^titre de l\'incident\s*:\s*', '', preview).strip()
         
-        country_match = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
+        country_match   = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
+        geo_match       = re.search(r'\*\*Geolocation.*?:\*\*\s*(.*?)\n', section)
         companies_match = re.search(r'\*\*List of Companies Impacted:\*\*\s*(.*?)\n', section)
-        overview_match = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
-        breach_match = re.search(r'\*\*The Breach Mechanism\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
-        impact_match = re.search(r'\*\*Impact and Consequences\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
-        control_match = re.search(r'\*\*Proposed Control.*?\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
-        link_match = re.search(r'(https?://[^\s]+)', section)
+        overview_match  = re.search(r'\*\*Overview\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
+        breach_match    = re.search(r'\*\*The Breach Mechanism\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
+        impact_match    = re.search(r'\*\*Impact and Consequences\*\*\n(.*?)(?=\n\*\*)', section, re.DOTALL)
+        control_match   = re.search(r'\*\*Proposed Control.*?\*\*\n(.*?)(?=\n\*\*|$)', section, re.DOTALL)
+        link_match      = re.search(r'(https?://[^\s]+)', section)
         
         subjects.append({
-            "preview": preview, 
-            "country": country_match.group(1).strip() if country_match else "", 
+            "preview":   preview, 
+            "country":   country_match.group(1).strip() if country_match else "", 
+            "geo":       geo_match.group(1).strip() if geo_match else "",
             "companies": companies_match.group(1).strip() if companies_match else "",
-            "overview": overview_match.group(1).strip() if overview_match else "", 
-            "breach": breach_match.group(1).strip() if breach_match else "", 
-            "impact": impact_match.group(1).strip() if impact_match else "",
-            "control": control_match.group(1).strip() if control_match else "", 
-            "link": link_match.group(1).strip() if link_match else ""
+            "overview":  overview_match.group(1).strip() if overview_match else "", 
+            "breach":    breach_match.group(1).strip() if breach_match else "", 
+            "impact":    impact_match.group(1).strip() if impact_match else "",
+            "control":   control_match.group(1).strip() if control_match else "", 
+            "link":      link_match.group(1).strip() if link_match else ""
         })
     return subjects
 
@@ -272,13 +312,14 @@ df_timeline = df_timeline.dropna(subset=['Date'])
 df_timeline = df_timeline.sort_values(by="Date") # Sort chronologically for the chart
 avg_7d_score = df_timeline['Score'].mean()
 
-# --- SIDEBAR: HISTORY SELECTION ---
+# --- SIDEBAR: HISTORY SELECTION ONLY ---
 with st.sidebar:
     st.title("📅 Intelligence Archive")
     st.caption("Select a date to view the strategic assessment.")
     report_options = [r['Filename'] for r in timeline_data]
     selected_filename = st.radio("Past 7 Days", report_options, label_visibility="collapsed")
     
+    st.markdown("---")
     st.markdown("### 🧮 CRQ Methodology (FAIR)")
     st.info("The **Composite Threat Score (0-100)** is calculated using a deterministic mathematical model based on the FAIR framework:\n\n"
             "**Score = (TC + EF + BI) × 3.33**\n\n"
@@ -286,55 +327,6 @@ with st.sidebar:
             "- **EF** (Event Frequency): Probability of attack (1-10)\n"
             "- **BI** (Business Impact): Potential financial/systemic impact (1-10)\n\n"
             "*Note: The AI strictly evaluates these 3 vectors based on the raw intel, ensuring an auditable and transparent final score.*")
-
-    # =====================================================================
-    # 🤖 5. ASK CTI-BOT (Interactive 7-Day Memory)
-    # =====================================================================
-    st.markdown("---")
-    st.markdown("### 💬 Ask CTI-Bot")
-    st.caption("Ask specific questions about the threat landscape. The AI will cross-reference the 7 last daily reports to answer you.")
-
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    if prompt := st.chat_input("Ask a question (e.g. 'Which incidents target Azure?')"):
-        st.chat_message("user").markdown(prompt)
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        
-        with st.chat_message("assistant"):
-            with st.spinner("Analyzing 7-day threat data..."):
-                auth_ctx = init_llm_auth()
-                
-                # Construire un contexte puissant avec les 7 rapports
-                context_block = "--- 7-DAY THREAT INTELLIGENCE CONTEXT ---\n"
-                for name, content in reports_data:
-                    # On limite la taille de chaque rapport pour éviter d'exploser le contexte
-                    context_block += f"\n[REPORT: {name}]\n{content[:2000]}...\n"
-                
-                system_instruction = f"You are an elite Cyber Threat Intelligence Assistant. Answer the user's questions strictly based on the following 7-day threat intelligence context. Be concise and precise.\n\n{context_block}"
-                
-                # Injecter l'historique
-                history_text = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in st.session_state.messages[:-1]])
-                full_prompt = f"{system_instruction}\n\n--- CHAT HISTORY ---\n{history_text}\n\nUSER: {prompt}\nASSISTANT:"
-                
-                # Appel LLM (On essaie les mêmes modèles que pour le résumé)
-                models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
-                response_text = "Désolé, impossible de joindre les serveurs d'IA pour le moment."
-                
-                for model_id in models_to_try:
-                    try:
-                        chat = LLMChat(model_id=model_id, auth_context=auth_ctx, high_reasoning_effort=False, web_search=False)
-                        response_text = chat.say(full_prompt)
-                        break # Succès
-                    except Exception:
-                        continue
-                
-                st.markdown(response_text)
-                st.session_state.messages.append({"role": "assistant", "content": response_text})
 
 # Get the content for the selected date
 selected_row = next(r for r in timeline_data if r['Filename'] == selected_filename)
@@ -463,6 +455,49 @@ else:
         generate_executive_brief.clear()
         st.rerun()
 
+# =====================================================================
+# 🤖 5. CTI-BOT — Conversational Box (Main Body, Fixed Height)
+# =====================================================================
+st.write("")
+st.subheader("💬 Ask CTI-Bot")
+st.caption("Chat with the AI about the last 7 days of threat intelligence. The bot cross-references all available daily reports to answer your questions.")
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Build scrollable chat history as HTML (fixed-height, no infinite growth)
+chat_html = "<div class='cti-chat-container' id='cti-chat-scroll'>"
+if not st.session_state.messages:
+    chat_html += "<div class='cti-msg-bot'>👋 Hello! Ask me anything about the threat landscape over the past 7 days.</div>"
+for message in st.session_state.messages:
+    css_class = "cti-msg-user" if message["role"] == "user" else "cti-msg-bot"
+    safe_content = str(message['content']).replace('<', '&lt;').replace('>', '&gt;')
+    chat_html += f"<div class='{css_class}'>{safe_content}</div>"
+chat_html += "</div>"
+st.markdown(chat_html, unsafe_allow_html=True)
+
+if cti_prompt := st.chat_input("Ask a question (e.g. 'Which incidents target Azure?')"):
+    st.session_state.messages.append({"role": "user", "content": cti_prompt})
+    with st.spinner("Analyzing 7-day threat data..."):
+        auth_ctx = init_llm_auth()
+        context_block = "--- 7-DAY THREAT INTELLIGENCE CONTEXT ---\n"
+        for name, content in reports_data:
+            context_block += f"\n[REPORT: {name}]\n{content[:2000]}...\n"
+        system_instruction = f"You are an elite Cyber Threat Intelligence Assistant. Answer the user's questions strictly based on the following 7-day threat intelligence context. Be concise and precise.\n\n{context_block}"
+        history_text = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in st.session_state.messages[:-1]])
+        full_prompt = f"{system_instruction}\n\n--- CHAT HISTORY ---\n{history_text}\n\nUSER: {cti_prompt}\nASSISTANT:"
+        models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
+        response_text = "Sorry, unable to reach the AI servers at the moment."
+        for model_id in models_to_try:
+            try:
+                chat_model = LLMChat(model_id=model_id, auth_context=auth_ctx, high_reasoning_effort=False, web_search=False)
+                response_text = chat_model.say(full_prompt)
+                break
+            except Exception:
+                continue
+        st.session_state.messages.append({"role": "assistant", "content": response_text})
+    st.rerun()
+
 # --- TECHNICAL APPENDIX (FEEDLY UX) ---
 st.write("")
 st.subheader("📋 Intelligence Feed (Incident Deep Dive)")
@@ -472,31 +507,31 @@ if not incidents:
 else:
     for sub in incidents:
         with st.expander(f"📰 {sub['preview']}"):
-            
-            # Séparation claire des badges
-            country = sub['country'] if sub['country'] else "Global/Unknown"
-            sector = sub['companies'] if sub['companies'] else "Multiple/Unknown"
-            
+
+            country   = sub.get('country', '') or "Global/Unknown"
+            geo       = sub.get('geo', '') or "Unknown"
+            companies = sub.get('companies', '') or "Multiple/Unknown"
+
             st.markdown(f"""
                 <span class='exec-badge badge-blue'>🌍 REGION: {country}</span>
-                <span class='exec-badge badge-dark'>🏢 SECTOR: {sector}</span>
+                <span class='exec-badge badge-orange'>📡 INFRA: {geo}</span>
+                <span class='exec-badge badge-purple'>🏢 COMPANY: {companies}</span>
             """, unsafe_allow_html=True)
-            
+
             st.divider()
-            
-            # Affichage clair et aéré
-            if sub['overview']: 
+
+            if sub['overview']:
                 st.markdown("##### 🔍 Operational Overview")
                 st.write(sub['overview'])
-            if sub['breach']: 
+            if sub['breach']:
                 st.markdown("##### ⚙️ Technical Vector")
                 st.write(sub['breach'])
-            if sub['impact']: 
+            if sub['impact']:
                 st.markdown("##### 💥 Consequences")
                 st.write(sub['impact'])
-            if sub['control']: 
+            if sub['control']:
                 st.markdown("##### 🛡️ Mitigation Options")
                 st.write(sub['control'])
-                
-            if sub['link']: 
+
+            if sub['link']:
                 st.markdown(f"\n[🔗 Go to Original Intel Source]({sub['link']})")
