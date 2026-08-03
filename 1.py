@@ -279,11 +279,13 @@ with st.sidebar:
     report_options = [r['Filename'] for r in timeline_data]
     selected_filename = st.radio("Past 7 Days", report_options, label_visibility="collapsed")
     
-    st.markdown("---")
-    st.markdown("### 🧮 CRQ Methodology")
-    st.info("The **Composite Threat Score (0-100)** is evaluated dynamically by the AI during the daily reporting process.\n\n"
-            "- A score of **100** is strictly reserved for Doomsday/Apocalyptic scenarios.\n"
-            "The **Trend** compares today's AI score against the 7-day moving average.")
+    st.markdown("### 🧮 CRQ Methodology (FAIR)")
+    st.info("The **Composite Threat Score (0-100)** is calculated using a deterministic mathematical model based on the FAIR framework:\n\n"
+            "**Score = (TC + EF + BI) × 3.33**\n\n"
+            "- **TC** (Threat Capability): Attacker sophistication (1-10)\n"
+            "- **EF** (Event Frequency): Probability of attack (1-10)\n"
+            "- **BI** (Business Impact): Potential financial/systemic impact (1-10)\n\n"
+            "*Note: The AI strictly evaluates these 3 vectors based on the raw intel, ensuring an auditable and transparent final score.*")
 
     # =====================================================================
     # 🤖 5. ASK CTI-BOT (Interactive 7-Day Memory)
