@@ -79,8 +79,8 @@ def generate_executive_summary(articles, covered_incidents=None):
     
     try:
         # Configuration pour le nouveau package google.genai
-        # Contournement SSL local (Windows/Zscaler/proxy...) : On utilise client_args={'verify': False}
-        client = genai.Client(api_key=API_KEY, http_options={'client_args': {'verify': False}})
+        # Contournement SSL local (Windows/Zscaler/proxy...) : On utilise httpx_client
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
@@ -99,13 +99,15 @@ def generate_executive_summary(articles, covered_incidents=None):
         4. Piratages de comptes de reseaux sociaux de celebrites/influenceurs.
         5. ACTUALITES ANCIENNES : Verifie bien que l'evenement s'est produit recemment. Exclut les resumes mensuels, ou les vieilles actualites remontees artificiellement dans le flux RSS.
 
-        --- EVALUATION DU SCORE DE GRAVITE GLOBAL ---
-        AVANT de lister le premier incident, tu DOIS IMPERATIVEMENT générer une première ligne tout en haut de ton rapport indiquant le score de gravité global de la journée.
-        Ce score doit évaluer la sévérité combinée de TOUS les incidents retenus sur une échelle de 0 à 100.
-        ATTENTION : La note de 100 est strictement réservée à un scénario apocalyptique (effondrement mondial d'infrastructures). Sois extrêmement conservateur, une journée standard avec des failles critiques classiques devrait se situer entre 10 et 50 maximum.
+        --- EVALUATION DU SCORE DE GRAVITE GLOBAL (METHODOLOGIE CRQ / FAIR) ---
+        AVANT de lister le premier incident, tu DOIS IMPERATIVEMENT évaluer scientifiquement la gravité globale de la journée (basé sur l'incident le plus critique).
+        Ne donne pas un chiffre au hasard. Evalue ces 3 vecteurs stricts de 1 à 10 :
+        1. Threat Capability (TC) : Sophistication de l'attaque (1 = Script kiddie, 10 = Nation-State Zero Day indétectable).
+        2. Event Frequency (EF) : Probabilité d'attaque sur le secteur BANCAIRE à court terme (1 = Très faible, 10 = Imminente/En cours).
+        3. Business Impact (BI) : Impact financier, systémique et réputationnel (1 = Négligeable, 10 = Faillite/Système paralysé).
         
-        Tu dois utiliser CE FORMAT EXACT pour la première ligne de ta réponse :
-        **Threat Score:** XX/100
+        Laisse le code Python faire le calcul mathématique final. Tu dois juste fournir les notes dans CE FORMAT EXACT pour la première ligne de ton rapport :
+        *(Auditable Metrics - Threat Capability: X/10 | Event Frequency: Y/10 | Business Impact: Z/10)*
         
         Ensuite, saute une ligne et commence à lister les incidents.
         
@@ -203,6 +205,22 @@ def main():
     
     print("Analyse par l'IA et redaction de l'Executive Summary...")
     report = generate_executive_summary(articles, covered_incidents=covered)
+    
+    print("Calcul mathematique et deterministe du score de risque final...")
+    match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', report, re.IGNORECASE)
+    
+    if match:
+        tc = int(match.group(1))
+        ef = int(match.group(2))
+        bi = int(match.group(3))
+        threat_score = int((tc + ef + bi) * 3.33)
+        threat_score = min(threat_score, 100) # Cap at 100
+        
+        # Inject the final Threat Score line just before the Auditable Metrics
+        report = report.replace(match.group(0), f"**Threat Score:** {threat_score}/100\n" + match.group(0))
+    else:
+        # Fallback if AI fails to format properly
+        report = "**Threat Score:** 0/100\n" + report
     
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
