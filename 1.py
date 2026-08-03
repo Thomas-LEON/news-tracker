@@ -191,13 +191,15 @@ ABSOLUTE RULES:
 - YOU MUST USE THE EXACT KEYS AS THE EXAMPLE BELOW. DO NOT RENAME THEM.
 - Adopt a "Military General" briefing style: Present the raw facts clearly, then provide a visionary strategic outlook (e.g., "AI could become a severe threat to our quantum projects within 6 months"). 
 - Present the decision clearly, but leave the final decision to the leadership.
+- Extract up to 5 critical threat tags (specific CVEs, Threat Actors, Malware names, or MITRE TTPs).
 
 EXAMPLE OF EXACT EXPECTED OUTPUT:
 {{
   "bluf": "A critical zero-day vulnerability is actively exploited, requiring immediate patching.",
   "threat_landscape": ["State-sponsored actors are targeting financial institutions."],
   "business_impact": ["Potential loss of sensitive PII leading to regulatory fines."],
-  "recommendations": ["Authorize emergency patching protocol vs Passive Monitoring. Leadership decision required."]
+  "recommendations": ["Authorize emergency patching protocol vs Passive Monitoring. Leadership decision required."],
+  "threat_tags": ["CVE-2026-1234", "LAZARUS GROUP", "RANSOMWARE", "LATERAL MOVEMENT"]
 }}
 
 --- INCIDENTS TO ANALYZE FOR {report_date} ---
@@ -220,7 +222,8 @@ EXAMPLE OF EXACT EXPECTED OUTPUT:
                     "bluf": bluf_val,
                     "threat_landscape": extract_key_recursive(parsed, ["threat_landscape", "landscape"]) or [],
                     "business_impact": extract_key_recursive(parsed, ["business_impact", "impact"]) or [],
-                    "recommendations": extract_key_recursive(parsed, ["recommendations", "actions"]) or []
+                    "recommendations": extract_key_recursive(parsed, ["recommendations", "actions"]) or [],
+                    "threat_tags": extract_key_recursive(parsed, ["threat_tags", "tags"]) or []
                 }, debug_logs
             else:
                 log_entry["error"] = f"Missing BLUF. Keys found: {list(parsed.keys()) if isinstance(parsed, dict) else type(parsed)}"
@@ -281,6 +284,55 @@ with st.sidebar:
     st.info("The **Composite Threat Score (0-100)** is evaluated dynamically by the AI during the daily reporting process.\n\n"
             "- A score of **100** is strictly reserved for Doomsday/Apocalyptic scenarios.\n"
             "The **Trend** compares today's AI score against the 7-day moving average.")
+
+    # =====================================================================
+    # 🤖 5. ASK CTI-BOT (Interactive 7-Day Memory)
+    # =====================================================================
+    st.markdown("---")
+    st.markdown("### 💬 Ask CTI-Bot")
+    st.caption("Ask specific questions about the threat landscape. The AI will cross-reference the 7 last daily reports to answer you.")
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    if prompt := st.chat_input("Ask a question (e.g. 'Which incidents target Azure?')"):
+        st.chat_message("user").markdown(prompt)
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        
+        with st.chat_message("assistant"):
+            with st.spinner("Analyzing 7-day threat data..."):
+                auth_ctx = init_llm_auth()
+                
+                # Construire un contexte puissant avec les 7 rapports
+                context_block = "--- 7-DAY THREAT INTELLIGENCE CONTEXT ---\n"
+                for name, content in reports_data:
+                    # On limite la taille de chaque rapport pour éviter d'exploser le contexte
+                    context_block += f"\n[REPORT: {name}]\n{content[:2000]}...\n"
+                
+                system_instruction = f"You are an elite Cyber Threat Intelligence Assistant. Answer the user's questions strictly based on the following 7-day threat intelligence context. Be concise and precise.\n\n{context_block}"
+                
+                # Injecter l'historique
+                history_text = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in st.session_state.messages[:-1]])
+                full_prompt = f"{system_instruction}\n\n--- CHAT HISTORY ---\n{history_text}\n\nUSER: {prompt}\nASSISTANT:"
+                
+                # Appel LLM (On essaie les mêmes modèles que pour le résumé)
+                models_to_try = ["gpt-oss-120b", "mistral-medium-3.5-ITG", "gemma-4-26b"]
+                response_text = "Désolé, impossible de joindre les serveurs d'IA pour le moment."
+                
+                for model_id in models_to_try:
+                    try:
+                        chat = LLMChat(model_id=model_id, auth_context=auth_ctx, high_reasoning_effort=False, web_search=False)
+                        response_text = chat.say(full_prompt)
+                        break # Succès
+                    except Exception:
+                        continue
+                
+                st.markdown(response_text)
+                st.session_state.messages.append({"role": "assistant", "content": response_text})
 
 # Get the content for the selected date
 selected_row = next(r for r in timeline_data if r['Filename'] == selected_filename)
@@ -376,15 +428,15 @@ with st.spinner(f"🧠 Synthesizing executive brief for {report_date_clean}...")
 # --- THE BLUF & PILLARS ---
 if brief and isinstance(brief, dict) and "bluf" in brief:
     
-    st.markdown("""
-        <span class='exec-badge badge-dark'>TOP SECRET</span>
-        <span class='exec-badge badge-red'>EXECUTIVE BRIEFING</span>
-        <span class='exec-badge badge-blue'>COMMAND EYES ONLY</span>
-    """, unsafe_allow_html=True)
-    
     with st.container(border=True):
         st.subheader("Bottom Line Up Front (BLUF)")
         st.info(brief.get('bluf', ''))
+        
+        # Affichage des Threat Tags Façon Feedly
+        tags = brief.get("threat_tags", [])
+        if tags:
+            tags_html = " ".join([f"<span class='exec-badge badge-dark'>🏷️ {str(t).upper()}</span>" for t in tags])
+            st.markdown(tags_html, unsafe_allow_html=True)
     
     st.write("")
     
