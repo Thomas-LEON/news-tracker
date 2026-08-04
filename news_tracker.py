@@ -116,6 +116,7 @@ def generate_executive_summary(articles, covered_incidents=None):
         ## Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible
 
         **Incident Metadata:**
+        - **Timeline:** [Event: date la plus précise de l'évenement | Disclosed: Date la plus précise de l'anonce de l'évenement]
         - **Impacted Country:** [Pays impacte, ou "Global" / "Unknown"]
         - **Geolocation / Cloud Region:** [Localite precise ou region Cloud impactee, si connue]
         - **List of Companies Impacted:** [Entreprises touchees, si connues]
