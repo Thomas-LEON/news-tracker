@@ -24,8 +24,7 @@ st.set_page_config(
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;} 
-    footer {visibility: hidden;} 
-    header {visibility: hidden;}
+    footer {visibility: hidden;}
     
     /* Typographie moderne et propre type Feedly */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
