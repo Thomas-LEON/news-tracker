@@ -59,7 +59,7 @@ def get_previously_covered_incidents(days=3):
         return covered
         
     now = datetime.datetime.now()
-    for i in range(days + 1):
+    for i in range(1,days + 1):
         target_date = (now - datetime.timedelta(days=i)).strftime("%Y-%m-%d")
         filepath = os.path.join(output_dir, f"Daily_Threat_Intel_{target_date}.md")
         if os.path.exists(filepath):
