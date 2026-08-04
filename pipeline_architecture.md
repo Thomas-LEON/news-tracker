@@ -8,13 +8,13 @@ The architecture is split into two decoupled micro-services connected via a GitH
 
 ```mermaid
 flowchart TD
-    subgraph Data Collection & Generation [news-tracker Repo (Backend)]
+    subgraph DataCollection ["Data Collection & Generation (news-tracker Repo)"]
         A["📡 Public RSS Feeds\n(DarkReading, HackerNews...)"] -->|feedparser| B{"🐍 Python Tracker\n(GitHub Actions Cron)"}
         B -->|Raw Text| C["🧠 Google Gemini API\n(Strict Filtering Rules)"]
         C -->|Markdown Report| D[("📁 GitHub Reports Directory\n(Data Lake)")]
     end
 
-    subgraph Executive Presentation [CTI-dashboard Repo (Frontend)]
+    subgraph ExecPresentation ["Executive Presentation (CTI-dashboard Repo)"]
         D -->|GitHub REST API| E["⚙️ Streamlit App\n(Data Ingestion & Parsing)"]
         E -->|Regex Parsing| F["🧮 CRQ Scoring Engine\n(FAIR Framework)"]
         E -->|Aggregated Data| G["🧠 Google Gemini API\n(Pro/Flash Models)"]
@@ -22,8 +22,8 @@ flowchart TD
         G --> H
     end
 
-    style Data Collection & Generation fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
-    style Executive Presentation fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
+    style DataCollection fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
+    style ExecPresentation fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
     style C fill:#8E75B2,color:#fff
     style G fill:#8E75B2,color:#fff
 ```
