@@ -1,67 +1,63 @@
-# End-to-End Threat Intelligence Pipeline Architecture
+# End-to-End Threat Intelligence Pipeline Architecture (Internal Version)
 
-This document provides a technical overview of the automated Cyber Threat Intelligence (CTI) pipeline, detailing the data flow from raw internet sources to the executive dashboard. 
+This document provides a technical overview of the automated Cyber Threat Intelligence (CTI) pipeline, detailing the data flow from raw internet sources to the executive dashboard deployed within the internal corporate environment.
 
-The architecture is split into two decoupled micro-services connected via a GitHub repository acting as a headless CMS/Data Lake.
+The architecture connects an external intelligence generation pipeline to an internal consumption dashboard.
 
 ## 🏗️ High-Level Architecture Diagram
 
 ```mermaid
 flowchart TD
-    subgraph DataCollection ["Data Collection & Generation (news-tracker Repo)"]
-        A["📡 Public RSS Feeds\n(DarkReading, HackerNews...)"] -->|feedparser| B{"🐍 Python Tracker\n(GitHub Actions Cron)"}
-        B -->|Raw Text| C["🧠 Google Gemini API\n(Strict Filtering Rules)"]
-        C -->|Markdown Report| D[("📁 GitHub Reports Directory\n(Data Lake)")]
+    subgraph ExternalDataGen ["Data Collection (GitHub Actions)"]
+        A["📡 Public RSS Feeds\n(DarkReading, HackerNews...)"] -->|feedparser| B{"🐍 Python Tracker Script\n(news-tracker)"}
+        B -->|Filtering| C["🧠 External LLM API\n(Strict Business Rules)"]
+        C -->|Markdown Report| D[("📁 GitHub Reports Directory\n(Public Data Lake)")]
     end
 
-    subgraph ExecPresentation ["Executive Presentation (CTI-dashboard Repo)"]
-        D -->|GitHub REST API| E["⚙️ Streamlit App\n(Data Ingestion & Parsing)"]
+    subgraph InternalDashboard ["Executive Dashboard (Internal Corporate Network)"]
+        D -->|Selenium Headless| E["⚙️ Streamlit App\n(1.py Monolith)"]
         E -->|Regex Parsing| F["🧮 CRQ Scoring Engine\n(FAIR Framework)"]
-        E -->|Aggregated Data| G["🧠 Google Gemini API\n(Pro/Flash Models)"]
-        F --> H["📊 Executive Dashboard\n(Plotly, BLUF, CTI-Bot)"]
-        G --> H
+        E -->|Prompt Engineering| G["🔒 Internal Enterprise LLM Proxy\n(auth_context, LLMChat)"]
+        G -.->|Fallback Loop| H[("🤖 Internal Models:\n- gpt-oss-120b\n- mistral-medium-3.5-ITG\n- gemma-4-26b")]
+        F --> I["📊 Executive Presentation\n(Plotly Gauge, BLUF, CTI-Bot)"]
+        H --> I
     end
 
-    style DataCollection fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
-    style ExecPresentation fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
-    style C fill:#8E75B2,color:#fff
-    style G fill:#8E75B2,color:#fff
+    style ExternalDataGen fill:#f8f9fa,stroke:#ced4da,stroke-width:2px
+    style InternalDashboard fill:#e3f2fd,stroke:#90caf9,stroke-width:2px
+    style G fill:#1565c0,color:#fff
+    style H fill:#ffb300,color:#000
 ```
 
 ---
 
-## ⚙️ Phase 1: Data Collection & Generation (`news-tracker`)
+## ⚙️ Phase 1: External Data Collection & Generation
 
-This component operates autonomously as a scheduled background job, acting as the primary intelligence gatherer and initial qualitative filter.
+This component operates autonomously on the public web, acting as the primary intelligence gatherer and initial qualitative filter.
 
 ### Workflow
-1. **Trigger:** A GitHub Actions cron job (`daily-tracker.yml`) triggers the execution every morning.
-2. **Scraping:** The `news_tracker.py` script uses the `feedparser` library to pull articles published in the last 24 hours from an array of pre-configured cyber-security RSS feeds.
-3. **AI Filtering (Noise Reduction):** The raw articles are sent to the **Google Gemini API**. The LLM is constrained by strict business rules:
-   - **Inclusion:** Financial sector impacts, Big Tech (Cloud/AI) vulnerabilities, critical infrastructure.
-   - **Exclusion:** Generic phishing, non-strategic ransomware (SMEs), consumer data leaks.
-4. **Report Generation:** The LLM structures the filtered intelligence into a highly formatted Markdown document. Crucially, the LLM is prompted to evaluate the FAIR framework vectors (Threat Capability, Event Frequency, Business Impact) and generate a quantitative Threat Score.
-5. **Storage:** The script commits and pushes the generated Markdown file (`Daily_Threat_Intel_YYYY-MM-DD.md`) directly into the repository.
-
-### Technical Stack
-- **Python 3.10+** (beautifulsoup4, feedparser, httpx)
-- **AI Model:** Google Gemini via the `google-genai` SDK.
-- **Compute:** GitHub Actions Ubuntu Runners.
+1. **Trigger:** A scheduled job runs the script every morning.
+2. **Scraping:** Uses the `feedparser` library to pull articles published in the last 24 hours from an array of pre-configured cyber-security RSS feeds.
+3. **AI Filtering:** Raw articles are processed using strict business rules to exclude noise (e.g., standard ransomware on SMEs) and include critical threats (e.g., Cloud, AI, Financial sector).
+4. **Report Generation:** Generates a highly formatted Markdown document (`Daily_Threat_Intel_YYYY-MM-DD.md`) containing the FAIR-based Threat Score and detailed incidents.
+5. **Storage:** The Markdown file is pushed to the `reports/` folder of the GitHub repository.
 
 ---
 
-## 📊 Phase 2: Executive Presentation (`CTI-dashboard`)
+## 📊 Phase 2: Internal Executive Dashboard (The `1.py` App)
 
-This component is the UI layer. It is fully decoupled from the generation process and only consumes the structured Markdown files, ensuring rapid load times and stateless operation.
+This component is the UI layer running within the internal corporate perimeter. It is designed to safely ingest external data and process it using **exclusively internal, compliant AI models**.
 
 ### Workflow
-1. **Data Ingestion:** The `data/github_client.py` module queries the GitHub REST API to fetch the last 7 days of Markdown reports from the `news-tracker` repository.
-2. **Regex Parsing:** The `analysis/parser.py` module uses compiled regular expressions to parse the Markdown. It extracts the raw text into structured Python `dataclasses` (Incidents) and extracts the FAIR Threat Score.
-3. **Data Visualization:** The timeline of Threat Scores is passed to Plotly to render the 7-day historical baseline and current-day gauge chart.
-4. **AI Synthesis (BLUF):** The raw text of the day's incidents is aggregated and sent to the **Google Gemini Pro API** to generate the "Bottom Line Up Front" (BLUF), synthesizing the strategic impact for C-Level executives.
-5. **Interactive RAG (CTI-Bot):** The text from all 7 days of reports is loaded into the context window of a **Google Gemini Flash API** model, enabling the user to ask natural language questions about the recent threat landscape.
+1. **Data Ingestion (Selenium Bypass):** To navigate internal corporate proxies and retrieve data from GitHub, the `fetch_recent_reports` function utilizes `selenium` with a headless Chrome browser. This safely fetches the last 7 days of Markdown reports without tripping standard HTTP blockers.
+2. **Regex Parsing & CRQ Extraction:** The Markdown is parsed using compiled regular expressions to extract structured incident data and the quantitative FAIR Threat Score.
+3. **Internal AI Synthesis (BLUF & CTI-Bot):** 
+   - **No Public APIs are used.** The application utilizes the internal LLM library (`llm.get_auth_context`, `llm.LLMChat`).
+   - The app implements a **resilience loop**: It attempts to reach multiple internal enterprise models sequentially (`gpt-oss-120b`, `mistral-medium-3.5-ITG`, `gemma-4-26b`) to generate the Executive Summary (BLUF) and power the interactive chat. If one model fails or is overloaded, it automatically falls back to the next.
+4. **Data Visualization:** Plotly is used to render the 7-day historical baseline (Trend Line) and the current-day Threat Score (Gauge Chart).
 
-### Technical Stack
-- **Python 3.10+** (Streamlit, Plotly, Pandas, requests)
-- **AI Models:** Google Gemini Pro (Strategic BLUF) and Gemini Flash (Fast Chatbot).
-- **Architecture:** Modular MVC-inspired structure (Data, Analysis, AI, UI layers).
+### Technical Stack (Internal Environment)
+- **Frontend/Backend:** Python 3 (Streamlit, Plotly, Pandas)
+- **Ingestion:** Selenium WebDriver (Headless Chrome)
+- **AI Infrastructure:** Internal Corporate LLM Proxy (`llm` module)
+- **Architecture:** Monolithic Streamlit script (`1.py`) combining UI, scraping, parsing, and LLM calls.
