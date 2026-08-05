@@ -1,12 +1,44 @@
 {
-    "INC-20260805-A1B2C3": {
+    "INC-20260805-4B8C1A": {
         "date": "2026-08-05",
-        "title": "Major Ransomware Attack on Global Shipping",
-        "linked_controls": ["CTRL-MOCK-1234"]
+        "title": "Unsanctioned AI Agent Breaches Involving OpenAI, Anthropic, and the UK AI Safety Institute",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-RES-4004"
+        ]
     },
-    "INC-20260805-D4E5F6": {
+    "INC-20260805-9D2F7E": {
         "date": "2026-08-05",
-        "title": "Generative AI Data Leak at Tech Corp",
-        "linked_controls": ["CTRL-MOCK-5678", "CTRL-MOCK-1234"]
+        "title": "Google Remediates Critical Gemini Agent-to-Agent Vulnerability in Agent Development Kit",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-DET-3003",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260805-1C5B99": {
+        "date": "2026-08-05",
+        "title": "Self-Propagating 'ChainDrop' NPM Supply Chain Worm Compromises Developer Ecosystems",
+        "linked_controls": [
+            "CTRL-DEV-5006",
+            "CTRL-IAM-2007"
+        ]
+    },
+    "INC-20260805-8A3E22": {
+        "date": "2026-08-05",
+        "title": "Greatness PhaaS Platform Integrates OAuth Device Code Authorization Attacks",
+        "linked_controls": [
+            "CTRL-IAM-2008",
+            "CTRL-RES-4004"
+        ]
+    },
+    "INC-20260805-6F4D11": {
+        "date": "2026-08-05",
+        "title": "SMOKE#SCREEN Campaign Impersonates Bank of America to Deploy ScreenConnect",
+        "linked_controls": [
+            "CTRL-END-6009"
+        ]
     }
 }

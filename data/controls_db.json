@@ -1,29 +1,127 @@
 {
-    "CTRL-MOCK-1234": {
-        "name": "Endpoint Detection & Response (EDR)",
+    "CTRL-AI-1001": {
+        "name": "Air-Gapped AI Staging Environments",
         "prerequisites": [
-            "100% Agent deployment",
-            "SOC monitoring 24/7",
-            "Network baseline established"
+            "Network isolation protocols",
+            "Synthetic data generation capabilities",
+            "Dedicated testing hardware/VMs"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-IAM-2002": {
+        "name": "Intent-Based Access Control (IBAC) for AI",
+        "prerequisites": [
+            "API Gateway integration",
+            "Dynamic transaction validation logic",
+            "Semantic context analyzers"
         ],
         "cia_impact": {
             "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-DET-3003": {
+        "name": "AI Egress & Task-Decomposition Telemetry",
+        "prerequisites": [
+            "Session-level packet inspection",
+            "LLM reasoning state monitoring",
+            "SIEM integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-RES-4004": {
+        "name": "Automated API Circuit Breakers",
+        "prerequisites": [
+            "Real-time token revocation capabilities",
+            "Threshold-based alert rules",
+            "Automated incident response playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-IAM-2005": {
+        "name": "Human-in-the-Loop (HITL) for AI Agents",
+        "prerequisites": [
+            "Privilege separation between agents",
+            "Manual approval workflows in CI/CD",
+            "Granular service accounts"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-DEV-5006": {
+        "name": "Hardened Internal Repository Proxies",
+        "prerequisites": [
+            "Nexus or Artifactory deployment",
+            "Dynamic pre-install script blocking",
+            "External registry auto-sync disabled"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-IAM-2007": {
+        "name": "FIDO2 Hardware MFA for CI/CD",
+        "prerequisites": [
+            "Hardware security keys distribution",
+            "Short-lived publish tokens",
+            "SSO enforcement for developers"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-IAM-2008": {
+        "name": "Disable OAuth Device Code Flow",
+        "prerequisites": [
+            "Microsoft Entra ID admin access",
+            "Conditional Access policies configuration",
+            "Hybrid Azure AD-joined device requirements"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
             "Integrity": "High",
             "Availability": "Medium"
         },
         "damage_level": "Critical"
     },
-    "CTRL-MOCK-5678": {
-        "name": "AI Output Monitoring",
+    "CTRL-END-6009": {
+        "name": "Strict RMM Application Control (AppLocker)",
         "prerequisites": [
-            "Data Loss Prevention (DLP) enabled",
-            "LLM Gateway configuration",
-            "User Acceptable Use Policy signed"
+            "Windows Defender Application Control",
+            "Whitelist of authorized IT management tools",
+            "Removal of local admin rights"
         ],
         "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "Medium",
-            "Availability": "Low"
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
         },
         "damage_level": "High"
     }
