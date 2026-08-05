@@ -2,13 +2,12 @@ import os
 import datetime
 import feedparser
 import re
+import json
+import uuid
 from google import genai
 from google.genai import types
-from bs4 import BeautifulSoup
 import httpx
-import certifi
-
-# --- CONFIGURATION ---
+from bs4 import BeautifulSoup
 # Remplacez "VOTRE_CLE_API" par votre véritable clé API Google Gemini (AI Studio).
 # Il est recommandé de la définir dans les variables d'environnement Windows.
 API_KEY = os.environ.get("GEMINI_API_KEY", "VOTRE_CLE_API")
@@ -196,6 +195,107 @@ def generate_executive_summary(articles, covered_incidents=None):
     except Exception as e:
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
 
+def update_databases(report_content, today_str):
+    """
+    Lit le rapport généré, en extrait les incidents et les contrôles associés,
+    dédoublonne les contrôles avec la base de données existante (via IA),
+    et met à jour les fichiers JSON.
+    """
+    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+    os.makedirs(data_dir, exist_ok=True)
+    
+    controls_db_path = os.path.join(data_dir, "controls_db.json")
+    incidents_db_path = os.path.join(data_dir, "incidents_db.json")
+    
+    # Load existing DBs
+    controls_db = {}
+    if os.path.exists(controls_db_path):
+        with open(controls_db_path, "r", encoding="utf-8") as f:
+            controls_db = json.load(f)
+            
+    incidents_db = {}
+    if os.path.exists(incidents_db_path):
+        with open(incidents_db_path, "r", encoding="utf-8") as f:
+            incidents_db = json.load(f)
+            
+    # Build a simplified list of existing controls to send to the LLM
+    existing_controls_list = [{"id": k, "name": v["name"]} for k, v in controls_db.items()]
+    
+    prompt = f"""Tu es un analyste expert en Risk Management.
+Voici le rapport quotidien Cyber :
+---
+{report_content}
+---
+
+Voici la liste des contrôles DÉJÀ EXISTANTS dans notre base de données :
+{json.dumps(existing_controls_list, indent=2)}
+
+TA TACHE :
+1. Isole chaque incident du rapport (chaque section H2 commençant par ##).
+2. Pour chaque incident, identifie les "Mitigating Controls" recommandés.
+3. Pour chaque contrôle identifié :
+   - Regarde s'il correspond SÉMANTIQUEMENT à un contrôle de la base existante. Si oui, réutilise son ID existant.
+   - S'il s'agit d'un nouveau contrôle (nouveau concept), crée-lui un ID sous la forme 'CTRL-NOUVEAU-XXXX' (remplace XXXX par 4 chiffres aléatoires).
+   - Génère pour ce NOUVEAU contrôle ses attributs : 'name', 'prerequisites' (liste de 3 pré-requis courts), 'cia_impact' (un objet contenant Confidentiality, Integrity, Availability notés Low, Medium, High, ou Critical), et 'damage_level' (Low, Medium, High, ou Critical).
+
+Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, structuré EXACTEMENT comme ceci :
+{{
+    "new_controls": {{
+        "CTRL-NOUVEAU-1234": {{
+            "name": "MFA for Admins",
+            "prerequisites": ["IdP deployment", "Hardware tokens", "User training"],
+            "cia_impact": {{"Confidentiality": "High", "Integrity": "High", "Availability": "Medium"}},
+            "damage_level": "Critical"
+        }}
+    }},
+    "incidents": [
+        {{
+            "title": "Titre complet de l'incident (celui du rapport)",
+            "controls": ["ID-EXISTANT", "CTRL-NOUVEAU-1234"]
+        }}
+    ]
+}}
+"""
+    try:
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
+        response = client.models.generate_content(
+            model='gemini-3.6-flash',
+            contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.1)
+        )
+        
+        raw_output = response.text
+        clean_json = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw_output, re.DOTALL | re.IGNORECASE)
+        clean_json_str = clean_json.group(1) if clean_json else raw_output
+        parsed_data = json.loads(clean_json_str)
+        
+        # Merge new controls
+        if "new_controls" in parsed_data:
+            for c_id, c_data in parsed_data["new_controls"].items():
+                if c_id not in controls_db:
+                    controls_db[c_id] = c_data
+                    
+        # Add incidents
+        if "incidents" in parsed_data:
+            for inc in parsed_data["incidents"]:
+                inc_id = f"INC-{today_str.replace('-','')}-{uuid.uuid4().hex[:6].upper()}"
+                incidents_db[inc_id] = {
+                    "date": today_str,
+                    "title": inc.get("title", "Unknown Incident"),
+                    "linked_controls": inc.get("controls", [])
+                }
+                
+        # Save DBs
+        with open(controls_db_path, "w", encoding="utf-8") as f:
+            json.dump(controls_db, f, indent=4)
+        with open(incidents_db_path, "w", encoding="utf-8") as f:
+            json.dump(incidents_db, f, indent=4)
+            
+        print("Base de données JSON (Controls & Incidents) mise à jour avec succès.")
+        
+    except Exception as e:
+        print(f"Erreur lors de la mise à jour des bases JSON : {e}")
+
 def main():
     print("Recherche des actualites (Threat Intel & Cyber) des dernieres 24h...")
     articles = fetch_recent_news()
@@ -234,6 +334,9 @@ def main():
         f.write(report)
         
     print(f"\nTermine ! Le rapport a ete sauvegarde ici :\n{filename}")
+    
+    print("\nMise à jour de la base de connaissances (Contrôles)...")
+    update_databases(report, today_str)
 
 if __name__ == "__main__":
     main()

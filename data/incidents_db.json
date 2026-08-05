@@ -1,0 +1,12 @@
+{
+    "INC-20260805-A1B2C3": {
+        "date": "2026-08-05",
+        "title": "Major Ransomware Attack on Global Shipping",
+        "linked_controls": ["CTRL-MOCK-1234"]
+    },
+    "INC-20260805-D4E5F6": {
+        "date": "2026-08-05",
+        "title": "Generative AI Data Leak at Tech Corp",
+        "linked_controls": ["CTRL-MOCK-5678", "CTRL-MOCK-1234"]
+    }
+}

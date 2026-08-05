@@ -1,0 +1,30 @@
+{
+    "CTRL-MOCK-1234": {
+        "name": "Endpoint Detection & Response (EDR)",
+        "prerequisites": [
+            "100% Agent deployment",
+            "SOC monitoring 24/7",
+            "Network baseline established"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-MOCK-5678": {
+        "name": "AI Output Monitoring",
+        "prerequisites": [
+            "Data Loss Prevention (DLP) enabled",
+            "LLM Gateway configuration",
+            "User Acceptable Use Policy signed"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    }
+}
