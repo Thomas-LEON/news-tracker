@@ -4,21 +4,14 @@
 **Threat Score:** 86/100
 *(Auditable Metrics - Threat Capability: 8/10 | Event Frequency: 9/10 | Business Impact: 9/10)*
 
-```python
-# Calculation Logic
-tc = 8
-ef = 9
-bi = 9
-global_risk_score = (tc * 0.3) + (ef * 0.3) + (bi * 0.4)
-print(f"Global Risk Score: {global_risk_score}/10")
-```
+
 
 ---
 
 ## Titre de l'incident : Google Agent Development Kit (ADK) AI Workflow Vulnerability – August 4, 2026
 
 **Incident Metadata:**
-- **Timeline:** [Event: August 4, 2026 | Disclosed: August 4, 2026]
+- **Timeline:** [Event: July 2-24, 2026 | Disclosed: August 4, 2026]
 - **Impacted Country:** Global
 - **Geolocation / Cloud Region:** Google Cloud Platform (GCP) / GitHub
 - **List of Companies Impacted:** Google
