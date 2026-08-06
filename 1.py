@@ -882,6 +882,12 @@ if not st.session_state.messages:
 for message in st.session_state.messages:
     css_class = "cti-msg-user" if message["role"] == "user" else "cti-msg-bot"
     safe = str(message['content']).replace('<', '&lt;').replace('>', '&gt;')
+    
+    # Parse basic Markdown (Bold, Italic) and newlines for the HTML chat bubbles
+    safe = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', safe)
+    safe = re.sub(r'\*(.*?)\*', r'<em>\1</em>', safe)
+    safe = safe.replace('\n', '<br>')
+    
     chat_html += f"<div class='{css_class}'>{safe}</div>"
 chat_html += "</div>"
 st.markdown(chat_html, unsafe_allow_html=True)
