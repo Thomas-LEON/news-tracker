@@ -45,7 +45,7 @@ st.markdown("""
         color: #1E2327 !important;
         background: linear-gradient(90deg, rgba(0,145,90,0.08) 0%, transparent 80%);
         border-left: 5px solid #00915A;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1.5rem;
         margin-bottom: 0.5rem;
         border-radius: 2px;
     }
