@@ -183,6 +183,7 @@ def parse_incidents(content):
         # Rétrocompatibilité : on supprime le préfixe s'il est présent dans les anciens rapports
         preview = re.sub(r'(?i)^titre de l\'incident\s*:\s*', '', preview).strip()
         
+        category_match  = re.search(r'\*\*Primary Category:\*\*\s*(.*?)\n', section)
         country_match   = re.search(r'\*\*Impacted Country:\*\*\s*(.*?)\n', section)
         geo_match       = re.search(r'\*\*Geolocation.*?:\*\*\s*(.*?)\n', section)
         companies_match = re.search(r'\*\*List of Companies Impacted:\*\*\s*(.*?)\n', section)
@@ -194,6 +195,7 @@ def parse_incidents(content):
         
         subjects.append({
             "preview":   preview, 
+            "category":  category_match.group(1).strip() if category_match else "",
             "country":   country_match.group(1).strip() if country_match else "", 
             "geo":       geo_match.group(1).strip() if geo_match else "",
             "companies": companies_match.group(1).strip() if companies_match else "",
@@ -490,7 +492,8 @@ with tab_briefing:
         st.info("No actionable intelligence detected for this date.")
     else:
         for sub in incidents:
-            with st.expander(f"📰 {sub['preview']}"):
+            cat_label = f"[{sub['category'].upper()}] " if sub.get('category') else ""
+            with st.expander(f"📰 {cat_label}{sub['preview']}"):
 
                 country   = sub.get('country', '') or "Global/Unknown"
                 geo       = sub.get('geo', '') or "Unknown"
@@ -651,7 +654,8 @@ if not incidents:
     st.info("No actionable intelligence detected for this date.")
 else:
     for sub in incidents:
-        with st.expander(f"📰 {sub['preview']}"):
+        cat_label = f"[{sub['category'].upper()}] " if sub.get('category') else ""
+        with st.expander(f"📰 {cat_label}{sub['preview']}"):
 
             country   = sub.get('country', '') or "Global/Unknown"
             geo       = sub.get('geo', '') or "Unknown"
