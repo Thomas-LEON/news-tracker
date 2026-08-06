@@ -838,31 +838,31 @@ with tab_controls:
                 c_data = controls_db[c_id]
                 label = f"{c_data.get('name', 'Unknown')}  —  {count} incident{'s' if count > 1 else ''}"
                 with st.expander(label):
-                col_info, col_inc = st.columns([1, 1])
-                with col_info:
-                    st.markdown("**Prerequisites**")
-                    for p in c_data.get("prerequisites", []):
-                        st.markdown(f"- {p}")
-                    st.markdown("")
-                    st.markdown("**CIA Impact**")
-                    cia = c_data.get("cia_impact", {})
-                    st.markdown(
-                        f"Confidentiality: `{cia.get('Confidentiality', 'N/A')}`  "
-                        f"Integrity: `{cia.get('Integrity', 'N/A')}`  "
-                        f"Availability: `{cia.get('Availability', 'N/A')}`"
-                    )
-                    dmg = c_data.get("damage_level", "N/A")
-                    color = "red" if dmg in ["Critical", "High"] else "orange" if dmg == "Medium" else "green"
-                    st.markdown(f"Damage Level: :{color}[**{dmg.upper()}**]")
+                    col_info, col_inc = st.columns([1, 1])
+                    with col_info:
+                        st.markdown("**Prerequisites**")
+                        for p in c_data.get("prerequisites", []):
+                            st.markdown(f"- {p}")
+                        st.markdown("")
+                        st.markdown("**CIA Impact**")
+                        cia = c_data.get("cia_impact", {})
+                        st.markdown(
+                            f"Confidentiality: `{cia.get('Confidentiality', 'N/A')}`  "
+                            f"Integrity: `{cia.get('Integrity', 'N/A')}`  "
+                            f"Availability: `{cia.get('Availability', 'N/A')}`"
+                        )
+                        dmg = c_data.get("damage_level", "N/A")
+                        color = "red" if dmg in ["Critical", "High"] else "orange" if dmg == "Medium" else "green"
+                        st.markdown(f"Damage Level: :{color}[**{dmg.upper()}**]")
 
-                with col_inc:
-                    st.markdown("**Linked Incidents**")
-                    linked = [d for d in incidents_db.values() if c_id in d.get("linked_controls", [])]
-                    if linked:
-                        for inc in linked:
-                            st.markdown(f"- **{inc['date']}** — {inc['title']}")
-                    else:
-                        st.markdown("*No incidents linked.*")
+                    with col_inc:
+                        st.markdown("**Linked Incidents**")
+                        linked = [d for d in incidents_db.values() if c_id in d.get("linked_controls", [])]
+                        if linked:
+                            for inc in linked:
+                                st.markdown(f"- **{inc['date']}** — {inc['title']}")
+                        else:
+                            st.markdown("*No incidents linked.*")
 
 
 # =========================================================================
