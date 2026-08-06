@@ -19,24 +19,85 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Petit nettoyage Streamlit de base et CSS Feedly / Mobile Responsive
+# ---- BNP PARIBAS BRAND DESIGN SYSTEM ----
+# Primary:  #00965E (BNP Green)
+# Dark:     #006B44 (BNP Dark Green)
+# Text:     #1A1A1A (Near-black institutional)
+# Bg:       #F7F8F6 (Off-white)
+# -----------------------------------------
 st.markdown("""
 <style>
-    #MainMenu {visibility: hidden;} 
+    #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    
-    /* Typographie moderne et propre type Feedly */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+    /* --- BNP TYPOGRAPHY --- */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
+        color: #1A1A1A;
     }
-    
-    /* Design des petits Badges "Super Executive" */
+
+    /* --- BNP SIDEBAR --- */
+    [data-testid="stSidebar"] {
+        background-color: #00965E !important;
+        border-right: none;
+    }
+    [data-testid="stSidebar"] * {
+        color: #ffffff !important;
+    }
+    [data-testid="stSidebar"] .stRadio > label {
+        color: rgba(255,255,255,0.85) !important;
+        font-size: 0.88rem !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] li {
+        color: rgba(255,255,255,0.92) !important;
+        font-size: 0.85rem !important;
+    }
+    [data-testid="stSidebar"] hr {
+        border-color: rgba(255,255,255,0.25) !important;
+    }
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] caption {
+        color: #ffffff !important;
+    }
+    [data-testid="stSidebar"] .stAlert {
+        background: rgba(255,255,255,0.12) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        border-radius: 8px;
+    }
+    [data-testid="stSidebar"] [data-baseweb="radio"] > div {
+        background: rgba(255,255,255,0.1) !important;
+        border-radius: 6px;
+        padding: 4px 8px;
+        margin-bottom: 4px;
+    }
+    [data-testid="stSidebar"] [data-baseweb="radio"] [aria-checked="true"] > div {
+        background: rgba(255,255,255,0.28) !important;
+        border-radius: 6px;
+    }
+
+    /* --- BNP TABS --- */
+    [data-baseweb="tab-list"] {
+        border-bottom: 2px solid #00965E !important;
+    }
+    [data-baseweb="tab"][aria-selected="true"] {
+        color: #00965E !important;
+        border-bottom: 3px solid #00965E !important;
+        font-weight: 700 !important;
+    }
+    [data-baseweb="tab"] {
+        color: #666666 !important;
+    }
+
+    /* --- BNP EXEC METADATA BADGES (Region/Infra/Company) --- */
     .exec-badge {
         display: inline-block;
         padding: 3px 10px;
-        border-radius: 10px;
-        font-size: 0.78rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
         font-weight: 600;
         margin-right: 6px;
         margin-bottom: 8px;
@@ -44,21 +105,102 @@ st.markdown("""
         letter-spacing: 0.5px;
         white-space: nowrap;
     }
-    .badge-red    { background-color: #ffebee; color: #c62828; border: 1px solid #ef9a9a;}
-    .badge-blue   { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9;}
-    .badge-green  { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7;}
-    .badge-dark   { background-color: #37474f; color: #ffffff; border: 1px solid #263238;}
-    .badge-purple { background-color: #ede7f6; color: #4527a0; border: 1px solid #b39ddb;}
-    .badge-orange { background-color: #fff3e0; color: #e65100; border: 1px solid #ffcc80;}
+    .badge-red    { background-color: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
+    .badge-blue   { background-color: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
+    .badge-green  { background-color: #ECFDF5; color: #065F46; border: 1px solid #6EE7B7; }
+    .badge-dark   { background-color: #1A1A1A; color: #ffffff; border: 1px solid #333333; }
+    .badge-purple { background-color: #F5F3FF; color: #4C1D95; border: 1px solid #DDD6FE; }
+    .badge-orange { background-color: #FFF7ED; color: #9A3412; border: 1px solid #FDBA74; }
+    .badge-bnp    { background-color: #00965E; color: #ffffff; border: 1px solid #006B44; }
 
-    /* CTI Chat Box - fixed height, scrollable */
+    /* --- BNP CATEGORY BADGES (Intelligence Feed) --- */
+    .cat-badge {
+        display: inline-block;
+        padding: 2px 9px;
+        border-radius: 3px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-right: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        vertical-align: middle;
+    }
+    .cat-ai           { background: #0EA5E9; color: #fff; }
+    .cat-cloud        { background: #6366F1; color: #fff; }
+    .cat-ransomware   { background: #DC2626; color: #fff; }
+    .cat-supply-chain { background: #D97706; color: #fff; }
+    .cat-phishing     { background: #9333EA; color: #fff; }
+    .cat-data-leak    { background: #DB2777; color: #fff; }
+    .cat-digital-asset{ background: #0891B2; color: #fff; }
+    .cat-malware      { background: #B91C1C; color: #fff; }
+    .cat-identity     { background: #065F46; color: #fff; }
+    .cat-default      { background: #374151; color: #fff; }
+
+    /* --- BNP LEADERBOARD TABLE (Control Center) --- */
+    .bnp-leaderboard {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Inter', sans-serif;
+    }
+    .bnp-leaderboard thead tr {
+        background: #00965E;
+        color: white;
+    }
+    .bnp-leaderboard thead th {
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+    }
+    .bnp-leaderboard tbody tr {
+        border-bottom: 1px solid #E5E7EB;
+        transition: background 0.15s;
+    }
+    .bnp-leaderboard tbody tr:hover {
+        background: #F0FDF4;
+    }
+    .bnp-leaderboard tbody td {
+        padding: 11px 14px;
+        font-size: 0.88rem;
+        color: #1A1A1A;
+        vertical-align: middle;
+    }
+    .bnp-rank {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #00965E;
+        width: 32px;
+        text-align: center;
+    }
+    .bnp-progress-bar-bg {
+        background: #E5E7EB;
+        border-radius: 3px;
+        height: 7px;
+        width: 160px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .bnp-progress-bar-fill {
+        background: #00965E;
+        border-radius: 3px;
+        height: 7px;
+        display: block;
+    }
+    .bnp-crit-critical { color: #991B1B; font-weight: 700; font-size: 0.75rem; }
+    .bnp-crit-high     { color: #92400E; font-weight: 700; font-size: 0.75rem; }
+    .bnp-crit-medium   { color: #065F46; font-weight: 700; font-size: 0.75rem; }
+    .bnp-crit-low      { color: #374151; font-weight: 700; font-size: 0.75rem; }
+
+    /* --- CTI CHAT BOX --- */
     .cti-chat-container {
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
+        border: 1px solid #D1FAE5;
+        border-radius: 10px;
         height: 370px;
         overflow-y: auto;
         padding: 12px 16px;
-        background: #fafafa;
+        background: #F7FFF9;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -66,7 +208,7 @@ st.markdown("""
     }
     .cti-msg-user {
         align-self: flex-end;
-        background: #1565c0;
+        background: #00965E;
         color: white;
         padding: 8px 14px;
         border-radius: 16px 16px 4px 16px;
@@ -80,13 +222,13 @@ st.markdown("""
         color: #1a1a1a;
         padding: 8px 14px;
         border-radius: 16px 16px 16px 4px;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #D1FAE5;
         max-width: 85%;
         font-size: 0.9rem;
         line-height: 1.4;
     }
 
-    /* Responsivité Mobile Ultime */
+    /* --- MOBILE RESPONSIVE --- */
     @media (max-width: 768px) {
         .block-container {
             padding-top: 1rem !important;
@@ -306,6 +448,21 @@ def format_bullets(data_item):
         return "\n".join([f"- {item}" for item in data_item])
     return str(data_item)
 
+# BNP Category badge helper
+def get_cat_badge_html(category: str) -> str:
+    if not category:
+        return ""
+    cat = category.strip().upper()
+    css_map = {
+        "AI": "cat-ai", "CLOUD": "cat-cloud",
+        "RANSOMWARE": "cat-ransomware", "SUPPLY CHAIN": "cat-supply-chain",
+        "PHISHING": "cat-phishing", "DATA LEAK": "cat-data-leak",
+        "DIGITAL ASSET": "cat-digital-asset", "MALWARE": "cat-malware",
+        "IDENTITY": "cat-identity",
+    }
+    css_class = css_map.get(cat, "cat-default")
+    return f"<span class='cat-badge {css_class}'>{cat}</span>"
+
 # =====================================================================
 # 🖥️ 4. USER INTERFACE (V9 MATHEMATICAL CRQ + PLOTLY)
 # =====================================================================
@@ -492,8 +649,11 @@ with tab_briefing:
         st.info("No actionable intelligence detected for this date.")
     else:
         for sub in incidents:
-            cat_label = f"[{sub['category'].upper()}] " if sub.get('category') else ""
-            with st.expander(f"📰 {cat_label}{sub['preview']}"):
+            cat_html = get_cat_badge_html(sub.get('category', ''))
+            label = f"{sub['preview']}"
+            with st.expander(f"📰 {sub['preview']}"):
+                if sub.get('category'):
+                    st.markdown(cat_html, unsafe_allow_html=True)
 
                 country   = sub.get('country', '') or "Global/Unknown"
                 geo       = sub.get('geo', '') or "Unknown"
@@ -543,25 +703,43 @@ with tab_controls:
         # Sort top controls
         sorted_controls = sorted(control_counts.items(), key=lambda x: x[1], reverse=True)
         
-        # Dataviz (Top 10)
-        top_10 = sorted_controls[:10]
-        names = [controls_db[c[0]].get("name", "Unknown Control") for c in top_10 if c[1] > 0]
-        counts = [c[1] for c in top_10 if c[1] > 0]
-        
-        if counts:
-            fig_bar = go.Figure(go.Bar(
-                x=counts,
-                y=names,
-                orientation='h',
-                marker_color='#37474f'
-            ))
-            fig_bar.update_layout(
-                title="Top Recommended Controls (Frequency of appearance in incidents)", 
-                yaxis={'autorange': 'reversed'},
-                height=350,
-                margin=dict(l=20, r=20, t=50, b=20)
-            )
-            st.plotly_chart(fig_bar, use_container_width=True)
+        # --- BNP LEADERBOARD (Top 10 Controls) ---
+        top_10 = [(c_id, cnt) for c_id, cnt in sorted_controls[:10] if cnt > 0]
+        max_count = top_10[0][1] if top_10 else 1
+
+        if top_10:
+            st.markdown("<p style='font-size:0.8rem;color:#666;margin-bottom:6px;'>Top recommended security controls ranked by number of threat incidents requiring their implementation.</p>", unsafe_allow_html=True)
+            rows_html = ""
+            for rank, (c_id, count) in enumerate(top_10, start=1):
+                c_data = controls_db[c_id]
+                name = c_data.get("name", "Unknown Control")
+                dmg = c_data.get("damage_level", "").upper()
+                dmg_class = f"bnp-crit-{dmg.lower()}" if dmg.lower() in ["critical","high","medium","low"] else "bnp-crit-low"
+                bar_pct = int((count / max_count) * 100)
+                medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(rank, str(rank))
+                rows_html += f"""
+                <tr>
+                    <td class='bnp-rank'>{medal}</td>
+                    <td><strong>{name}</strong></td>
+                    <td>
+                        <div class='bnp-progress-bar-bg'>
+                            <div class='bnp-progress-bar-fill' style='width:{bar_pct}%'></div>
+                        </div>
+                        <span style='font-size:0.8rem;color:#555;margin-left:8px;'>{count} incident{'s' if count > 1 else ''}</span>
+                    </td>
+                    <td class='{dmg_class}'>{dmg if dmg else 'N/A'}</td>
+                </tr>"""
+            leaderboard_html = f"""
+            <table class='bnp-leaderboard'>
+                <thead><tr>
+                    <th>#</th>
+                    <th>Control</th>
+                    <th>Frequency</th>
+                    <th>Risk Level</th>
+                </tr></thead>
+                <tbody>{rows_html}</tbody>
+            </table>"""
+            st.markdown(leaderboard_html, unsafe_allow_html=True)
         else:
             st.info("No controls have been linked to incidents yet.")
             
@@ -654,8 +832,11 @@ if not incidents:
     st.info("No actionable intelligence detected for this date.")
 else:
     for sub in incidents:
-        cat_label = f"[{sub['category'].upper()}] " if sub.get('category') else ""
-        with st.expander(f"📰 {cat_label}{sub['preview']}"):
+        cat_html = get_cat_badge_html(sub.get('category', ''))
+        with st.expander(f"📰 {sub['preview']}"):
+            if sub.get('category'):
+                st.markdown(cat_html, unsafe_allow_html=True)
+
 
             country   = sub.get('country', '') or "Global/Unknown"
             geo       = sub.get('geo', '') or "Unknown"
