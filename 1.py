@@ -533,16 +533,16 @@ def render_incident_card(sub):
     st.markdown(meta_html, unsafe_allow_html=True)
 
     if sub.get('overview'):
-        st.markdown(f"<div class='inc-section inc-overview'><span class='inc-section-label'>Operational Overview</span>{sub['overview']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-overview'><span class='inc-section-label'>Operational Overview</span>\n\n{sub['overview']}\n\n</div>", unsafe_allow_html=True)
 
     if sub.get('breach'):
-        st.markdown(f"<div class='inc-section inc-vector'><span class='inc-section-label'>Attack Vector</span>{sub['breach']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-vector'><span class='inc-section-label'>Attack Vector</span>\n\n{sub['breach']}\n\n</div>", unsafe_allow_html=True)
 
     if sub.get('impact'):
-        st.markdown(f"<div class='inc-section inc-impact'><span class='inc-section-label'>Business Impact</span>{sub['impact']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-impact'><span class='inc-section-label'>Business Impact</span>\n\n{sub['impact']}\n\n</div>", unsafe_allow_html=True)
 
     if sub.get('control'):
-        st.markdown(f"<div class='inc-section inc-control'><span class='inc-section-label'>Recommended Controls</span>{sub['control']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-control'><span class='inc-section-label'>Recommended Controls</span>\n\n{sub['control']}\n\n</div>", unsafe_allow_html=True)
 
     if sub.get('link'):
         st.markdown(f"[View Source Intelligence]({sub['link']})")
