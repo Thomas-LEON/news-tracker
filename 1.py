@@ -28,13 +28,11 @@ st.markdown("""
     /* --- RESET: Remove Streamlit chrome --- */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
 
     /* --- LAYOUT: Tighten & contain --- */
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
-        max-width: 1200px;
     }
 
     /* --- TYPOGRAPHY --- */
