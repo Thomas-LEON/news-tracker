@@ -90,20 +90,23 @@ st.markdown("""
     [data-testid="stSidebar"] .stAlert li {
         color: #1E2327 !important; /* Force black text in info boxes */
     }
-    [data-testid="stSidebar"] [data-baseweb="radio"] > div {
-        background: transparent !important;
-        border-radius: 4px;
-        padding: 2px 6px;
-        margin-bottom: 2px;
+    [data-testid="stSidebar"] div[role="radiogroup"] label {
+        padding: 6px 12px !important;
+        border-radius: 6px !important;
+        margin-bottom: 4px !important;
+        transition: background 0.2s ease;
     }
-    [data-testid="stSidebar"] [data-baseweb="radio"] [aria-checked="true"] > div {
-        background: #00915A !important;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0,145,90,0.2);
+    [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
+        background-color: #00915A !important;
+        box-shadow: 0 2px 5px rgba(0,145,90,0.3) !important;
     }
-    [data-testid="stSidebar"] [data-baseweb="radio"] [aria-checked="true"] p {
+    [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) p {
         color: #FFFFFF !important;
         font-weight: 600 !important;
+    }
+    /* Hide the default radio circle when selected to make it look like a pure button */
+    [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) > div:first-child {
+        display: none !important;
     }
 
     /* --- TABS --- */
