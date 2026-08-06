@@ -139,11 +139,11 @@ def generate_executive_summary(articles, covered_incidents=None):
 
         **Proposed Control: Mitigating Threats**
         To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:
-        - I. Governance & Containment (Prevention): [Action proposee]
-        - II. Identity & Access Management (Containment): [Action proposee]
-        - III. Infrastructure Intelligence (Detection): [Action proposee]
-        - IV. Operational Resilience: [Action proposee]
-        - V. Simulation environment: [Action proposee]
+        - **I. Governance & Containment (Prevention):** [Action proposee]
+        - **II. Identity & Access Management (Containment):** [Action proposee]
+        - **III. Infrastructure Intelligence (Detection):** [Action proposee]
+        - **IV. Operational Resilience:** [Action proposee]
+        - **V. Simulation environment:** [Action proposee]
         (Adapte les propositions de controles a la nature exacte de la menace !)
 
         **Conclusion**
