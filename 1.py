@@ -89,7 +89,7 @@ st.markdown("""
     /* --- TABS --- */
     [data-baseweb="tab-list"] {
         border-bottom: 1px solid #E5E7EB !important;
-        gap: 0;
+        gap: 2rem !important; /* Increased gap */
     }
     [data-baseweb="tab"][aria-selected="true"] {
         color: #00915A !important;
@@ -98,7 +98,30 @@ st.markdown("""
     }
     [data-baseweb="tab"] {
         color: #6C757D !important;
-        font-size: 0.88rem !important;
+        font-size: 1rem !important; /* Increased font size */
+        padding-bottom: 0.5rem !important;
+    }
+
+    /* --- EXPANDERS (Clickable elements) --- */
+    [data-testid="stExpander"] {
+        border: 1px solid #E5E7EB;
+        border-radius: 6px;
+        background-color: #FFFFFF;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        margin-bottom: 0.5rem;
+    }
+    [data-testid="stExpander"] summary {
+        background-color: #F8FAFC !important;
+        border-radius: 6px;
+        padding: 0.75rem 1rem !important;
+        color: #1E2327 !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease;
+    }
+    [data-testid="stExpander"] summary:hover {
+        background-color: #ECFDF5 !important;
+        color: #00915A !important;
+        border-left: 4px solid #00915A !important;
     }
 
     /* --- METRIC CONTAINERS --- */
@@ -113,26 +136,26 @@ st.markdown("""
     /* --- METADATA BADGES --- */
     .exec-badge {
         display: inline-block;
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-size: 0.70rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
         font-weight: 600;
-        margin-right: 6px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        white-space: nowrap;
+        white-space: normal; /* Allow wrapping if needed */
+        line-height: 1.2;
     }
-    .badge-region  { background: #EFF6FF; color: #1E40AF; border: 1px solid #DBEAFE; }
-    .badge-infra   { background: #FFF7ED; color: #9A3412; border: 1px solid #FED7AA; }
-    .badge-entity  { background: #F5F3FF; color: #5B21B6; border: 1px solid #DDD6FE; }
-    .badge-tag     { background: #F4F6F8; color: #1E2327; border: 1px solid #D1D5DB; }
+    .badge-region  { background: #DBEAFE; color: #1E3A8A; border: 1px solid #BFDBFE; }
+    .badge-infra   { background: #FFEDD5; color: #9A3412; border: 1px solid #FED7AA; }
+    .badge-entity  { background: #F3E8FF; color: #5B21B6; border: 1px solid #E9D5FF; }
+    .badge-tag     { background: #F3F4F6; color: #1F2937; border: 1px solid #D1D5DB; }
 
     /* --- CATEGORY BADGES --- */
     .cat-badge {
         display: inline-block;
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-size: 0.68rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -639,8 +662,8 @@ with tab_briefing:
             }
         ))
         fig_gauge.update_layout(
-            height=260,
-            margin=dict(l=30, r=30, t=50, b=10),
+            height=280,
+            margin=dict(l=10, r=10, t=50, b=10),
             paper_bgcolor='white',
             plot_bgcolor='white',
             font=dict(family='Inter')
