@@ -4,8 +4,8 @@
         "title": "Unsanctioned AI Agent Breaches Involving OpenAI, Anthropic, and the UK AI Safety Institute",
         "linked_controls": [
             "CTRL-AI-1001",
-            "CTRL-IAM-2002",
             "CTRL-DET-3003",
+            "CTRL-IAM-2002",
             "CTRL-RES-4004"
         ]
     },
@@ -13,17 +13,17 @@
         "date": "2026-08-05",
         "title": "Google Remediates Critical Gemini Agent-to-Agent Vulnerability in Agent Development Kit",
         "linked_controls": [
-            "CTRL-IAM-2005",
+            "CTRL-AI-1001",
             "CTRL-DET-3003",
-            "CTRL-AI-1001"
+            "CTRL-IAM-2005"
         ]
     },
     "INC-20260805-1C5B99": {
         "date": "2026-08-05",
         "title": "Self-Propagating 'ChainDrop' NPM Supply Chain Worm Compromises Developer Ecosystems",
         "linked_controls": [
-            "CTRL-DEV-5006",
-            "CTRL-IAM-2007"
+            "CTRL-IAM-500",
+            "CTRL-DEV-5006"
         ]
     },
     "INC-20260805-8A3E22": {
@@ -45,77 +45,76 @@
         "date": "2026-08-06",
         "title": "HashiCorp Terraform MCP Server, Veeam, and Django Patch Critical Infrastructure Vulnerabilities Including CVSS 10.0 Bug",
         "linked_controls": [
-            "CTRL-PATCH-7010",
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
             "CTRL-IAM-7011",
-            "CTRL-DET-7012",
-            "CTRL-NET-7013",
-            "CTRL-SIM-7014"
+            "CTRL-SIM-300",
+            "CTRL-DET-7012"
         ]
     },
     "INC-20260806-002": {
         "date": "2026-08-06",
         "title": "JetBrains TeamCity On-Premise Servers Targeted via Active Exploitation of Critical RCE Flaw CVE-2026-63077",
         "linked_controls": [
-            "CTRL-PATCH-7015",
-            "CTRL-IAM-7016",
-            "CTRL-DET-7017",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
             "CTRL-NET-7018",
-            "CTRL-SIM-7019"
+            "CTRL-SIM-300",
+            "CTRL-IAM-7016"
         ]
     },
     "INC-20260806-003": {
         "date": "2026-08-06",
         "title": "CISA Issues Urgent Warning on Active Exploitation of Langflow AI Framework and Apache Tomcat Vulnerabilities",
         "linked_controls": [
-            "CTRL-PATCH-7020",
-            "CTRL-IAM-7021",
+            "CTRL-NET-200",
             "CTRL-DET-7022",
-            "CTRL-NET-7023",
-            "CTRL-SIM-7024"
+            "CTRL-SIM-300",
+            "CTRL-PATCH-100"
         ]
     },
     "INC-20260806-004": {
         "date": "2026-08-06",
         "title": "Critical OVSwrap Linux Kernel Flaw (CVE-2026-64531) Exposes Enterprise Cloud Infrastructure to Root Escalation",
         "linked_controls": [
-            "CTRL-PATCH-7025",
-            "CTRL-IAM-7026",
-            "CTRL-DET-7027",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
             "CTRL-SYS-7028",
-            "CTRL-SIM-7029"
+            "CTRL-IAM-7026",
+            "CTRL-SIM-300"
         ]
     },
     "INC-20260806-005": {
         "date": "2026-08-06",
         "title": "Underground Service 'Poison Claude' Intercepts Enterprise AI Prompts Targeting Anthropic LLM Ecosystem",
         "linked_controls": [
-            "CTRL-GOV-7030",
             "CTRL-IAM-7031",
+            "CTRL-GOV-7030",
             "CTRL-DET-7032",
-            "CTRL-RES-7033",
-            "CTRL-SIM-7034"
+            "CTRL-SIM-300",
+            "CTRL-RES-7033"
         ]
     },
     "INC-20260806-006": {
         "date": "2026-08-06",
         "title": "Palo Alto Networks Uncovers Passkey Hijacking Vector Targeting Synced WebAuthn Passkeys",
         "linked_controls": [
-            "CTRL-IAM-7035",
-            "CTRL-IAM-7036",
-            "CTRL-DET-7037",
             "CTRL-RES-7038",
-            "CTRL-SIM-7039"
+            "CTRL-DET-7037",
+            "CTRL-IAM-7036",
+            "CTRL-IAM-500",
+            "CTRL-SIM-300"
         ]
     },
     "INC-20260806-007": {
         "date": "2026-08-06",
         "title": "Cisco Patches Critical RCE and Bypass Vulnerabilities Across SD-WAN, IOS XE, and FMC Infrastructure",
         "linked_controls": [
-            "CTRL-PATCH-7040",
-            "CTRL-NET-7041",
-            "CTRL-DET-7042",
             "CTRL-RES-7043",
-            "CTRL-SIM-7044"
+            "CTRL-PATCH-100",
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
         ]
     }
 }

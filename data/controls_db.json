@@ -83,20 +83,6 @@
         },
         "damage_level": "Critical"
     },
-    "CTRL-IAM-2007": {
-        "name": "FIDO2 Hardware MFA for CI/CD",
-        "prerequisites": [
-            "Hardware security keys distribution",
-            "Short-lived publish tokens",
-            "SSO enforcement for developers"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "Critical",
-            "Availability": "Low"
-        },
-        "damage_level": "Critical"
-    },
     "CTRL-IAM-2008": {
         "name": "Disable OAuth Device Code Flow",
         "prerequisites": [
@@ -125,19 +111,6 @@
         },
         "damage_level": "High"
     },
-    "CTRL-PATCH-7010": {
-        "name": "Emergency Out-of-Band Patching",
-        "prerequisites": [
-            "Patch management system",
-            "Downtime window approval"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "Critical",
-            "Availability": "High"
-        },
-        "damage_level": "Critical"
-    },
     "CTRL-IAM-7011": {
         "name": "Emergency Credential Rotation",
         "prerequisites": [
@@ -164,45 +137,6 @@
         },
         "damage_level": "High"
     },
-    "CTRL-NET-7013": {
-        "name": "ZTNA Isolated Management VLANs",
-        "prerequisites": [
-            "ZTNA infrastructure",
-            "Network segmentation"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "High",
-            "Availability": "Medium"
-        },
-        "damage_level": "Critical"
-    },
-    "CTRL-SIM-7014": {
-        "name": "Red Team Cross-Tenant Simulation",
-        "prerequisites": [
-            "Staging environment",
-            "Red team resources"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Medium",
-            "Integrity": "Medium",
-            "Availability": "Low"
-        },
-        "damage_level": "Medium"
-    },
-    "CTRL-PATCH-7015": {
-        "name": "CI/CD Network Isolation & Hotfix",
-        "prerequisites": [
-            "Network isolation",
-            "Patch deployment"
-        ],
-        "cia_impact": {
-            "Confidentiality": "High",
-            "Integrity": "Critical",
-            "Availability": "High"
-        },
-        "damage_level": "Critical"
-    },
     "CTRL-IAM-7016": {
         "name": "Build Pipeline Credential Invalidation",
         "prerequisites": [
@@ -216,19 +150,6 @@
         },
         "damage_level": "Critical"
     },
-    "CTRL-DET-7017": {
-        "name": "CI/CD Process Execution Telemetry",
-        "prerequisites": [
-            "EDR on build nodes",
-            "YARA/SIGMA rules"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Medium",
-            "Integrity": "High",
-            "Availability": "Low"
-        },
-        "damage_level": "High"
-    },
     "CTRL-NET-7018": {
         "name": "CI/CD Strict Egress Filtering",
         "prerequisites": [
@@ -239,45 +160,6 @@
             "Confidentiality": "High",
             "Integrity": "High",
             "Availability": "Medium"
-        },
-        "damage_level": "High"
-    },
-    "CTRL-SIM-7019": {
-        "name": "DAST on Staging Build Agents",
-        "prerequisites": [
-            "DAST tools",
-            "Staging build environment"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Low",
-            "Integrity": "Medium",
-            "Availability": "Low"
-        },
-        "damage_level": "Medium"
-    },
-    "CTRL-PATCH-7020": {
-        "name": "AI Framework Emergency Patching",
-        "prerequisites": [
-            "Asset inventory",
-            "Patch automation"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "Critical",
-            "Availability": "High"
-        },
-        "damage_level": "Critical"
-    },
-    "CTRL-IAM-7021": {
-        "name": "ZTNA for AI Orchestration",
-        "prerequisites": [
-            "MFA enforcement",
-            "ZTNA broker"
-        ],
-        "cia_impact": {
-            "Confidentiality": "High",
-            "Integrity": "High",
-            "Availability": "Low"
         },
         "damage_level": "High"
     },
@@ -294,63 +176,11 @@
         },
         "damage_level": "Critical"
     },
-    "CTRL-NET-7023": {
-        "name": "AI Micro-Segmentation",
-        "prerequisites": [
-            "SDN",
-            "Micro-segmentation policies"
-        ],
-        "cia_impact": {
-            "Confidentiality": "High",
-            "Integrity": "High",
-            "Availability": "Medium"
-        },
-        "damage_level": "High"
-    },
-    "CTRL-SIM-7024": {
-        "name": "LLM Middleware Penetration Testing",
-        "prerequisites": [
-            "Pen-test authorization",
-            "AI-specific test cases"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Medium",
-            "Integrity": "High",
-            "Availability": "Low"
-        },
-        "damage_level": "Medium"
-    },
-    "CTRL-PATCH-7025": {
-        "name": "Kernel Update Rollout",
-        "prerequisites": [
-            "Reboot coordination",
-            "Staging validation"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "Critical",
-            "Availability": "Critical"
-        },
-        "damage_level": "Critical"
-    },
     "CTRL-IAM-7026": {
         "name": "Least-Privilege Container Profiles",
         "prerequisites": [
             "AppArmor/SELinux",
             "Non-root container policies"
-        ],
-        "cia_impact": {
-            "Confidentiality": "High",
-            "Integrity": "High",
-            "Availability": "Low"
-        },
-        "damage_level": "High"
-    },
-    "CTRL-DET-7027": {
-        "name": "eBPF Kernel Telemetry",
-        "prerequisites": [
-            "eBPF sensors",
-            "SIEM correlation"
         ],
         "cia_impact": {
             "Confidentiality": "High",
@@ -371,19 +201,6 @@
             "Availability": "Medium"
         },
         "damage_level": "Medium"
-    },
-    "CTRL-SIM-7029": {
-        "name": "Kernel Exploit Canary Testing",
-        "prerequisites": [
-            "Canary nodes",
-            "Exploit payload"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Low",
-            "Integrity": "Medium",
-            "Availability": "Low"
-        },
-        "damage_level": "Low"
     },
     "CTRL-GOV-7030": {
         "name": "Shadow AI Policy Enforcement",
@@ -437,32 +254,6 @@
         },
         "damage_level": "High"
     },
-    "CTRL-SIM-7034": {
-        "name": "Web Gateway AI Proxy Testing",
-        "prerequisites": [
-            "Proxy logs",
-            "Threat intelligence feeds"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Medium",
-            "Integrity": "Low",
-            "Availability": "Low"
-        },
-        "damage_level": "Medium"
-    },
-    "CTRL-IAM-7035": {
-        "name": "Hardware-Bound FIDO2 Enforcement",
-        "prerequisites": [
-            "Hardware tokens",
-            "IdP policy enforcement"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "High",
-            "Availability": "Low"
-        },
-        "damage_level": "Critical"
-    },
     "CTRL-IAM-7036": {
         "name": "Device Posture Assessment for WebAuthn",
         "prerequisites": [
@@ -502,45 +293,6 @@
         },
         "damage_level": "High"
     },
-    "CTRL-SIM-7039": {
-        "name": "Browser Credential Extraction Simulation",
-        "prerequisites": [
-            "Red team tooling",
-            "EDR monitoring"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Medium",
-            "Integrity": "Medium",
-            "Availability": "Low"
-        },
-        "damage_level": "Medium"
-    },
-    "CTRL-PATCH-7040": {
-        "name": "Core Network Appliance Patching",
-        "prerequisites": [
-            "Maintenance window",
-            "Firmware repository"
-        ],
-        "cia_impact": {
-            "Confidentiality": "Critical",
-            "Integrity": "Critical",
-            "Availability": "Critical"
-        },
-        "damage_level": "Critical"
-    },
-    "CTRL-NET-7041": {
-        "name": "OOB Management Network Isolation",
-        "prerequisites": [
-            "OOB network architecture",
-            "Strict ACLs"
-        ],
-        "cia_impact": {
-            "Confidentiality": "High",
-            "Integrity": "High",
-            "Availability": "Medium"
-        },
-        "damage_level": "High"
-    },
     "CTRL-DET-7042": {
         "name": "Edge IPS Signature Deployment",
         "prerequisites": [
@@ -567,17 +319,74 @@
         },
         "damage_level": "High"
     },
-    "CTRL-SIM-7044": {
-        "name": "Network Patch Lab Validation",
+    "CTRL-PATCH-100": {
+        "name": "Emergency Out-of-Band Patch Management",
         "prerequisites": [
-            "Lab environment",
-            "Configuration backups"
+            "Asset inventory",
+            "Patch automation",
+            "Maintenance window authorization"
         ],
         "cia_impact": {
-            "Confidentiality": "Low",
-            "Integrity": "Medium",
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
             "Availability": "High"
         },
+        "damage_level": "Critical"
+    },
+    "CTRL-NET-200": {
+        "name": "Zero Trust Network Access (ZTNA) & Isolation",
+        "prerequisites": [
+            "MFA enforcement",
+            "ZTNA broker",
+            "Network segmentation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-SIM-300": {
+        "name": "Adversarial Simulation & Red Teaming",
+        "prerequisites": [
+            "Staging environment",
+            "Threat intelligence feeds",
+            "Red team resources"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
         "damage_level": "Medium"
+    },
+    "CTRL-DET-400": {
+        "name": "Endpoint & Kernel Behavioral Telemetry",
+        "prerequisites": [
+            "EDR/XDR agents",
+            "eBPF sensors",
+            "SIEM correlation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-IAM-500": {
+        "name": "Hardware-Bound FIDO2 MFA Enforcement",
+        "prerequisites": [
+            "Hardware security keys",
+            "IdP policy enforcement",
+            "SSO integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
     }
 }
