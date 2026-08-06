@@ -14,14 +14,14 @@ import os
 # =====================================================================
 st.set_page_config(
     page_title="Executive CTI Dashboard",
-    page_icon="🛡️",
+    page_icon="ðŸ›¡ï¸",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ---- BNP PARIBAS BRAND DESIGN SYSTEM ----
-# Primary:  #00965E (BNP Green)
-# Dark:     #006B44 (BNP Dark Green)
+# ---- EXECUTIVE BRAND DESIGN SYSTEM ----
+# Primary:  #00965E (Brand Green)
+# Dark:     #006B44 (Brand Dark Green)
 # Text:     #1A1A1A (Near-black institutional)
 # Bg:       #F7F8F6 (Off-white)
 # -----------------------------------------
@@ -30,14 +30,14 @@ st.markdown("""
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
 
-    /* --- BNP TYPOGRAPHY --- */
+    /* --- EXECUTIVE TYPOGRAPHY --- */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
         color: #1A1A1A;
     }
 
-    /* --- BNP SIDEBAR --- */
+    /* --- SIDEBAR --- */
     [data-testid="stSidebar"] {
         background-color: #00965E !important;
         border-right: none;
@@ -79,7 +79,7 @@ st.markdown("""
         border-radius: 6px;
     }
 
-    /* --- BNP TABS --- */
+    /* --- TABS --- */
     [data-baseweb="tab-list"] {
         border-bottom: 2px solid #00965E !important;
     }
@@ -92,7 +92,7 @@ st.markdown("""
         color: #666666 !important;
     }
 
-    /* --- BNP EXEC METADATA BADGES (Region/Infra/Company) --- */
+    /* --- EXEC METADATA BADGES (Region/Infra/Company) --- */
     .exec-badge {
         display: inline-block;
         padding: 3px 10px;
@@ -111,9 +111,9 @@ st.markdown("""
     .badge-dark   { background-color: #1A1A1A; color: #ffffff; border: 1px solid #333333; }
     .badge-purple { background-color: #F5F3FF; color: #4C1D95; border: 1px solid #DDD6FE; }
     .badge-orange { background-color: #FFF7ED; color: #9A3412; border: 1px solid #FDBA74; }
-    .badge-bnp    { background-color: #00965E; color: #ffffff; border: 1px solid #006B44; }
+    .badge-brand    { background-color: #00965E; color: #ffffff; border: 1px solid #006B44; }
 
-    /* --- BNP CATEGORY BADGES (Intelligence Feed) --- */
+    /* --- CATEGORY BADGES (Intelligence Feed) --- */
     .cat-badge {
         display: inline-block;
         padding: 2px 9px;
@@ -136,17 +136,17 @@ st.markdown("""
     .cat-identity     { background: #065F46; color: #fff; }
     .cat-default      { background: #374151; color: #fff; }
 
-    /* --- BNP LEADERBOARD TABLE (Control Center) --- */
-    .bnp-leaderboard {
+    /* --- LEADERBOARD TABLE (Control Center) --- */
+    .exec-leaderboard {
         width: 100%;
         border-collapse: collapse;
         font-family: 'Inter', sans-serif;
     }
-    .bnp-leaderboard thead tr {
+    .exec-leaderboard thead tr {
         background: #00965E;
         color: white;
     }
-    .bnp-leaderboard thead th {
+    .exec-leaderboard thead th {
         padding: 10px 14px;
         text-align: left;
         font-size: 0.78rem;
@@ -154,27 +154,27 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.6px;
     }
-    .bnp-leaderboard tbody tr {
+    .exec-leaderboard tbody tr {
         border-bottom: 1px solid #E5E7EB;
         transition: background 0.15s;
     }
-    .bnp-leaderboard tbody tr:hover {
+    .exec-leaderboard tbody tr:hover {
         background: #F0FDF4;
     }
-    .bnp-leaderboard tbody td {
+    .exec-leaderboard tbody td {
         padding: 11px 14px;
         font-size: 0.88rem;
         color: #1A1A1A;
         vertical-align: middle;
     }
-    .bnp-rank {
+    .exec-rank {
         font-size: 1rem;
         font-weight: 800;
         color: #00965E;
         width: 32px;
         text-align: center;
     }
-    .bnp-progress-bar-bg {
+    .exec-progress-bar-bg {
         background: #E5E7EB;
         border-radius: 3px;
         height: 7px;
@@ -182,16 +182,16 @@ st.markdown("""
         display: inline-block;
         vertical-align: middle;
     }
-    .bnp-progress-bar-fill {
+    .exec-progress-bar-fill {
         background: #00965E;
         border-radius: 3px;
         height: 7px;
         display: block;
     }
-    .bnp-crit-critical { color: #991B1B; font-weight: 700; font-size: 0.75rem; }
-    .bnp-crit-high     { color: #92400E; font-weight: 700; font-size: 0.75rem; }
-    .bnp-crit-medium   { color: #065F46; font-weight: 700; font-size: 0.75rem; }
-    .bnp-crit-low      { color: #374151; font-weight: 700; font-size: 0.75rem; }
+    .exec-crit-critical { color: #991B1B; font-weight: 700; font-size: 0.75rem; }
+    .exec-crit-high     { color: #92400E; font-weight: 700; font-size: 0.75rem; }
+    .exec-crit-medium   { color: #065F46; font-weight: 700; font-size: 0.75rem; }
+    .exec-crit-low      { color: #374151; font-weight: 700; font-size: 0.75rem; }
 
     /* --- CTI CHAT BOX --- */
     .cti-chat-container {
@@ -243,7 +243,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # =====================================================================
-# 📡 1. DATA FETCHING (7-Day History & JSON DB)
+# ðŸ“¡ 1. DATA FETCHING (7-Day History & JSON DB)
 # =====================================================================
 @st.cache_data(ttl=1800)
 def fetch_recent_reports(limit=7):
@@ -308,21 +308,21 @@ def fetch_json_db(db_name):
             driver.quit()
 
 # =====================================================================
-# ⚙️ 2. NATIVE MARKDOWN PARSER & MATHEMATICAL SCORING
+# âš™ï¸ 2. NATIVE MARKDOWN PARSER & MATHEMATICAL SCORING
 # =====================================================================
 def parse_incidents(content):
     subjects = []
-    # On découpe le document à chaque titre H2 (##)
+    # On dÃ©coupe le document Ã  chaque titre H2 (##)
     sections = re.split(r'\n## ', content)
     
-    # Le premier élément (sections[0]) contient l'en-tête principal, on l'ignore.
+    # Le premier Ã©lÃ©ment (sections[0]) contient l'en-tÃªte principal, on l'ignore.
     for section in sections[1:]:
         lines = section.strip().split('\n')
         if not lines: continue
         
-        # La première ligne devient automatiquement le titre de l'incident (sans le ##)
+        # La premiÃ¨re ligne devient automatiquement le titre de l'incident (sans le ##)
         preview = lines[0].strip()
-        # Rétrocompatibilité : on supprime le préfixe s'il est présent dans les anciens rapports
+        # RÃ©trocompatibilitÃ© : on supprime le prÃ©fixe s'il est prÃ©sent dans les anciens rapports
         preview = re.sub(r'(?i)^titre de l\'incident\s*:\s*', '', preview).strip()
         
         category_match  = re.search(r'\*\*Primary Category:\*\*\s*(.*?)\n', section)
@@ -351,15 +351,15 @@ def parse_incidents(content):
 
 def extract_threat_score(content):
     """
-    Extrait le score généré par l'IA directement depuis le markdown.
+    Extrait le score gÃ©nÃ©rÃ© par l'IA directement depuis le markdown.
     """
     match = re.search(r'\*\*Threat Score:\*\*\s*(\d+)', content, re.IGNORECASE)
     if match:
-        return min(int(match.group(1)), 100) # Sécurité pour bloquer à 100 maximum
-    return 0 # Si pas de score trouvé, on met 0
+        return min(int(match.group(1)), 100) # SÃ©curitÃ© pour bloquer Ã  100 maximum
+    return 0 # Si pas de score trouvÃ©, on met 0
 
 # =====================================================================
-# 🧠 3. AI ENGINE (Qualitative BLUF Only)
+# ðŸ§  3. AI ENGINE (Qualitative BLUF Only)
 # =====================================================================
 @st.cache_resource
 def init_llm_auth():
@@ -448,7 +448,7 @@ def format_bullets(data_item):
         return "\n".join([f"- {item}" for item in data_item])
     return str(data_item)
 
-# BNP Category badge helper
+# Category badge helper
 def get_cat_badge_html(category: str) -> str:
     if not category:
         return ""
@@ -464,7 +464,7 @@ def get_cat_badge_html(category: str) -> str:
     return f"<span class='cat-badge {css_class}'>{cat}</span>"
 
 # =====================================================================
-# 🖥️ 4. USER INTERFACE (V9 MATHEMATICAL CRQ + PLOTLY)
+# ðŸ–¥ï¸ 4. USER INTERFACE (V9 MATHEMATICAL CRQ + PLOTLY)
 # =====================================================================
 with st.spinner("Synchronising historical intelligence feed..."):
     reports_data, error = fetch_recent_reports(limit=7)
@@ -476,7 +476,7 @@ if error or not reports_data:
 # Build timeline data
 timeline_data = []
 for name, content in reports_data:
-    # On sécurise l'extraction de la date via Regex pour ignorer le texte parasite
+    # On sÃ©curise l'extraction de la date via Regex pour ignorer le texte parasite
     match = re.search(r'(\d{4}[-_]\d{2}[-_]\d{2})', name)
     if match:
         date_str = match.group(1).replace("_", "-")
@@ -490,22 +490,22 @@ for name, content in reports_data:
 df_timeline = pd.DataFrame(timeline_data)
 # L'ajout de errors='coerce' transforme les dates invalides en NaT sans faire planter l'application
 df_timeline['Date'] = pd.to_datetime(df_timeline['Date'], format='mixed', errors='coerce')
-# On supprime les lignes où la date n'a pas pu être parsée
+# On supprime les lignes oÃ¹ la date n'a pas pu Ãªtre parsÃ©e
 df_timeline = df_timeline.dropna(subset=['Date'])
 df_timeline = df_timeline.sort_values(by="Date") # Sort chronologically for the chart
 avg_7d_score = df_timeline['Score'].mean()
 
 # --- SIDEBAR: HISTORY SELECTION ONLY ---
 with st.sidebar:
-    st.title("📅 Intelligence Archive")
+    st.title("ðŸ“… Intelligence Archive")
     st.caption("Select a date to view the strategic assessment.")
     report_options = [r['Filename'] for r in timeline_data]
     selected_filename = st.radio("Past 7 Days", report_options, label_visibility="collapsed")
     
     st.markdown("---")
-    st.markdown("### 🧮 CRQ Methodology (FAIR)")
+    st.markdown("### ðŸ§® CRQ Methodology (FAIR)")
     st.info("The **Composite Threat Score (0-100)** is calculated using a deterministic mathematical model based on the FAIR framework:\n\n"
-            "**Score = (TC + EF + BI) × 3.33**\n\n"
+            "**Score = (TC + EF + BI) Ã— 3.33**\n\n"
             "- **TC** (Threat Capability): Attacker sophistication (1-10)\n"
             "- **EF** (Event Frequency): Probability of attack (1-10)\n"
             "- **BI** (Business Impact): Potential financial/systemic impact (1-10)\n\n"
@@ -519,13 +519,13 @@ report_date_clean = selected_filename.replace(".md", "").replace("_", " ")
 incidents = parse_incidents(selected_content)
 current_score = selected_row['Score']
 
-# Extraction des métriques FAIR pour les afficher sous le score si elles existent
+# Extraction des mÃ©triques FAIR pour les afficher sous le score si elles existent
 auditable_metrics = ""
 metrics_match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*(.*?)\)\*', selected_content, re.IGNORECASE)
 if metrics_match:
     auditable_metrics = metrics_match.group(1).strip()
 
-tab_briefing, tab_controls = st.tabs(["📅 Daily Threat Briefing", "🛡️ Control Center & Knowledge Base"])
+tab_briefing, tab_controls = st.tabs(["ðŸ“… Daily Threat Briefing", "ðŸ›¡ï¸ Control Center & Knowledge Base"])
 
 with tab_briefing:
     st.title("Strategic Cyber Threat Briefing")
@@ -601,7 +601,7 @@ with tab_briefing:
         if inc['country']: condensed_report += f"  TARGETS: {inc['country']} / {inc['companies']}\n"
         condensed_report += f"  SUMMARY: {inc['overview']}\n\n"
 
-    with st.spinner(f"🧠 Synthesizing executive brief for {report_date_clean}..."):
+    with st.spinner(f"ðŸ§  Synthesizing executive brief for {report_date_clean}..."):
         auth_ctx = init_llm_auth()
         brief, debug_logs = generate_executive_brief(condensed_report, report_date_clean, auth_ctx)
 
@@ -612,10 +612,10 @@ with tab_briefing:
             st.subheader("Bottom Line Up Front (BLUF)")
             st.info(brief.get('bluf', ''))
             
-            # Affichage des Threat Tags Façon Feedly
+            # Affichage des Threat Tags FaÃ§on Feedly
             tags = brief.get("threat_tags", [])
             if tags:
-                tags_html = " ".join([f"<span class='exec-badge badge-dark'>🏷️ {str(t).upper()}</span>" for t in tags])
+                tags_html = " ".join([f"<span class='exec-badge badge-dark'>ðŸ·ï¸ {str(t).upper()}</span>" for t in tags])
                 st.markdown(tags_html, unsafe_allow_html=True)
         
         st.write("")
@@ -624,26 +624,26 @@ with tab_briefing:
         col1, col2, col3 = st.columns(3)
         with col1:
             with st.container(border=True):
-                st.markdown("#### 🌍 Threat Landscape")
-                st.markdown(format_bullets(brief.get("threat_landscape", "—")))
+                st.markdown("#### ðŸŒ Threat Landscape")
+                st.markdown(format_bullets(brief.get("threat_landscape", "â€”")))
         with col2:
             with st.container(border=True):
-                st.markdown("#### 📉 Strategic Vision & Impact")
-                st.markdown(format_bullets(brief.get("business_impact", "—")))
+                st.markdown("#### ðŸ“‰ Strategic Vision & Impact")
+                st.markdown(format_bullets(brief.get("business_impact", "â€”")))
         with col3:
             with st.container(border=True):
-                st.markdown("#### 🛡️ Decision Points")
-                st.markdown(format_bullets(brief.get("recommendations", "—")))
+                st.markdown("#### ðŸ›¡ï¸ Decision Points")
+                st.markdown(format_bullets(brief.get("recommendations", "â€”")))
 
     else:
-        st.error("🚨 The AI pipeline failed for this specific date.")
-        if st.button("🔄 Retry Generation"):
+        st.error("ðŸš¨ The AI pipeline failed for this specific date.")
+        if st.button("ðŸ”„ Retry Generation"):
             generate_executive_brief.clear()
             st.rerun()
 
     # --- TECHNICAL APPENDIX (FEEDLY UX) ---
     st.write("")
-    st.subheader("📋 Intelligence Feed (Incident Deep Dive)")
+    st.subheader("ðŸ“‹ Intelligence Feed (Incident Deep Dive)")
 
     if not incidents:
         st.info("No actionable intelligence detected for this date.")
@@ -651,7 +651,7 @@ with tab_briefing:
         for sub in incidents:
             cat_html = get_cat_badge_html(sub.get('category', ''))
             label = f"{sub['preview']}"
-            with st.expander(f"📰 {sub['preview']}"):
+            with st.expander(f"ðŸ“° {sub['preview']}"):
                 if sub.get('category'):
                     st.markdown(cat_html, unsafe_allow_html=True)
 
@@ -660,38 +660,38 @@ with tab_briefing:
                 companies = sub.get('companies', '') or "Multiple/Unknown"
 
                 st.markdown(f"""
-                    <span class='exec-badge badge-blue'>🌍 REGION: {country}</span>
-                    <span class='exec-badge badge-orange'>📡 INFRA: {geo}</span>
-                    <span class='exec-badge badge-purple'>🏢 COMPANY: {companies}</span>
+                    <span class='exec-badge badge-blue'>ðŸŒ REGION: {country}</span>
+                    <span class='exec-badge badge-orange'>ðŸ“¡ INFRA: {geo}</span>
+                    <span class='exec-badge badge-purple'>ðŸ¢ COMPANY: {companies}</span>
                 """, unsafe_allow_html=True)
 
                 st.divider()
 
                 if sub['overview']:
-                    st.markdown("##### 🔍 Operational Overview")
+                    st.markdown("##### ðŸ” Operational Overview")
                     st.write(sub['overview'])
                 if sub['breach']:
-                    st.markdown("##### ⚙️ Technical Vector")
+                    st.markdown("##### âš™ï¸ Technical Vector")
                     st.write(sub['breach'])
                 if sub['impact']:
-                    st.markdown("##### 💥 Consequences")
+                    st.markdown("##### ðŸ’¥ Consequences")
                     st.write(sub['impact'])
                 if sub['control']:
-                    st.markdown("##### 🛡️ Mitigation Options")
+                    st.markdown("##### ðŸ›¡ï¸ Mitigation Options")
                     st.write(sub['control'])
 
                 if sub['link']:
-                    st.markdown(f"\n[🔗 Go to Original Intel Source]({sub['link']})")
+                    st.markdown(f"\n[ðŸ”— Go to Original Intel Source]({sub['link']})")
 
 with tab_controls:
-    st.title("🛡️ Strategic Control Center")
+    st.title("ðŸ›¡ï¸ Strategic Control Center")
     st.caption("Central Knowledge Base mapping generated mitigation controls to real-world threat incidents.")
     
     controls_db = fetch_json_db("controls_db.json")
     incidents_db = fetch_json_db("incidents_db.json")
     
     if not controls_db or not incidents_db:
-        st.info("🔄 The Control Database is currently empty or synchronizing from GitHub. It will populate automatically during the next daily threat scan.")
+        st.info("ðŸ”„ The Control Database is currently empty or synchronizing from GitHub. It will populate automatically during the next daily threat scan.")
     else:
         # Calculate occurrences
         control_counts = {c_id: 0 for c_id in controls_db}
@@ -703,7 +703,7 @@ with tab_controls:
         # Sort top controls
         sorted_controls = sorted(control_counts.items(), key=lambda x: x[1], reverse=True)
         
-        # --- BNP LEADERBOARD (Top 10 Controls) ---
+        # --- LEADERBOARD (Top 10 Controls) ---
         top_10 = [(c_id, cnt) for c_id, cnt in sorted_controls[:10] if cnt > 0]
         max_count = top_10[0][1] if top_10 else 1
 
@@ -714,23 +714,23 @@ with tab_controls:
                 c_data = controls_db[c_id]
                 name = c_data.get("name", "Unknown Control")
                 dmg = c_data.get("damage_level", "").upper()
-                dmg_class = f"bnp-crit-{dmg.lower()}" if dmg.lower() in ["critical","high","medium","low"] else "bnp-crit-low"
+                dmg_class = f"exec-crit-{dmg.lower()}" if dmg.lower() in ["critical","high","medium","low"] else "exec-crit-low"
                 bar_pct = int((count / max_count) * 100)
-                medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(rank, str(rank))
+                medal = {1: "ðŸ¥‡", 2: "ðŸ¥ˆ", 3: "ðŸ¥‰"}.get(rank, str(rank))
                 rows_html += f"""
                 <tr>
-                    <td class='bnp-rank'>{medal}</td>
+                    <td class='exec-rank'>{medal}</td>
                     <td><strong>{name}</strong></td>
                     <td>
-                        <div class='bnp-progress-bar-bg'>
-                            <div class='bnp-progress-bar-fill' style='width:{bar_pct}%'></div>
+                        <div class='exec-progress-bar-bg'>
+                            <div class='exec-progress-bar-fill' style='width:{bar_pct}%'></div>
                         </div>
                         <span style='font-size:0.8rem;color:#555;margin-left:8px;'>{count} incident{'s' if count > 1 else ''}</span>
                     </td>
                     <td class='{dmg_class}'>{dmg if dmg else 'N/A'}</td>
                 </tr>"""
             leaderboard_html = f"""
-            <table class='bnp-leaderboard'>
+            <table class='exec-leaderboard'>
                 <thead><tr>
                     <th>#</th>
                     <th>Control</th>
@@ -744,22 +744,22 @@ with tab_controls:
             st.info("No controls have been linked to incidents yet.")
             
         st.divider()
-        st.subheader("📚 Drill-Down Matrix")
+        st.subheader("ðŸ“š Drill-Down Matrix")
         
         # Display each control in an expander
         for c_id, count in sorted_controls:
             if count == 0: continue
             
             c_data = controls_db[c_id]
-            with st.expander(f"🛡️ {c_data.get('name', 'Unknown')} (Recommended {count} times)"):
+            with st.expander(f"ðŸ›¡ï¸ {c_data.get('name', 'Unknown')} (Recommended {count} times)"):
                 col_info, col_inc = st.columns([1, 1])
                 
                 with col_info:
-                    st.markdown("##### 🎯 Prerequisites")
+                    st.markdown("##### ðŸŽ¯ Prerequisites")
                     for p in c_data.get("prerequisites", []):
                         st.markdown(f"- {p}")
                     
-                    st.markdown("##### 💥 CIA Impact Matrix")
+                    st.markdown("##### ðŸ’¥ CIA Impact Matrix")
                     cia = c_data.get("cia_impact", {})
                     st.markdown(f"**Confidentiality:** `{cia.get('Confidentiality', 'N/A')}` | **Integrity:** `{cia.get('Integrity', 'N/A')}` | **Availability:** `{cia.get('Availability', 'N/A')}`")
                     
@@ -768,7 +768,7 @@ with tab_controls:
                     st.markdown(f"**Potential Damage Level:** :{color}[**{dmg.upper()}**]")
                     
                 with col_inc:
-                    st.markdown("##### 🔗 Linked Threat Incidents")
+                    st.markdown("##### ðŸ”— Linked Threat Incidents")
                     # Find incidents that linked this control
                     linked_incs = []
                     for inc_id, inc_data in incidents_db.items():
@@ -782,10 +782,10 @@ with tab_controls:
                         st.markdown("*No specific incidents linked in history.*")
 
 # =====================================================================
-# 🤖 5. CTI-BOT — Conversational Box (Main Body, Fixed Height)
+# ðŸ¤– 5. CTI-BOT â€” Conversational Box (Main Body, Fixed Height)
 # =====================================================================
 st.write("")
-st.subheader("💬 Ask CTI-Bot")
+st.subheader("ðŸ’¬ Ask CTI-Bot")
 st.caption("Chat with the AI about the last 7 days of threat intelligence. The bot cross-references all available daily reports to answer your questions.")
 
 if "messages" not in st.session_state:
@@ -794,7 +794,7 @@ if "messages" not in st.session_state:
 # Build scrollable chat history as HTML (fixed-height, no infinite growth)
 chat_html = "<div class='cti-chat-container' id='cti-chat-scroll'>"
 if not st.session_state.messages:
-    chat_html += "<div class='cti-msg-bot'>👋 Hello! Ask me anything about the threat landscape over the past 7 days.</div>"
+    chat_html += "<div class='cti-msg-bot'>ðŸ‘‹ Hello! Ask me anything about the threat landscape over the past 7 days.</div>"
 for message in st.session_state.messages:
     css_class = "cti-msg-user" if message["role"] == "user" else "cti-msg-bot"
     safe_content = str(message['content']).replace('<', '&lt;').replace('>', '&gt;')
@@ -826,14 +826,14 @@ if cti_prompt := st.chat_input("Ask a question (e.g. 'Which incidents target Azu
 
 # --- TECHNICAL APPENDIX (FEEDLY UX) ---
 st.write("")
-st.subheader("📋 Intelligence Feed (Incident Deep Dive)")
+st.subheader("ðŸ“‹ Intelligence Feed (Incident Deep Dive)")
 
 if not incidents:
     st.info("No actionable intelligence detected for this date.")
 else:
     for sub in incidents:
         cat_html = get_cat_badge_html(sub.get('category', ''))
-        with st.expander(f"📰 {sub['preview']}"):
+        with st.expander(f"ðŸ“° {sub['preview']}"):
             if sub.get('category'):
                 st.markdown(cat_html, unsafe_allow_html=True)
 
@@ -843,25 +843,26 @@ else:
             companies = sub.get('companies', '') or "Multiple/Unknown"
 
             st.markdown(f"""
-                <span class='exec-badge badge-blue'>🌍 REGION: {country}</span>
-                <span class='exec-badge badge-orange'>📡 INFRA: {geo}</span>
-                <span class='exec-badge badge-purple'>🏢 COMPANY: {companies}</span>
+                <span class='exec-badge badge-blue'>ðŸŒ REGION: {country}</span>
+                <span class='exec-badge badge-orange'>ðŸ“¡ INFRA: {geo}</span>
+                <span class='exec-badge badge-purple'>ðŸ¢ COMPANY: {companies}</span>
             """, unsafe_allow_html=True)
 
             st.divider()
 
             if sub['overview']:
-                st.markdown("##### 🔍 Operational Overview")
+                st.markdown("##### ðŸ” Operational Overview")
                 st.write(sub['overview'])
             if sub['breach']:
-                st.markdown("##### ⚙️ Technical Vector")
+                st.markdown("##### âš™ï¸ Technical Vector")
                 st.write(sub['breach'])
             if sub['impact']:
-                st.markdown("##### 💥 Consequences")
+                st.markdown("##### ðŸ’¥ Consequences")
                 st.write(sub['impact'])
             if sub['control']:
-                st.markdown("##### 🛡️ Mitigation Options")
+                st.markdown("##### ðŸ›¡ï¸ Mitigation Options")
                 st.write(sub['control'])
 
             if sub['link']:
-                st.markdown(f"\n[🔗 Go to Original Intel Source]({sub['link']})")
+                st.markdown(f"\n[ðŸ”— Go to Original Intel Source]({sub['link']})")
+
