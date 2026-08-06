@@ -529,37 +529,20 @@ def render_incident_card(sub):
     geo       = sub.get('geo', '')       or "Undisclosed"
     companies = sub.get('companies', '') or "Multiple"
 
-    meta_html = f"""<div class='inc-meta-bar'>
-        {cat_html}
-        <span class='exec-badge badge-region'>Region: {country}</span>
-        <span class='exec-badge badge-infra'>Infra: {geo}</span>
-        <span class='exec-badge badge-entity'>Entities: {companies}</span>
-    </div>"""
+    meta_html = f"<div class='inc-meta-bar'>{cat_html} <span class='exec-badge badge-region'>Region: {country}</span> <span class='exec-badge badge-infra'>Infra: {geo}</span> <span class='exec-badge badge-entity'>Entities: {companies}</span></div>"
     st.markdown(meta_html, unsafe_allow_html=True)
 
     if sub.get('overview'):
-        st.markdown(f"""<div class='inc-section inc-overview'>
-            <span class='inc-section-label'>Operational Overview</span>
-            {sub['overview']}
-        </div>""", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-overview'><span class='inc-section-label'>Operational Overview</span>{sub['overview']}</div>", unsafe_allow_html=True)
 
     if sub.get('breach'):
-        st.markdown(f"""<div class='inc-section inc-vector'>
-            <span class='inc-section-label'>Attack Vector</span>
-            {sub['breach']}
-        </div>""", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-vector'><span class='inc-section-label'>Attack Vector</span>{sub['breach']}</div>", unsafe_allow_html=True)
 
     if sub.get('impact'):
-        st.markdown(f"""<div class='inc-section inc-impact'>
-            <span class='inc-section-label'>Business Impact</span>
-            {sub['impact']}
-        </div>""", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-impact'><span class='inc-section-label'>Business Impact</span>{sub['impact']}</div>", unsafe_allow_html=True)
 
     if sub.get('control'):
-        st.markdown(f"""<div class='inc-section inc-control'>
-            <span class='inc-section-label'>Recommended Controls</span>
-            {sub['control']}
-        </div>""", unsafe_allow_html=True)
+        st.markdown(f"<div class='inc-section inc-control'><span class='inc-section-label'>Recommended Controls</span>{sub['control']}</div>", unsafe_allow_html=True)
 
     if sub.get('link'):
         st.markdown(f"[View Source Intelligence]({sub['link']})")
