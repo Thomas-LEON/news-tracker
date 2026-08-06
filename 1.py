@@ -830,12 +830,14 @@ with tab_controls:
 
         st.markdown("")
 
-        for c_id, count in sorted_controls:
-            if count == 0:
-                continue
-            c_data = controls_db[c_id]
-            label = f"{c_data.get('name', 'Unknown')}  —  {count} incident{'s' if count > 1 else ''}"
-            with st.expander(label):
+        # Wrap the expanders in a scrollable container so it doesn't take up 2000km of vertical space
+        with st.container(height=400, border=False):
+            for c_id, count in sorted_controls:
+                if count == 0:
+                    continue
+                c_data = controls_db[c_id]
+                label = f"{c_data.get('name', 'Unknown')}  —  {count} incident{'s' if count > 1 else ''}"
+                with st.expander(label):
                 col_info, col_inc = st.columns([1, 1])
                 with col_info:
                     st.markdown("**Prerequisites**")
