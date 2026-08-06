@@ -36,9 +36,7 @@ st.markdown("""
     }
 
     /* --- TYPOGRAPHY --- */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
         color: #1E2327;
     }
     h1 {
@@ -211,7 +209,6 @@ st.markdown("""
     .exec-leaderboard {
         width: 100%;
         border-collapse: collapse;
-        font-family: 'Inter', sans-serif;
     }
     .exec-leaderboard thead tr {
         border-bottom: 2px solid #00915A;
@@ -219,10 +216,8 @@ st.markdown("""
     .exec-leaderboard thead th {
         padding: 8px 14px;
         text-align: left;
-        font-size: 0.70rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
+        font-size: 0.80rem;
+        font-weight: 600;
         color: #6C757D;
         background: transparent;
     }
@@ -623,9 +618,9 @@ with tab_briefing:
             mode="gauge+number+delta",
             value=current_score,
             domain={'x': [0, 1], 'y': [0, 1]},
-            title={'text': "Composite Threat Score", 'font': {'size': 16, 'color': '#1E2327', 'family': 'Inter'}},
+            title={'text': "Composite Threat Score", 'font': {'size': 16, 'color': '#1E2327'}},
             delta={'reference': avg_7d_score, 'increasing': {'color': "#DC2626"}, 'decreasing': {'color': "#00915A"}},
-            number={'font': {'size': 42, 'color': '#1E2327', 'family': 'Inter'}},
+            number={'font': {'size': 42, 'color': '#1E2327'}},
             gauge={
                 'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "#E5E7EB", 'dtick': 25},
                 'bar': {'color': "rgba(0,0,0,0)"},
@@ -648,8 +643,7 @@ with tab_briefing:
             height=280,
             margin=dict(l=10, r=10, t=50, b=10),
             paper_bgcolor='white',
-            plot_bgcolor='white',
-            font=dict(family='Inter')
+            plot_bgcolor='white'
         )
         st.plotly_chart(fig_gauge, use_container_width=True)
 
@@ -674,12 +668,12 @@ with tab_briefing:
             line=dict(color='#D1D5DB', width=1.5, dash='dot')
         ))
         fig_line.update_layout(
-            title=dict(text="7-Day Trend", font=dict(size=14, color='#1E2327', family='Inter')),
+            title=dict(text="7-Day Trend", font=dict(size=14, color='#1E2327')),
             height=260,
             margin=dict(l=20, r=20, t=40, b=20),
             paper_bgcolor='white',
             plot_bgcolor='white',
-            font=dict(family='Inter', color='#6C757D', size=11),
+            font=dict(color='#6C757D', size=11),
             legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1, font=dict(size=10)),
             yaxis=dict(range=[0, 100], gridcolor='#F3F4F6', zerolinecolor='#F3F4F6', title=''),
             xaxis=dict(gridcolor='#F3F4F6', zerolinecolor='#F3F4F6', title=''),
