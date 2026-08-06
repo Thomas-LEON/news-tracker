@@ -43,6 +43,11 @@ st.markdown("""
         font-weight: 700;
         letter-spacing: -0.02em;
         color: #1E2327 !important;
+        background: linear-gradient(90deg, rgba(0,145,90,0.08) 0%, transparent 80%);
+        border-left: 5px solid #00915A;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 2px;
     }
     h2, h3, h4 {
         font-weight: 600;
@@ -54,7 +59,14 @@ st.markdown("""
         background-color: #F4F6F8 !important;
         border-right: 1px solid #E5E7EB;
     }
-    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h1 {
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        color: #1E2327 !important;
+        font-size: 1.1rem !important;
+    }
     [data-testid="stSidebar"] h2,
     [data-testid="stSidebar"] h3 {
         color: #1E2327 !important;
@@ -71,7 +83,12 @@ st.markdown("""
     [data-testid="stSidebar"] .stAlert {
         background: #FFFFFF !important;
         border: 1px solid #E5E7EB !important;
+        border-left: 4px solid #3B82F6 !important;
         border-radius: 6px;
+    }
+    [data-testid="stSidebar"] .stAlert p,
+    [data-testid="stSidebar"] .stAlert li {
+        color: #1E2327 !important; /* Force black text in info boxes */
     }
     [data-testid="stSidebar"] [data-baseweb="radio"] > div {
         background: transparent !important;
@@ -80,8 +97,13 @@ st.markdown("""
         margin-bottom: 2px;
     }
     [data-testid="stSidebar"] [data-baseweb="radio"] [aria-checked="true"] > div {
-        background: rgba(0,145,90,0.08) !important;
+        background: #00915A !important;
         border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,145,90,0.2);
+    }
+    [data-testid="stSidebar"] [data-baseweb="radio"] [aria-checked="true"] p {
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
     }
 
     /* --- TABS --- */
