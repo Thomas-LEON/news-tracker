@@ -23,6 +23,8 @@ flowchart TD
     C -->|"❌ Noise / Low Impact"| D["🗑️ Discarded"]
     C -->|"✅ Critical Threat / Bank Impact"| E["📄 Markdown Report\n(Executive Format)"]
     E --> F["🚀 Git Push to reports/"]
+    E --> G["🗄️ LLM Knowledge Extraction\n(JSON Relational DB)"]
+    G --> H["data/controls_db.json\ndata/incidents_db.json"]
 
     style A fill:#4a9eff,color:#fff
     style B fill:#f1c40f,color:#000
@@ -30,6 +32,8 @@ flowchart TD
     style D fill:#ee5a24,color:#fff
     style E fill:#2ed573,color:#fff
     style F fill:#9b59b6,color:#fff
+    style G fill:#0984e3,color:#fff
+    style H fill:#d63031,color:#fff
 ```
 
 ---
@@ -45,6 +49,14 @@ The LLM is explicitly prompted with **Strict Business Rules** to ensure extreme 
 | **Critical Infrastructure:** Major CVEs on Windows, Linux, or Enterprise Networks. | **Generic Noise:** Background phishing campaigns. |
 
 **Anti-Duplicate System:** The script automatically parses the past 3 days of generated reports and dynamically creates a blacklist to ensure the AI never writes about the same incident twice, even if RSS feeds push old articles.
+
+---
+
+## 🗄️ JSON Relational Control Center (V13 Architecture)
+
+Beyond simply generating markdown files, the system extracts structured, actionable intelligence from every incident:
+- **Semantic Control Deduplication:** A secondary AI pass analyzes the "Mitigating Controls" proposed in the report. It compares them against a local JSON database and assigns consistent IDs (`CTRL-NOUVEAU-XXXX` or reuses existing ones).
+- **Relational Databases:** The intelligence is saved locally in `data/incidents_db.json` (tracking incidents over time) and `data/controls_db.json` (tracking defense mechanisms, their CIA impact, and prerequisites).
 
 ---
 
@@ -77,6 +89,9 @@ The repository includes a `.github/workflows/daily-tracker.yml` that runs every 
 news-tracker/
 ├── .github/workflows/
 │   └── daily-tracker.yml        # GitHub Actions CI/CD Pipeline
+├── data/
+│   ├── controls_db.json         # Relational database of mitigating controls
+│   └── incidents_db.json        # Relational database of tracked incidents
 ├── reports/                     # Auto-generated daily markdown reports
 ├── news_tracker.py              # Core logic & AI prompt engineering
 ├── requirements.txt             # Python dependencies
