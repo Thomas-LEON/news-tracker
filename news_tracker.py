@@ -257,17 +257,37 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     ]
 }}
 """
+    models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
-        response = client.models.generate_content(
-            model='gemini-3.6-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(temperature=0.1)
-        )
         
-        raw_output = response.text
-        clean_json = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', raw_output, re.DOTALL | re.IGNORECASE)
-        clean_json_str = clean_json.group(1) if clean_json else raw_output
+        raw_output = None
+        for model_name in models_to_try:
+            try:
+                print(f"[DB Update] Tentative avec {model_name}...")
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=0.0)
+                )
+                raw_output = response.text
+                break
+            except Exception as model_err:
+                print(f"[DB Update] Echec avec {model_name}: {model_err}")
+                continue
+        
+        if not raw_output:
+            print("[DB Update] Aucun modèle disponible pour la mise à jour des bases JSON.")
+            return
+        
+        # Extraction robuste : on cherche le premier '{' et le dernier '}' dans la réponse,
+        # sans dépendre du formatage Markdown (backticks) que l'IA peut oublier.
+        start_idx = raw_output.find('{')
+        end_idx = raw_output.rfind('}')
+        if start_idx == -1 or end_idx == -1:
+            print(f"[DB Update] Impossible de trouver un objet JSON dans la réponse IA : {raw_output[:200]}")
+            return
+        clean_json_str = raw_output[start_idx:end_idx + 1]
         parsed_data = json.loads(clean_json_str)
         
         # Merge new controls
