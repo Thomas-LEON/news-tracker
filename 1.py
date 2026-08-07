@@ -890,6 +890,7 @@ st.markdown("---")
 
 st.subheader("CTI Assistant")
 st.caption("Conversational interface. Queries are answered against the last 7 days of intelligence.")
+st.caption("⚖️ **Compliance Notice:** You are interacting with an AI system. Responses are synthesized automatically.")
 
 st.markdown("")
 
