@@ -761,7 +761,9 @@ with tab_briefing:
         st.info("No actionable intelligence for this date.")
     else:
         for sub in incidents:
-            with st.expander(sub['preview']):
+            cat_str = sub.get('category', '').strip().upper()
+            title_label = f"{sub['preview']}   |   [{cat_str}]" if cat_str else sub['preview']
+            with st.expander(title_label):
                 render_incident_card(sub)
 
 
