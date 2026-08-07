@@ -168,9 +168,9 @@ st.markdown("""
         white-space: normal; /* Allow wrapping if needed */
         line-height: 1.2;
     }
-    .badge-region  { background: #DBEAFE; color: #1E3A8A; border: 1px solid #BFDBFE; }
-    .badge-infra   { background: #FFEDD5; color: #9A3412; border: 1px solid #FED7AA; }
-    .badge-entity  { background: #F3E8FF; color: #5B21B6; border: 1px solid #E9D5FF; }
+    .badge-region  { background: #DBEAFE; color: #1E3A8A; border: 1px solid #BFDBFE; } /* Blue */
+    .badge-infra   { background: #F3F4F6; color: #374151; border: 1px solid #D1D5DB; } /* Gray */
+    .badge-entity  { background: #F3E8FF; color: #5B21B6; border: 1px solid #E9D5FF; } /* Purple */
     .badge-tag     { background: #F3F4F6; color: #1F2937; border: 1px solid #D1D5DB; }
 
     /* --- CATEGORY BADGES --- */
@@ -183,16 +183,18 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-    .cat-ai           { background: #DBEAFE; color: #1E40AF; }
-    .cat-cloud        { background: #E0E7FF; color: #3730A3; }
-    .cat-ransomware   { background: #FEE2E2; color: #991B1B; }
-    .cat-supply-chain { background: #FEF3C7; color: #92400E; }
-    .cat-phishing     { background: #EDE9FE; color: #5B21B6; }
-    .cat-data-leak    { background: #FCE7F3; color: #9D174D; }
-    .cat-digital-asset{ background: #CFFAFE; color: #155E75; }
-    .cat-malware      { background: #FEE2E2; color: #7F1D1D; }
-    .cat-identity     { background: #D1FAE5; color: #065F46; }
-    .cat-default      { background: #F3F4F6; color: #374151; }
+    .cat-ai           { background: #DBEAFE; color: #1E40AF; } /* Blue */
+    .cat-cloud        { background: #D1FAE5; color: #065F46; } /* Green */
+    .cat-ransomware   { background: #FEE2E2; color: #991B1B; } /* Red */
+    .cat-supply-chain { background: #FEF3C7; color: #92400E; } /* Yellow/Orange */
+    .cat-phishing     { background: #EDE9FE; color: #5B21B6; } /* Violet */
+    .cat-data-leak    { background: #FEE2E2; color: #991B1B; } /* Red */
+    .cat-digital-asset{ background: #FEF3C7; color: #92400E; } /* Yellow/Orange */
+    .cat-finance      { background: #FEF3C7; color: #92400E; } /* Yellow/Orange */
+    .cat-malware      { background: #FEE2E2; color: #991B1B; } /* Red */
+    .cat-identity     { background: #FEF3C7; color: #92400E; } /* Yellow/Orange */
+    .cat-infra        { background: #F3F4F6; color: #374151; } /* Gray */
+    .cat-default      { background: #F3F4F6; color: #374151; } /* Gray */
 
     /* --- INCIDENT CARD SECTIONS --- */
     .inc-section {
@@ -535,7 +537,8 @@ def get_cat_badge_html(category: str) -> str:
         "AI": "cat-ai", "CLOUD": "cat-cloud",
         "RANSOMWARE": "cat-ransomware", "SUPPLY CHAIN": "cat-supply-chain",
         "PHISHING": "cat-phishing", "DATA LEAK": "cat-data-leak",
-        "DIGITAL ASSET": "cat-digital-asset", "MALWARE": "cat-malware",
+        "DIGITAL ASSET": "cat-digital-asset", "FINANCE": "cat-finance",
+        "INFRA": "cat-infra", "MALWARE": "cat-malware",
         "IDENTITY": "cat-identity",
     }
     css_class = css_map.get(cat, "cat-default")
