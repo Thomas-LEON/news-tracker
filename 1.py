@@ -763,13 +763,13 @@ with tab_briefing:
         for sub in incidents:
             cat_str = sub.get('category', '').strip().upper()
             color_map = {
-                "AI": "blue", "CLOUD": "green", "RANSOMWARE": "red",
-                "SUPPLY CHAIN": "orange", "PHISHING": "violet", 
-                "DATA LEAK": "red", "DIGITAL ASSET": "gray", 
-                "MALWARE": "red", "IDENTITY": "orange"
+                "AI": "blue-background", "CLOUD": "green-background", "RANSOMWARE": "red-background",
+                "SUPPLY CHAIN": "orange-background", "PHISHING": "violet-background", 
+                "DATA LEAK": "red-background", "DIGITAL ASSET": "gray-background", 
+                "MALWARE": "red-background", "IDENTITY": "orange-background"
             }
             if cat_str:
-                col = color_map.get(cat_str, "gray")
+                col = color_map.get(cat_str, "gray-background")
                 title_label = f"{sub['preview']}   |   :{col}[**{cat_str}**]"
             else:
                 title_label = sub['preview']
