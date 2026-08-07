@@ -765,7 +765,8 @@ with tab_briefing:
             color_map = {
                 "AI": "blue-background", "CLOUD": "green-background", "RANSOMWARE": "red-background",
                 "SUPPLY CHAIN": "orange-background", "PHISHING": "violet-background", 
-                "DATA LEAK": "red-background", "DIGITAL ASSET": "gray-background", 
+                "DATA LEAK": "red-background", "DIGITAL ASSET": "orange-background", 
+                "FINANCE": "orange-background", "INFRA": "gray-background",
                 "MALWARE": "red-background", "IDENTITY": "orange-background"
             }
             if cat_str:
