@@ -388,5 +388,103 @@
             "Availability": "Low"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1001": {
+        "name": "API Gateway Zero-Trust Input Validation",
+        "prerequisites": [
+            "API Gateway Infrastructure Deployment",
+            "OpenAPI/Schema Definition Framework",
+            "Zero-Trust Access Policy Mapping"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-2001": {
+        "name": "IT Desk Call-Back Identity Verification",
+        "prerequisites": [
+            "Helpdesk Ticketing System Integration",
+            "Out-of-band Communication Channel",
+            "Standardized Verification Operating Procedures"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-2002": {
+        "name": "Network Data Exfiltration Behavioral Telemetry",
+        "prerequisites": [
+            "Egress Network Traffic Taps",
+            "Network Traffic Analysis (NTA) Sensors",
+            "Baseline Outbound Traffic Profiles"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3001": {
+        "name": "Automated SAST/DAST Application Security Testing",
+        "prerequisites": [
+            "CI/CD Pipeline Integration",
+            "Static Code Analysis Engine",
+            "Staging Environment DAST Scanner"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3002": {
+        "name": "Database Feature Hardening & Runtime Unbinding",
+        "prerequisites": [
+            "Database Engine Schema Audit",
+            "DBA Role-Based Access Controls",
+            "Application Dependency Mapping"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-3003": {
+        "name": "Database Activity Monitoring (DAM)",
+        "prerequisites": [
+            "DAM Audit Sensor Deployment",
+            "Centralized Database Audit Logging",
+            "SIEM Security Rules Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7001": {
+        "name": "Nested Virtualization Disablement",
+        "prerequisites": [
+            "Hypervisor Baseline Inventory",
+            "Configuration Management Automation",
+            "Virtualization Policy Enforcement"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
     }
 }

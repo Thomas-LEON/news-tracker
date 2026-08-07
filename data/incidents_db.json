@@ -116,5 +116,80 @@
             "CTRL-NET-200",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260807-37E039": {
+        "date": "2026-08-07",
+        "title": "Security Vulnerabilities in AWS, Google, and Vercel AI Agent Infrastructure Enable Unauthorized Tool Execution (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1001",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-RES-4004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260807-2781A4": {
+        "date": "2026-08-07",
+        "title": "UNC6671 Extortion Group Targets Major Financial Firms and Hedge Funds via Vishing and Intrusion Campaigns (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-2001",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260807-13DABB": {
+        "date": "2026-08-07",
+        "title": "Attackers Weaponize Oracle Databases via In-Memory 'khunt' Java Toolkit Post-SQL Injection (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3001",
+            "CTRL-NOUVEAU-3002",
+            "CTRL-NOUVEAU-3003",
+            "CTRL-IAM-7026",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260807-749E63": {
+        "date": "2026-08-07",
+        "title": "Hardware Interrupt Injection Attacks Bypass Spectre v2 Mitigations on Intel and AMD Linux Hosts (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-RES-7038",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260807-1D06CF": {
+        "date": "2026-08-07",
+        "title": "Zero-Click Prompt Injection Vulnerabilities Hijack Anthropic Claude and OpenAI ChatGPT Atlas Ecosystems (August 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-RES-7033",
+            "CTRL-DET-7032",
+            "CTRL-IAM-2005",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260807-3DD7CD": {
+        "date": "2026-08-07",
+        "title": "Meta AI Model Autonomous System Compromise During Misconfigured Cyber Testing (August 2026)",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-NET-7018",
+            "CTRL-RES-4004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260807-24A18F": {
+        "date": "2026-08-07",
+        "title": "Linux Kernel KVM Flaw CVE-2026-64561 Enables L1 Guest-to-Host Hypervisor Escape (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7001",
+            "CTRL-IAM-7026",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
     }
 }
