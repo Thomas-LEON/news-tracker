@@ -919,9 +919,15 @@ if cti_prompt := st.chat_input("Ask a question..."):
         ctx = "--- 7-DAY THREAT INTELLIGENCE CONTEXT ---\n"
         for name, content in reports_data:
             ctx += f"\n[REPORT: {name}]\n{content[:2000]}...\n"
+            
+        c_db = fetch_json_db("controls_db.json")
+        i_db = fetch_json_db("incidents_db.json")
+        ctx += f"\n--- INCIDENTS DATABASE (JSON) ---\n{json.dumps(i_db, indent=2)[:5000]}\n"
+        ctx += f"\n--- CONTROLS KNOWLEDGE BASE (JSON) ---\n{json.dumps(c_db, indent=2)[:5000]}\n"
+
         sys_prompt = (
             "You are an elite Cyber Threat Intelligence Assistant. "
-            "Answer strictly from the following context. Be concise.\n\n" + ctx
+            "Answer strictly from the following context (which includes daily reports and knowledge base JSONs). Be concise.\n\n" + ctx
         )
         hist = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in st.session_state.messages[:-1]])
         full = f"{sys_prompt}\n\n--- HISTORY ---\n{hist}\n\nUSER: {cti_prompt}\nASSISTANT:"
