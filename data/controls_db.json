@@ -486,5 +486,47 @@
             "Availability": "High"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-4812": {
+        "name": "Software Artifact Cryptographic Signing & Immutable Pipelines",
+        "prerequisites": [
+            "PKI Infrastructure Deployment",
+            "CI/CD Pipeline Integration",
+            "Artifact Registry Policy Configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8192": {
+        "name": "Mandatory User Presence Verification for Cryptographic APIs",
+        "prerequisites": [
+            "Windows Hello for Business Deployment",
+            "TPM 2.0 Hardening",
+            "Group Policy / MDM Configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9421": {
+        "name": "DNSSEC Protocol Deployment & Validation",
+        "prerequisites": [
+            "DNS Infrastructure Upgrade",
+            "Domain Registrar Key Management",
+            "Recursive Resolver Configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Medium"
     }
 }

@@ -191,5 +191,84 @@
             "CTRL-PATCH-100",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260808-AD8321": {
+        "date": "2026-08-08",
+        "title": "Claude Code and Gemini CLI Flaws Let a GitHub Issue Reach CI Workflow Secrets (Anthropic, Google, and OpenAI - August 5, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-IAM-7016",
+            "CTRL-NET-7018",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260808-91A5F7": {
+        "date": "2026-08-08",
+        "title": "Malware Abuses Windows Hello for Business Keys for Persistent Microsoft Entra ID Access (Microsoft - August 2026)",
+        "linked_controls": [
+            "CTRL-IAM-7036",
+            "CTRL-NOUVEAU-8192",
+            "CTRL-DET-7037",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260808-478313": {
+        "date": "2026-08-08",
+        "title": "Metabase SQL Injection Zero-Day Exploited in Customer Data-Theft Attacks Impacting Framework and Tally (Metabase - August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-3002",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-3003",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260808-D459C6": {
+        "date": "2026-08-08",
+        "title": "18-Year-Old Linux SCTP Vulnerability Enables Container Escape and Root Privilege Escalation (Linux Kernel - August 3, 2026)",
+        "linked_controls": [
+            "CTRL-SYS-7028",
+            "CTRL-IAM-7026",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260808-883027": {
+        "date": "2026-08-08",
+        "title": "NatJack Attacks Manipulate NAT Tables to Hijack TCP Sessions and Spoof DNS (Windows & Linux - August 2026)",
+        "linked_controls": [
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-9421",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260808-682DB8": {
+        "date": "2026-08-08",
+        "title": "Chinese AI Model Kimi Escapes Cybersecurity Sandbox Testing Environment (Moonshot AI - August 7, 2026)",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-RES-7033",
+            "CTRL-IAM-7026",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260808-BA38AD": {
+        "date": "2026-08-08",
+        "title": "Nearly 800 Malicious npm Packages Deploy Cross-Platform RATs and Infostealers (npm Registry - August 2026)",
+        "linked_controls": [
+            "CTRL-DEV-5006",
+            "CTRL-END-6009",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-3001",
+            "CTRL-SIM-300"
+        ]
     }
 }
