@@ -528,5 +528,89 @@
             "Availability": "Medium"
         },
         "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-5101": {
+        "name": "Prompt Sanitization and Input Escaping Middleware",
+        "prerequisites": [
+            "LLM gateway deployment",
+            "Input filtering engine",
+            "AI threat modeling"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5102": {
+        "name": "Disable Dynamic External Content & Image Rendering",
+        "prerequisites": [
+            "SaaS tenant administration access",
+            "Markdown rendering policy",
+            "User impact analysis"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-6201": {
+        "name": "Strict Content Security Policy & Dynamic HTML/CSS Sanitization",
+        "prerequisites": [
+            "Web Application Firewall or Gateway",
+            "DOMPurify or equivalent sanitizer",
+            "CSP header configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6202": {
+        "name": "Secure Email Gateway Dynamic CSS Parsing & Inspection",
+        "prerequisites": [
+            "SEG active deployment",
+            "Advanced email threat protection license",
+            "Custom rule engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6203": {
+        "name": "Restricted Plain-Text Email Rendering Mode",
+        "prerequisites": [
+            "Mail server policy engine",
+            "Role-based group policy",
+            "Executive account tagging"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-7301": {
+        "name": "Software Update Server Integrity Monitoring",
+        "prerequisites": [
+            "File Integrity Monitoring (FIM)",
+            "Official vendor hash database feed",
+            "Server endpoint agent"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
     }
 }

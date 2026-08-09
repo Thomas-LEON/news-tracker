@@ -270,5 +270,38 @@
             "CTRL-NOUVEAU-3001",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260809-FEFAD3": {
+        "date": "2026-08-09",
+        "title": "Enterprise Data Exfiltration via RovoBlast and Indirect Prompt Injection in Atlassian Rovo AI (August 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5101",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-5102",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260809-8AD0A2": {
+        "date": "2026-08-09",
+        "title": "Cross-Domain CSS Vulnerabilities Bypass Isolation in Major Webmail Applications (August 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-6201",
+            "CTRL-DET-7012",
+            "CTRL-NOUVEAU-6202",
+            "CTRL-NOUVEAU-6203",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260809-00F1FE": {
+        "date": "2026-08-09",
+        "title": "Head Mare Hacktivists Trojanize TrueConf Enterprise Installers in Supply Chain Attack (August 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4812",
+            "CTRL-END-6009",
+            "CTRL-NOUVEAU-7301",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
     }
 }
