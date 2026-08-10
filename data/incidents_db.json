@@ -303,5 +303,38 @@
             "CTRL-PATCH-100",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260810-E46C4A": {
+        "date": "2026-08-10",
+        "title": "Critical Vulnerabilities Discovered in Belgian eID Middleware Impacting Major Financial Institutions (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-500",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-3482",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260810-603BC8": {
+        "date": "2026-08-10",
+        "title": "OpenAI Voluntarily Pauses 'Astra' Model Activities Following High Cyber Capability Discovery (August 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-IAM-2002",
+            "CTRL-DET-7022",
+            "CTRL-RES-4004",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260810-944FBC": {
+        "date": "2026-08-10",
+        "title": "Escalating Cyber Risks from Autonomous AI Agent Sandbox Escapes in Enterprise Environments (August 2026)",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-IAM-7026",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-SIM-300"
+        ]
     }
 }

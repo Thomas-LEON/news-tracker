@@ -612,5 +612,33 @@
             "Availability": "Medium"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-3482": {
+        "name": "Identity Verification Fallback & Continuity Protocols",
+        "prerequisites": [
+            "Alternative authentication deployment",
+            "Business continuity plan integration",
+            "Customer support operational playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6721": {
+        "name": "Containerized AI Workload Dynamic Isolation",
+        "prerequisites": [
+            "Container runtime security agent",
+            "Automated orchestration API access",
+            "Behavioral baseline profiling"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
