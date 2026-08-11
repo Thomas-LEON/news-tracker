@@ -336,5 +336,60 @@
             "CTRL-NOUVEAU-6721",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260811-25D00B": {
+        "date": "2026-08-11",
+        "title": "CEVA Logistics Supply Chain Breach Exposes Enterprise and Banking Fulfillment Data (August 10, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8101",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-8102",
+            "CTRL-NOUVEAU-8103",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260811-E8A3F8": {
+        "date": "2026-08-11",
+        "title": "\"Ghostjacking\" Attack Vector Targets Enterprise AI Agents via Poisoned Security Logs (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5101",
+            "CTRL-IAM-2005",
+            "CTRL-NOUVEAU-8201",
+            "CTRL-RES-7033",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260811-543450": {
+        "date": "2026-08-11",
+        "title": "LexisNexis Suspends Compliance and API Services Following Third-Party Infrastructure Incident (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8301",
+            "CTRL-NOUVEAU-3482",
+            "CTRL-NOUVEAU-8302",
+            "CTRL-NOUVEAU-8303",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260811-88C694": {
+        "date": "2026-08-11",
+        "title": "Kimsuky Deploys Private Offline AI Framework to Automate Malware and Phishing (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8401",
+            "CTRL-IAM-500",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-8402",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260811-6B03AD": {
+        "date": "2026-08-11",
+        "title": "Passkey Exploits Expose Synced Private Keys and Enable MFA Bypass (August 2026)",
+        "linked_controls": [
+            "CTRL-IAM-500",
+            "CTRL-IAM-7036",
+            "CTRL-DET-400",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
     }
 }

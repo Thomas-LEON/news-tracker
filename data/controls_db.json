@@ -640,5 +640,131 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8101": {
+        "name": "Third-Party Physical Supply Chain Risk Governance",
+        "prerequisites": [
+            "TPRM Framework",
+            "Vendor Contractual Audits",
+            "Data Classification Policy"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8102": {
+        "name": "Dark Web Shipping & Manifest Monitoring",
+        "prerequisites": [
+            "Threat Intelligence Platform",
+            "Brand Intelligence Feeds",
+            "Automated Alerting"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Low",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-8103": {
+        "name": "Downstream Supply Chain Incident Response Playbook",
+        "prerequisites": [
+            "IR Framework Deployment",
+            "Vendor Communication Protocols",
+            "Legal & Regulatory Mapping"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8201": {
+        "name": "Deterministic Safety Evaluation Layer for AI Execution",
+        "prerequisites": [
+            "API Gateway Infrastructure",
+            "Rule-Based Engine Deployment",
+            "AI Execution Logging"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8301": {
+        "name": "Fourth-Party Dependency Risk Mapping",
+        "prerequisites": [
+            "Vendor Discovery Tools",
+            "Architecture Mapping",
+            "Supply Chain Risk Inventory"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8302": {
+        "name": "SaaS & Third-Party Regulatory API Health Telemetry",
+        "prerequisites": [
+            "API Health Monitoring Agent",
+            "SLA Incident Alerting",
+            "SIEM Integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Medium",
+            "Availability": "High"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-8303": {
+        "name": "Redundant Secondary Compliance Verification Engine",
+        "prerequisites": [
+            "Multi-Vendor Compliance Strategy",
+            "Data Normalization Layer",
+            "Fallback Workflow Automation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8401": {
+        "name": "NLP-Based Email Behavioral & Intent Inspection",
+        "prerequisites": [
+            "Email Gateway Integration",
+            "NLP Threat Models",
+            "Inbound Mail Inspection Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8402": {
+        "name": "Advanced AI-Driven Phishing Awareness Training",
+        "prerequisites": [
+            "Security Awareness Platform",
+            "Synthetic Media Modules",
+            "Phishing Metric Tracking"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
     }
 }
