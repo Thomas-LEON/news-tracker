@@ -766,5 +766,61 @@
             "Availability": "Low"
         },
         "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-9012": {
+        "name": "Vetted Tool Registry for AI Agents",
+        "prerequisites": [
+            "AI Governance Policy",
+            "Tool Vetting Framework",
+            "API Gateway Integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9013": {
+        "name": "Immutable Offline Backup Vaults",
+        "prerequisites": [
+            "Storage Isolation Infrastructure",
+            "WORM Storage Configuration",
+            "Backup Access Policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "Critical"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9014": {
+        "name": "Automated Secret-Scanning Commit Hooks",
+        "prerequisites": [
+            "Code Repository Integration",
+            "Secret Detection Ruleset",
+            "Developer Workstation Agent"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9016": {
+        "name": "Just-In-Time Privileged Access Management",
+        "prerequisites": [
+            "PAM Solution Deployment",
+            "Identity Provider Integration",
+            "Role-Based Access Controls"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
     }
 }
