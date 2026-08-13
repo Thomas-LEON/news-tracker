@@ -822,5 +822,61 @@
             "Availability": "Medium"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-5103": {
+        "name": "Server-Side AI Model State Management",
+        "prerequisites": [
+            "API Gateway Architecture",
+            "Stateful Session Storage",
+            "Cryptographic State Binding"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4410": {
+        "name": "SaaS Security Posture Management (SSPM) & Guest Access Governance",
+        "prerequisites": [
+            "SaaS Platform Admin Access",
+            "Centralized Identity Governance",
+            "API Audit Logging"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6010": {
+        "name": "Host Symbolic Link & OS Privilege Restriction",
+        "prerequisites": [
+            "Group Policy Management",
+            "Endpoint Management Agent",
+            "Least-Privilege Policy"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8801": {
+        "name": "Automated SOAR Machine-Speed Threat Containment",
+        "prerequisites": [
+            "SOAR Engine Integration",
+            "SIEM Event Pipeline",
+            "Automated Containment Playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
     }
 }

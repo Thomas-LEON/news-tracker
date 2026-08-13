@@ -468,5 +468,72 @@
             "CTRL-NOUVEAU-8402",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260813-9EECD0": {
+        "date": "2026-08-13",
+        "title": "OpenAI, Anthropic, and Google API Logic Flaw Enables Reasoning Session Hijacking and Credential Exfiltration (August 12, 2026)",
+        "linked_controls": [
+            "CTRL-DET-7032",
+            "CTRL-IAM-7011",
+            "CTRL-DET-7022",
+            "CTRL-NOUVEAU-5101",
+            "CTRL-NOUVEAU-5103",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260813-E96BA5": {
+        "date": "2026-08-13",
+        "title": "LiteLLM PyPI Supply Chain Compromise Exposes Cloud Credentials and K8s Tokens Across 2,500 Organizations (August 12, 2026)",
+        "linked_controls": [
+            "CTRL-DEV-5006",
+            "CTRL-IAM-7011",
+            "CTRL-DET-400",
+            "CTRL-NET-7018",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260813-7238F8": {
+        "date": "2026-08-13",
+        "title": "Stealthy \"City-Forum\" Data Theft Campaign Targets Unauthenticated Enterprise Salesforce and ServiceNow Portals (August 12, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4410",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260813-D8193E": {
+        "date": "2026-08-13",
+        "title": "Microsoft Defender \"ShieldBreak\" Zero-Day Disclosed Publicly, Granting Enterprise LPE to SYSTEM (August 12, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-6010",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260813-EF2CAB": {
+        "date": "2026-08-13",
+        "title": "Broadcom VMware vCenter Server Critical RCE Vulnerability (CVE-2026-59310) Exploited in the Wild (August 12, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260813-C27E53": {
+        "date": "2026-08-13",
+        "title": "Near-Autonomous AI Cyber Attack Framework Observed Targeting Government Infrastructure in Taiwan (August 12, 2026)",
+        "linked_controls": [
+            "CTRL-NET-200",
+            "CTRL-IAM-7011",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-SIM-300"
+        ]
     }
 }
