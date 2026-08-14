@@ -398,10 +398,9 @@ def main():
     print("Analyse par l'IA et redaction de l'Executive Summary (Brouillon)...")
     draft_report = generate_executive_summary(articles, covered_incidents=covered)
     
-    final_report = verify_and_correct_report(draft_report, articles)
-    
+    # Extraire le Threat Score du BROUILLON (avant l'audit, car l'auditeur peut reformater cette ligne)
     print("Calcul mathematique et deterministe du score de risque final...")
-    match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', final_report, re.IGNORECASE)
+    match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', draft_report, re.IGNORECASE)
     
     if match:
         tc = int(match.group(1))
@@ -409,12 +408,14 @@ def main():
         bi = int(match.group(3))
         threat_score = int((tc + ef + bi) * 3.33)
         threat_score = min(threat_score, 100) # Cap at 100
-        
-        # Inject the final Threat Score line just before the Auditable Metrics
-        final_report = final_report.replace(match.group(0), f"**Threat Score:** {threat_score}/100\n" + match.group(0))
+        score_line = f"**Threat Score:** {threat_score}/100\n*(Auditable Metrics - Threat Capability: {tc}/10 | Event Frequency: {ef}/10 | Business Impact: {bi}/10)*\n\n"
     else:
-        # Fallback if AI fails to format properly
-        final_report = "**Threat Score:** 0/100\n" + final_report
+        score_line = "**Threat Score:** 0/100\n\n"
+    
+    final_report = verify_and_correct_report(draft_report, articles)
+    
+    # Injecter le score calculé en tête du rapport final audité
+    final_report = score_line + final_report
     
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
