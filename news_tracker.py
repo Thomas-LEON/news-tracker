@@ -22,7 +22,10 @@ RSS_FEEDS = [
     "https://www.securityweek.com/feed/",
     "https://www.infosecurity-magazine.com/rss/news/",
     "https://techcrunch.com/category/security/feed/",
-    "https://feeds.arstechnica.com/arstechnica/security"
+    "https://feeds.arstechnica.com/arstechnica/security",
+    "https://www.helpnetsecurity.com/feed/",
+    "https://thecyberwire.com/feeds/rss.xml",
+    "https://www.cybersecuritydive.com/feeds/news/"
 ]
 # ---------------------
 
@@ -174,7 +177,7 @@ def generate_executive_summary(articles, covered_incidents=None):
             for ci in covered_incidents:
                 prompt += f"- {ci}\n"
                 
-        models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+        models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
         
         for model_name in models_to_try:
             try:
@@ -195,6 +198,69 @@ def generate_executive_summary(articles, covered_incidents=None):
         
     except Exception as e:
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
+
+def verify_and_correct_report(draft_report, articles):
+    """
+    Audite le rapport brouillon généré, supprime les incidents hors-sujet (géopolitique, régulation sans incident technique)
+    et corrige scrupuleusement les dates des incidents en s'appuyant sur les articles originaux.
+    """
+    print("\nLancement de l'Audit IA (Double Check)...")
+    prompt = f"""Tu es un Auditeur Cyber (Red Team / Fact Checker) extrêmement strict.
+On t'a soumis un brouillon de rapport Threat Intel, ainsi que les articles bruts d'origine.
+Ton rôle est de corriger les erreurs de l'IA qui a rédigé ce brouillon.
+
+Voici le brouillon :
+---
+{draft_report}
+---
+
+Voici les articles bruts d'origine (pour vérifier les dates et les faits) :
+---
+"""
+    for i, art in enumerate(articles):
+        soup = BeautifulSoup(art['summary'], 'html.parser')
+        clean_summary = soup.get_text()[:300]
+        prompt += f"- Titre: {art['title']}\n  Lien: {art['link']}\n  Date/Source: {art['source']}\n  Extrait: {clean_summary}\n\n"
+
+    prompt += """
+TA MISSION :
+1. SUPPRESSION DES HORS-SUJETS : Supprime IMPITOYABLEMENT toute section entière du brouillon qui relate un événement purement politique, gouvernemental, ou régulatoire (ex: "Executive Order", "New Bill", etc.) à moins qu'il n'y ait une vraie cyberattaque ou une vulnérabilité critique d'infrastructure mentionnée.
+2. VÉRIFICATION DES DATES : L'IA précédente a tendance à inventer ou forcer des dates récentes pour de vieux articles remontés dans le flux RSS. Vérifie dans les articles bruts si la date de l'incident est réellement récente (moins de 7 jours).
+  - Si l'incident date de plus d'une semaine (ex: un vieil article d'il y a un an), supprime toute la section.
+  - Si la date de l'incident dans le rapport ne correspond pas à la date réelle de l'article, corrige la date dans le rapport (Timeline: Event: ...).
+3. Rends UNIQUEMENT le rapport Markdown final corrigé. Conserve le formatage exact (titres ##, puces, structure). Ne rajoute pas d'intro ou de conclusion générale de ta part, donne juste le rapport final (les balises Markdown sont autorisées).
+"""
+
+    models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    try:
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
+        
+        for model_name in models_to_try:
+            try:
+                print(f"Tentative d'audit avec {model_name}...")
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=0.0)
+                )
+                
+                raw_text = response.text.strip()
+                if raw_text.startswith("```markdown"):
+                    raw_text = raw_text[11:]
+                elif raw_text.startswith("```"):
+                    raw_text = raw_text[3:]
+                if raw_text.endswith("```"):
+                    raw_text = raw_text[:-3]
+                    
+                return raw_text.strip()
+            except Exception as e:
+                print(f"Echec de l'audit avec {model_name}: {e}")
+                continue
+                
+        return draft_report
+    except Exception as e:
+        print(f"Erreur globale lors de l'audit : {e}")
+        return draft_report
 
 def update_databases(report_content, today_str):
     """
@@ -257,7 +323,7 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     ]
 }}
 """
-    models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
         
@@ -320,16 +386,22 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
 def main():
     print("Recherche des actualites (Threat Intel & Cyber) des dernieres 24h...")
     articles = fetch_recent_news()
+    if not articles:
+        print("Aucun article recent trouve.")
+        return
+        
     print(f"{len(articles)} articles trouves.")
     
     print("Recherche des anciens rapports pour eviter les doublons...")
     covered = get_previously_covered_incidents(days=3)
     
-    print("Analyse par l'IA et redaction de l'Executive Summary...")
-    report = generate_executive_summary(articles, covered_incidents=covered)
+    print("Analyse par l'IA et redaction de l'Executive Summary (Brouillon)...")
+    draft_report = generate_executive_summary(articles, covered_incidents=covered)
+    
+    final_report = verify_and_correct_report(draft_report, articles)
     
     print("Calcul mathematique et deterministe du score de risque final...")
-    match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', report, re.IGNORECASE)
+    match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', final_report, re.IGNORECASE)
     
     if match:
         tc = int(match.group(1))
@@ -339,25 +411,25 @@ def main():
         threat_score = min(threat_score, 100) # Cap at 100
         
         # Inject the final Threat Score line just before the Auditable Metrics
-        report = report.replace(match.group(0), f"**Threat Score:** {threat_score}/100\n" + match.group(0))
+        final_report = final_report.replace(match.group(0), f"**Threat Score:** {threat_score}/100\n" + match.group(0))
     else:
         # Fallback if AI fails to format properly
-        report = "**Threat Score:** 0/100\n" + report
+        final_report = "**Threat Score:** 0/100\n" + final_report
     
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     os.makedirs(output_dir, exist_ok=True)
-    filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
     
+    filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
     with open(filename, "w", encoding="utf-8") as f:
         f.write(f"# 🛡️ Daily Threat Intel & Emerging Tech Briefing\n")
-        f.write(f"**Date:** {today_str}\n\n")
-        f.write(report)
+        f.write(f"**Date:** {datetime.datetime.now().strftime('%B %d, %Y')}\n\n")
+        f.write(final_report)
         
-    print(f"\nTermine ! Le rapport a ete sauvegarde ici :\n{filename}")
+    print(f"\nTermine ! Le rapport final a ete sauvegarde ici :\n{filename}")
     
     print("\nMise à jour de la base de connaissances (Contrôles)...")
-    update_databases(report, today_str)
+    update_databases(final_report, today_str)
 
 if __name__ == "__main__":
     main()
