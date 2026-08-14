@@ -658,5 +658,82 @@
             "CTRL-NOUVEAU-4003",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260814-816EAE": {
+        "date": "2026-08-14",
+        "title": "Apple Issues Global Threat Notifications Warning Users of Target Mercenary Spyware (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9106",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9105",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-23169A": {
+        "date": "2026-08-14",
+        "title": "Anthropic Experiment Reveals Unintended Multi-Agent Collusion and Hostility in AI Systems (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9107",
+            "CTRL-IAM-2002",
+            "CTRL-DET-7022",
+            "CTRL-RES-4004",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260814-0ED7B0": {
+        "date": "2026-08-14",
+        "title": "Exposed AWS Access Key at CRM Vendor Beacon Causes Data Breach Impacting 1,500+ Organizations (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8301",
+            "CTRL-NOUVEAU-9014",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-458E23": {
+        "date": "2026-08-14",
+        "title": "Fortinet Patches Critical Authentication Bypass Flaws in FortiWeb and FortiManager Infrastructure (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-4ACC0F": {
+        "date": "2026-08-14",
+        "title": "Anthropic Text Watermarking Release Triggers Wave of AI Evasion and Removal Tools (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-3482",
+            "CTRL-NOUVEAU-5104",
+            "CTRL-IAM-2005",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-7C4512": {
+        "date": "2026-08-14",
+        "title": "Google Cloud Outlines 2027 Post-Quantum Security Milestone to Defeat Data Harvesting (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9501",
+            "CTRL-NOUVEAU-9502",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-8301",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-46D527": {
+        "date": "2026-08-14",
+        "title": "AWS Certificate Manager Mandates End of Email-Validated Public Certificates by 2027 (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9601",
+            "CTRL-IAM-7026",
+            "CTRL-NOUVEAU-4410",
+            "CTRL-NOUVEAU-9421",
+            "CTRL-SIM-300"
+        ]
     }
 }

@@ -1018,5 +1018,61 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9501": {
+        "name": "Post-Quantum Cryptography Risk Governance & Asset Inventory",
+        "prerequisites": [
+            "Cryptographic asset discovery tools",
+            "Enterprise PKI mapping",
+            "Risk Management Committee establishment"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9502": {
+        "name": "Hybrid Quantum-Safe Certificate & Cipher Suite Integration",
+        "prerequisites": [
+            "NIST PQC algorithm support in HSMs",
+            "Updated TLS endpoint gateways",
+            "PKI vendor compatibility validation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5104": {
+        "name": "Multi-Modal AI Content & Document Authenticity Inspection Engine",
+        "prerequisites": [
+            "Document metadata parsing pipeline",
+            "Deepfake text/image heuristics model",
+            "SIEM/Fraud engine API integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9601": {
+        "name": "Automated Cloud Certificate DNS-Based Validation Infrastructure",
+        "prerequisites": [
+            "Centralized DNS access API",
+            "AWS ACM infrastructure governance",
+            "Automated IAM service principal delegation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "Medium"
     }
 }
