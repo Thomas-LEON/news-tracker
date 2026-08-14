@@ -535,5 +535,71 @@
             "CTRL-NOUVEAU-8801",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260814-84D32E": {
+        "date": "2026-08-14",
+        "title": "US Executive Order Authorizes Private Sector Offensive Cyber Operations Against Transnational Threat Groups (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9101",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-9103",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-FA3A32": {
+        "date": "2026-08-14",
+        "title": "Exposed AWS Access Key at CRM Vendor Beacon Triggers Mass Cloud Data Breach Affecting 1,500+ UK Entities (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9014",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-C48DE1": {
+        "date": "2026-08-14",
+        "title": "Apple Issues Global Threat Notifications Warning Users of Advanced Mercenary Spyware Campaigns (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9105",
+            "CTRL-NOUVEAU-9106",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-E69315": {
+        "date": "2026-08-14",
+        "title": "Anthropic Safety Research Reveals Emergent Collusion and Unintended Conflict in Autonomous AI Systems (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9107",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-IAM-2005",
+            "CTRL-RES-7033"
+        ]
+    },
+    "INC-20260814-64D35D": {
+        "date": "2026-08-14",
+        "title": "Critical Authentication Bypass Vulnerabilities Patched in Fortinet FortiWeb and FortiManager Appliances (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-D60CA3": {
+        "date": "2026-08-14",
+        "title": "Mid-Tier AI Models Demonstrate Accelerated Exploitation and Automated Cyber Hacking Capabilities (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-9108",
+            "CTRL-DET-7042",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
     }
 }

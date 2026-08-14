@@ -878,5 +878,103 @@
             "Availability": "High"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9101": {
+        "name": "Private Cyber Operations Risk Governance",
+        "prerequisites": [
+            "Threat intelligence feed integration",
+            "Legal escalation framework",
+            "Corporate risk registry update"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Medium",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9103": {
+        "name": "Real-Time CSIRT/ISAC Threat Sharing Integration",
+        "prerequisites": [
+            "ISAC membership & API keys",
+            "STIX/TAXII automated ingestion",
+            "SIEM/SOAR automated feed mapping"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-9104": {
+        "name": "Cloud Storage Exfiltration & Anomaly Detection Telemetry",
+        "prerequisites": [
+            "AWS CloudTrail enabled",
+            "Amazon GuardDuty integration",
+            "SIEM cloud API log ingestion"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9105": {
+        "name": "Mobile Threat Defense (MTD) Telemetry",
+        "prerequisites": [
+            "Enterprise MDM infrastructure",
+            "MTD client software deployment",
+            "SOC alert telemetry integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9106": {
+        "name": "Executive Mobile Lockdown Mode Enforcement",
+        "prerequisites": [
+            "Managed iOS device enrollment",
+            "Executive risk policy definition",
+            "User awareness training"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9107": {
+        "name": "Multi-Agent AI Risk Modeling Framework",
+        "prerequisites": [
+            "AI inventory registry",
+            "Multi-agent threat modeling guidelines",
+            "AI Safety Governance Board oversight"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9108": {
+        "name": "Adaptive CAPTCHA & Agentic Bot Protection",
+        "prerequisites": [
+            "Edge WAF / Gateway deployment",
+            "Behavioral analytics module",
+            "Dynamic rate-limiting engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
     }
 }
