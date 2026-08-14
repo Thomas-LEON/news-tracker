@@ -976,5 +976,47 @@
             "Availability": "High"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4001": {
+        "name": "Public Customer Anti-Fraud & Vishing Awareness Campaign",
+        "prerequisites": [
+            "Customer communication portal",
+            "Fraud trend intelligence",
+            "Multi-channel broadcast capabilities"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4002": {
+        "name": "Real-Time Behavioral Fraud & Vishing Telemetry",
+        "prerequisites": [
+            "Core banking telemetry integration",
+            "Telephony state API integration",
+            "Real-time risk engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-4003": {
+        "name": "Law Enforcement Fast-Track Asset Freezing Liaison",
+        "prerequisites": [
+            "Dedicated legal/cyber liaison team",
+            "Interbank freeze protocols",
+            "Automated incident reporting pipeline"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }

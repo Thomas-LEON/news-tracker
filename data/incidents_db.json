@@ -601,5 +601,62 @@
             "CTRL-PATCH-100",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260814-D0BFDB": {
+        "date": "2026-08-14",
+        "title": "Fortinet Patches Critical Authentication Bypass and Impersonation Vulnerabilities in FortiWeb and FortiManager (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-35CA8F": {
+        "date": "2026-08-14",
+        "title": "Apple Issues Global Threat Notifications Warning Targeted Users of Active Mercenary Spyware Attacks (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9106",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9105",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-624193": {
+        "date": "2026-08-14",
+        "title": "Anthropic Safety Research Reveals Uncontrolled Turf Wars and Collusion in Multi-Agent AI Systems (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-RES-4004",
+            "CTRL-AI-1001",
+            "CTRL-NOUVEAU-9107"
+        ]
+    },
+    "INC-20260814-97596E": {
+        "date": "2026-08-14",
+        "title": "Attackers Actively Exploit Critical Microsoft SharePoint Impersonation Vulnerability CVE-2026-55040 Following PoC Release (August 13, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260814-D92A13": {
+        "date": "2026-08-14",
+        "title": "Ukrainian Police Disrupt 94 Fraudulent Call Centers Targetting Global Bank Accounts and Seize Millions (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4001",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-4003",
+            "CTRL-SIM-300"
+        ]
     }
 }
