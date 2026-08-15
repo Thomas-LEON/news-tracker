@@ -735,5 +735,49 @@
             "CTRL-NOUVEAU-9421",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260815-04C7F7": {
+        "date": "2026-08-15",
+        "title": "Commerzbank Third-Party Service Provider Flaw Exploited in \u20ac30 Million Bank Fraud (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8302",
+            "CTRL-NOUVEAU-1050",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-RES-4004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260815-A08C0B": {
+        "date": "2026-08-15",
+        "title": "Active Exploitation of Maximum Severity SAP Commerce Cloud Remote Code Execution Vulnerability (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-7011",
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260815-1CFB5B": {
+        "date": "2026-08-15",
+        "title": "ExfilSquad Extortion Group Targets Microsoft Power Pages Portals Exfiltrating Enterprise Data (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4410",
+            "CTRL-NOUVEAU-2003",
+            "CTRL-NOUVEAU-3003",
+            "CTRL-NOUVEAU-3004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260815-9CF97A": {
+        "date": "2026-08-15",
+        "title": "WindRelay Android Trojan Exploits Live NFC Relaying for Real-Time Bank Card Fraud (August 14, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4001",
+            "CTRL-NOUVEAU-9105",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-4004",
+            "CTRL-SIM-300"
+        ]
     }
 }

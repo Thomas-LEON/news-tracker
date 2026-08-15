@@ -1074,5 +1074,61 @@
             "Availability": "Critical"
         },
         "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-1050": {
+        "name": "Mutual TLS & API Signature Validation Middleware",
+        "prerequisites": [
+            "PKI & Certificate Management Infrastructure",
+            "API Gateway Integration",
+            "Vendor Mutual Authentication Support"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-2003": {
+        "name": "Low-Code/No-Code Anonymous Access Enforcement & Governance",
+        "prerequisites": [
+            "Identity Provider Integration",
+            "Low-Code Asset Inventory",
+            "Tenant Security Governance"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3004": {
+        "name": "Database Field-Level Data Masking & Anonymization",
+        "prerequisites": [
+            "Data Classification Policy",
+            "Database Schema Mapping",
+            "DLP/Masking Middleware"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4004": {
+        "name": "Step-Up Biometric Authentication & Step-Down Throttling",
+        "prerequisites": [
+            "Mobile Banking SDK Biometrics",
+            "Fraud Engine Policy Rules",
+            "User Device Risk Scoring"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
     }
 }
