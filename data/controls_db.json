@@ -1130,5 +1130,19 @@
             "Availability": "High"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8831": {
+        "name": "Network Edge Hardware Hardening & Remote WAN Lockdown",
+        "prerequisites": [
+            "Perimeter asset inventory",
+            "Out-of-band management network",
+            "Firmware baseline configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
     }
 }

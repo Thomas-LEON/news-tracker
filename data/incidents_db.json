@@ -779,5 +779,31 @@
             "CTRL-NOUVEAU-4004",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260816-4BC406": {
+        "date": "2026-08-16",
+        "title": "Account Takeover and Credential Exploitation Threats Targeting Enterprise AI Platforms (August 15, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-IAM-500",
+            "CTRL-IAM-7036",
+            "CTRL-DET-7012",
+            "CTRL-NOUVEAU-9014",
+            "CTRL-IAM-7031",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260816-EB1B90": {
+        "date": "2026-08-16",
+        "title": "Evooo1Bot Modular Linux Botnet Targets Enterprise Edge Routers and Gateway Infrastructure (August 15, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-SIM-300"
+        ]
     }
 }
