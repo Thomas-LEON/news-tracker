@@ -86,32 +86,32 @@ def generate_executive_summary(articles, covered_incidents=None):
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
-        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier un TOP 1 a 10 des incidents ou menaces, et de rediger un rapport detaille pour CHACUN d'entre eux.
+        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier JUSQU'A 10 incidents ou menaces majeurs.
+        Si AUCUN article ne correspond aux critères stricts ci-dessous, ou si tu n'as pas de preuves concrètes dans les articles fournis, tu DOIS IMPÉRATIVEMENT répondre uniquement par le mot "SKIPPED". Ne comble JAMAIS les vides par l'invention.
         
         CRITERES STRICTS D'INCLUSION (Un article doit valider l'un de ces points pour etre retenu) :
         1. Impact direct / indirect Banque : Attaques ciblant le secteur financier, vos fournisseurs (Supply Chain, editeurs logiciels), ou fuites de donnees reglementees (RGPD).
-        2. Gros acteurs technologiques : Tout incident (meme sans impact immediat) impliquant les geants du Cloud (AWS, Azure, GCP), les leaders de l'IA (OpenAI, Anthropic, HuggingFace...), les grands du Web (Meta, Apple) ou de la Cyber (CrowdStrike, Palo Alto, etc.).
-        3. Infrastructures critiques : Failles majeures touchant des technos d'entreprise classiques (Windows, Linux, reseaux).
-        4. Alertes CVE (Failles) : A ne retenir UNIQUEMENT si la faille touche un grand nom de l'IA ou du Cloud.
+        2. Gros acteurs technologiques : Tout incident impliquant les geants du Cloud (AWS, Azure, GCP) ou de l'IA (OpenAI, Anthropic...).
+        3. Infrastructures critiques : Failles majeures touchant des technos d'entreprise classiques.
         
-        CRITERES STRICTS D'EXCLUSION (Ignore IMPERATIVEMENT ces articles, c'est du bruit) :
-        1. Ransomwares "classiques" touchant des entites non-strategiques (PME, mairies, hopitaux).
-        2. Fuites de donnees grand public (sites e-commerce, forums, jeux video).
-        3. Campagnes de phishing ou malwares generiques de masse.
-        4. Piratages de comptes de reseaux sociaux de celebrites/influenceurs.
-        5. ACTUALITES ANCIENNES : Verifie bien que l'evenement s'est produit recemment. Exclut les resumes mensuels, ou les vieilles actualites remontees artificiellement dans le flux RSS.
+        CRITERES STRICTS D'EXCLUSION (Ignore IMPERATIVEMENT ces articles, c'est du bruit. DROP-LES) :
+        1. ZERO HALLUCINATION : Ne génère AUCUN rapport sans avoir identifié une source légitime, une CVE réelle ou un rapport technique existant dans le texte fourni.
+        2. ZERO EXTRAPOLATION : Ne transforme JAMAIS un simple tutoriel de sécurité ou un article de conseil en une campagne d'attaque active. Contente-toi des faits stricts.
+        3. IT OUTAGES != CYBER THREAT : Une panne de service (Outage) n'est PAS un incident de sécurité, sauf si elle est explicitement attribuée à une attaque (ex: DDoS, Ransomware). Sinon, IGNORE.
+        4. ACTUALITES ANCIENNES : Distingue toujours la date de la faille initiale (Breach) de la date d'annonce/arrestation. Si la faille date de plusieurs mois/années, IGNORE.
+        5. Ransomwares "classiques" touchant des PME/hôpitaux, ou fuites grand public (jeux vidéo, influenceurs).
 
         --- EVALUATION DU SCORE DE GRAVITE GLOBAL (METHODOLOGIE CRQ / FAIR) ---
-        AVANT de lister le premier incident, tu DOIS IMPERATIVEMENT évaluer scientifiquement la gravité globale de la journée (basé sur l'incident le plus critique).
-        Ne donne pas un chiffre au hasard. Evalue ces 3 vecteurs stricts de 1 à 10 :
-        1. Threat Capability (TC) : Sophistication de l'attaque (1 = Script kiddie, 10 = Nation-State Zero Day indétectable).
-        2. Event Frequency (EF) : Probabilité d'attaque sur le secteur BANCAIRE à court terme (1 = Très faible, 10 = Imminente/En cours).
-        3. Business Impact (BI) : Impact financier, systémique et réputationnel (1 = Négligeable, 10 = Faillite/Système paralysé).
+        AVANT de lister le premier incident (si tu en as trouvé), tu DOIS IMPERATIVEMENT évaluer scientifiquement la gravité globale de la journée.
+        1. Threat Capability (TC) : Sophistication (1 = Script kiddie, 10 = Nation-State Zero Day).
+        2. Event Frequency (EF) : Probabilité d'attaque sur le secteur BANCAIRE (1 = Très faible, 10 = Imminente).
+        3. Business Impact (BI) : Impact financier et réputationnel (1 = Négligeable, 10 = Faillite).
         
-        Laisse le code Python faire le calcul mathématique final. Tu dois juste fournir les notes dans CE FORMAT EXACT pour la première ligne de ton rapport :
+        Tu dois juste fournir les notes dans CE FORMAT EXACT pour la première ligne de ton rapport :
         *(Auditable Metrics - Threat Capability: X/10 | Event Frequency: Y/10 | Business Impact: Z/10)*
         
         Ensuite, saute une ligne et commence à lister les incidents.
+
         
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
@@ -186,7 +186,7 @@ def generate_executive_summary(articles, covered_incidents=None):
                     model=model_name,
                     contents=prompt,
                     config=types.GenerateContentConfig(
-                        temperature=0.2,
+                        temperature=0.1,
                     )
                 )
                 return response.text
@@ -224,11 +224,10 @@ Voici les articles bruts d'origine (pour vérifier les dates et les faits) :
 
     prompt += """
 TA MISSION :
-1. SUPPRESSION DES HORS-SUJETS : Supprime IMPITOYABLEMENT toute section entière du brouillon qui relate un événement purement politique, gouvernemental, ou régulatoire (ex: "Executive Order", "New Bill", etc.) à moins qu'il n'y ait une vraie cyberattaque ou une vulnérabilité critique d'infrastructure mentionnée.
-2. VÉRIFICATION DES DATES : L'IA précédente a tendance à inventer ou forcer des dates récentes pour de vieux articles remontés dans le flux RSS. Vérifie dans les articles bruts si la date de l'incident est réellement récente (moins de 7 jours).
-  - Si l'incident date de plus d'une semaine (ex: un vieil article d'il y a un an), supprime toute la section.
-  - Si la date de l'incident dans le rapport ne correspond pas à la date réelle de l'article, corrige la date dans le rapport (Timeline: Event: ...).
-3. Rends UNIQUEMENT le rapport Markdown final corrigé. Conserve le formatage exact (titres ##, puces, structure). Ne rajoute pas d'intro ou de conclusion générale de ta part, donne juste le rapport final (les balises Markdown sont autorisées).
+1. SUPPRESSION DES HALLUCINATIONS : Traque les CVE inventées ou les entreprises fictives. Si le brouillon parle d'une attaque qui n'existe ABSOLUMENT PAS dans les articles bruts, supprime toute la section.
+2. SUPPRESSION DES FAUX POSITIFS : Une panne informatique (Outage) sans preuve d'attaque n'est PAS un incident cyber. Un tutoriel de sécurité n'est PAS une campagne d'attaque active. Si le brouillon a extrapolé, supprime la section.
+3. VÉRIFICATION DES DATES : Distingue la date de l'incident (Breach) de la date d'arrestation/découverte. Si le Breach date de plusieurs mois ou années (ex: 2023), c'est une vieille affaire, supprime la section.
+4. Rends UNIQUEMENT le rapport Markdown final corrigé. Si TOUTES les sections sont supprimées car elles étaient fausses, retourne UNIQUEMENT le mot "SKIPPED". Ne rajoute pas d'intro ou de conclusion.
 """
 
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
@@ -398,6 +397,10 @@ def main():
     print("Analyse par l'IA et redaction de l'Executive Summary (Brouillon)...")
     draft_report = generate_executive_summary(articles, covered_incidents=covered)
     
+    if "SKIPPED" in draft_report.strip().upper():
+        print("L'IA n'a trouvé aucun incident majeur qualifié aujourd'hui. Fin du script.")
+        return
+
     # Extraire le Threat Score du BROUILLON (avant l'audit, car l'auditeur peut reformater cette ligne)
     print("Calcul mathematique et deterministe du score de risque final...")
     match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', draft_report, re.IGNORECASE)
@@ -414,8 +417,13 @@ def main():
     
     final_report = verify_and_correct_report(draft_report, articles)
     
+    if "SKIPPED" in final_report.strip().upper():
+        print("L'Auditeur IA a invalidé l'intégralité du brouillon (hors-sujet ou hallucinations). Aucun rapport ne sera publié.")
+        return
+
     # Injecter le score calculé en tête du rapport final audité
     final_report = score_line + final_report
+
     
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
