@@ -805,5 +805,38 @@
             "CTRL-NOUVEAU-2002",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260817-F2E5AB": {
+        "date": "2026-08-17",
+        "title": "Major Fortune 500 Enterprise Data Theft Campaign Exploits Azure Cloud Storage (August 17, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4411",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-NOUVEAU-8304",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260817-908D0C": {
+        "date": "2026-08-17",
+        "title": "Anthropic Confirms Widespread Outage Affecting Claude AI Platform and Integrated Enterprise Services (August 17, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7034",
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-8302",
+            "CTRL-NOUVEAU-7035",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260817-E9FE30": {
+        "date": "2026-08-17",
+        "title": "Windows 11 Firmware Security Defense Bypass Discovered by Academic Researchers (August 17, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-6011",
+            "CTRL-SIM-300"
+        ]
     }
 }

@@ -1144,5 +1144,75 @@
             "Availability": "High"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4411": {
+        "name": "Cloud Security Posture Management (CSPM) & Storage Endpoint Governance",
+        "prerequisites": [
+            "Cloud API access configuration",
+            "CSPM scanner deployment",
+            "Baseline storage security policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8304": {
+        "name": "Critical Third-Party & Vendor Isolation Review",
+        "prerequisites": [
+            "Vendor risk management framework",
+            "Cross-tenant access inventory",
+            "Third-party audit playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7034": {
+        "name": "AI Vendor SLA & Redundancy Governance",
+        "prerequisites": [
+            "Vendor contract mapping",
+            "SLA threshold definitions",
+            "Operational risk policy"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Medium",
+            "Availability": "High"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-7035": {
+        "name": "Multi-Model AI Dynamic Fallback & Failover Architecture",
+        "prerequisites": [
+            "Unified API routing layer",
+            "Secondary LLM provider credentials",
+            "Model parity benchmarking"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Medium",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6011": {
+        "name": "Endpoint Hardware Configuration & Firmware Fleet Audit",
+        "prerequisites": [
+            "Hardware telemetry agent",
+            "OEM advisories tracking pipeline",
+            "Centralized asset management DB"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
