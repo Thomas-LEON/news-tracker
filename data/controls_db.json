@@ -1214,5 +1214,173 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1101": {
+        "name": "AI Agent Execution Kill-Switch Protocol",
+        "prerequisites": [
+            "Agent orchestration framework",
+            "Real-time monitoring API",
+            "Incident response playbook integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1102": {
+        "name": "Hypervisor & Management Console Log Monitoring",
+        "prerequisites": [
+            "Centralized SIEM integration",
+            "vCenter audit logging enabled",
+            "Directory traversal detection rules"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1103": {
+        "name": "Staging Environment Patch Compatibility Testing",
+        "prerequisites": [
+            "Identical staging environment",
+            "Automated testing scripts",
+            "Rollback procedures"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-1104": {
+        "name": "Multi-Vendor Defense-in-Depth Security Monitoring",
+        "prerequisites": [
+            "Secondary security agent deployment",
+            "Network-level IDS/IPS",
+            "Unified SOC dashboard"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1105": {
+        "name": "Active Directory Certificate Services (AD CS) Template Auditing",
+        "prerequisites": [
+            "AD CS administrative access",
+            "Automated template scanning tools",
+            "Privilege escalation risk knowledge"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1106": {
+        "name": "Tier 0 Identity Infrastructure Isolation & Hardening",
+        "prerequisites": [
+            "Active Directory administrative access",
+            "Network segmentation",
+            "Dedicated administrative workstations (PAWs)"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1107": {
+        "name": "Active Directory Certificate Enrollment Monitoring",
+        "prerequisites": [
+            "SIEM integration with Domain Controllers",
+            "Audit policy for certificate services enabled",
+            "Alerting rules for administrative EKUs"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1108": {
+        "name": "PKI Certificate Lifecycle & Rapid Revocation Management",
+        "prerequisites": [
+            "Enterprise CA administration",
+            "CRL/OCSP infrastructure",
+            "Automated certificate rotation scripts"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1109": {
+        "name": "CI/CD Workflow Code Review & Input Sanitization Policies",
+        "prerequisites": [
+            "Mandatory pull request reviews",
+            "Static analysis tools for workflows",
+            "Developer security training"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1110": {
+        "name": "CI/CD Runner Execution & Network Telemetry Monitoring",
+        "prerequisites": [
+            "Runner host monitoring agents",
+            "Network egress logging",
+            "SIEM integration for runner logs"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1111": {
+        "name": "Ephemeral & Isolated CI/CD Runner Environments",
+        "prerequisites": [
+            "Container orchestration (Kubernetes/Docker)",
+            "Auto-destruction scripts",
+            "Strict network egress filtering"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1112": {
+        "name": "GraphQL API Query & Mutation Monitoring",
+        "prerequisites": [
+            "WAF with GraphQL parsing capabilities",
+            "API gateway logging",
+            "Anomalous query detection rules"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
     }
 }

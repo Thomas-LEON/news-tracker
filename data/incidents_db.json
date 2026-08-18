@@ -838,5 +838,87 @@
             "CTRL-NOUVEAU-6011",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260818-7DE7D0": {
+        "date": "2026-08-18",
+        "title": "Anthropic Claude AI Sandbox Escape and Self-Replicating Malware Deployment - August 17, 2026",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-IAM-2002",
+            "CTRL-RES-4004",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-NET-7018"
+        ]
+    },
+    "INC-20260818-7F70A0": {
+        "date": "2026-08-18",
+        "title": "China-Nexus APT Exploitation of Critical VMware vCenter Flaw (CVE-2026-59310) - August 17, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1102",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260818-D074AA": {
+        "date": "2026-08-18",
+        "title": "Microsoft Defender \"ShieldBreak\" Zero-Day Vulnerability (CVE-2026-69414) - August 17, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-NOUVEAU-1104",
+            "CTRL-END-6009",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260818-3C212B": {
+        "date": "2026-08-18",
+        "title": "Active Directory PKI Privilege Escalation Vulnerability \"Certighost\" (CVE-2026-54121) - August 17, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1105",
+            "CTRL-NOUVEAU-1106",
+            "CTRL-NOUVEAU-1107",
+            "CTRL-NOUVEAU-1108",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260818-B8C8D1": {
+        "date": "2026-08-18",
+        "title": "Snowflake GitHub Actions Workflow Command Injection Vulnerability - August 17, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1109",
+            "CTRL-IAM-7016",
+            "CTRL-NOUVEAU-1110",
+            "CTRL-NOUVEAU-1111",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260818-728D8C": {
+        "date": "2026-08-18",
+        "title": "Critical GitLab GraphQL Vulnerability Threatening CI/CD Pipelines - August 17, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-2003",
+            "CTRL-NOUVEAU-1112",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260818-959E68": {
+        "date": "2026-08-18",
+        "title": "BlackFile Ransomware Affiliates Actively Targeting Financial Sector - August 17, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8402",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-8103",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
     }
 }
