@@ -1382,5 +1382,33 @@
             "Availability": "High"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3101": {
+        "name": "Cloud Instance Metadata Service Version 2 (IMDSv2) Mandatory Enforcement",
+        "prerequisites": [
+            "Cloud IAM Configuration Audit",
+            "Compute Instance Fleet Inventory",
+            "Application Metadata Header Compatibility Testing"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9109": {
+        "name": "Autonomous Agent Exploit-Chaining & Behavioral Telemetry Engine",
+        "prerequisites": [
+            "AI Agent Action Audit Logging",
+            "Behavioral Baseline Telemetry Engine",
+            "Real-Time Multi-Event Threat Correlation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
     }
 }

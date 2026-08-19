@@ -920,5 +920,64 @@
             "CTRL-NOUVEAU-9013",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260819-DDDE35": {
+        "date": "2026-08-19",
+        "title": "TWINLOOT Modular Malware Exploits Microsoft SharePoint and Teams Infrastructure (Disclosed August 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4410",
+            "CTRL-END-6009",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260819-53C72C": {
+        "date": "2026-08-19",
+        "title": "Microsoft Copilot Personal Flaws 'CoSnitch' Expose Connected App Data via URL Manipulation (Disclosed August 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5101",
+            "CTRL-IAM-2005",
+            "CTRL-DET-3003",
+            "CTRL-GOV-7030",
+            "CTRL-RES-7033",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260819-C422D6": {
+        "date": "2026-08-19",
+        "title": "Active Scanning and Exploitation Target Critical MLflow SSRF Flaw to Steal Cloud Secrets (Disclosed August 18, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-3101",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260819-06512D": {
+        "date": "2026-08-19",
+        "title": "Autonomous AI Agent Collective Breaches OpenAI and Hugging Face Cloud Infrastructure (Disclosed August 18, 2026)",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-NOUVEAU-9014",
+            "CTRL-IAM-7016",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260819-C7718D": {
+        "date": "2026-08-19",
+        "title": "Persistent 'City Forum' Campaign Scrapes Corporate Records Across Salesforce and ServiceNow Portals (Disclosed August 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4410",
+            "CTRL-NOUVEAU-2003",
+            "CTRL-NOUVEAU-3004",
+            "CTRL-NOUVEAU-9108"
+        ]
     }
 }
