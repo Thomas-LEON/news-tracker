@@ -46,7 +46,8 @@ def fetch_recent_news():
                             "title": entry.title,
                             "link": entry.link,
                             "summary": entry.get('summary', ''),
-                            "source": feed.feed.get('title', feed_url)
+                            "source": feed.feed.get('title', feed_url),
+                            "published": published.strftime("%Y-%m-%d %H:%M:%S UTC")
                         })
         except Exception as e:
             print(f"Erreur lors de la lecture du flux {feed_url}: {e}")
@@ -98,7 +99,7 @@ def generate_executive_summary(articles, covered_incidents=None):
         1. ZERO HALLUCINATION : Ne génère AUCUN rapport sans avoir identifié une source légitime, une CVE réelle ou un rapport technique existant dans le texte fourni.
         2. ZERO EXTRAPOLATION : Ne transforme JAMAIS un simple tutoriel de sécurité ou un article de conseil en une campagne d'attaque active. Contente-toi des faits stricts.
         3. IT OUTAGES != CYBER THREAT : Une panne de service (Outage) n'est PAS un incident de sécurité, sauf si elle est explicitement attribuée à une attaque (ex: DDoS, Ransomware). Sinon, IGNORE.
-        4. ACTUALITES ANCIENNES : Distingue toujours la date de la faille initiale (Breach) de la date d'annonce/arrestation. Si la faille date de plusieurs mois/années, IGNORE.
+        4. ACTUALITES ANCIENNES & NATURE DE L'INFO : Distingue toujours la date de la faille initiale (Breach) de la date d'annonce/arrestation. Si la faille date de plusieurs mois/années, IGNORE. Ne transforme pas un "Post-mortem" en une nouvelle attaque. Ne présume jamais que l'événement s'est produit aujourd'hui. Si la date exacte de l'incident n'est pas mentionnée dans le texte, indique 'Inconnue' plutôt que d'utiliser la date du jour.
         5. Ransomwares "classiques" touchant des PME/hôpitaux, ou fuites grand public (jeux vidéo, influenceurs).
 
         --- EVALUATION DU SCORE DE GRAVITE GLOBAL (METHODOLOGIE CRQ / FAIR) ---
@@ -119,7 +120,8 @@ def generate_executive_summary(articles, covered_incidents=None):
 
         **Incident Metadata:**
         - **Primary Category:** [Un seul mot clé principal: AI, CLOUD, RANSOMWARE, SUPPLY CHAIN, DATA LEAK, etc.]
-        - **Timeline:** [Event: date la plus précise de l'évenement | Disclosed: Date la plus précise de l'anonce de l'évenement]
+        - **News Nature:** [Nouvelle attaque / Post-mortem / Mise à jour de patch / Arrestation]
+        - **Timeline:** [Incident Date: (Quand l'attaque a eu lieu, ex: Juillet 2026 ou Inconnue) | Source Publication Date: (Date de l'article)]
         - **Impacted Country:** [Pays impacte, ou "Global" / "Unknown"]
         - **Geolocation / Cloud Region:** [Localite precise ou region Cloud impactee, si connue]
         - **List of Companies Impacted:** [Entreprises touchees, si connues]
@@ -169,7 +171,7 @@ def generate_executive_summary(articles, covered_incidents=None):
         for i, art in enumerate(articles):
             soup = BeautifulSoup(art['summary'], 'html.parser')
             clean_summary = soup.get_text()[:400]
-            prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Extrait: {clean_summary}\n"
+            prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Date de publication: {art.get('published', 'Inconnue')}\n  Extrait: {clean_summary}\n"
             
         if covered_incidents:
             prompt += "\n\nCRITERE D'EXCLUSION ABSOLU (DOUBLONS DEJA TRAITES) :\n"
