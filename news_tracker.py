@@ -103,10 +103,11 @@ def generate_executive_summary(articles, covered_incidents=None):
         5. Ransomwares "classiques" touchant des PME/hôpitaux, ou fuites grand public (jeux vidéo, influenceurs).
 
         --- EVALUATION DU SCORE DE GRAVITE GLOBAL (METHODOLOGIE CRQ / FAIR) ---
-        AVANT de lister le premier incident (si tu en as trouvé), tu DOIS IMPERATIVEMENT évaluer scientifiquement la gravité globale de la journée.
-        1. Threat Capability (TC) : Sophistication (1 = Script kiddie, 10 = Nation-State Zero Day).
-        2. Event Frequency (EF) : Probabilité d'attaque sur le secteur BANCAIRE (1 = Très faible, 10 = Imminente).
-        3. Business Impact (BI) : Impact financier et réputationnel (1 = Négligeable, 10 = Faillite).
+        AVANT de lister le premier incident (si tu en as trouvé), tu DOIS IMPERATIVEMENT évaluer scientifiquement la gravité globale de la journée (basé sur l'incident le plus critique).
+        RÉFÉRENTIEL DE NOTATION STRICT (N'utilise pas la note de 7 ou 8 par défaut ! Un jour normal avec des menaces basiques DOIT être noté entre 2 et 4. Réserve les notes de 8 à 10 UNIQUEMENT pour les crises systémiques) :
+        1. Threat Capability (TC) : 1-3 = Vulnérabilité connue et patchée / Attaque basique | 4-7 = Attaque sophistiquée nécessitant une action humaine | 8-10 = Zero-Day critique en cours d'exploitation, Zero-click, Nation-State.
+        2. Event Frequency (EF) : 1-3 = Ne cible pas du tout le secteur bancaire/IA | 4-7 = Campagne mondiale opportuniste (la banque peut être touchée) | 8-10 = Le secteur financier ou l'infrastructure Cloud/IA de la banque est la cible directe.
+        3. Business Impact (BI) : 1-3 = Impact négligeable, perturbation d'un service mineur | 4-7 = Indisponibilité prolongée, vol de données non-critiques | 8-10 = Risque systémique mondial, vol massif de données financières, faillite.
         
         Tu dois juste fournir les notes dans CE FORMAT EXACT pour la première ligne de ton rapport :
         *(Auditable Metrics - Threat Capability: X/10 | Event Frequency: Y/10 | Business Impact: Z/10)*
