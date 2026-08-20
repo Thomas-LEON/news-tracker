@@ -979,5 +979,71 @@
             "CTRL-NOUVEAU-3004",
             "CTRL-NOUVEAU-9108"
         ]
+    },
+    "INC-20260820-212EFB": {
+        "date": "2026-08-20",
+        "title": "Cl0p Ransomware Group Extorts Major Banking Supplier Fiserv and Enterprise Clients via PTC Windchill Vulnerability (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1113",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-8304",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260820-D8DED6": {
+        "date": "2026-08-20",
+        "title": "Academic Researchers Demonstrate High-Speed Spectre Side-Channel Attack on Cloudflare Workers Infrastructure (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1114",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-1116",
+            "CTRL-NOUVEAU-1050",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260820-BC43F8": {
+        "date": "2026-08-20",
+        "title": "US Agencies Issue Warning Over AI-Driven Cyber Attacks Targeting Siemens S7 Critical Infrastructure PLCs (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1117",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1118",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-NOUVEAU-1119"
+        ]
+    },
+    "INC-20260820-231000": {
+        "date": "2026-08-20",
+        "title": "Researchers Uncover \"Zombie Card\" Flaw Allowing Unauthorized Transactions on Expired Contactless Credit Cards (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1120",
+            "CTRL-NOUVEAU-1121",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-4001",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260820-66B487": {
+        "date": "2026-08-20",
+        "title": "Active Exploitation of Critical Microsoft Windows IKE Extension RCE Vulnerability Prompts CISA KEV Addition (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-DET-7042",
+            "CTRL-RES-7043",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260820-D3EF8C": {
+        "date": "2026-08-20",
+        "title": "Sakura Internet Data Breach Exposes Sales Management System and 1.36 Million Customer Records (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8101",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-8401",
+            "CTRL-NOUVEAU-8103",
+            "CTRL-NOUVEAU-8402"
+        ]
     }
 }

@@ -1410,5 +1410,131 @@
             "Availability": "Medium"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1113": {
+        "name": "Vendor SBOM & Vulnerability Disclosure Oversight Governance",
+        "prerequisites": [
+            "Vendor Risk Assessment Policy",
+            "Software Asset Management Inventory",
+            "Automated Vulnerability Scanning Integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1114": {
+        "name": "Hardware-Level Dedicated Physical Core Isolation",
+        "prerequisites": [
+            "Bare-Metal Compute Infrastructure",
+            "Hypervisor Isolation Policy Framework",
+            "Hardware Topology & Core Mapping Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1115": {
+        "name": "Short-Lived Session Tokens & Dynamic Key Rotation",
+        "prerequisites": [
+            "Centralized Identity Provider Integration",
+            "Key Management Service (KMS)",
+            "API Gateway Auth Token Refactoring"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1116": {
+        "name": "Microarchitectural & High-Precision Timer Telemetry",
+        "prerequisites": [
+            "Low-Level CPU Performance Counter Monitoring",
+            "EDR Behavioral Detection Agent",
+            "Isolate Sandbox Runtime Controls"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Low",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-1117": {
+        "name": "OT/IT Network Air-Gapping & Industrial Microsegmentation",
+        "prerequisites": [
+            "Network Architecture Baseline Mapping",
+            "Industrial Firewall Infrastructure",
+            "OT Asset Inventory"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "Critical"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1118": {
+        "name": "Industrial Protocol Deep Packet Inspection & Telemetry",
+        "prerequisites": [
+            "SPAN/TAP Network Port Mirroring",
+            "Industrial NIDS Infrastructure",
+            "S7Comm Protocol Parser Deployment"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1119": {
+        "name": "Digital Twin ICS Security Simulation Testbed",
+        "prerequisites": [
+            "PLC Logic Configuration Backups",
+            "Virtual Industrial SCADA Modeling Environment",
+            "Threat Intelligence Script Feeds"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-1120": {
+        "name": "Real-Time EMV Cryptogram & Expiration Authorization Rules",
+        "prerequisites": [
+            "Core Payment Gateway Integration",
+            "Hardware Security Module (HSM) Updates",
+            "ISO 8583 Message Validation Rules"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1121": {
+        "name": "Instant Card Lifecycle & NFC Token Deactivation API",
+        "prerequisites": [
+            "Mobile Banking API Integration",
+            "Token Service Provider (TSP) Connection",
+            "Real-Time Lifecycle Event Bus"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }
