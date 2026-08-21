@@ -1045,5 +1045,115 @@
             "CTRL-NOUVEAU-8103",
             "CTRL-NOUVEAU-8402"
         ]
+    },
+    "INC-20260821-E7E364": {
+        "date": "2026-08-21",
+        "title": "Microsoft Entra ID Remote Code Execution Vulnerability (CVE-2026-69836) Exploited in the Wild on August 20, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3482",
+            "CTRL-IAM-500",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-60A9F1": {
+        "date": "2026-08-21",
+        "title": "Citrix NetScaler ADC and Gateway Critical Authentication Bypass Vulnerability Disclosed on August 20, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-RES-7043",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-5FEF4A": {
+        "date": "2026-08-21",
+        "title": "Rust Supply Chain Attack Compromises arrayref, internment, and append-only-vec Crates on August 20, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5291",
+            "CTRL-IAM-500",
+            "CTRL-NET-7018",
+            "CTRL-DEV-5006",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-9DFD50": {
+        "date": "2026-08-21",
+        "title": "Manic Android Malware Targets European and Ukrainian Financial Institutions on August 20, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4001",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-524A4F": {
+        "date": "2026-08-21",
+        "title": "ToxicPanda 2.0 Android Banking Trojan Targets Over 140 Financial Applications on August 20, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7419",
+            "CTRL-NOUVEAU-4004",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-RES-4004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-C5E0EF": {
+        "date": "2026-08-21",
+        "title": "AI Data Intelligence Giant Alation Confirms Cyberattack on August 18, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-3003",
+            "CTRL-NOUVEAU-3004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-AE6505": {
+        "date": "2026-08-21",
+        "title": "JFrog Artifactory Flaws Enabling Software Supply Chain Attacks Disclosed on August 20, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-DEV-5006",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-101FD5": {
+        "date": "2026-08-21",
+        "title": "N-able Passportal Password Manager Bug Exposes Master Keys on August 20, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-6834",
+            "CTRL-DET-7037",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-F4DB42": {
+        "date": "2026-08-21",
+        "title": "xAI Grok Chatbot Vulnerable to Cryptographic Context Injection Attack Disclosed on August 20, 2026",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-5102",
+            "CTRL-NOUVEAU-5101",
+            "CTRL-RES-7033",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260821-016622": {
+        "date": "2026-08-21",
+        "title": "Grandoreiro Banking Trojan Resurfaces with Advanced Evasion Features in Mexico on August 20, 2026",
+        "linked_controls": [
+            "CTRL-DET-400",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-9103",
+            "CTRL-SIM-300"
+        ]
     }
 }

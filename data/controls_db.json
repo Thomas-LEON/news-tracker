@@ -1536,5 +1536,47 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5291": {
+        "name": "Strict Software Dependency Pinning & Lockfile Integrity Verification",
+        "prerequisites": [
+            "Automated CI/CD build pipelines",
+            "Centralized artifact dependency lockfiles",
+            "Cryptographic package integrity hash validation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7419": {
+        "name": "Mobile Runtime Application Self-Protection (RASP) & Anti-Overlay Enforcement",
+        "prerequisites": [
+            "Native mobile application SDK integration",
+            "Device root/jailbreak and hook detection engine",
+            "Real-time overlay and accessibility permission monitoring"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6834": {
+        "name": "Zero-Knowledge Password Vault & Multi-Custodian Cryptographic Architecture",
+        "prerequisites": [
+            "Client-side zero-knowledge encryption implementation",
+            "Multi-party computation (MPC) or split-key governance",
+            "Privileged access management (PAM) policy integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
     }
 }
