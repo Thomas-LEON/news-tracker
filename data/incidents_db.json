@@ -1155,5 +1155,90 @@
             "CTRL-NOUVEAU-9103",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260822-C30969": {
+        "date": "2026-08-22",
+        "title": "Private Equity Firm Apollo Discloses Cloud Data Breach Amid Broader Financial Sector Campaign (July 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-2001",
+            "CTRL-IAM-500",
+            "CTRL-DET-7037",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260822-4B09F7": {
+        "date": "2026-08-22",
+        "title": "Over 9,300 Active Corporate AWS Access Keys Exposed in Public Repositories (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1115",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-9014",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260822-31466D": {
+        "date": "2026-08-22",
+        "title": "Unauthenticated Code Injection Vulnerability in GitLab (CVE-2026-19478) Under Active Exploitation (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260822-8AA05F": {
+        "date": "2026-08-22",
+        "title": "Cisco Patches Nine Critical and High Flaws in Crosswork and Secure Workload (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-RES-7043",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260822-E0902D": {
+        "date": "2026-08-22",
+        "title": "Malicious npm Packages Deploy RedC2 4.0 Linux Backdoor via AI-Powered C2 (August 2026)",
+        "linked_controls": [
+            "CTRL-DEV-5006",
+            "CTRL-NOUVEAU-5291",
+            "CTRL-IAM-7026",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-1111"
+        ]
+    },
+    "INC-20260822-BD9304": {
+        "date": "2026-08-22",
+        "title": "Weaponization of Microsoft Defender Driver BTR.sys for Security Evasion (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9016",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-6811",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260822-604F81": {
+        "date": "2026-08-22",
+        "title": "Microsoft Teams Phishing Campaigns Deploy SynkLoader Malware (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4410",
+            "CTRL-IAM-7036",
+            "CTRL-NOUVEAU-8403",
+            "CTRL-NOUVEAU-8402",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260822-0DAFB7": {
+        "date": "2026-08-22",
+        "title": "CISA Orders Emergency Patching of TrueConf Server Vulnerabilities Targeted by Head Mare (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-9103",
+            "CTRL-NOUVEAU-3001"
+        ]
     }
 }

@@ -1578,5 +1578,33 @@
             "Availability": "High"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-6811": {
+        "name": "Dual-Custody Endpoint Policy Change Authorization",
+        "prerequisites": [
+            "Privileged Access Management (PAM)",
+            "Change Management Workflow System",
+            "Endpoint Security Management Console"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8403": {
+        "name": "SaaS Collaboration Chat Threat & Attachment Inspection Engine",
+        "prerequisites": [
+            "SaaS API Integration",
+            "Automated Malware & URL Sandbox",
+            "Tenant Messaging Policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
