@@ -96,10 +96,10 @@ def generate_executive_summary(articles, covered_incidents=None):
         3. Infrastructures critiques : Failles majeures touchant des technos d'entreprise classiques.
         
         CRITERES STRICTS D'EXCLUSION (Ignore IMPERATIVEMENT ces articles, c'est du bruit. DROP-LES) :
-        1. ZERO HALLUCINATION : Ne génère AUCUN rapport sans avoir identifié une source légitime, une CVE réelle ou un rapport technique existant dans le texte fourni.
+        1. ZERO HALLUCINATION : Ne génère rien qui ne soit pas explicitement écrit dans l'article. Ne comble pas les trous.
         2. ZERO EXTRAPOLATION : Ne transforme JAMAIS un simple tutoriel de sécurité ou un article de conseil en une campagne d'attaque active. Contente-toi des faits stricts.
-        3. IT OUTAGES != CYBER THREAT : Une panne de service (Outage) n'est PAS un incident de sécurité, sauf si elle est explicitement attribuée à une attaque (ex: DDoS, Ransomware). Sinon, IGNORE.
-        4. ACTUALITES ANCIENNES & NATURE DE L'INFO : Distingue toujours la date de la faille initiale (Breach) de la date d'annonce/arrestation. Si la faille date de plusieurs mois/années, IGNORE. Ne transforme pas un "Post-mortem" en une nouvelle attaque. Ne présume jamais que l'événement s'est produit aujourd'hui. Si la date exacte de l'incident n'est pas mentionnée dans le texte, indique 'Inconnue' plutôt que d'utiliser la date du jour.
+        3. IT OUTAGES != CYBER THREAT : Une panne de service (Outage) n'est PAS un incident de sécurité, sauf si elle est explicitement attribuée à une attaque (ex: DDoS, Ransomware).
+        4. ACTUALITES ANCIENNES : Si un article parle d'une attaque vieille de plusieurs années SANS nouvel élément, IGNORE. MAIS si c'est une *nouvelle révélation* (Disclosure) d'une ancienne faille (ex: fuite de clés AWS découverte aujourd'hui), tu DOIS la traiter comme un incident pertinent.
         5. Ransomwares "classiques" touchant des PME/hôpitaux, ou fuites grand public (jeux vidéo, influenceurs).
 
         --- EVALUATION DU SCORE DE GRAVITE GLOBAL (METHODOLOGIE CRQ / FAIR) ---
@@ -229,7 +229,7 @@ Voici les articles bruts d'origine (pour vérifier les dates et les faits) :
 TA MISSION :
 1. SUPPRESSION DES HALLUCINATIONS : Traque les CVE inventées ou les entreprises fictives. Si le brouillon parle d'une attaque qui n'existe ABSOLUMENT PAS dans les articles bruts, supprime toute la section.
 2. SUPPRESSION DES FAUX POSITIFS : Une panne informatique (Outage) sans preuve d'attaque n'est PAS un incident cyber. Un tutoriel de sécurité n'est PAS une campagne d'attaque active. Si le brouillon a extrapolé, supprime la section.
-3. VÉRIFICATION DES DATES : Distingue la date de l'incident (Breach) de la date d'arrestation/découverte. Si le Breach date de plusieurs mois ou années (ex: 2023), c'est une vieille affaire, supprime la section.
+3. VÉRIFICATION DES DATES : Ne supprime PAS une section si elle relate la *découverte récente* d'une fuite passée (ex: fuite AWS de 2023 révélée aujourd'hui). Supprime uniquement si l'article est un simple résumé ou rappel d'une vieille affaire sans aucun nouvel élément d'actualité.
 4. Rends UNIQUEMENT le rapport Markdown final corrigé. Si TOUTES les sections sont supprimées car elles étaient fausses, retourne UNIQUEMENT le mot "SKIPPED". Ne rajoute pas d'intro ou de conclusion.
 """
 
