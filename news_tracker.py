@@ -86,7 +86,7 @@ def generate_executive_summary(articles, covered_incidents=None):
     try:
         # Configuration pour le nouveau package google.genai
         # Contournement SSL local (Windows/Zscaler/proxy...) : On utilise httpx_client
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
@@ -238,7 +238,7 @@ TA MISSION :
 
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})
         
         for model_name in models_to_try:
             try:
@@ -330,7 +330,7 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
 """
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})
         
         raw_output = None
         for model_name in models_to_try:
