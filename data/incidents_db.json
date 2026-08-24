@@ -1240,5 +1240,16 @@
             "CTRL-NOUVEAU-9103",
             "CTRL-NOUVEAU-3001"
         ]
+    },
+    "INC-20260824-7AE17D": {
+        "date": "2026-08-24",
+        "title": "Chameleon SEO Poisoning Campaign Exploits Cloaked Banking Websites Disclosed by Fortra (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9430",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-8404",
+            "CTRL-NOUVEAU-4001",
+            "CTRL-SIM-300"
+        ]
     }
 }

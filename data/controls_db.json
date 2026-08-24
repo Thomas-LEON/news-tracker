@@ -1606,5 +1606,33 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9430": {
+        "name": "Proactive Brand Protection & Domain Takedown Infrastructure",
+        "prerequisites": [
+            "Domain registrar API access",
+            "Trademark registration mapping",
+            "Automated web scraping feeds"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8404": {
+        "name": "Anti-Cloaking Web Threat Intelligence & Proxy Inspection Engine",
+        "prerequisites": [
+            "Residential proxy network integration",
+            "Dynamic headless browser execution engine",
+            "Threat Intelligence Platform (TIP) connectivity"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }
