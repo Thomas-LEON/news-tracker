@@ -8,6 +8,9 @@ from google import genai
 from google.genai import types
 import httpx
 from bs4 import BeautifulSoup
+import socket
+socket.setdefaulttimeout(15.0)
+
 # Remplacez "VOTRE_CLE_API" par votre véritable clé API Google Gemini (AI Studio).
 # Il est recommandé de la définir dans les variables d'environnement Windows.
 API_KEY = os.environ.get("GEMINI_API_KEY", "VOTRE_CLE_API")
@@ -83,7 +86,7 @@ def generate_executive_summary(articles, covered_incidents=None):
     try:
         # Configuration pour le nouveau package google.genai
         # Contournement SSL local (Windows/Zscaler/proxy...) : On utilise httpx_client
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})
         
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
@@ -235,7 +238,7 @@ TA MISSION :
 
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})
         
         for model_name in models_to_try:
             try:
@@ -327,7 +330,7 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
 """
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False)})
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})
         
         raw_output = None
         for model_name in models_to_try:
