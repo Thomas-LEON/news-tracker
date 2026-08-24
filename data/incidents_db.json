@@ -1251,5 +1251,16 @@
             "CTRL-NOUVEAU-4001",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260824-FCB10D": {
+        "date": "2026-08-24",
+        "title": "Fortra Discovers Chameleon SEO Poisoning Campaign Targeting Banking Sector (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9430",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-8404",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-4001"
+        ]
     }
 }
