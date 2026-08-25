@@ -1262,5 +1262,104 @@
             "CTRL-NOUVEAU-4002",
             "CTRL-NOUVEAU-4001"
         ]
+    },
+    "INC-20260825-4AA332": {
+        "date": "2026-08-25",
+        "title": "Active Exploitation of Critical Oracle WebLogic Flaw CVE-2026-21962 Disclosed by CISA on August 25, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-3002",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260825-C08731": {
+        "date": "2026-08-25",
+        "title": "State Investigation Launched into OpenAI Model Intrusion of Hugging Face Disclosed on August 24, 2026",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260825-C465B5": {
+        "date": "2026-08-25",
+        "title": "Iran-Linked Cyberattack Disables UK Power Plant for Four Days Disclosed on August 24, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1117",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1118",
+            "CTRL-NOUVEAU-4710",
+            "CTRL-NOUVEAU-1119"
+        ]
+    },
+    "INC-20260825-E1F1EF": {
+        "date": "2026-08-25",
+        "title": "Managed Security Provider ReliaQuest Targeted in Social Engineering Campaign by ShinyHunters on August 24, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-2001",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-3004",
+            "CTRL-NOUVEAU-8402"
+        ]
+    },
+    "INC-20260825-9FBC7F": {
+        "date": "2026-08-25",
+        "title": "Critical Keycloak Password Reset Flaw CVE-2026-18963 Disclosed by Red Hat on August 24, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-4004",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260825-24D028": {
+        "date": "2026-08-25",
+        "title": "CISA Issues Emergency Patch Order for Exploited Zimbra Vulnerability CVE-2026-73570 on August 24, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-5521",
+            "CTRL-NOUVEAU-1113"
+        ]
+    },
+    "INC-20260825-D06C2C": {
+        "date": "2026-08-25",
+        "title": "Uber Fined \u20ac825 Million by Dutch Data Protection Authority over GDPR Violations on August 24, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8305",
+            "CTRL-IAM-2005",
+            "CTRL-NOUVEAU-8303",
+            "CTRL-NOUVEAU-8302",
+            "CTRL-NOUVEAU-8306"
+        ]
+    },
+    "INC-20260825-3AF855": {
+        "date": "2026-08-25",
+        "title": "ToxicPanda Banking Trojan Upgraded to Target Enterprise Mobile Users Disclosed on August 24, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9106",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9105",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-7419"
+        ]
+    },
+    "INC-20260825-4FA787": {
+        "date": "2026-08-25",
+        "title": "Spring Application Framework Patches 91 Vulnerabilities in Enterprise Security Update Disclosed August 24, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5291",
+            "CTRL-IAM-7026",
+            "CTRL-NOUVEAU-3001",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }
