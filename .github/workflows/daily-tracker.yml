@@ -8,6 +8,7 @@ on:
 jobs:
   run-tracker:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write # Nécessaire pour faire le push du rapport généré
 

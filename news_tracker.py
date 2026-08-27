@@ -430,6 +430,17 @@ def main():
     # Injecter le score calculé en tête du rapport final audité
     final_report = score_line + final_report
 
+    # Génération du sommaire (Table of Contents)
+    titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
+    if titles:
+        toc = "**Executive Summary - Incidents:**\n"
+        for idx, title in enumerate(titles, 1):
+            clean_title = title.strip()
+            anchor = re.sub(r'[^a-zA-Z0-9\-]', '', clean_title.lower().replace(' ', '-'))
+            toc += f"{idx}. [{clean_title}](#{anchor})\n"
+        toc += "\n---\n\n"
+        final_report = final_report.replace(score_line, score_line + toc, 1)
+
     
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
