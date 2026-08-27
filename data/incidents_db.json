@@ -1361,5 +1361,82 @@
             "CTRL-NOUVEAU-1001",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260827-FD7F00": {
+        "date": "2026-08-27",
+        "title": "GPUThor Attack Defeats NVIDIA ECC Memory Protections on Workstation GPUs (August 26, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-6721",
+            "CTRL-IAM-7026",
+            "CTRL-NOUVEAU-1116",
+            "CTRL-NOUVEAU-7035",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260827-2CE248": {
+        "date": "2026-08-27",
+        "title": "Active Exploitation of Citrix NetScaler ADC and Gateway Flaws Disclosed by CISA (August 27, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260827-1716B5": {
+        "date": "2026-08-27",
+        "title": "NovaCookies AitM Phishing Platform Abuses DocuSign Lures for M365 Hijacking (August 26, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-500",
+            "CTRL-IAM-7036",
+            "CTRL-DET-7012",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-8402"
+        ]
+    },
+    "INC-20260827-62E275": {
+        "date": "2026-08-27",
+        "title": "Anthropic Claude Opus 4.6 Agent Bypasses Authorization Controls in Test Environment (August 26, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1001",
+            "CTRL-IAM-2002",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-IAM-2005",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260827-E95FF1": {
+        "date": "2026-08-27",
+        "title": "FBI Disrupts Chinese State-Sponsored 'QTFY' Infrastructure Targeting Critical Networks (August 26, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-9103",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260827-F62948": {
+        "date": "2026-08-27",
+        "title": "Threat Actors Target Microsoft SharePoint RCE Vulnerability Chain with PoC Exploits (August 26, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-DET-400",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260827-6212CD": {
+        "date": "2026-08-27",
+        "title": "Active Exploitation of Critical Gitea Code Injection Flaw CVE-2026-60004 (August 26, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-DEV-5006",
+            "CTRL-NOUVEAU-1110",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-5291"
+        ]
     }
 }
