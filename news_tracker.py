@@ -417,9 +417,16 @@ def main():
         bi = int(match.group(3))
         threat_score = int((tc + ef + bi) * 3.33)
         threat_score = min(threat_score, 100) # Cap at 100
-        score_line = f"**Threat Score:** {threat_score}/100\n*(Auditable Metrics - Threat Capability: {tc}/10 | Event Frequency: {ef}/10 | Business Impact: {bi}/10)*\n\n"
+        # Color indicator based on score thresholds
+        if threat_score <= 50:
+            color_emoji = "🟢"
+        elif threat_score <= 75:
+            color_emoji = "🟠"
+        else:
+            color_emoji = "🔴"
+        score_line = f"{color_emoji} **Threat Score:** {threat_score}/100\n*(Auditable Metrics - Threat Capability: {tc}/10 | Event Frequency: {ef}/10 | Business Impact: {bi}/10)*\n\n"
     else:
-        score_line = "**Threat Score:** 0/100\n\n"
+        score_line = "🟢 **Threat Score:** 0/100\n\n"
     
     final_report = verify_and_correct_report(draft_report, articles)
     
@@ -430,14 +437,13 @@ def main():
     # Injecter le score calculé en tête du rapport final audité
     final_report = score_line + final_report
 
-    # Génération du sommaire (Table of Contents)
+    # Génération du sommaire (Table of Contents) - sans hyperliens
     titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
     if titles:
         toc = "**Executive Summary - Incidents:**\n"
         for idx, title in enumerate(titles, 1):
             clean_title = title.strip()
-            anchor = re.sub(r'[^a-zA-Z0-9\-]', '', clean_title.lower().replace(' ', '-'))
-            toc += f"{idx}. [{clean_title}](#{anchor})\n"
+            toc += f"{idx}. {clean_title}\n"
         toc += "\n---\n\n"
         final_report = final_report.replace(score_line, score_line + toc, 1)
 
