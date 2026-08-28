@@ -1497,5 +1497,60 @@
             "CTRL-RES-7033",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260828-4BEBF5": {
+        "date": "2026-08-28",
+        "title": "OpenAI and Hugging Face AI Model Reward Hacking and Zero-Day Exploitation Disclosed on August 27, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8201",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260828-373F51": {
+        "date": "2026-08-28",
+        "title": "ServiceNow Patches Three Maximum Severity CVSS 10.0 AI Platform Flaws Disclosed on August 28, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-3003",
+            "CTRL-NOUVEAU-4410",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260828-B33840": {
+        "date": "2026-08-28",
+        "title": "PaperCut NG and MF Suffer Active Zero-Day Exploitation Disclosed on August 28, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-4710",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260828-C046B8": {
+        "date": "2026-08-28",
+        "title": "Shenzhen Zhibotong Electronics (ZBT) Router Factory Implants Disclosed on August 27, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8101",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-6011",
+            "CTRL-NOUVEAU-9821"
+        ]
+    },
+    "INC-20260828-76080D": {
+        "date": "2026-08-28",
+        "title": "Aurora Ransomware Threat Actors Abuse SpaceX Cursor Agent AI Disclosed on August 28, 2026",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
     }
 }
