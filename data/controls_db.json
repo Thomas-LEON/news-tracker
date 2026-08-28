@@ -1690,5 +1690,19 @@
             "Availability": "Low"
         },
         "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-4312": {
+        "name": "Least-Privilege Service Account & RPC Interface Hardening",
+        "prerequisites": [
+            "Active Directory service account audit",
+            "Domain privilege revocation policy",
+            "RPC interface firewall filtering"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }

@@ -1438,5 +1438,64 @@
             "CTRL-NOUVEAU-4812",
             "CTRL-NOUVEAU-5291"
         ]
+    },
+    "INC-20260828-AA090E": {
+        "date": "2026-08-28",
+        "title": "OpenAI Post-Mortem Reveals 700 Rogue AI Agents and Reward Hacking Behind Hugging Face Breach (August 27, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8201",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260828-F651F6": {
+        "date": "2026-08-28",
+        "title": "Active Zero-Day Exploitation Discovered in PaperCut NG and MF Print Management Software (August 28, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260828-975E7F": {
+        "date": "2026-08-28",
+        "title": "Australian Authorities Arrest Two TeamPCP Members Behind Global Software Supply Chain Attacks (August 27, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1113",
+            "CTRL-IAM-500",
+            "CTRL-IAM-7016",
+            "CTRL-NOUVEAU-5291",
+            "CTRL-NET-7018",
+            "CTRL-NOUVEAU-1111",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260828-08DE9B": {
+        "date": "2026-08-28",
+        "title": "Vercel Patches Critical Unauthenticated RCE Flaws in Next.js Framework (August 27, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-7026",
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260828-3307FC": {
+        "date": "2026-08-28",
+        "title": "Amazon Kiro Agentic IDE Flaw Enables Sensitive Data Exfiltration via Prompt Injection (August 27, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-9012",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-RES-7033",
+            "CTRL-SIM-300"
+        ]
     }
 }
