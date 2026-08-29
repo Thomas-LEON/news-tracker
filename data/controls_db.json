@@ -1718,5 +1718,47 @@
             "Availability": "High"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-5582": {
+        "name": "Protocol-Level Smart Contract Circuit Breakers",
+        "prerequisites": [
+            "Real-time state monitoring",
+            "Automated governance voting",
+            "Pre-defined risk thresholds"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9921": {
+        "name": "Adversarial Fuzzing for EVM State-Transition Logic",
+        "prerequisites": [
+            "Isolated testnet environment",
+            "Fuzzing engine integration",
+            "Logic specification documentation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4489": {
+        "name": "AI Runtime Host System Call Restriction",
+        "prerequisites": [
+            "eBPF kernel instrumentation",
+            "Container security policy",
+            "Agent behavior profiling"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
     }
 }

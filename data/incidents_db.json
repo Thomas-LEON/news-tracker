@@ -1552,5 +1552,24 @@
             "CTRL-NOUVEAU-9013",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260829-420252": {
+        "date": "2026-08-29",
+        "title": "Cosmos EVM Balance-Handling Vulnerability Exploited Across Six Blockchain Networks (August 20\u201325, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-5582",
+            "CTRL-NOUVEAU-9921"
+        ]
+    },
+    "INC-20260829-2E1925": {
+        "date": "2026-08-29",
+        "title": "OpenAI Internal Systems Compromised via Linux Kernel Flaw CVE-2026-53362 (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-4489",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-6721"
+        ]
     }
 }
