@@ -1585,5 +1585,64 @@
             "CTRL-RES-4004",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260831-C6CD12": {
+        "date": "2026-08-31",
+        "title": "Anthropic Claude Session Hijacking via Infostealer Malware (August 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260831-7B4FF2": {
+        "date": "2026-08-31",
+        "title": "China-Linked \"Fire Ant\" Espionage Campaign Hijacking Cisco Routers and TACACS Servers (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-4921",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260831-B755B6": {
+        "date": "2026-08-31",
+        "title": "Russian State Hackers Deploy \"GuardBreaker\" Technique to Bypass AI Malware Analysis (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5310",
+            "CTRL-IAM-7031",
+            "CTRL-NOUVEAU-5311",
+            "CTRL-NOUVEAU-5312",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260831-6477B5": {
+        "date": "2026-08-31",
+        "title": "Critical \"KindaRails2Shell\" Ruby on Rails Vulnerability Actively Exploited (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-4122",
+            "CTRL-NET-200",
+            "CTRL-IAM-7026",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260831-3389B9": {
+        "date": "2026-08-31",
+        "title": "FulcrumSec Extortion Group Breaches Manchester Airports Group, Stealing 86 GB of Data (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-3005",
+            "CTRL-NOUVEAU-3003",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-8104",
+            "CTRL-SIM-300"
+        ]
     }
 }

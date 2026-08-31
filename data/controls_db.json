@@ -1774,5 +1774,103 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4921": {
+        "name": "Immutable Out-of-Band Centralized Log Forwarding",
+        "prerequisites": [
+            "Centralized SIEM platform",
+            "Write-Once-Read-Many (WORM) storage",
+            "Out-of-band network path"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5310": {
+        "name": "AI-Assisted SecOps Governance & Guidelines",
+        "prerequisites": [
+            "SecOps workflow mapping",
+            "AI risk assessment framework",
+            "Analyst training program"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-5311": {
+        "name": "SOAR LLM Refusal & Safety Violation Monitoring",
+        "prerequisites": [
+            "SOAR platform integration",
+            "LLM API response parsing",
+            "Incident response playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5312": {
+        "name": "Traditional Static & Heuristic Malware Sandboxing",
+        "prerequisites": [
+            "Sandbox environment deployment",
+            "Heuristic analysis engine",
+            "Automated file routing pipeline"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4122": {
+        "name": "WAF Path Traversal & File Read Protection",
+        "prerequisites": [
+            "WAF deployment",
+            "Signature update subscription",
+            "Traffic inspection rules"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3005": {
+        "name": "Database Least-Privilege Access Controls",
+        "prerequisites": [
+            "Database access auditing",
+            "Role-Based Access Control (RBAC)",
+            "Application identity verification"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8104": {
+        "name": "Data Extortion Incident Response & Regulatory Notification Playbook",
+        "prerequisites": [
+            "Legal counsel alignment",
+            "GDPR compliance mapping",
+            "Pre-drafted communication templates"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
