@@ -1571,5 +1571,19 @@
             "CTRL-DET-400",
             "CTRL-NOUVEAU-6721"
         ]
+    },
+    "INC-20260831-4672FE": {
+        "date": "2026-08-31",
+        "title": "Anthropic Warns of Infostealer Malware Hijacking Claude User Sessions (August 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-DET-7037",
+            "CTRL-DET-7012",
+            "CTRL-DET-400",
+            "CTRL-RES-4004",
+            "CTRL-SIM-300"
+        ]
     }
 }

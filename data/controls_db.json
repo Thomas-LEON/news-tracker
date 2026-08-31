@@ -1760,5 +1760,19 @@
             "Availability": "Medium"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9831": {
+        "name": "Device-Bound Session Credentials & Cryptographic Token Binding",
+        "prerequisites": [
+            "TPM 2.0 or Secure Enclave hardware availability on endpoints",
+            "IdP support for Device Bound Session Credentials (DBSC)",
+            "Managed browser deployment across enterprise endpoints"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }
