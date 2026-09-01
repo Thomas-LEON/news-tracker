@@ -1644,5 +1644,70 @@
             "CTRL-NOUVEAU-8104",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260901-E6D12F": {
+        "date": "2026-09-01",
+        "title": "ServiceNow Patches Three Critical Code Injection Flaws (August 31, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-9017",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260901-69878B": {
+        "date": "2026-09-01",
+        "title": "PaperCut NG and MF Zero-Days Exploited in Active Data Theft Attacks (August 27 \u2013 September 1, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-END-6009",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-4B8C5B": {
+        "date": "2026-09-01",
+        "title": "Aurora Ransomware Actors Leverage SpaceX's Cursor AI in Enterprise Attacks (August 31, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-IAM-7031",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-641AF0": {
+        "date": "2026-09-01",
+        "title": "Threat Actors Impersonate AI Crawlers (OpenAI, Anthropic, Google) for Reconnaissance (August 31, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8404",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-8405",
+            "CTRL-DET-7042",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-AF2053": {
+        "date": "2026-09-01",
+        "title": "McKesson Discloses Major Healthcare Supply Chain Breach Claimed by ShinyHunters (August 25\u201331, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-4710",
+            "CTRL-NOUVEAU-8103"
+        ]
+    },
+    "INC-20260901-9E9E8C": {
+        "date": "2026-09-01",
+        "title": "Tectonic DeFi Protocol Exploited for $74 Million Forcing Cronos Blockchain Pause (August 31, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5583",
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-5582",
+            "CTRL-NOUVEAU-9921"
+        ]
     }
 }

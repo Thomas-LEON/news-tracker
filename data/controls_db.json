@@ -1872,5 +1872,47 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9017": {
+        "name": "ITSM Configuration & Operational Table Rollback",
+        "prerequisites": [
+            "Automated DB snapshot engine",
+            "Integrity verification pipeline",
+            "Rollback automation playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8405": {
+        "name": "AI Crawler & Search Bot IP Verification Protocol",
+        "prerequisites": [
+            "Official crawler IP feed ingestion",
+            "Reverse proxy verification module",
+            "Real-time IP matching engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5583": {
+        "name": "Multi-Oracle Price Feed & Decentralized Oracle Consensus",
+        "prerequisites": [
+            "Multi-source oracle API integration",
+            "Dynamic price deviation thresholding",
+            "Automated circuit breaker deployment"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
     }
 }
