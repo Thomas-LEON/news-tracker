@@ -1709,5 +1709,85 @@
             "CTRL-NOUVEAU-5582",
             "CTRL-NOUVEAU-9921"
         ]
+    },
+    "INC-20260901-5F471A": {
+        "date": "2026-09-01",
+        "title": "Attackers Steal METR API Key and Consume $600,000 in AI Credits (September 2026)",
+        "linked_controls": [
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-DET-7022",
+            "CTRL-NOUVEAU-5421",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-274CE7": {
+        "date": "2026-09-01",
+        "title": "Exploitation of Critical JFrog Artifactory Authentication Bypass CVE-2026-82329 in the Wild (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DEV-5006",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-455E67": {
+        "date": "2026-09-01",
+        "title": "Active Exploitation of Chained PaperCut Zero-Day Vulnerabilities CVE-2026-82078 and CVE-2026-81578 (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-END-6009",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-A8F4EA": {
+        "date": "2026-09-01",
+        "title": "ServiceNow Patches Critical Code Injection Vulnerabilities (August 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-3004",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260901-7AC6F3": {
+        "date": "2026-09-01",
+        "title": "Aurora Ransomware Operators Weaponize SpaceX Cursor AI Coding Assistant (August 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-9012",
+            "CTRL-NOUVEAU-4489",
+            "CTRL-DET-400",
+            "CTRL-RES-7038",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-58D3A7": {
+        "date": "2026-09-01",
+        "title": "Threat Actors Impersonate Major AI Crawlers to Harvest Enterprise Credentials (August 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8405",
+            "CTRL-NOUVEAU-4122",
+            "CTRL-NOUVEAU-9014",
+            "CTRL-NOUVEAU-8404",
+            "CTRL-NOUVEAU-4411",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260901-D0EBD8": {
+        "date": "2026-09-01",
+        "title": "Five Individuals Plead Guilty to US ATM Jackpotting Attacks Using Malware (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7701",
+            "CTRL-NOUVEAU-7702",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-7703",
+            "CTRL-SIM-300"
+        ]
     }
 }

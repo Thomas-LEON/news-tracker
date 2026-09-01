@@ -1914,5 +1914,61 @@
             "Availability": "High"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-5421": {
+        "name": "Dual-Authorization API Key Provisioning & High-Quota Governance",
+        "prerequisites": [
+            "Centralized API Gateway",
+            "Multi-factor authentication infrastructure",
+            "Role-based access controls"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7701": {
+        "name": "ATM Enclosure Physical Tamper Detection & Intrusion Sensors",
+        "prerequisites": [
+            "Physical intrusion sensor hardware",
+            "Centralized alarm monitoring integration",
+            "Hardware fleet inventory"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7702": {
+        "name": "Host-to-Dispenser Cryptographic Bus & XFS Security Protocol",
+        "prerequisites": [
+            "Hardware Security Module (HSM) deployment",
+            "Encrypted dispenser firmware",
+            "Cryptographic key management"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-7703": {
+        "name": "Automated ATM Dispenser Shutdown on Enclosure Violation",
+        "prerequisites": [
+            "Real-time hardware signal bus",
+            "Fail-safe dispenser firmware",
+            "SOC alerting pipeline"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "High"
     }
 }
