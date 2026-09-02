@@ -1998,5 +1998,33 @@
             "Availability": "Critical"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5821": {
+        "name": "Client-Side Banking Memory Hooking & Application Integrity Protection",
+        "prerequisites": [
+            "Runtime Application Self-Protection (RASP) SDK integration",
+            "Code obfuscation & anti-tamper build pipeline",
+            "Binary integrity verification service"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6319": {
+        "name": "Synthetic Identity & Stolen Document Monitoring Engine",
+        "prerequisites": [
+            "Dark web threat intelligence feed",
+            "Identity verification API integration",
+            "Fraud analytics platform"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
     }
 }

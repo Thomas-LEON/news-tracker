@@ -1848,5 +1848,75 @@
             "CTRL-NOUVEAU-1001",
             "CTRL-NOUVEAU-3001"
         ]
+    },
+    "INC-20260902-FC2F6F": {
+        "date": "2026-09-02",
+        "title": "Incident 1: Active Exploitation of Langflow RCE (CVE-2026-0768) to Steal AWS and OpenAI Credentials (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9019",
+            "CTRL-IAM-7011",
+            "CTRL-DET-7022",
+            "CTRL-NOUVEAU-2003",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-F42B51": {
+        "date": "2026-09-02",
+        "title": "Incident 2: Breeze Comet Manipulates Payment Systems and Banking Software in Brazil for Financial Fraud (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-5821",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-RES-4004",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-3D2B42": {
+        "date": "2026-09-02",
+        "title": "Incident 3: Active Zero-Day Exploitation of SonicWall SMA 1000 Remote Access Appliances (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-9821"
+        ]
+    },
+    "INC-20260902-28FBDD": {
+        "date": "2026-09-02",
+        "title": "Incident 4: Dark Web Leak of 153 Million Driver's Licenses Siphoned from Identity Verification Provider (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-4004",
+            "CTRL-NOUVEAU-5104",
+            "CTRL-NOUVEAU-6319",
+            "CTRL-NOUVEAU-9103",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-E487C5": {
+        "date": "2026-09-02",
+        "title": "Incident 5: BGP Hijacking Attack Weaponizes Virtualizor VPS Management Software Updates (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-9425",
+            "CTRL-DEV-5006",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-ED27C5": {
+        "date": "2026-09-02",
+        "title": "Incident 6: OpenAI\u2019s Astra Model Reaches Critical Autonomous Zero-Day Exploitation Threshold (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8201",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-PATCH-100",
+            "CTRL-RES-7033"
+        ]
     }
 }
