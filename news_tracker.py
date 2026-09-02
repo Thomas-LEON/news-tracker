@@ -15,6 +15,10 @@ socket.setdefaulttimeout(15.0)
 # Il est recommandé de la définir dans les variables d'environnement Windows.
 API_KEY = os.environ.get("GEMINI_API_KEY", "VOTRE_CLE_API")
 
+# Format de sortie : "html" (newsletter email) ou "markdown" (ancien format).
+# Rollback rapide : mettre OUTPUT_FORMAT=markdown dans le workflow GitHub Actions.
+OUTPUT_FORMAT = os.environ.get("OUTPUT_FORMAT", "html").lower()
+
 # Liste des flux RSS (Sources cyber & Tech)
 RSS_FEEDS = [
     "https://feeds.feedburner.com/TheHackersNews",
@@ -388,6 +392,240 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     except Exception as e:
         print(f"Erreur lors de la mise à jour des bases JSON : {e}")
 
+def _md_section_to_html(section_text):
+    """Convertit un bloc de texte Markdown d'un incident en HTML."""
+    lines = section_text.strip().split('\n')
+    html_parts = []
+    in_metadata = False
+    in_control = False
+    metadata_lines = []
+    control_lines = []
+    
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            if in_metadata:
+                in_metadata = False
+                html_parts.append('<div class="metadata">' + '<br>\n'.join(metadata_lines) + '</div>')
+                metadata_lines = []
+            if in_control:
+                in_control = False
+                html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
+                control_lines = []
+            continue
+        
+        # Detect metadata block start
+        if stripped == '**Incident Metadata:**':
+            in_metadata = True
+            continue
+        if in_metadata:
+            # Convert - **Key:** Value
+            cleaned = re.sub(r'^-\s*', '', stripped)
+            cleaned = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', cleaned)
+            metadata_lines.append(cleaned)
+            continue
+            
+        # Detect section headers like **Overview**, **The Breach Mechanism**, etc.
+        header_match = re.match(r'^\*\*(.+?)\*\*\s*$', stripped)
+        if header_match and not stripped.startswith('- '):
+            title = header_match.group(1)
+            if 'Proposed Control' in title:
+                in_control = True
+                html_parts.append(f'<h3>{title}</h3>')
+                continue
+            elif 'Conclusion' in title:
+                # Close control box if still open
+                if in_control:
+                    in_control = False
+                    html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
+                    control_lines = []
+                html_parts.append(f'<h3>{title}</h3>')
+                continue
+            else:
+                html_parts.append(f'<h3>{title}</h3>')
+                continue
+        
+        # Bullet points
+        if stripped.startswith('- '):
+            content = stripped[2:]
+            content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', content)
+            if in_control:
+                control_lines.append(content)
+                continue
+            html_parts.append(f'<p><strong>•</strong> {content}</p>')
+            continue
+        
+        # Footnotes / Sources section
+        if stripped.startswith('[') and re.match(r'^\[\d+\.?\s', stripped):
+            url_match = re.search(r'(https?://\S+)', stripped)
+            if url_match:
+                url = url_match.group(1).rstrip('])')
+                domain = re.search(r'https?://(?:www\.)?([^/]+)', url)
+                domain_name = domain.group(1) if domain else url
+                html_parts.append(f'<a href="{url}">{domain_name}</a><br>')
+            continue
+        
+        # Regular paragraph - convert bold
+        para = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', stripped)
+        # Convert markdown links
+        para = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', para)
+        # Replace em dashes
+        para = para.replace(' — ', ' - ').replace('—', '-')
+        html_parts.append(f'<p>{para}</p>')
+    
+    # Flush any remaining control box
+    if in_control and control_lines:
+        html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
+    if in_metadata and metadata_lines:
+        html_parts.append('<div class="metadata">' + '<br>\n'.join(metadata_lines) + '</div>')
+    
+    return '\n'.join(html_parts)
+
+def convert_to_html_report(final_report, threat_score, date_str):
+    """Convertit le rapport Markdown final en HTML newsletter stylée."""
+    
+    # Determine score color
+    if threat_score <= 50:
+        score_class = "score-green"
+        score_emoji = "&#128994;"  # 🟢
+    elif threat_score <= 75:
+        score_class = "score-orange"
+        score_emoji = "&#128992;"  # 🟠
+    else:
+        score_class = "score-red"
+        score_emoji = "&#128308;"  # 🔴
+    
+    # Extract incident titles for TOC
+    titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
+    
+    # Build TOC HTML
+    toc_html = ""
+    for idx, title in enumerate(titles, 1):
+        clean_title = title.strip().replace('—', '-')
+        toc_html += f'<div class="toc-item"><span class="toc-number">{idx}.</span> {clean_title}</div>\n'
+    
+    # Split report into incident sections
+    # Remove everything before the first ## (score line, TOC, etc.)
+    first_incident = final_report.find('## ')
+    if first_incident == -1:
+        incidents_text = final_report
+    else:
+        incidents_text = final_report[first_incident:]
+    
+    # Split by --- separator
+    raw_sections = re.split(r'\n---\n', incidents_text)
+    
+    # Build incidents HTML
+    incidents_html = ""
+    for idx, section in enumerate(raw_sections, 1):
+        section = section.strip()
+        if not section:
+            continue
+        
+        # Extract title from ## header
+        title_match = re.match(r'^## (.+)', section)
+        if title_match:
+            incident_title = title_match.group(1).strip().replace('—', '-')
+            section_body = section[title_match.end():].strip()
+        else:
+            incident_title = f"Incident {idx}"
+            section_body = section
+        
+        body_html = _md_section_to_html(section_body)
+        
+        separator = '<tr><td><hr class="incident-separator"></td></tr>' if idx > 1 else ''
+        
+        incidents_html += f"""
+        {separator}
+        <tr>
+          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
+            <h2 style="color:#00915A;margin:0;font-size:18px;">{idx}. {incident_title}</h2>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:20px 30px 10px 30px;">
+            {body_html}
+          </td>
+        </tr>
+"""
+    
+    # Format the date nicely
+    try:
+        date_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+        formatted_date = date_obj.strftime("%B %d, %Y")
+    except:
+        formatted_date = date_str
+    
+    # Assemble the full HTML
+    html = f"""<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Daily Threat Intel Report</title>
+<style>
+  p {{ margin-bottom:10px; line-height:1.6; color:#555555; font-size:14px; }}
+  h3 {{ color:#333333; font-size:16px; margin:20px 0 10px 0; border-bottom:1px solid #eeeeee; padding-bottom:5px; }}
+  .control-box {{ font-weight:bold; background:#f9f9f9; padding:10px; border-left:3px solid #00915A; margin-bottom:15px; color:#333333; font-size:13px; }}
+  .metadata {{ background:#f5f5f5; padding:12px 15px; border-radius:4px; margin:10px 0 15px 0; font-size:13px; line-height:1.8; color:#444; }}
+  .metadata strong {{ color:#333; }}
+  a {{ color:#00915A; text-decoration:none; font-weight:bold; }}
+  .incident-separator {{ border:0; border-top:2px solid #eeeeee; margin:25px 0; }}
+  .score-badge {{ display:inline-block; padding:6px 14px; border-radius:20px; font-weight:bold; font-size:16px; color:#fff; }}
+  .score-green {{ background-color:#28a745; }}
+  .score-orange {{ background-color:#fd7e14; }}
+  .score-red {{ background-color:#dc3545; }}
+  .toc-item {{ font-size:14px; line-height:2; color:#333; }}
+  .toc-number {{ font-weight:bold; color:#00915A; }}
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4;padding:20px 0;">
+  <tr>
+    <td align="center">
+      <table width="100%" style="max-width:800px;background:#ffffff;border:1px solid #dddddd;border-collapse:collapse;">
+        <tr>
+          <td style="background-color:#00915A;padding:30px 20px;text-align:center;">
+            <h1 style="color:#fff;margin:0;font-size:24px;">Daily Threat Intel Report</h1>
+            <p style="color:#e5f4ee;margin:10px 0 0;font-size:14px;">RISK ORM CTFR Intelligence Briefing - {formatted_date}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:20px 30px 10px 30px;text-align:center;">
+            <span class="score-badge {score_class}">{score_emoji} Threat Score: {threat_score}/100</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
+            <h2 style="color:#00915A;margin:0;font-size:18px;">Executive Summary - Incidents</h2>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:15px 30px;">
+            {toc_html}
+          </td>
+        </tr>
+        {incidents_html}
+        <tr>
+          <td style="background:#f9f9f9;padding:20px 30px;text-align:center;">
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#555555;">
+              For additional information, please contact the <strong>Emerging Technology Risk and Intelligence</strong> team.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#eeeeee;padding:20px;text-align:center;">
+            <p style="margin:0;font-size:11px;color:#999999;">Synthesis by Emerging Technology Risk and Intelligence</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>"""
+    
+    return html
+
 def main():
     print("Recherche des actualites (Threat Intel & Cyber) des dernieres 24h...")
     articles = fetch_recent_news()
@@ -447,18 +685,27 @@ def main():
         toc += "\n---\n\n"
         final_report = final_report.replace(score_line, score_line + toc, 1)
 
-    
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     os.makedirs(output_dir, exist_ok=True)
     
-    filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(f"# 🛡️ Daily Threat Intel & Emerging Tech Briefing\n")
+    # Toujours sauvegarder le Markdown (pour GitHub et la DB)
+    md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
+    with open(md_filename, "w", encoding="utf-8") as f:
+        f.write(f"# Daily Threat Intel Report\n")
         f.write(f"**Date:** {datetime.datetime.now().strftime('%B %d, %Y')}\n\n")
         f.write(final_report)
+    print(f"\nRapport Markdown sauvegarde : {md_filename}")
+    
+    # Générer aussi le HTML si OUTPUT_FORMAT == "html"
+    if OUTPUT_FORMAT == "html":
+        html_content = convert_to_html_report(final_report, threat_score, today_str)
+        html_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.html")
+        with open(html_filename, "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print(f"Rapport HTML newsletter sauvegarde : {html_filename}")
         
-    print(f"\nTermine ! Le rapport final a ete sauvegarde ici :\n{filename}")
+    print(f"\nTermine ! Format de sortie : {OUTPUT_FORMAT.upper()}")
     
     print("\nMise à jour de la base de connaissances (Contrôles)...")
     update_databases(final_report, today_str)
