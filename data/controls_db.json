@@ -1970,5 +1970,33 @@
             "Availability": "High"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9019": {
+        "name": "Automated Centralized Secrets Vault & Dynamic Credential Injection",
+        "prerequisites": [
+            "Centralized KMS/Vault infrastructure deployment",
+            "Application Workload Identity integration",
+            "CI/CD pipeline dynamic injection policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9425": {
+        "name": "BGP Route Anomaly & Prefix Hijacking Monitoring",
+        "prerequisites": [
+            "ASN telemetry feeds integration",
+            "BGP Route Monitoring infrastructure deployment",
+            "Automated SOC routing alert playbooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Critical",
+            "Availability": "Critical"
+        },
+        "damage_level": "High"
     }
 }

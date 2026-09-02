@@ -1789,5 +1789,64 @@
             "CTRL-NOUVEAU-7703",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260902-9B7A7F": {
+        "date": "2026-09-02",
+        "title": "Critical Langflow Vulnerability (CVE-2026-0768) Exploited to Steal OpenAI and AWS Keys (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-NOUVEAU-9019",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-3CA000": {
+        "date": "2026-09-02",
+        "title": "Active Exploitation of Chained SonicWall SMA1000 Zero-Day Vulnerabilities (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-7036",
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-RES-7043",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-BEC6AB": {
+        "date": "2026-09-02",
+        "title": "BGP Hijacking Attack Targets Virtualizor Update Infrastructure to Deliver Malicious Updates (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-1102",
+            "CTRL-NOUVEAU-9425",
+            "CTRL-NOUVEAU-7301",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260902-D2A633": {
+        "date": "2026-09-02",
+        "title": "Anthropic Claude AI Exploited to Port Pre-Authentication RCE Exploit Across PLC Models (September 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-5310",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-NOUVEAU-1117",
+            "CTRL-NOUVEAU-1118",
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1119"
+        ]
+    },
+    "INC-20260902-657750": {
+        "date": "2026-09-02",
+        "title": "Critical SQL Injection Vulnerability (CVE-2026-9586) in Sangoma Switchvox Exploited for RCE (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-3001"
+        ]
     }
 }
