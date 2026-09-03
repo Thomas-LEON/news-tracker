@@ -2026,5 +2026,33 @@
             "Availability": "Low"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-5105": {
+        "name": "Defensive AI Autonomous Code Scanning & Preemptive Vulnerability Mitigation",
+        "prerequisites": [
+            "AI Model Deployment Pipeline",
+            "AST Tool Integration",
+            "Automated Remediation Sandbox"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-5522": {
+        "name": "Managed File Transfer Payload Field-Level & End-to-End Encryption",
+        "prerequisites": [
+            "Public Key Infrastructure (PKI)",
+            "Key Management System (KMS)",
+            "MFT Interface API Integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }

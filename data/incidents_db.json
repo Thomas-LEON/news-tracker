@@ -1918,5 +1918,116 @@
             "CTRL-PATCH-100",
             "CTRL-RES-7033"
         ]
+    },
+    "INC-20260903-308E93": {
+        "date": "2026-09-03",
+        "title": "CrowdStrike Falcon Sensor Zero-Day Privilege Escalation Vulnerability (FalconFlank) - September 3, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-END-6009",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-1104",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-C6A668": {
+        "date": "2026-09-03",
+        "title": "SonicWall SMA 1000 Series Zero-Days Exploited in Active Attacks - September 2, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-RES-7043",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260903-B6FB22": {
+        "date": "2026-09-03",
+        "title": "BGP Hijacking Campaign Delivers Malicious Virtualizor Updates - September 2, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9425",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-7301",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-6A3ED1": {
+        "date": "2026-09-03",
+        "title": "Breach of Major ID Verification Service Exposes 153 Million Driver's Licenses - September 2, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-6319",
+            "CTRL-NOUVEAU-3482",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-08798D": {
+        "date": "2026-09-03",
+        "title": "Malicious .git Configurations Enable Remote Code Execution in AI Coding Agents - September 2, 2026",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-3001",
+            "CTRL-RES-7033"
+        ]
+    },
+    "INC-20260903-821159": {
+        "date": "2026-09-03",
+        "title": "\"Spring Ring\" Vishing Campaign Targets Microsoft Teams for Session Hijacking - September 2, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8402",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-2001",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-925EFC": {
+        "date": "2026-09-03",
+        "title": "Dropbox Accounts Compromised via Exploitation of Lenovo Email Verification Flaw - September 2, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4410",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-B80939": {
+        "date": "2026-09-03",
+        "title": "Over 22,000 Microsoft Exchange Servers Vulnerable to Critical Authentication Bypass (CVE-2026-62911) - September 2, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-4410",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-9F209F": {
+        "date": "2026-09-03",
+        "title": "OpenAI's Astra Model Achieves Autonomous Zero-Day Discovery and Exploitation - September 2, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9107",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-5105"
+        ]
+    },
+    "INC-20260903-7BFE54": {
+        "date": "2026-09-03",
+        "title": "Active Exploit Published for Cleo Harmony Authentication Bypass Vulnerability - September 2, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-5522",
+            "CTRL-SIM-300"
+        ]
     }
 }
