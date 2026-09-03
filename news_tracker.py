@@ -697,13 +697,15 @@ def main():
         f.write(final_report)
     print(f"\nRapport Markdown sauvegarde : {md_filename}")
     
-    # Générer aussi le HTML si OUTPUT_FORMAT == "html"
+    # Générer le fichier .eml dans un dossier séparé newsletters/
     if OUTPUT_FORMAT == "html":
+        nl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "newsletters")
+        os.makedirs(nl_dir, exist_ok=True)
         html_content = convert_to_html_report(final_report, threat_score, today_str)
-        html_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.html")
-        with open(html_filename, "w", encoding="utf-8") as f:
+        eml_filename = os.path.join(nl_dir, f"Daily_Threat_Intel_{today_str}.eml")
+        with open(eml_filename, "w", encoding="utf-8") as f:
             f.write(html_content)
-        print(f"Rapport HTML newsletter sauvegarde : {html_filename}")
+        print(f"Newsletter .eml sauvegardee : {eml_filename}")
         
     print(f"\nTermine ! Format de sortie : {OUTPUT_FORMAT.upper()}")
     
