@@ -2054,5 +2054,19 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9341": {
+        "name": "Federated Identity Provider Trust & Claims Governance",
+        "prerequisites": [
+            "Centralized Enterprise Identity Provider Catalog",
+            "SSO Federation Trust Validation Framework",
+            "Inbound Identity Claims Verification Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }

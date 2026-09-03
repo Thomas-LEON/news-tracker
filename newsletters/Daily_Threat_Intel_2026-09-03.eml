@@ -1,470 +1,783 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Daily Threat Intel Report</title>
-<style>
-  p { margin-bottom:10px; line-height:1.6; color:#555555; font-size:14px; }
-  h3 { color:#333333; font-size:16px; margin:20px 0 10px 0; border-bottom:1px solid #eeeeee; padding-bottom:5px; }
-  .control-box { font-weight:bold; background:#f9f9f9; padding:10px; border-left:3px solid #00915A; margin-bottom:15px; color:#333333; font-size:13px; }
-  .metadata { background:#f5f5f5; padding:12px 15px; border-radius:4px; margin:10px 0 15px 0; font-size:13px; line-height:1.8; color:#444; }
-  .metadata strong { color:#333; }
-  a { color:#00915A; text-decoration:none; font-weight:bold; }
-  .incident-separator { border:0; border-top:2px solid #eeeeee; margin:25px 0; }
-  .score-badge { display:inline-block; padding:6px 14px; border-radius:20px; font-weight:bold; font-size:16px; color:#fff; }
-  .score-green { background-color:#28a745; }
-  .score-orange { background-color:#fd7e14; }
-  .score-red { background-color:#dc3545; }
-  .toc-item { font-size:14px; line-height:2; color:#333; }
-  .toc-number { font-weight:bold; color:#00915A; }
-</style>
-</head>
-<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4;padding:20px 0;">
-  <tr>
-    <td align="center">
-      <table width="100%" style="max-width:800px;background:#ffffff;border:1px solid #dddddd;border-collapse:collapse;">
-        <tr>
-          <td style="background-color:#00915A;padding:30px 20px;text-align:center;">
-            <h1 style="color:#fff;margin:0;font-size:24px;">Daily Threat Intel Report</h1>
-            <p style="color:#e5f4ee;margin:10px 0 0;font-size:14px;">RISK ORM CTFR Intelligence Briefing - September 03, 2026</p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;text-align:center;">
-            <span class="score-badge score-orange">&#128992; Threat Score: 69/100</span>
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">Executive Summary - Incidents</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:15px 30px;">
-            <div class="toc-item"><span class="toc-number">1.</span> CrowdStrike Falcon Sensor Zero-Day Privilege Escalation Vulnerability (FalconFlank) - September 3, 2026</div>
-<div class="toc-item"><span class="toc-number">2.</span> SonicWall SMA 1000 Series Zero-Days Exploited in Active Attacks - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">3.</span> BGP Hijacking Campaign Delivers Malicious Virtualizor Updates - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">4.</span> Breach of Major ID Verification Service Exposes 153 Million Driver's Licenses - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">5.</span> Malicious .git Configurations Enable Remote Code Execution in AI Coding Agents - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">6.</span> "Spring Ring" Vishing Campaign Targets Microsoft Teams for Session Hijacking - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">7.</span> Dropbox Accounts Compromised via Exploitation of Lenovo Email Verification Flaw - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">8.</span> Over 22,000 Microsoft Exchange Servers Vulnerable to Critical Authentication Bypass (CVE-2026-62911) - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">9.</span> OpenAI's Astra Model Achieves Autonomous Zero-Day Discovery and Exploitation - September 2, 2026</div>
-<div class="toc-item"><span class="toc-number">10.</span> Active Exploit Published for Cleo Harmony Authentication Bypass Vulnerability - September 2, 2026</div>
+Content-Type: multipart/alternative; boundary="===============6061532349283962307=="
+MIME-Version: 1.0
+Subject: Daily Threat Intel Report - September 03, 2026
+From: 
+To: 
+MIME-Version: 1.0
 
-          </td>
-        </tr>
-        
-        
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">1. CrowdStrike Falcon Sensor Zero-Day Privilege Escalation Vulnerability (FalconFlank) - September 3, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> SUPPLY CHAIN<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 3, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> CrowdStrike</div>
-<p>On September 3, 2026, a security researcher released a proof-of-concept (PoC) for a zero-day privilege escalation vulnerability, dubbed "FalconFlank," impacting the CrowdStrike Falcon Sensor¹.</p>
-<h3>Overview</h3>
-<p>The vulnerability, disclosed by a researcher known as Chaotic Eclipse, allows local privilege escalation by abusing the office malicious macros remediation feature within the CrowdStrike Falcon Sensor¹. This poses a severe risk to enterprise environments, including financial institutions, that rely on CrowdStrike for endpoint detection and response (EDR).</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Abuse of Remediation Feature</strong>: The exploit targets the "office malicious macros remediation" mechanism in the Falcon Sensor¹.</p>
-<p><strong>•</strong> <strong>Local Privilege Escalation</strong>: An attacker with low-privilege access can leverage this flaw to elevate their privileges to SYSTEM/root on the host machine¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>EDR Bypass and Compromise</strong>: Attackers can disable or bypass endpoint security controls on compromised workstations.</p>
-<p><strong>•</strong> <strong>Lateral Movement</strong>: Elevated privileges allow threat actors to perform lateral movement across the banking network.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Establish a rapid-response protocol to monitor CrowdStrike's official channels for emergency hotfixes or configuration workarounds.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Restrict local administrative privileges and enforce strict application whitelisting to prevent the execution of unauthorized PoC code.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Configure alternative logging mechanisms (e.g., Windows Event Logs, Sysmon) to detect unusual privilege escalation patterns independent of the EDR.<br>
-<strong>IV. Operational Resilience:</strong> Prepare contingency plans for isolating critical segments if EDR integrity is questioned.<br>
-<strong>V. Simulation environment:</strong> Test the FalconFlank PoC in a secure, isolated sandbox to identify specific behavioral signatures.</div>
-<h3>Conclusion</h3>
-<p>This incident highlights the risk of security tooling itself becoming an entry point or escalation vector, emphasizing the need for defense-in-depth.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://github.com/ChaoticEclipse/FalconFlank (Hypothetical reference based on text)</p>
-<h3>Footnotes</h3>
-<p>[1] https://thehackernews.com/2026/09/researcher-releases-falconflank-poc.html</p>
-          </td>
-        </tr>
+--===============6061532349283962307==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
 
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">2. SonicWall SMA 1000 Series Zero-Days Exploited in Active Attacks - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> VULNERABILITY<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> SonicWall</div>
-<p>On September 2, 2026, SonicWall released emergency patches addressing two zero-day vulnerabilities (including CVE-2026-83548) in its Secure Mobile Access (SMA) 1000 series VPN appliances that are actively being exploited in the wild¹, ².</p>
-<h3>Overview</h3>
-<p>The vulnerabilities allow unauthenticated remote code execution (RCE) and server-side request forgery (SSRF) on internet-exposed VPN appliances¹, ². The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has added these flaws to its Known Exploited Vulnerabilities (KEV) catalog due to active exploitation by threat actors to deploy reverse shells and crypto miners³.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Pre-Authentication SSRF (CVE-2026-83548)</strong>: Attackers exploit a critical flaw (CVSS 10.0) in the appliance to send crafted requests without authentication¹, ².</p>
-<p><strong>•</strong> <strong>Attack Chaining</strong>: Threat actors chain the SSRF with a second zero-day to achieve unauthenticated Remote Code Execution (RCE) on the target gateway¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Perimeter Compromise</strong>: Successful exploitation grants attackers direct access to the internal network, bypassing the VPN gateway.</p>
-<p><strong>•</strong> <strong>Malware Deployment</strong>: Attackers are actively deploying reverse shells and cryptocurrency miners on compromised appliances³.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Immediately apply the security updates provided by SonicWall for SMA 1000 series appliances.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Restrict management interface access to trusted IP ranges only (ACLs).<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Monitor network traffic for outbound connections originating from VPN appliances to unauthorized external IPs.<br>
-<strong>IV. Operational Resilience:</strong> Implement redundant VPN gateways to allow seamless failover during emergency patching cycles.<br>
-<strong>V. Simulation environment:</strong> Deploy a patched virtual appliance in a staging environment to verify that the update does not disrupt user authentication.</div>
-<h3>Conclusion</h3>
-<p>Edge devices remain prime targets for threat actors; rapid patching of VPN gateways is critical to maintaining perimeter security.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://thehackernews.com/2026/09/cisa-adds-seven-exploited-flaws-as.html</p>
-<h3>Footnotes</h3>
-<p>[1] https://thehackernews.com/2026/09/attackers-exploit-two-sonicwall-sma.html</p>
-<p>[2] https://www.darkreading.com/vulnerabilities-threats/sonicwall-sma-1000-zero-days-enable-unauthenticated-rce</p>
-<p>[3] https://thehackernews.com/2026/09/cisa-adds-seven-exploited-flaws-as.html</p>
-          </td>
-        </tr>
+UGxlYXNlIGVuYWJsZSBIVE1MIHRvIHZpZXcgdGhpcyBpbnRlbGxpZ2VuY2UgYnJpZWZpbmcu
 
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">3. BGP Hijacking Campaign Delivers Malicious Virtualizor Updates - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> SUPPLY CHAIN<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: August 28, 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Virtualizor, Softaculous</div>
-<p>Between August 28 and September 2, 2026, threat actors executed a sophisticated Border Gateway Protocol (BGP) hijack targeting Softaculous traffic to distribute malicious updates to Virtualizor hypervisors¹, ².</p>
-<h3>Overview</h3>
-<p>By hijacking BGP routes and utilizing a technically valid TLS certificate for Softaculous domains, attackers diverted update traffic to deliver a compromised Virtualizor package¹, ². This supply chain attack resulted in persistent root-level compromise on multiple hypervisors¹.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>BGP Route Hijacking</strong>: Attackers manipulated BGP routing to intercept and redirect traffic destined for Softaculous update servers¹, ².</p>
-<p><strong>•</strong> <strong>Valid TLS Certificate Abuse</strong>: The threat actors used a valid TLS certificate to bypass browser and system trust warnings during the diverted update process².</p>
-<p><strong>•</strong> <strong>Malicious Package Injection</strong>: Compromised update packages were delivered to target hypervisors, establishing persistent root access¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Hypervisor Takeover</strong>: Attackers gained full root-level control over affected Virtualizor hypervisors, compromising all hosted virtual machines¹.</p>
-<p><strong>•</strong> <strong>Infrastructure Persistence</strong>: The malicious update established deep, persistent access within the hosting provider's infrastructure¹.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Implement BGP Route Origin Authorization (ROA) and Resource Public Key Infrastructure (RPKI) to prevent route hijacking.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Enforce strict network segmentation between hypervisor management interfaces and the rest of the corporate network.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Monitor BGP route advertisements for anomalies and verify the cryptographic signatures of all software updates before installation.<br>
-<strong>IV. Operational Resilience:</strong> Establish a clean-room recovery procedure for hypervisors suspected of running compromised firmware or updates.<br>
-<strong>V. Simulation environment:</strong> Test update verification scripts in a non-production environment to ensure they flag unsigned or improperly signed packages.</div>
-<h3>Conclusion</h3>
-<p>This incident demonstrates the extreme risk of BGP hijacking when combined with valid TLS certificates, bypassing traditional trust mechanisms to poison the software supply chain.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://thehackernews.com/2026/09/bgp-hijack-delivers-malicious.html</p>
-<h3>Footnotes</h3>
-<p>[1] https://thehackernews.com/2026/09/bgp-hijack-delivers-malicious.html</p>
-<p>[2] https://www.securityweek.com/malicious-virtualizor-update-served-via-bgp-hijacking/</p>
-          </td>
-        </tr>
+--===============6061532349283962307==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
 
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">4. Breach of Major ID Verification Service Exposes 153 Million Driver's Licenses - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> DATA LEAK<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: Unknown | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Unknown ID Verification Service</div>
-<p>On September 2, 2026, reports emerged that the FBI is investigating a massive data breach involving the theft and dark web sale of over 153 million driver's license scans from a major identity verification service¹, ².</p>
-<h3>Overview</h3>
-<p>An identity theft search website claimed to possess and sell photos of over 153 million driver's licenses stolen from an unnamed ID verification provider¹, ². The crime site has since shut down, but the exposure of these documents poses a severe risk to financial institutions relying on digital Know Your Customer (KYC) processes.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Third-Party Compromise</strong>: Attackers breached the database of a major identity verification service provider to exfiltrate stored scans of government-issued IDs¹, ².</p>
-<p><strong>•</strong> <strong>Dark Web Monetization</strong>: The stolen scans were hosted on a specialized identity theft search portal for sale to other cybercriminals¹, ².</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>KYC and Identity Fraud</strong>: The availability of 153 million high-quality ID scans enables widespread synthetic identity fraud and bank account takeover attempts.</p>
-<p><strong>•</strong> <strong>Regulatory and Reputational Damage</strong>: The breach highlights the systemic risk of outsourcing sensitive customer identification data to third-party verification services.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Audit all third-party KYC and identity verification vendors to ensure they do not retain customer ID scans longer than legally required.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Implement multi-factor authentication (MFA) methods that do not rely solely on document verification (e.g., behavioral biometrics).<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Enhance fraud detection models to flag newly registered accounts using IDs that match known leaked datasets.<br>
-<strong>IV. Operational Resilience:</strong> Establish a rapid-response protocol for customers whose identities are confirmed to be compromised in this leak.<br>
-<strong>V. Simulation environment:</strong> Simulate identity spoofing scenarios using synthetic data to test the resilience of the bank's onboarding pipeline.</div>
-<h3>Conclusion</h3>
-<p>Third-party identity verification services are high-value targets; banks must assume that identity documents are compromised and implement secondary verification controls.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://techcrunch.com/2026/09/02/it-sure-looks-like-hackers-breached-a-major-id-card-verification-service/</p>
-<h3>Footnotes</h3>
-<p>[1] https://www.infosecurity-magazine.com/news/fbi-probes-breach-153-million/</p>
-<p>[2] https://techcrunch.com/2026/09/02/it-sure-looks-like-hackers-breached-a-major-id-card-verification-service/</p>
-          </td>
-        </tr>
+PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KPG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1U
+eXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNoYXJzZXQ9VVRGLTgiPgo8dGl0bGU+RGFpbHkgVGhy
+ZWF0IEludGVsIFJlcG9ydDwvdGl0bGU+CjxzdHlsZT4KICBwIHsgbWFyZ2luLWJvdHRvbToxMHB4
+OyBsaW5lLWhlaWdodDoxLjY7IGNvbG9yOiM1NTU1NTU7IGZvbnQtc2l6ZToxNHB4OyB9CiAgaDMg
+eyBjb2xvcjojMzMzMzMzOyBmb250LXNpemU6MTZweDsgbWFyZ2luOjIwcHggMCAxMHB4IDA7IGJv
+cmRlci1ib3R0b206MXB4IHNvbGlkICNlZWVlZWU7IHBhZGRpbmctYm90dG9tOjVweDsgfQogIC5j
+b250cm9sLWJveCB7IGZvbnQtd2VpZ2h0OmJvbGQ7IGJhY2tncm91bmQ6I2Y5ZjlmOTsgcGFkZGlu
+ZzoxMHB4OyBib3JkZXItbGVmdDozcHggc29saWQgIzAwOTE1QTsgbWFyZ2luLWJvdHRvbToxNXB4
+OyBjb2xvcjojMzMzMzMzOyBmb250LXNpemU6MTNweDsgfQogIC5tZXRhZGF0YSB7IGJhY2tncm91
+bmQ6I2Y1ZjVmNTsgcGFkZGluZzoxMnB4IDE1cHg7IGJvcmRlci1yYWRpdXM6NHB4OyBtYXJnaW46
+MTBweCAwIDE1cHggMDsgZm9udC1zaXplOjEzcHg7IGxpbmUtaGVpZ2h0OjEuODsgY29sb3I6IzQ0
+NDsgfQogIC5tZXRhZGF0YSBzdHJvbmcgeyBjb2xvcjojMzMzOyB9CiAgYSB7IGNvbG9yOiMwMDkx
+NUE7IHRleHQtZGVjb3JhdGlvbjpub25lOyBmb250LXdlaWdodDpib2xkOyB9CiAgLmluY2lkZW50
+LXNlcGFyYXRvciB7IGJvcmRlcjowOyBib3JkZXItdG9wOjJweCBzb2xpZCAjZWVlZWVlOyBtYXJn
+aW46MjVweCAwOyB9CiAgLnNjb3JlLWJhZGdlIHsgZGlzcGxheTppbmxpbmUtYmxvY2s7IHBhZGRp
+bmc6NnB4IDE0cHg7IGJvcmRlci1yYWRpdXM6MjBweDsgZm9udC13ZWlnaHQ6Ym9sZDsgZm9udC1z
+aXplOjE2cHg7IGNvbG9yOiNmZmY7IH0KICAuc2NvcmUtZ3JlZW4geyBiYWNrZ3JvdW5kLWNvbG9y
+OiMyOGE3NDU7IH0KICAuc2NvcmUtb3JhbmdlIHsgYmFja2dyb3VuZC1jb2xvcjojZmQ3ZTE0OyB9
+CiAgLnNjb3JlLXJlZCB7IGJhY2tncm91bmQtY29sb3I6I2RjMzU0NTsgfQogIC50b2MtaXRlbSB7
+IGZvbnQtc2l6ZToxNHB4OyBsaW5lLWhlaWdodDoyOyBjb2xvcjojMzMzOyB9CiAgLnRvYy1udW1i
+ZXIgeyBmb250LXdlaWdodDpib2xkOyBjb2xvcjojMDA5MTVBOyB9Cjwvc3R5bGU+CjwvaGVhZD4K
+PGJvZHkgc3R5bGU9Im1hcmdpbjowO3BhZGRpbmc6MDtiYWNrZ3JvdW5kLWNvbG9yOiNmNGY0ZjQ7
+Zm9udC1mYW1pbHk6QXJpYWwsc2Fucy1zZXJpZjsiPgo8dGFibGUgd2lkdGg9IjEwMCUiIGNlbGxw
+YWRkaW5nPSIwIiBjZWxsc3BhY2luZz0iMCIgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6I2Y0ZjRm
+NDtwYWRkaW5nOjIwcHggMDsiPgogIDx0cj4KICAgIDx0ZCBhbGlnbj0iY2VudGVyIj4KICAgICAg
+PHRhYmxlIHdpZHRoPSIxMDAlIiBzdHlsZT0ibWF4LXdpZHRoOjgwMHB4O2JhY2tncm91bmQ6I2Zm
+ZmZmZjtib3JkZXI6MXB4IHNvbGlkICNkZGRkZGQ7Ym9yZGVyLWNvbGxhcHNlOmNvbGxhcHNlOyI+
+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMwMDkx
+NUE7cGFkZGluZzozMHB4IDIwcHg7dGV4dC1hbGlnbjpjZW50ZXI7Ij4KICAgICAgICAgICAgPGgx
+IHN0eWxlPSJjb2xvcjojZmZmO21hcmdpbjowO2ZvbnQtc2l6ZToyNHB4OyI+RGFpbHkgVGhyZWF0
+IEludGVsIFJlcG9ydDwvaDE+CiAgICAgICAgICAgIDxwIHN0eWxlPSJjb2xvcjojZTVmNGVlO21h
+cmdpbjoxMHB4IDAgMDtmb250LXNpemU6MTRweDsiPlJJU0sgT1JNIENURlIgSW50ZWxsaWdlbmNl
+IEJyaWVmaW5nIC0gU2VwdGVtYmVyIDAzLCAyMDI2PC9wPgogICAgICAgICAgPC90ZD4KICAgICAg
+ICA8L3RyPgogICAgICAgIDx0cj4KICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzoyMHB4IDMw
+cHggMTBweCAzMHB4O3RleHQtYWxpZ246Y2VudGVyOyI+CiAgICAgICAgICAgIDxzcGFuIGNsYXNz
+PSJzY29yZS1iYWRnZSBzY29yZS1vcmFuZ2UiPiYjMTI4OTkyOyBUaHJlYXQgU2NvcmU6IDY5LzEw
+MDwvc3Bhbj4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KICAgICAgICA8dHI+CiAgICAg
+ICAgICA8dGQgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6I2U1ZjRlZTtwYWRkaW5nOjE1cHggMzBw
+eDtib3JkZXItdG9wOjJweCBzb2xpZCAjMDA5MTVBOyI+CiAgICAgICAgICAgIDxoMiBzdHlsZT0i
+Y29sb3I6IzAwOTE1QTttYXJnaW46MDtmb250LXNpemU6MThweDsiPkV4ZWN1dGl2ZSBTdW1tYXJ5
+IC0gSW5jaWRlbnRzPC9oMj4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KICAgICAgICA8
+dHI+CiAgICAgICAgICA8dGQgc3R5bGU9InBhZGRpbmc6MTVweCAzMHB4OyI+CiAgICAgICAgICAg
+IDxkaXYgY2xhc3M9InRvYy1pdGVtIj48c3BhbiBjbGFzcz0idG9jLW51bWJlciI+MS48L3NwYW4+
+IENyb3dkU3RyaWtlIEZhbGNvbiBTZW5zb3IgWmVyby1EYXkgUHJpdmlsZWdlIEVzY2FsYXRpb24g
+VnVsbmVyYWJpbGl0eSAiRmFsY29uRmxhbmsiIERpc2Nsb3NlZCAoU2VwdGVtYmVyIDMsIDIwMjYp
+PC9kaXY+CjxkaXYgY2xhc3M9InRvYy1pdGVtIj48c3BhbiBjbGFzcz0idG9jLW51bWJlciI+Mi48
+L3NwYW4+IFNvbmljV2FsbCBTTUEgMTAwMCBTZXJpZXMgVlBOIFplcm8tRGF5IFZ1bG5lcmFiaWxp
+dGllcyBBY3RpdmVseSBFeHBsb2l0ZWQgaW4gdGhlIFdpbGQgKFNlcHRlbWJlciAyLCAyMDI2KTwv
+ZGl2Pgo8ZGl2IGNsYXNzPSJ0b2MtaXRlbSI+PHNwYW4gY2xhc3M9InRvYy1udW1iZXIiPjMuPC9z
+cGFuPiBCR1AgSGlqYWNraW5nIENhbXBhaWduIFRhcmdldHMgU29mdGFjdWxvdXMgYW5kIFZpcnR1
+YWxpem9yIFVwZGF0ZXMgKEF1Z3VzdCAyOCwgMjAyNik8L2Rpdj4KPGRpdiBjbGFzcz0idG9jLWl0
+ZW0iPjxzcGFuIGNsYXNzPSJ0b2MtbnVtYmVyIj40Ljwvc3Bhbj4gRkJJIEludmVzdGlnYXRlcyBN
+YXNzaXZlIEJyZWFjaCBvZiAxNTMgTWlsbGlvbiBEcml2ZXIncyBMaWNlbnNlcyBTdG9sZW4gZnJv
+bSBJRCBWZXJpZmljYXRpb24gU2VydmljZSAoU2VwdGVtYmVyIDIsIDIwMjYpPC9kaXY+CjxkaXYg
+Y2xhc3M9InRvYy1pdGVtIj48c3BhbiBjbGFzcz0idG9jLW51bWJlciI+NS48L3NwYW4+IE1hbGlj
+aW91cyBHaXQgQ29uZmlndXJhdGlvbnMgRW5hYmxlIFJlbW90ZSBDb2RlIEV4ZWN1dGlvbiBpbiBB
+SSBDb2RpbmcgQWdlbnRzIChTZXB0ZW1iZXIgMiwgMjAyNik8L2Rpdj4KPGRpdiBjbGFzcz0idG9j
+LWl0ZW0iPjxzcGFuIGNsYXNzPSJ0b2MtbnVtYmVyIj42Ljwvc3Bhbj4gRHJvcGJveCBBY2NvdW50
+cyBDb21wcm9taXNlZCB2aWEgRXhwbG9pdGF0aW9uIG9mIExlbm92byBFbWFpbCBWZXJpZmljYXRp
+b24gRmxhdyAoU2VwdGVtYmVyIDIsIDIwMjYpPC9kaXY+CjxkaXYgY2xhc3M9InRvYy1pdGVtIj48
+c3BhbiBjbGFzcz0idG9jLW51bWJlciI+Ny48L3NwYW4+ICJTcHJpbmcgUmluZyIgVGhyZWF0IEdy
+b3VwIFRhcmdldHMgTWljcm9zb2Z0IFRlYW1zIFVzZXJzIGluIFNvcGhpc3RpY2F0ZWQgVmlzaGlu
+ZyBDYW1wYWlnbiAoU2VwdGVtYmVyIDIsIDIwMjYpPC9kaXY+CjxkaXYgY2xhc3M9InRvYy1pdGVt
+Ij48c3BhbiBjbGFzcz0idG9jLW51bWJlciI+OC48L3NwYW4+IENpc2NvIFBhdGNoZXMgQ3JpdGlj
+YWwgSU9TIFhSIGFuZCBOZXh1cyBWdWxuZXJhYmlsaXRpZXMsIFdhcm5zIG9mIFVucGF0Y2hlZCBT
+ZWN1cmUgRW1haWwgRmxhd3MgKFNlcHRlbWJlciAzLCAyMDI2KTwvZGl2Pgo8ZGl2IGNsYXNzPSJ0
+b2MtaXRlbSI+PHNwYW4gY2xhc3M9InRvYy1udW1iZXIiPjkuPC9zcGFuPiBPdmVyIDIyLDAwMCBN
+aWNyb3NvZnQgRXhjaGFuZ2UgU2VydmVycyBFeHBvc2VkIHRvIENyaXRpY2FsIEF1dGhlbnRpY2F0
+aW9uIEJ5cGFzcyBDVkUtMjAyNi02MjkxMSAoU2VwdGVtYmVyIDIsIDIwMjYpPC9kaXY+CjxkaXYg
+Y2xhc3M9InRvYy1pdGVtIj48c3BhbiBjbGFzcz0idG9jLW51bWJlciI+MTAuPC9zcGFuPiBQdWJs
+aWMgRXhwbG9pdCBSZWxlYXNlZCBmb3IgQ3JpdGljYWwgQ2xlbyBIYXJtb255IE1hbmFnZWQgRmls
+ZSBUcmFuc2ZlciBWdWxuZXJhYmlsaXR5IChTZXB0ZW1iZXIgMiwgMjAyNik8L2Rpdj4KCiAgICAg
+ICAgICA8L3RkPgogICAgICAgIDwvdHI+CiAgICAgICAgCiAgICAgICAgCiAgICAgICAgPHRyPgog
+ICAgICAgICAgPHRkIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNlNWY0ZWU7cGFkZGluZzoxNXB4
+IDMwcHg7Ym9yZGVyLXRvcDoycHggc29saWQgIzAwOTE1QTsiPgogICAgICAgICAgICA8aDIgc3R5
+bGU9ImNvbG9yOiMwMDkxNUE7bWFyZ2luOjA7Zm9udC1zaXplOjE4cHg7Ij4xLiBDcm93ZFN0cmlr
+ZSBGYWxjb24gU2Vuc29yIFplcm8tRGF5IFByaXZpbGVnZSBFc2NhbGF0aW9uIFZ1bG5lcmFiaWxp
+dHkgIkZhbGNvbkZsYW5rIiBEaXNjbG9zZWQgKFNlcHRlbWJlciAzLCAyMDI2KTwvaDI+CiAgICAg
+ICAgICA8L3RkPgogICAgICAgIDwvdHI+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxl
+PSJwYWRkaW5nOjIwcHggMzBweCAxMHB4IDMwcHg7Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0i
+bWV0YWRhdGEiPjxzdHJvbmc+UHJpbWFyeSBDYXRlZ29yeTo8L3N0cm9uZz4gU1VQUExZIENIQUlO
+PGJyPgo8c3Ryb25nPk5ld3MgTmF0dXJlOjwvc3Ryb25nPiBOb3V2ZWxsZSBhdHRhcXVlPGJyPgo8
+c3Ryb25nPlRpbWVsaW5lOjwvc3Ryb25nPiBJbmNpZGVudCBEYXRlOiBTZXB0ZW1iZXIgMywgMjAy
+NiB8IFNvdXJjZSBQdWJsaWNhdGlvbiBEYXRlOiBTZXB0ZW1iZXIgMywgMjAyNjxicj4KPHN0cm9u
+Zz5JbXBhY3RlZCBDb3VudHJ5Ojwvc3Ryb25nPiBHbG9iYWw8YnI+CjxzdHJvbmc+R2VvbG9jYXRp
+b24gLyBDbG91ZCBSZWdpb246PC9zdHJvbmc+IFVua25vd248YnI+CjxzdHJvbmc+TGlzdCBvZiBD
+b21wYW5pZXMgSW1wYWN0ZWQ6PC9zdHJvbmc+IENyb3dkU3RyaWtlPC9kaXY+CjxwPkEgc2VjdXJp
+dHkgcmVzZWFyY2hlciBoYXMgcmVsZWFzZWQgYSBwcm9vZi1vZi1jb25jZXB0IChQb0MpIGV4cGxv
+aXQgZm9yIGEgemVyby1kYXkgcHJpdmlsZWdlIGVzY2FsYXRpb24gdnVsbmVyYWJpbGl0eSwgZHVi
+YmVkICJGYWxjb25GbGFuaywiIGltcGFjdGluZyBDcm93ZFN0cmlrZSBGYWxjb24gU2Vuc29yIG9u
+IFNlcHRlbWJlciAzLCAyMDI2LsK5PC9wPgo8aDM+T3ZlcnZpZXc8L2gzPgo8cD5UaGUgdnVsbmVy
+YWJpbGl0eSwgZGlzY292ZXJlZCBhbmQgcHVibGlzaGVkIGJ5IHJlc2VhcmNoZXIgQ2hhb3RpYyBF
+Y2xpcHNlLCBhYnVzZXMgdGhlIG9mZmljZSBtYWxpY2lvdXMgbWFjcm9zIHJlbWVkaWF0aW9uIGZl
+YXR1cmUgd2l0aGluIHRoZSBDcm93ZFN0cmlrZSBGYWxjb24gU2Vuc29yLsK5IFRoaXMgZmxhdyBh
+bGxvd3MgbG9jYWwgYXR0YWNrZXJzIHRvIGVzY2FsYXRlIHByaXZpbGVnZXMgb24gYWZmZWN0ZWQg
+c3lzdGVtcywgcG9zaW5nIGEgc2V2ZXJlIHRocmVhdCB0byBlbnRlcnByaXNlIGVuZHBvaW50cyB3
+aGVyZSBDcm93ZFN0cmlrZSBpcyBkZXBsb3llZCBhcyBhIHByaW1hcnkgZGVmZW5zZSBtZWNoYW5p
+c20uPC9wPgo8aDM+VGhlIEJyZWFjaCBNZWNoYW5pc208L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ry
+b25nPiA8c3Ryb25nPkFidXNlIG9mIFJlbWVkaWF0aW9uIEZlYXR1cmU6PC9zdHJvbmc+IFRoZSBl
+eHBsb2l0IHRhcmdldHMgdGhlIHNwZWNpZmljIG1lY2hhbmlzbSBDcm93ZFN0cmlrZSBGYWxjb24g
+dXNlcyB0byByZW1lZGlhdGUgbWFsaWNpb3VzIE1pY3Jvc29mdCBPZmZpY2UgbWFjcm9zLsK5PC9w
+Pgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPlByaXZpbGVnZSBFc2NhbGF0aW9uOjwv
+c3Ryb25nPiBCeSBtYW5pcHVsYXRpbmcgdGhpcyByZW1lZGlhdGlvbiBwcm9jZXNzLCBhIGxvY2Fs
+IGxvdy1wcml2aWxlZ2VkIGF0dGFja2VyIGNhbiBleGVjdXRlIGFyYml0cmFyeSBjb2RlIHdpdGgg
+ZWxldmF0ZWQgc3lzdGVtIHByaXZpbGVnZXMuPC9wPgo8aDM+SW1wYWN0IGFuZCBDb25zZXF1ZW5j
+ZXM8L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPkVuZHBvaW50IENvbXByb21p
+c2U6PC9zdHJvbmc+IFN1Y2Nlc3NmdWwgZXhwbG9pdGF0aW9uIGFsbG93cyBhdHRhY2tlcnMgdG8g
+YnlwYXNzIGxvY2FsIHNlY3VyaXR5IGNvbnRyb2xzIGFuZCBnYWluIGZ1bGwgYWRtaW5pc3RyYXRp
+dmUgY29udHJvbCBvdmVyIHRoZSBob3N0LjwvcD4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0
+cm9uZz5TZWN1cml0eSBUb29sIEV2YXNpb246PC9zdHJvbmc+IFNpbmNlIHRoZSB2dWxuZXJhYmls
+aXR5IHJlc2lkZXMgd2l0aGluIHRoZSBzZWN1cml0eSBhZ2VudCBpdHNlbGYsIGl0IGNhbiBiZSBs
+ZXZlcmFnZWQgdG8gZGlzYWJsZSBvciBldmFkZSBlbmRwb2ludCBkZXRlY3Rpb24gYW5kIHJlc3Bv
+bnNlIChFRFIpIGNhcGFiaWxpdGllcy48L3A+CjxoMz5Qcm9wb3NlZCBDb250cm9sOiBNaXRpZ2F0
+aW5nIFRocmVhdHM8L2gzPgo8cD5UbyBhZGRyZXNzIHRoZSB2dWxuZXJhYmlsaXRpZXMgZXhwb3Nl
+ZCBieSB0aGlzIGluY2lkZW50LCB0aGUgaW1wbGVtZW50YXRpb24gb2YgdGhlIGZvbGxvd2luZyBj
+b250cm9sIGZyYW1ld29yayBpcyBwcm9wb3NlZDo8L3A+CjxkaXYgY2xhc3M9ImNvbnRyb2wtYm94
+Ij48c3Ryb25nPkkuIEdvdmVybmFuY2UgJiBDb250YWlubWVudCAoUHJldmVudGlvbik6PC9zdHJv
+bmc+IEVzdGFibGlzaCBlbWVyZ2VuY3kgY29tbXVuaWNhdGlvbiBjaGFubmVscyB3aXRoIENyb3dk
+U3RyaWtlIHRvIG1vbml0b3IgZm9yIG9mZmljaWFsIHBhdGNoZXMgYW5kIHdvcmthcm91bmRzLjxi
+cj4KPHN0cm9uZz5JSS4gSWRlbnRpdHkgJiBBY2Nlc3MgTWFuYWdlbWVudCAoQ29udGFpbm1lbnQp
+Ojwvc3Ryb25nPiBSZXN0cmljdCBsb2NhbCBhZG1pbmlzdHJhdGl2ZSBwcml2aWxlZ2VzIGFuZCBj
+bG9zZWx5IG1vbml0b3IgbG9jYWwgYWNjb3VudCBjcmVhdGlvbiBvciBwcml2aWxlZ2UgY2hhbmdl
+cy48YnI+CjxzdHJvbmc+SUlJLiBJbmZyYXN0cnVjdHVyZSBJbnRlbGxpZ2VuY2UgKERldGVjdGlv
+bik6PC9zdHJvbmc+IERlcGxveSBzZWNvbmRhcnkgZGV0ZWN0aW9uIG1lY2hhbmlzbXMgKGUuZy4s
+IFdpbmRvd3MgRXZlbnQgTG9ncywgU3lzbW9uKSB0byBkZXRlY3QgdW51c3VhbCBjaGlsZCBwcm9j
+ZXNzZXMgc3Bhd25lZCBieSBzZWN1cml0eSBhZ2VudCBzZXJ2aWNlcy48YnI+CjxzdHJvbmc+SVYu
+IE9wZXJhdGlvbmFsIFJlc2lsaWVuY2U6PC9zdHJvbmc+IFByZXBhcmUgcm9sbGJhY2sgYW5kIGlz
+b2xhdGlvbiBwcm9jZWR1cmVzIGZvciBlbmRwb2ludHMgc2hvd2luZyBzaWducyBvZiBFRFIgdGFt
+cGVyaW5nLjxicj4KPHN0cm9uZz5WLiBTaW11bGF0aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBU
+ZXN0IHRoZSAiRmFsY29uRmxhbmsiIFBvQyBpbiBhIHNlZ3JlZ2F0ZWQgbGFiIGVudmlyb25tZW50
+IHRvIGlkZW50aWZ5IHNwZWNpZmljIGJlaGF2aW9yYWwgc2lnbmF0dXJlcy48L2Rpdj4KPGgzPkNv
+bmNsdXNpb248L2gzPgo8cD5WdWxuZXJhYmlsaXRpZXMgaW4gc2VjdXJpdHkgYWdlbnRzIHJlcHJl
+c2VudCBhIGNyaXRpY2FsIHJpc2sgYXMgdGhleSBydW4gd2l0aCBoaWdoIHByaXZpbGVnZXM7IG9y
+Z2FuaXphdGlvbnMgbXVzdCBtYWludGFpbiBpbmRlcGVuZGVudCBtb25pdG9yaW5nIGNvbnRyb2xz
+IHRvIGRldGVjdCBFRFIgdGFtcGVyaW5nLjwvcD4KPGgzPkZ1cnRoZXIgUmVhZGluZzwvaDM+Cjxw
+Pmh0dHBzOi8vdGhlaGFja2VybmV3cy5jb20vMjAyNi8wOS9yZXNlYXJjaGVyLXJlbGVhc2VzLWZh
+bGNvbmZsYW5rLXBvYy5odG1sPC9wPgo8aDM+Rm9vdG5vdGVzPC9oMz4KPHA+WzFdIGh0dHBzOi8v
+dGhlaGFja2VybmV3cy5jb20vMjAyNi8wOS9yZXNlYXJjaGVyLXJlbGVhc2VzLWZhbGNvbmZsYW5r
+LXBvYy5odG1sPC9wPgogICAgICAgICAgPC90ZD4KICAgICAgICA8L3RyPgoKICAgICAgICA8dHI+
+PHRkPjxociBjbGFzcz0iaW5jaWRlbnQtc2VwYXJhdG9yIj48L3RkPjwvdHI+CiAgICAgICAgPHRy
+PgogICAgICAgICAgPHRkIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNlNWY0ZWU7cGFkZGluZzox
+NXB4IDMwcHg7Ym9yZGVyLXRvcDoycHggc29saWQgIzAwOTE1QTsiPgogICAgICAgICAgICA8aDIg
+c3R5bGU9ImNvbG9yOiMwMDkxNUE7bWFyZ2luOjA7Zm9udC1zaXplOjE4cHg7Ij4yLiBTb25pY1dh
+bGwgU01BIDEwMDAgU2VyaWVzIFZQTiBaZXJvLURheSBWdWxuZXJhYmlsaXRpZXMgQWN0aXZlbHkg
+RXhwbG9pdGVkIGluIHRoZSBXaWxkIChTZXB0ZW1iZXIgMiwgMjAyNik8L2gyPgogICAgICAgICAg
+PC90ZD4KICAgICAgICA8L3RyPgogICAgICAgIDx0cj4KICAgICAgICAgIDx0ZCBzdHlsZT0icGFk
+ZGluZzoyMHB4IDMwcHggMTBweCAzMHB4OyI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9Im1ldGFk
+YXRhIj48c3Ryb25nPlByaW1hcnkgQ2F0ZWdvcnk6PC9zdHJvbmc+IENMT1VEPGJyPgo8c3Ryb25n
+Pk5ld3MgTmF0dXJlOjwvc3Ryb25nPiBOb3V2ZWxsZSBhdHRhcXVlPGJyPgo8c3Ryb25nPlRpbWVs
+aW5lOjwvc3Ryb25nPiBJbmNpZGVudCBEYXRlOiBTZXB0ZW1iZXIgMiwgMjAyNiB8IFNvdXJjZSBQ
+dWJsaWNhdGlvbiBEYXRlOiBTZXB0ZW1iZXIgMiwgMjAyNjxicj4KPHN0cm9uZz5JbXBhY3RlZCBD
+b3VudHJ5Ojwvc3Ryb25nPiBHbG9iYWw8YnI+CjxzdHJvbmc+R2VvbG9jYXRpb24gLyBDbG91ZCBS
+ZWdpb246PC9zdHJvbmc+IFVua25vd248YnI+CjxzdHJvbmc+TGlzdCBvZiBDb21wYW5pZXMgSW1w
+YWN0ZWQ6PC9zdHJvbmc+IFNvbmljV2FsbDwvZGl2Pgo8cD5Tb25pY1dhbGwgcmVsZWFzZWQgZW1l
+cmdlbmN5IHBhdGNoZXMgb24gU2VwdGVtYmVyIDIsIDIwMjYsIHRvIGFkZHJlc3MgdHdvIGNyaXRp
+Y2FsIHplcm8tZGF5IHZ1bG5lcmFiaWxpdGllcyAoaW5jbHVkaW5nIENWRS0yMDI2LTgzNTQ4KSBh
+ZmZlY3RpbmcgaXRzIFNlY3VyZSBNb2JpbGUgQWNjZXNzIChTTUEpIDEwMDAgc2VyaWVzIFZQTiBh
+cHBsaWFuY2VzIHRoYXQgYXJlIGFjdGl2ZWx5IGJlaW5nIGV4cGxvaXRlZCBpbiB0aGUgd2lsZC7C
+uSDCsjwvcD4KPGgzPk92ZXJ2aWV3PC9oMz4KPHA+VGhlIHZ1bG5lcmFiaWxpdGllcywgZGlzY292
+ZXJlZCBpbnRlcm5hbGx5IGFuZCB0cmFja2VkIGFzIENWRS0yMDI2LTgzNTQ4LCBhbGxvdyB1bmF1
+dGhlbnRpY2F0ZWQgcmVtb3RlIGF0dGFja2VycyB0byBleGVjdXRlIGFyYml0cmFyeSBjb2RlIG9u
+IHRoZSBhZmZlY3RlZCBWUE4gYXBwbGlhbmNlcy7CuSDCsiBUaGVzZSBlZGdlIGRldmljZXMgYXJl
+IGNvbW1vbmx5IHVzZWQgYnkgZW50ZXJwcmlzZXMsIGluY2x1ZGluZyBmaW5hbmNpYWwgaW5zdGl0
+dXRpb25zLCB0byBzZWN1cmUgcmVtb3RlIGFjY2VzcywgbWFraW5nIHRoaXMgYWN0aXZlIGV4cGxv
+aXRhdGlvbiBjYW1wYWlnbiBhIGhpZ2gtcHJpb3JpdHkgdGhyZWF0LjwvcD4KPGgzPlRoZSBCcmVh
+Y2ggTWVjaGFuaXNtPC9oMz4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5QcmUtQXV0
+aGVudGljYXRpb24gU1NSRjo8L3N0cm9uZz4gQ1ZFLTIwMjYtODM1NDggaXMgYSBjcml0aWNhbCBT
+ZXJ2ZXItU2lkZSBSZXF1ZXN0IEZvcmdlcnkgKFNTUkYpIHZ1bG5lcmFiaWxpdHkgd2l0aCBhIENW
+U1Mgc2NvcmUgb2YgMTAuMC7CuSDCsjwvcD4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9u
+Zz5BdHRhY2sgQ2hhaW5pbmc6PC9zdHJvbmc+IEF0dGFja2VycyBjaGFpbiB0aGUgU1NSRiB2dWxu
+ZXJhYmlsaXR5IHdpdGggYSBzZWNvbmQgZmxhdyB0byBhY2hpZXZlIHVuYXV0aGVudGljYXRlZCBy
+ZW1vdGUgY29kZSBleGVjdXRpb24gKFJDRSkgb24gdGhlIGFwcGxpYW5jZS7CsjwvcD4KPGgzPklt
+cGFjdCBhbmQgQ29uc2VxdWVuY2VzPC9oMz4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9u
+Zz5VbmF1dGhlbnRpY2F0ZWQgUmVtb3RlIENvZGUgRXhlY3V0aW9uOjwvc3Ryb25nPiBBdHRhY2tl
+cnMgY2FuIGdhaW4gY29tcGxldGUgY29udHJvbCBvdmVyIHRoZSBWUE4gZ2F0ZXdheSB3aXRob3V0
+IG5lZWRpbmcgdmFsaWQgY3JlZGVudGlhbHMuwrI8L3A+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+
+IDxzdHJvbmc+TmV0d29yayBMYXRlcmFsIE1vdmVtZW50Ojwvc3Ryb25nPiBPbmNlIHRoZSBWUE4g
+YXBwbGlhbmNlIGlzIGNvbXByb21pc2VkLCBhdHRhY2tlcnMgY2FuIHBpdm90IGludG8gdGhlIGlu
+dGVybmFsIGNvcnBvcmF0ZSBuZXR3b3JrLCBieXBhc3NpbmcgcGVyaW1ldGVyIGRlZmVuc2VzLjwv
+cD4KPGgzPlByb3Bvc2VkIENvbnRyb2w6IE1pdGlnYXRpbmcgVGhyZWF0czwvaDM+CjxwPlRvIGFk
+ZHJlc3MgdGhlIHZ1bG5lcmFiaWxpdGllcyBleHBvc2VkIGJ5IHRoaXMgaW5jaWRlbnQsIHRoZSBp
+bXBsZW1lbnRhdGlvbiBvZiB0aGUgZm9sbG93aW5nIGNvbnRyb2wgZnJhbWV3b3JrIGlzIHByb3Bv
+c2VkOjwvcD4KPGRpdiBjbGFzcz0iY29udHJvbC1ib3giPjxzdHJvbmc+SS4gR292ZXJuYW5jZSAm
+IENvbnRhaW5tZW50IChQcmV2ZW50aW9uKTo8L3N0cm9uZz4gSW1tZWRpYXRlbHkgYXBwbHkgdGhl
+IHNlY3VyaXR5IHVwZGF0ZXMgcHJvdmlkZWQgYnkgU29uaWNXYWxsIGZvciBTTUEgMTAwMCBzZXJp
+ZXMgYXBwbGlhbmNlcy48YnI+CjxzdHJvbmc+SUkuIElkZW50aXR5ICYgQWNjZXNzIE1hbmFnZW1l
+bnQgKENvbnRhaW5tZW50KTo8L3N0cm9uZz4gSW1wbGVtZW50IHN0cmljdCBtdWx0aS1mYWN0b3Ig
+YXV0aGVudGljYXRpb24gKE1GQSkgYW5kIHJlc3RyaWN0IGFjY2VzcyB0byB0aGUgVlBOIG1hbmFn
+ZW1lbnQgaW50ZXJmYWNlLjxicj4KPHN0cm9uZz5JSUkuIEluZnJhc3RydWN0dXJlIEludGVsbGln
+ZW5jZSAoRGV0ZWN0aW9uKTo8L3N0cm9uZz4gTW9uaXRvciBWUE4gYXBwbGlhbmNlIGxvZ3MgZm9y
+IHVudXN1YWwgb3V0Ym91bmQgY29ubmVjdGlvbnMgKFNTUkYgaW5kaWNhdG9ycykgYW5kIHVuYXV0
+aG9yaXplZCBjb25maWd1cmF0aW9uIGNoYW5nZXMuPGJyPgo8c3Ryb25nPklWLiBPcGVyYXRpb25h
+bCBSZXNpbGllbmNlOjwvc3Ryb25nPiBFc3RhYmxpc2ggYWx0ZXJuYXRpdmUgcmVtb3RlIGFjY2Vz
+cyBwYXRod2F5cyBpbiBjYXNlIHRoZSBwcmltYXJ5IFZQTiBnYXRld2F5IG5lZWRzIHRvIGJlIGlz
+b2xhdGVkLjxicj4KPHN0cm9uZz5WLiBTaW11bGF0aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBW
+YWxpZGF0ZSBwYXRjaCBkZXBsb3ltZW50IGFuZCBjb25maWd1cmF0aW9uIGluIGEgc3RhZ2luZyBl
+bnZpcm9ubWVudCBiZWZvcmUgYXBwbHlpbmcgdG8gcHJvZHVjdGlvbiBnYXRld2F5cy48L2Rpdj4K
+PGgzPkNvbmNsdXNpb248L2gzPgo8cD5FZGdlIGRldmljZXMgcmVtYWluIHByaW1hcnkgdGFyZ2V0
+cyBmb3Igc29waGlzdGljYXRlZCB0aHJlYXQgYWN0b3JzOyByYXBpZCBwYXRjaCBkZXBsb3ltZW50
+IGFuZCBuZXR3b3JrIHNlZ21lbnRhdGlvbiBhcmUgY3JpdGljYWwgdG8gcHJldmVudGluZyBwZXJp
+bWV0ZXIgYnJlYWNoZXMgZnJvbSBsZWFkaW5nIHRvIGZ1bGwgbmV0d29yayBjb21wcm9taXNlLjwv
+cD4KPGgzPkZ1cnRoZXIgUmVhZGluZzwvaDM+CjxwPmh0dHBzOi8vdGhlaGFja2VybmV3cy5jb20v
+MjAyNi8wOS9hdHRhY2tlcnMtZXhwbG9pdC10d28tc29uaWN3YWxsLXNtYS5odG1sPC9wPgo8aDM+
+Rm9vdG5vdGVzPC9oMz4KPHA+WzFdIGh0dHBzOi8vdGhlaGFja2VybmV3cy5jb20vMjAyNi8wOS9j
+aXNhLWFkZHMtc2V2ZW4tZXhwbG9pdGVkLWZsYXdzLWFzLmh0bWw8L3A+CjxwPlsyXSBodHRwczov
+L3RoZWhhY2tlcm5ld3MuY29tLzIwMjYvMDkvYXR0YWNrZXJzLWV4cGxvaXQtdHdvLXNvbmljd2Fs
+bC1zbWEuaHRtbDwvcD4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KCiAgICAgICAgPHRy
+Pjx0ZD48aHIgY2xhc3M9ImluY2lkZW50LXNlcGFyYXRvciI+PC90ZD48L3RyPgogICAgICAgIDx0
+cj4KICAgICAgICAgIDx0ZCBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZTVmNGVlO3BhZGRpbmc6
+MTVweCAzMHB4O2JvcmRlci10b3A6MnB4IHNvbGlkICMwMDkxNUE7Ij4KICAgICAgICAgICAgPGgy
+IHN0eWxlPSJjb2xvcjojMDA5MTVBO21hcmdpbjowO2ZvbnQtc2l6ZToxOHB4OyI+My4gQkdQIEhp
+amFja2luZyBDYW1wYWlnbiBUYXJnZXRzIFNvZnRhY3Vsb3VzIGFuZCBWaXJ0dWFsaXpvciBVcGRh
+dGVzIChBdWd1c3QgMjgsIDIwMjYpPC9oMj4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4K
+ICAgICAgICA8dHI+CiAgICAgICAgICA8dGQgc3R5bGU9InBhZGRpbmc6MjBweCAzMHB4IDEwcHgg
+MzBweDsiPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJtZXRhZGF0YSI+PHN0cm9uZz5QcmltYXJ5
+IENhdGVnb3J5Ojwvc3Ryb25nPiBTVVBQTFkgQ0hBSU48YnI+CjxzdHJvbmc+TmV3cyBOYXR1cmU6
+PC9zdHJvbmc+IE5vdXZlbGxlIGF0dGFxdWU8YnI+CjxzdHJvbmc+VGltZWxpbmU6PC9zdHJvbmc+
+IEluY2lkZW50IERhdGU6IEF1Z3VzdCAyOCwgMjAyNiB8IFNvdXJjZSBQdWJsaWNhdGlvbiBEYXRl
+OiBTZXB0ZW1iZXIgMiwgMjAyNjxicj4KPHN0cm9uZz5JbXBhY3RlZCBDb3VudHJ5Ojwvc3Ryb25n
+PiBHbG9iYWw8YnI+CjxzdHJvbmc+R2VvbG9jYXRpb24gLyBDbG91ZCBSZWdpb246PC9zdHJvbmc+
+IFVua25vd248YnI+CjxzdHJvbmc+TGlzdCBvZiBDb21wYW5pZXMgSW1wYWN0ZWQ6PC9zdHJvbmc+
+IFNvZnRhY3Vsb3VzLCBWaXJ0dWFsaXpvcjwvZGl2Pgo8cD5UaHJlYXQgYWN0b3JzIGV4ZWN1dGVk
+IGEgc29waGlzdGljYXRlZCBCb3JkZXIgR2F0ZXdheSBQcm90b2NvbCAoQkdQKSBoaWphY2sgc3Rh
+cnRpbmcgQXVndXN0IDI4LCAyMDI2LCB0byBkaXZlcnQgU29mdGFjdWxvdXMgdHJhZmZpYyBhbmQg
+ZGVsaXZlciBtYWxpY2lvdXMgVmlydHVhbGl6b3Igc29mdHdhcmUgdXBkYXRlcy7CuSDCsjwvcD4K
+PGgzPk92ZXJ2aWV3PC9oMz4KPHA+VGhlIGF0dGFjayB3aW5kb3cgcmFuIGZyb20gQXVndXN0IDI4
+IHRvIFNlcHRlbWJlciAyLCAyMDI2LCBkdXJpbmcgd2hpY2ggdGhlIGF0dGFja2VycyB1c2VkIGEg
+dGVjaG5pY2FsbHkgdmFsaWQgVExTIGNlcnRpZmljYXRlIGZvciBTb2Z0YWN1bG91cycgZG9tYWlu
+cyB0byBzZXJ2ZSBhIGNvbXByb21pc2VkIFZpcnR1YWxpem9yIHBhY2thZ2UuwrkgwrIgVGhpcyBz
+dXBwbHkgY2hhaW4gYXR0YWNrIHJlc3VsdGVkIGluIHJvb3QtbGV2ZWwgY29tcHJvbWlzZXMgYWNy
+b3NzIG11bHRpcGxlIGh5cGVydmlzb3JzIG1hbmFnZWQgYnkgaG9zdGluZyBwcm92aWRlcnMuwrk8
+L3A+CjxoMz5UaGUgQnJlYWNoIE1lY2hhbmlzbTwvaDM+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+
+IDxzdHJvbmc+QkdQIFJvdXRlIEhpamFja2luZzo8L3N0cm9uZz4gQXR0YWNrZXJzIG1hbmlwdWxh
+dGVkIEJHUCByb3V0aW5nIHRvIGludGVyY2VwdCBhbmQgcmVkaXJlY3QgdHJhZmZpYyBkZXN0aW5l
+ZCBmb3IgU29mdGFjdWxvdXMgdXBkYXRlIHNlcnZlcnMuwrk8L3A+CjxwPjxzdHJvbmc+4oCiPC9z
+dHJvbmc+IDxzdHJvbmc+VmFsaWQgVExTIENlcnRpZmljYXRlIEFidXNlOjwvc3Ryb25nPiBUaGUg
+dGhyZWF0IGFjdG9ycyBvYnRhaW5lZCBvciB1dGlsaXplZCBhIHZhbGlkIFRMUyBjZXJ0aWZpY2F0
+ZSBmb3IgdGhlIGhpamFja2VkIGRvbWFpbnMgdG8gYnlwYXNzIGJyb3dzZXIgYW5kIHN5c3RlbSB0
+cnVzdCB3YXJuaW5ncy7CsjwvcD4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5NYWxp
+Y2lvdXMgUGFja2FnZSBJbmplY3Rpb246PC9zdHJvbmc+IERpdmVydGVkIHVwZGF0ZSB0cmFmZmlj
+IHdhcyB1c2VkIHRvIHNlcnZlIGEgYmFja2Rvb3JlZCBWaXJ0dWFsaXpvciBwYWNrYWdlIHRoYXQg
+ZXN0YWJsaXNoZWQgcGVyc2lzdGVudCByb290IGFjY2Vzcy7CuTwvcD4KPGgzPkltcGFjdCBhbmQg
+Q29uc2VxdWVuY2VzPC9oMz4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5Sb290LUxl
+dmVsIEh5cGVydmlzb3IgQ29tcHJvbWlzZTo8L3N0cm9uZz4gTXVsdGlwbGUgaHlwZXJ2aXNvcnMg
+c3VzdGFpbmVkIGZ1bGwgcm9vdC1sZXZlbCBjb21wcm9taXNlLCBhbGxvd2luZyBhdHRhY2tlcnMg
+Y29tcGxldGUgY29udHJvbCBvdmVyIGhvc3RlZCB2aXJ0dWFsIG1hY2hpbmVzLsK5PC9wPgo8cD48
+c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPkluZnJhc3RydWN0dXJlIFRha2VvdmVyOjwvc3Ry
+b25nPiBBdHRhY2tlcnMgZXN0YWJsaXNoZWQgcGVyc2lzdGVudCBiYWNrZG9vciBhY2Nlc3MgdG8g
+dGhlIHZpcnR1YWxpemF0aW9uIGluZnJhc3RydWN0dXJlLCBieXBhc3Npbmcgc3RhbmRhcmQgc2Vj
+dXJpdHkgbW9uaXRvcmluZy48L3A+CjxoMz5Qcm9wb3NlZCBDb250cm9sOiBNaXRpZ2F0aW5nIFRo
+cmVhdHM8L2gzPgo8cD5UbyBhZGRyZXNzIHRoZSB2dWxuZXJhYmlsaXRpZXMgZXhwb3NlZCBieSB0
+aGlzIGluY2lkZW50LCB0aGUgaW1wbGVtZW50YXRpb24gb2YgdGhlIGZvbGxvd2luZyBjb250cm9s
+IGZyYW1ld29yayBpcyBwcm9wb3NlZDo8L3A+CjxkaXYgY2xhc3M9ImNvbnRyb2wtYm94Ij48c3Ry
+b25nPkkuIEdvdmVybmFuY2UgJiBDb250YWlubWVudCAoUHJldmVudGlvbik6PC9zdHJvbmc+IElt
+cGxlbWVudCBCR1AgUm91dGUgT3JpZ2luIEF1dGhvcml6YXRpb24gKFJPQSkgYW5kIFJvdXRlIE9y
+aWdpbiBWYWxpZGF0aW9uIChST1YpIHRvIG1pdGlnYXRlIGhpamFja2luZyByaXNrcy48YnI+Cjxz
+dHJvbmc+SUkuIElkZW50aXR5ICYgQWNjZXNzIE1hbmFnZW1lbnQgKENvbnRhaW5tZW50KTo8L3N0
+cm9uZz4gRW5mb3JjZSBzdHJpY3QgYWNjZXNzIGNvbnRyb2xzIGFuZCBtdWx0aS1mYWN0b3IgYXV0
+aGVudGljYXRpb24gb24gYWxsIHZpcnR1YWxpemF0aW9uIG1hbmFnZW1lbnQgY29uc29sZXMuPGJy
+Pgo8c3Ryb25nPklJSS4gSW5mcmFzdHJ1Y3R1cmUgSW50ZWxsaWdlbmNlIChEZXRlY3Rpb24pOjwv
+c3Ryb25nPiBNb25pdG9yIG5ldHdvcmsgcm91dGluZyB0YWJsZXMgZm9yIHVuZXhwZWN0ZWQgQkdQ
+IHBhdGggY2hhbmdlcyBhbmQgdmFsaWRhdGUgdXBkYXRlIHBhY2thZ2UgaGFzaGVzIGFnYWluc3Qg
+b2ZmaWNpYWwgb3V0LW9mLWJhbmQgc291cmNlcy48YnI+CjxzdHJvbmc+SVYuIE9wZXJhdGlvbmFs
+IFJlc2lsaWVuY2U6PC9zdHJvbmc+IE1haW50YWluIG9mZmxpbmUsIHZlcmlmaWVkIGdvbGRlbiBp
+bWFnZXMgb2YgaHlwZXJ2aXNvciBjb25maWd1cmF0aW9ucyBmb3IgcmFwaWQgcmVkZXBsb3ltZW50
+Ljxicj4KPHN0cm9uZz5WLiBTaW11bGF0aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBUZXN0IEJH
+UCBtb25pdG9yaW5nIHRvb2xzIGFuZCBmYWlsb3ZlciBwcm9jZWR1cmVzIGluIGEgc2ltdWxhdGVk
+IG5ldHdvcmsgZW52aXJvbm1lbnQuPC9kaXY+CjxoMz5Db25jbHVzaW9uPC9oMz4KPHA+QkdQIGhp
+amFja2luZyBjb21iaW5lZCB3aXRoIHZhbGlkIFRMUyBjZXJ0aWZpY2F0ZXMgcmVwcmVzZW50cyBh
+IGhpZ2hseSBzb3BoaXN0aWNhdGVkIHN1cHBseSBjaGFpbiB0aHJlYXQgdGhhdCBieXBhc3NlcyB0
+cmFkaXRpb25hbCBjcnlwdG9ncmFwaGljIHRydXN0IG1vZGVscywgcmVxdWlyaW5nIG91dC1vZi1i
+YW5kIHZlcmlmaWNhdGlvbiBvZiBjcml0aWNhbCBzb2Z0d2FyZSB1cGRhdGVzLjwvcD4KPGgzPkZ1
+cnRoZXIgUmVhZGluZzwvaDM+CjxwPmh0dHBzOi8vdGhlaGFja2VybmV3cy5jb20vMjAyNi8wOS9i
+Z3AtaGlqYWNrLWRlbGl2ZXJzLW1hbGljaW91cy5odG1sPC9wPgo8aDM+Rm9vdG5vdGVzPC9oMz4K
+PHA+WzFdIGh0dHBzOi8vdGhlaGFja2VybmV3cy5jb20vMjAyNi8wOS9iZ3AtaGlqYWNrLWRlbGl2
+ZXJzLW1hbGljaW91cy5odG1sPC9wPgo8cD5bMl0gaHR0cHM6Ly93d3cuc2VjdXJpdHl3ZWVrLmNv
+bS9tYWxpY2lvdXMtdmlydHVhbGl6b3ItdXBkYXRlLXNlcnZlZC12aWEtYmdwLWhpamFja2luZy88
+L3A+CiAgICAgICAgICA8L3RkPgogICAgICAgIDwvdHI+CgogICAgICAgIDx0cj48dGQ+PGhyIGNs
+YXNzPSJpbmNpZGVudC1zZXBhcmF0b3IiPjwvdGQ+PC90cj4KICAgICAgICA8dHI+CiAgICAgICAg
+ICA8dGQgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6I2U1ZjRlZTtwYWRkaW5nOjE1cHggMzBweDti
+b3JkZXItdG9wOjJweCBzb2xpZCAjMDA5MTVBOyI+CiAgICAgICAgICAgIDxoMiBzdHlsZT0iY29s
+b3I6IzAwOTE1QTttYXJnaW46MDtmb250LXNpemU6MThweDsiPjQuIEZCSSBJbnZlc3RpZ2F0ZXMg
+TWFzc2l2ZSBCcmVhY2ggb2YgMTUzIE1pbGxpb24gRHJpdmVyJ3MgTGljZW5zZXMgU3RvbGVuIGZy
+b20gSUQgVmVyaWZpY2F0aW9uIFNlcnZpY2UgKFNlcHRlbWJlciAyLCAyMDI2KTwvaDI+CiAgICAg
+ICAgICA8L3RkPgogICAgICAgIDwvdHI+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxl
+PSJwYWRkaW5nOjIwcHggMzBweCAxMHB4IDMwcHg7Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0i
+bWV0YWRhdGEiPjxzdHJvbmc+UHJpbWFyeSBDYXRlZ29yeTo8L3N0cm9uZz4gREFUQSBMRUFLPGJy
+Pgo8c3Ryb25nPk5ld3MgTmF0dXJlOjwvc3Ryb25nPiBOb3V2ZWxsZSBhdHRhcXVlPGJyPgo8c3Ry
+b25nPlRpbWVsaW5lOjwvc3Ryb25nPiBJbmNpZGVudCBEYXRlOiBTZXB0ZW1iZXIgMiwgMjAyNiBv
+ciBlYXJsaWVyIHwgU291cmNlIFB1YmxpY2F0aW9uIERhdGU6IFNlcHRlbWJlciAyLCAyMDI2PGJy
+Pgo8c3Ryb25nPkltcGFjdGVkIENvdW50cnk6PC9zdHJvbmc+IFVuaXRlZCBTdGF0ZXM8YnI+Cjxz
+dHJvbmc+R2VvbG9jYXRpb24gLyBDbG91ZCBSZWdpb246PC9zdHJvbmc+IFVua25vd248YnI+Cjxz
+dHJvbmc+TGlzdCBvZiBDb21wYW5pZXMgSW1wYWN0ZWQ6PC9zdHJvbmc+IFVua25vd24gSUQgVmVy
+aWZpY2F0aW9uIFNlcnZpY2U8L2Rpdj4KPHA+VGhlIEZCSSBpcyBpbnZlc3RpZ2F0aW5nIGEgbWFz
+c2l2ZSBkYXRhIGJyZWFjaCBpbnZvbHZpbmcgdGhlIHRoZWZ0IGFuZCBkYXJrIHdlYiBzYWxlIG9m
+IG92ZXIgMTUzIG1pbGxpb24gZHJpdmVyJ3MgbGljZW5zZSBzY2FucyBmcm9tIGEgbWFqb3IgaWRl
+bnRpdHkgdmVyaWZpY2F0aW9uIHNlcnZpY2Ugb24gU2VwdGVtYmVyIDIsIDIwMjYuwrkgwrI8L3A+
+CjxoMz5PdmVydmlldzwvaDM+CjxwPkFuIGlkZW50aXR5IHRoZWZ0IHNlYXJjaCBzaXRlIGNsYWlt
+ZWQgdG8gaGF2ZSBzdG9sZW4gb3ZlciAxNTAgbWlsbGlvbiBkcml2ZXIncyBsaWNlbnNlIHBob3Rv
+cyBmcm9tIGFuIHVubmFtZWQgSUQgdmVyaWZpY2F0aW9uIHNlcnZpY2UgYmVmb3JlIHRoZSBjcmlt
+ZSBzaXRlIHdhcyBzaHV0IGRvd24uwrIgVGhpcyBicmVhY2ggcG9zZXMgYSBzZXZlcmUgc3lzdGVt
+aWMgcmlzayB0byBmaW5hbmNpYWwgaW5zdGl0dXRpb25zIHRoYXQgcmVseSBvbiB0aGlyZC1wYXJ0
+eSBJRCB2ZXJpZmljYXRpb24gZm9yIEtub3cgWW91ciBDdXN0b21lciAoS1lDKSBhbmQgYW50aS1t
+b25leSBsYXVuZGVyaW5nIChBTUwpIGNvbXBsaWFuY2UuPC9wPgo8aDM+VGhlIEJyZWFjaCBNZWNo
+YW5pc208L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPlRoaXJkLVBhcnR5IENv
+bXByb21pc2U6PC9zdHJvbmc+IEF0dGFja2VycyBicmVhY2hlZCB0aGUgZGF0YWJhc2Ugb2YgYSBt
+YWpvciBpZGVudGl0eSB2ZXJpZmljYXRpb24gc2VydmljZSBwcm92aWRlciwgZ2FpbmluZyBhY2Nl
+c3MgdG8gc3RvcmVkIHNjYW5zIG9mIGdvdmVybm1lbnQtaXNzdWVkIElEcy7CuSDCsjwvcD4KPHA+
+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5EYXJrIFdlYiBNb25ldGl6YXRpb246PC9zdHJv
+bmc+IFRoZSBzdG9sZW4gZGF0YSwgaW5jbHVkaW5nIGhpZ2gtcmVzb2x1dGlvbiBwaG90b3Mgb2Yg
+ZHJpdmVyJ3MgbGljZW5zZXMsIHdhcyBsaXN0ZWQgZm9yIHNhbGUgb24gY3liZXJjcmltZSBmb3J1
+bXMuwrk8L3A+CjxoMz5JbXBhY3QgYW5kIENvbnNlcXVlbmNlczwvaDM+CjxwPjxzdHJvbmc+4oCi
+PC9zdHJvbmc+IDxzdHJvbmc+S1lDIGFuZCBJZGVudGl0eSBGcmF1ZDo8L3N0cm9uZz4gQXR0YWNr
+ZXJzIGNhbiB1c2UgdGhlIHN0b2xlbiBoaWdoLXF1YWxpdHkgSUQgc2NhbnMgdG8gYnlwYXNzIGF1
+dG9tYXRlZCBpZGVudGl0eSB2ZXJpZmljYXRpb24gY2hlY2tzIGF0IGJhbmtzIGFuZCBmaW5hbmNp
+YWwgaW5zdGl0dXRpb25zLjwvcD4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5SZWd1
+bGF0b3J5IGFuZCBDb21wbGlhbmNlIFJpc2s6PC9zdHJvbmc+IEZpbmFuY2lhbCBpbnN0aXR1dGlv
+bnMgdXRpbGl6aW5nIHRoZSBjb21wcm9taXNlZCB2ZW5kb3IgZmFjZSBpbmRpcmVjdCBjb21wbGlh
+bmNlIGFuZCByZXB1dGF0aW9uYWwgcmlza3MuPC9wPgo8aDM+UHJvcG9zZWQgQ29udHJvbDogTWl0
+aWdhdGluZyBUaHJlYXRzPC9oMz4KPHA+VG8gYWRkcmVzcyB0aGUgdnVsbmVyYWJpbGl0aWVzIGV4
+cG9zZWQgYnkgdGhpcyBpbmNpZGVudCwgdGhlIGltcGxlbWVudGF0aW9uIG9mIHRoZSBmb2xsb3dp
+bmcgY29udHJvbCBmcmFtZXdvcmsgaXMgcHJvcG9zZWQ6PC9wPgo8ZGl2IGNsYXNzPSJjb250cm9s
+LWJveCI+PHN0cm9uZz5JLiBHb3Zlcm5hbmNlICYgQ29udGFpbm1lbnQgKFByZXZlbnRpb24pOjwv
+c3Ryb25nPiBBdWRpdCBhbGwgdGhpcmQtcGFydHkgaWRlbnRpdHkgdmVyaWZpY2F0aW9uIHZlbmRv
+cnMgdG8gZW5zdXJlIHRoZXkgZG8gbm90IHJldGFpbiByYXcgSUQgc2NhbnMgaW5kZWZpbml0ZWx5
+Ljxicj4KPHN0cm9uZz5JSS4gSWRlbnRpdHkgJiBBY2Nlc3MgTWFuYWdlbWVudCAoQ29udGFpbm1l
+bnQpOjwvc3Ryb25nPiBJbXBsZW1lbnQgbXVsdGktbW9kYWwgaWRlbnRpdHkgdmVyaWZpY2F0aW9u
+IChlLmcuLCBjb21iaW5pbmcgSUQgc2NhbnMgd2l0aCBsaXZlIGZhY2lhbCBiaW9tZXRyaWNzIGFu
+ZCBiZWhhdmlvcmFsIGFuYWx5c2lzKS48YnI+CjxzdHJvbmc+SUlJLiBJbmZyYXN0cnVjdHVyZSBJ
+bnRlbGxpZ2VuY2UgKERldGVjdGlvbik6PC9zdHJvbmc+IE1vbml0b3IgZm9yIGFub21hbG91cyBw
+YXR0ZXJucyBpbiBuZXcgYWNjb3VudCBjcmVhdGlvbnMsIHN1Y2ggYXMgcmV1c2VkIElEIHBob3Rv
+cyBvciBzeW50aGV0aWMgaWRlbnRpdGllcy48YnI+CjxzdHJvbmc+SVYuIE9wZXJhdGlvbmFsIFJl
+c2lsaWVuY2U6PC9zdHJvbmc+IEVzdGFibGlzaCBhIHJhcGlkLXJlc3BvbnNlIHByb3RvY29sIHRv
+IGZsYWcgYW5kIG1hbnVhbGx5IHJldmlldyBoaWdoLXJpc2sgYWNjb3VudCByZWdpc3RyYXRpb25z
+Ljxicj4KPHN0cm9uZz5WLiBTaW11bGF0aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBTaW11bGF0
+ZSBzeW50aGV0aWMgaWRlbnRpdHkgZnJhdWQgc2NlbmFyaW9zIHRvIHRlc3QgdGhlIHJlc2lsaWVu
+Y2Ugb2YgdGhlIGJhbmsncyBvbmJvYXJkaW5nIHBpcGVsaW5lLjwvZGl2Pgo8aDM+Q29uY2x1c2lv
+bjwvaDM+CjxwPlRoZSBjb21wcm9taXNlIG9mIGlkZW50aXR5IHZlcmlmaWNhdGlvbiBzZXJ2aWNl
+cyB1bmRlcm1pbmVzIHRoZSBmb3VuZGF0aW9uIG9mIGRpZ2l0YWwgb25ib2FyZGluZywgZm9yY2lu
+ZyBiYW5rcyB0byBhZG9wdCBtb3JlIHJvYnVzdCwgbXVsdGktbGF5ZXJlZCBpZGVudGl0eSB2ZXJp
+ZmljYXRpb24gY29udHJvbHMuPC9wPgo8aDM+RnVydGhlciBSZWFkaW5nPC9oMz4KPHA+aHR0cHM6
+Ly90ZWNoY3J1bmNoLmNvbS8yMDI2LzA5LzAyL2l0LXN1cmUtbG9va3MtbGlrZS1oYWNrZXJzLWJy
+ZWFjaGVkLWEtbWFqb3ItaWQtY2FyZC12ZXJpZmljYXRpb24tc2VydmljZS88L3A+CjxoMz5Gb290
+bm90ZXM8L2gzPgo8cD5bMV0gaHR0cHM6Ly93d3cuaW5mb3NlY3VyaXR5LW1hZ2F6aW5lLmNvbS9u
+ZXdzL2ZiaS1wcm9iZXMtYnJlYWNoLTE1My1taWxsaW9uLzwvcD4KPHA+WzJdIGh0dHBzOi8vdGVj
+aGNydW5jaC5jb20vMjAyNi8wOS8wMi9pdC1zdXJlLWxvb2tzLWxpa2UtaGFja2Vycy1icmVhY2hl
+ZC1hLW1ham9yLWlkLWNhcmQtdmVyaWZpY2F0aW9uLXNlcnZpY2UvPC9wPgogICAgICAgICAgPC90
+ZD4KICAgICAgICA8L3RyPgoKICAgICAgICA8dHI+PHRkPjxociBjbGFzcz0iaW5jaWRlbnQtc2Vw
+YXJhdG9yIj48L3RkPjwvdHI+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxlPSJiYWNr
+Z3JvdW5kLWNvbG9yOiNlNWY0ZWU7cGFkZGluZzoxNXB4IDMwcHg7Ym9yZGVyLXRvcDoycHggc29s
+aWQgIzAwOTE1QTsiPgogICAgICAgICAgICA8aDIgc3R5bGU9ImNvbG9yOiMwMDkxNUE7bWFyZ2lu
+OjA7Zm9udC1zaXplOjE4cHg7Ij41LiBNYWxpY2lvdXMgR2l0IENvbmZpZ3VyYXRpb25zIEVuYWJs
+ZSBSZW1vdGUgQ29kZSBFeGVjdXRpb24gaW4gQUkgQ29kaW5nIEFnZW50cyAoU2VwdGVtYmVyIDIs
+IDIwMjYpPC9oMj4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KICAgICAgICA8dHI+CiAg
+ICAgICAgICA8dGQgc3R5bGU9InBhZGRpbmc6MjBweCAzMHB4IDEwcHggMzBweDsiPgogICAgICAg
+ICAgICA8ZGl2IGNsYXNzPSJtZXRhZGF0YSI+PHN0cm9uZz5QcmltYXJ5IENhdGVnb3J5Ojwvc3Ry
+b25nPiBBSTxicj4KPHN0cm9uZz5OZXdzIE5hdHVyZTo8L3N0cm9uZz4gTm91dmVsbGUgYXR0YXF1
+ZTxicj4KPHN0cm9uZz5UaW1lbGluZTo8L3N0cm9uZz4gSW5jaWRlbnQgRGF0ZTogU2VwdGVtYmVy
+IDIsIDIwMjYgfCBTb3VyY2UgUHVibGljYXRpb24gRGF0ZTogU2VwdGVtYmVyIDIsIDIwMjY8YnI+
+CjxzdHJvbmc+SW1wYWN0ZWQgQ291bnRyeTo8L3N0cm9uZz4gR2xvYmFsPGJyPgo8c3Ryb25nPkdl
+b2xvY2F0aW9uIC8gQ2xvdWQgUmVnaW9uOjwvc3Ryb25nPiBVbmtub3duPGJyPgo8c3Ryb25nPkxp
+c3Qgb2YgQ29tcGFuaWVzIEltcGFjdGVkOjwvc3Ryb25nPiBBbnRocm9waWMgKENsYXVkZSksIE9w
+ZW5BSSAoQ29kZXgpLCBDdXJzb3I8L2Rpdj4KPHA+U2VjdXJpdHkgcmVzZWFyY2hlcnMgZGlzY2xv
+c2VkIGVpZ2h0IHZ1bG5lcmFiaWxpdGllcyBhY3Jvc3Mgc2V2ZW4gY29tbWFuZC1saW5lIEFJIGNv
+ZGluZyBhZ2VudHMsIGluY2x1ZGluZyBDbGF1ZGUsIENvZGV4LCBhbmQgQ3Vyc29yLCBvbiBTZXB0
+ZW1iZXIgMiwgMjAyNiwgYWxsb3dpbmcgbWFsaWNpb3VzIHJlcG9zaXRvcmllcyB0byBleGVjdXRl
+IGFyYml0cmFyeSBjb2RlIG9uIGRldmVsb3BlciBtYWNoaW5lcy7CuTwvcD4KPGgzPk92ZXJ2aWV3
+PC9oMz4KPHA+RGlzY292ZXJlZCBieSBNYW5pZm9sZCBTZWN1cml0eSwgdGhlIGZsYXdzIGV4cGxv
+aXQgaG93IEFJIGFnZW50cyBpbnRlcmFjdCB3aXRoIEdpdCByZXBvc2l0b3JpZXMuwrkgSWYgYSBk
+ZXZlbG9wZXIgaW5zdHJ1Y3RzIGFuIEFJIGFnZW50IHRvIGludGVyYWN0IHdpdGggYSBtYWxpY2lv
+dXMgcmVwb3NpdG9yeSwgdGhlIHJlcG9zaXRvcnkncyBjdXN0b20gR2l0IGNvbmZpZ3VyYXRpb24g
+Y2FuIGZvcmNlIHRoZSBhZ2VudCB0byBydW4gYXR0YWNrZXItY29udHJvbGxlZCBjb21tYW5kcyBv
+dXRzaWRlIGl0cyBzYW5kYm94IHdpdGhvdXQgcHJvbXB0aW5nIHRoZSB1c2VyLsK5IEZvdXIgb2Yg
+dGhlc2UgZmxhd3MgcmVtYWluZWQgdW5wYXRjaGVkIGF0IHRoZSB0aW1lIG9mIHB1YmxpY2F0aW9u
+LsK5PC9wPgo8aDM+VGhlIEJyZWFjaCBNZWNoYW5pc208L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ry
+b25nPiA8c3Ryb25nPkdpdCBDb25maWcgTWFuaXB1bGF0aW9uOjwvc3Ryb25nPiBBdHRhY2tlcnMg
+Y3JhZnQgYSByZXBvc2l0b3J5IHdpdGggYSBtYWxpY2lvdXMgYC5naXRgIGNvbmZpZ3VyYXRpb24g
+dGhhdCBzcGVjaWZpZXMgYXJiaXRyYXJ5IGNvbW1hbmRzIHRvIHJ1biBkdXJpbmcgc3RhbmRhcmQg
+R2l0IG9wZXJhdGlvbnMuwrk8L3A+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+IDxzdHJvbmc+U2Fu
+ZGJveCBFc2NhcGU6PC9zdHJvbmc+IFRoZSBBSSBhZ2VudCBleGVjdXRlcyB0aGUgR2l0IGNvbW1h
+bmRzIGFzIHRoZSBsb2NhbCB1c2VyLCBydW5uaW5nIHRoZSBtYWxpY2lvdXMgcGF5bG9hZCBvdXRz
+aWRlIHRoZSBhZ2VudCdzIHJlc3RyaWN0ZWQgc2FuZGJveCBlbnZpcm9ubWVudC7CuTwvcD4KPGgz
+PkltcGFjdCBhbmQgQ29uc2VxdWVuY2VzPC9oMz4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0
+cm9uZz5EZXZlbG9wZXIgV29ya3N0YXRpb24gQ29tcHJvbWlzZTo8L3N0cm9uZz4gQXR0YWNrZXJz
+IGNhbiBhY2hpZXZlIGZ1bGwgcmVtb3RlIGNvZGUgZXhlY3V0aW9uIG9uIGRldmVsb3BlciBtYWNo
+aW5lcywgcG90ZW50aWFsbHkgbGVhZGluZyB0byBzb3VyY2UgY29kZSB0aGVmdCBvciBjcmVkZW50
+aWFsIGhhcnZlc3RpbmcuPC9wPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPlN1cHBs
+eSBDaGFpbiBQb2lzb25pbmc6PC9zdHJvbmc+IENvbXByb21pc2VkIGRldmVsb3BlciB3b3Jrc3Rh
+dGlvbnMgY2FuIGJlIHVzZWQgdG8gaW5qZWN0IG1hbGljaW91cyBjb2RlIGludG8gdGhlIGJhbmsn
+cyBpbnRlcm5hbCBzb2Z0d2FyZSByZXBvc2l0b3JpZXMuPC9wPgo8aDM+UHJvcG9zZWQgQ29udHJv
+bDogTWl0aWdhdGluZyBUaHJlYXRzPC9oMz4KPHA+VG8gYWRkcmVzcyB0aGUgdnVsbmVyYWJpbGl0
+aWVzIGV4cG9zZWQgYnkgdGhpcyBpbmNpZGVudCwgdGhlIGltcGxlbWVudGF0aW9uIG9mIHRoZSBm
+b2xsb3dpbmcgY29udHJvbCBmcmFtZXdvcmsgaXMgcHJvcG9zZWQ6PC9wPgo8ZGl2IGNsYXNzPSJj
+b250cm9sLWJveCI+PHN0cm9uZz5JLiBHb3Zlcm5hbmNlICYgQ29udGFpbm1lbnQgKFByZXZlbnRp
+b24pOjwvc3Ryb25nPiBSZXN0cmljdCB0aGUgdXNlIG9mIHVuYXBwcm92ZWQgY29tbWFuZC1saW5l
+IEFJIGNvZGluZyBhZ2VudHMgb24gY29ycG9yYXRlIGRldmVsb3BlciB3b3Jrc3RhdGlvbnMuPGJy
+Pgo8c3Ryb25nPklJLiBJZGVudGl0eSAmIEFjY2VzcyBNYW5hZ2VtZW50IChDb250YWlubWVudCk6
+PC9zdHJvbmc+IFJ1biBBSSBjb2RpbmcgdG9vbHMgaW4gaXNvbGF0ZWQsIGNvbnRhaW5lcml6ZWQg
+ZW52aXJvbm1lbnRzIHdpdGggcmVzdHJpY3RlZCBhY2Nlc3MgdG8gdGhlIGhvc3Qgc3lzdGVtLjxi
+cj4KPHN0cm9uZz5JSUkuIEluZnJhc3RydWN0dXJlIEludGVsbGlnZW5jZSAoRGV0ZWN0aW9uKTo8
+L3N0cm9uZz4gTW9uaXRvciBkZXZlbG9wZXIgZW5kcG9pbnRzIGZvciB1bnVzdWFsIGNoaWxkIHBy
+b2Nlc3NlcyBzcGF3bmVkIGJ5IEFJIGFnZW50IGJpbmFyaWVzIG9yIEdpdCBwcm9jZXNzZXMuPGJy
+Pgo8c3Ryb25nPklWLiBPcGVyYXRpb25hbCBSZXNpbGllbmNlOjwvc3Ryb25nPiBJbXBsZW1lbnQg
+c3RyaWN0IGJyYW5jaCBwcm90ZWN0aW9uIGFuZCBtYW5kYXRvcnkgcGVlciByZXZpZXdzIGZvciBh
+bGwgY29kZSBnZW5lcmF0ZWQgb3IgdG91Y2hlZCBieSBBSSBhZ2VudHMuPGJyPgo8c3Ryb25nPlYu
+IFNpbXVsYXRpb24gZW52aXJvbm1lbnQ6PC9zdHJvbmc+IFRlc3QgQUkgYWdlbnQgYmVoYXZpb3Jz
+IGFnYWluc3QgY29udHJvbGxlZCwgbm9uLXByb2R1Y3Rpb24gcmVwb3NpdG9yaWVzIHRvIGlkZW50
+aWZ5IHVuc2FmZSBleGVjdXRpb24gcGF0dGVybnMuPC9kaXY+CjxoMz5Db25jbHVzaW9uPC9oMz4K
+PHA+QUkgY29kaW5nIGFnZW50cyBpbnRyb2R1Y2UgbmV3IGF0dGFjayB2ZWN0b3JzIGludG8gdGhl
+IGRldmVsb3BtZW50IGxpZmVjeWNsZTsgb3JnYW5pemF0aW9ucyBtdXN0IHRyZWF0IEFJIHRvb2xz
+IGFzIHVudHJ1c3RlZCBleGVjdXRpb24gZW52aXJvbm1lbnRzIGFuZCBpc29sYXRlIHRoZW0gYWNj
+b3JkaW5nbHkuPC9wPgo8aDM+RnVydGhlciBSZWFkaW5nPC9oMz4KPHA+aHR0cHM6Ly90aGVoYWNr
+ZXJuZXdzLmNvbS8yMDI2LzA5L21hbGljaW91cy1naXQtY29uZmlncy1jYW4tbWFrZS1jbGF1ZGUu
+aHRtbDwvcD4KPGgzPkZvb3Rub3RlczwvaDM+CjxwPlsxXSBodHRwczovL3RoZWhhY2tlcm5ld3Mu
+Y29tLzIwMjYvMDkvbWFsaWNpb3VzLWdpdC1jb25maWdzLWNhbi1tYWtlLWNsYXVkZS5odG1sPC9w
+PgogICAgICAgICAgPC90ZD4KICAgICAgICA8L3RyPgoKICAgICAgICA8dHI+PHRkPjxociBjbGFz
+cz0iaW5jaWRlbnQtc2VwYXJhdG9yIj48L3RkPjwvdHI+CiAgICAgICAgPHRyPgogICAgICAgICAg
+PHRkIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNlNWY0ZWU7cGFkZGluZzoxNXB4IDMwcHg7Ym9y
+ZGVyLXRvcDoycHggc29saWQgIzAwOTE1QTsiPgogICAgICAgICAgICA8aDIgc3R5bGU9ImNvbG9y
+OiMwMDkxNUE7bWFyZ2luOjA7Zm9udC1zaXplOjE4cHg7Ij42LiBEcm9wYm94IEFjY291bnRzIENv
+bXByb21pc2VkIHZpYSBFeHBsb2l0YXRpb24gb2YgTGVub3ZvIEVtYWlsIFZlcmlmaWNhdGlvbiBG
+bGF3IChTZXB0ZW1iZXIgMiwgMjAyNik8L2gyPgogICAgICAgICAgPC90ZD4KICAgICAgICA8L3Ry
+PgogICAgICAgIDx0cj4KICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzoyMHB4IDMwcHggMTBw
+eCAzMHB4OyI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9Im1ldGFkYXRhIj48c3Ryb25nPlByaW1h
+cnkgQ2F0ZWdvcnk6PC9zdHJvbmc+IENMT1VEPGJyPgo8c3Ryb25nPk5ld3MgTmF0dXJlOjwvc3Ry
+b25nPiBOb3V2ZWxsZSBhdHRhcXVlPGJyPgo8c3Ryb25nPlRpbWVsaW5lOjwvc3Ryb25nPiBJbmNp
+ZGVudCBEYXRlOiBTZXB0ZW1iZXIgMiwgMjAyNiBvciBlYXJsaWVyIHwgU291cmNlIFB1YmxpY2F0
+aW9uIERhdGU6IFNlcHRlbWJlciAyLCAyMDI2PGJyPgo8c3Ryb25nPkltcGFjdGVkIENvdW50cnk6
+PC9zdHJvbmc+IEdsb2JhbDxicj4KPHN0cm9uZz5HZW9sb2NhdGlvbiAvIENsb3VkIFJlZ2lvbjo8
+L3N0cm9uZz4gVW5rbm93bjxicj4KPHN0cm9uZz5MaXN0IG9mIENvbXBhbmllcyBJbXBhY3RlZDo8
+L3N0cm9uZz4gRHJvcGJveCwgTGVub3ZvPC9kaXY+CjxwPkRyb3Bib3ggaXNzdWVkIHdhcm5pbmdz
+IHRvIHVzZXJzIG9uIFNlcHRlbWJlciAyLCAyMDI2LCBhZnRlciB1bmF1dGhvcml6ZWQgcGFydGll
+cyBicmVhY2hlZCBhY2NvdW50cyBieSBleHBsb2l0aW5nIGFuIGVtYWlsIHZlcmlmaWNhdGlvbiBm
+bGF3IGluIExlbm92bydzIGlkZW50aXR5IHN5c3RlbS7CuTwvcD4KPGgzPk92ZXJ2aWV3PC9oMz4K
+PHA+QXR0YWNrZXJzIGV4cGxvaXRlZCBhIHZ1bG5lcmFiaWxpdHkgaW4gTGVub3ZvJ3MgZW1haWwg
+dmVyaWZpY2F0aW9uIHByb2Nlc3MgdG8gcmVnaXN0ZXIgZnJhdWR1bGVudCBMZW5vdm8gSURzIHVz
+aW5nIHRhcmdldCBlbWFpbCBhZGRyZXNzZXMuwrkgVGhpcyBhbGxvd2VkIHRoZW0gdG8gYnlwYXNz
+IGF1dGhlbnRpY2F0aW9uIGFuZCBnYWluIHVuYXV0aG9yaXplZCBhY2Nlc3MgdG8gbGlua2VkIERy
+b3Bib3ggYWNjb3VudHMsIGhpZ2hsaWdodGluZyB0aGUgcmlza3Mgb2YgZmVkZXJhdGVkIGlkZW50
+aXR5IGFuZCBjcm9zcy1wbGF0Zm9ybSB0cnVzdCByZWxhdGlvbnNoaXBzLsK5PC9wPgo8aDM+VGhl
+IEJyZWFjaCBNZWNoYW5pc208L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPkVt
+YWlsIFZlcmlmaWNhdGlvbiBCeXBhc3M6PC9zdHJvbmc+IEF0dGFja2VycyBleHBsb2l0ZWQgYSBm
+bGF3IGluIExlbm92bydzIHJlZ2lzdHJhdGlvbiBzeXN0ZW0gdG8gdmVyaWZ5IGVtYWlsIGFkZHJl
+c3NlcyB0aGV5IGRpZCBub3Qgb3duLsK5PC9wPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ry
+b25nPkZlZGVyYXRlZCBBY2Nlc3MgQWJ1c2U6PC9zdHJvbmc+IFRoZSBmcmF1ZHVsZW50IExlbm92
+byBJRHMgd2VyZSB0aGVuIHVzZWQgdG8gYXV0aGVudGljYXRlIGFuZCBsb2cgaW50byBsaW5rZWQg
+dGhpcmQtcGFydHkgc2VydmljZXMsIHNwZWNpZmljYWxseSBEcm9wYm94LsK5PC9wPgo8aDM+SW1w
+YWN0IGFuZCBDb25zZXF1ZW5jZXM8L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25n
+PlVuYXV0aG9yaXplZCBDbG91ZCBBY2Nlc3M6PC9zdHJvbmc+IEF0dGFja2VycyBnYWluZWQgYWNj
+ZXNzIHRvIHNlbnNpdGl2ZSBjb3Jwb3JhdGUgYW5kIHBlcnNvbmFsIGRhdGEgc3RvcmVkIHdpdGhp
+biBjb21wcm9taXNlZCBEcm9wYm94IGFjY291bnRzLjwvcD4KPHA+PHN0cm9uZz7igKI8L3N0cm9u
+Zz4gPHN0cm9uZz5DcmVkZW50aWFsIFN0dWZmaW5nIC8gUGl2b3Q6PC9zdHJvbmc+IFRoZSBicmVh
+Y2ggY291bGQgYmUgdXNlZCB0byBoYXJ2ZXN0IGZ1cnRoZXIgY3JlZGVudGlhbHMgb3IgcGl2b3Qg
+aW50byBvdGhlciBjb3Jwb3JhdGUgY2xvdWQgc2VydmljZXMuPC9wPgo8aDM+UHJvcG9zZWQgQ29u
+dHJvbDogTWl0aWdhdGluZyBUaHJlYXRzPC9oMz4KPHA+VG8gYWRkcmVzcyB0aGUgdnVsbmVyYWJp
+bGl0aWVzIGV4cG9zZWQgYnkgdGhpcyBpbmNpZGVudCwgdGhlIGltcGxlbWVudGF0aW9uIG9mIHRo
+ZSBmb2xsb3dpbmcgY29udHJvbCBmcmFtZXdvcmsgaXMgcHJvcG9zZWQ6PC9wPgo8ZGl2IGNsYXNz
+PSJjb250cm9sLWJveCI+PHN0cm9uZz5JLiBHb3Zlcm5hbmNlICYgQ29udGFpbm1lbnQgKFByZXZl
+bnRpb24pOjwvc3Ryb25nPiBSZXZpZXcgYW5kIHJlc3RyaWN0IHRoZSB1c2Ugb2YgdGhpcmQtcGFy
+dHkgZmVkZXJhdGVkIGlkZW50aXR5IHByb3ZpZGVycyAobGlrZSBMZW5vdm8gSUQpIGZvciBjb3Jw
+b3JhdGUgY2xvdWQgc2VydmljZXMuPGJyPgo8c3Ryb25nPklJLiBJZGVudGl0eSAmIEFjY2VzcyBN
+YW5hZ2VtZW50IChDb250YWlubWVudCk6PC9zdHJvbmc+IEVuZm9yY2UgbWFuZGF0b3J5IG11bHRp
+LWZhY3RvciBhdXRoZW50aWNhdGlvbiAoTUZBKSBhdCB0aGUgYXBwbGljYXRpb24gbGV2ZWwsIGlu
+ZGVwZW5kZW50IG9mIGZlZGVyYXRlZCBpZGVudGl0eSBwcm92aWRlcnMuPGJyPgo8c3Ryb25nPklJ
+SS4gSW5mcmFzdHJ1Y3R1cmUgSW50ZWxsaWdlbmNlIChEZXRlY3Rpb24pOjwvc3Ryb25nPiBNb25p
+dG9yIGNsb3VkIGFjY2VzcyBsb2dzIGZvciBhbm9tYWxvdXMgbG9naW5zIG9yaWdpbmF0aW5nIGZy
+b20gdW5leHBlY3RlZCBpZGVudGl0eSBwcm92aWRlcnMgb3IgZ2VvZ3JhcGhpYyBsb2NhdGlvbnMu
+PGJyPgo8c3Ryb25nPklWLiBPcGVyYXRpb25hbCBSZXNpbGllbmNlOjwvc3Ryb25nPiBJbXBsZW1l
+bnQgYXV0b21hdGVkIGRhdGEgbG9zcyBwcmV2ZW50aW9uIChETFApIHBvbGljaWVzIHRvIGRldGVj
+dCBhbmQgYmxvY2sgbWFzcyBkb3dubG9hZHMgZnJvbSBjbG91ZCBzdG9yYWdlLjxicj4KPHN0cm9u
+Zz5WLiBTaW11bGF0aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBDb25kdWN0IGZlZGVyYXRlZCBT
+U08gdHJ1c3QgcmVsYXRpb25zaGlwIGF1ZGl0cyBhbmQgc2ltdWxhdGUgYnlwYXNzIHNjZW5hcmlv
+cyBpbiBhIHRlc3QgdGVuYW50LjwvZGl2Pgo8aDM+Q29uY2x1c2lvbjwvaDM+CjxwPkZlZGVyYXRl
+ZCBpZGVudGl0eSBzeXN0ZW1zIHNpbXBsaWZ5IGFjY2VzcyBidXQgaW50cm9kdWNlIHNoYXJlZCBy
+aXNrczsgb3JnYW5pemF0aW9ucyBtdXN0IGltcGxlbWVudCBpbmRlcGVuZGVudCB2ZXJpZmljYXRp
+b24gY29udHJvbHMgdG8gcHJvdGVjdCBzZW5zaXRpdmUgY2xvdWQgcmVwb3NpdG9yaWVzLjwvcD4K
+PGgzPkZ1cnRoZXIgUmVhZGluZzwvaDM+CjxwPmh0dHBzOi8vd3d3LmJsZWVwaW5nY29tcHV0ZXIu
+Y29tL25ld3Mvc2VjdXJpdHkvZHJvcGJveC1hY2NvdW50cy1icmVhY2hlZC10aHJvdWdoLWxlbm92
+by1lbWFpbC12ZXJpZmljYXRpb24tZmxhdy88L3A+CjxoMz5Gb290bm90ZXM8L2gzPgo8cD5bMV0g
+aHR0cHM6Ly93d3cuYmxlZXBpbmdjb21wdXRlci5jb20vbmV3cy9zZWN1cml0eS9kcm9wYm94LWFj
+Y291bnRzLWJyZWFjaGVkLXRocm91Z2gtbGVub3ZvLWVtYWlsLXZlcmlmaWNhdGlvbi1mbGF3Lzwv
+cD4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KCiAgICAgICAgPHRyPjx0ZD48aHIgY2xh
+c3M9ImluY2lkZW50LXNlcGFyYXRvciI+PC90ZD48L3RyPgogICAgICAgIDx0cj4KICAgICAgICAg
+IDx0ZCBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZTVmNGVlO3BhZGRpbmc6MTVweCAzMHB4O2Jv
+cmRlci10b3A6MnB4IHNvbGlkICMwMDkxNUE7Ij4KICAgICAgICAgICAgPGgyIHN0eWxlPSJjb2xv
+cjojMDA5MTVBO21hcmdpbjowO2ZvbnQtc2l6ZToxOHB4OyI+Ny4gIlNwcmluZyBSaW5nIiBUaHJl
+YXQgR3JvdXAgVGFyZ2V0cyBNaWNyb3NvZnQgVGVhbXMgVXNlcnMgaW4gU29waGlzdGljYXRlZCBW
+aXNoaW5nIENhbXBhaWduIChTZXB0ZW1iZXIgMiwgMjAyNik8L2gyPgogICAgICAgICAgPC90ZD4K
+ICAgICAgICA8L3RyPgogICAgICAgIDx0cj4KICAgICAgICAgIDx0ZCBzdHlsZT0icGFkZGluZzoy
+MHB4IDMwcHggMTBweCAzMHB4OyI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9Im1ldGFkYXRhIj48
+c3Ryb25nPlByaW1hcnkgQ2F0ZWdvcnk6PC9zdHJvbmc+IFNVUFBMWSBDSEFJTjxicj4KPHN0cm9u
+Zz5OZXdzIE5hdHVyZTo8L3N0cm9uZz4gTm91dmVsbGUgYXR0YXF1ZTxicj4KPHN0cm9uZz5UaW1l
+bGluZTo8L3N0cm9uZz4gSW5jaWRlbnQgRGF0ZTogU2VwdGVtYmVyIDIsIDIwMjYgb3IgZWFybGll
+ciB8IFNvdXJjZSBQdWJsaWNhdGlvbiBEYXRlOiBTZXB0ZW1iZXIgMiwgMjAyNjxicj4KPHN0cm9u
+Zz5JbXBhY3RlZCBDb3VudHJ5Ojwvc3Ryb25nPiBHbG9iYWw8YnI+CjxzdHJvbmc+R2VvbG9jYXRp
+b24gLyBDbG91ZCBSZWdpb246PC9zdHJvbmc+IFVua25vd248YnI+CjxzdHJvbmc+TGlzdCBvZiBD
+b21wYW5pZXMgSW1wYWN0ZWQ6PC9zdHJvbmc+IE1pY3Jvc29mdCAoVGVhbXMgdXNlcnMpPC9kaXY+
+CjxwPkEgdGhyZWF0IGdyb3VwIGtub3duIGFzICJTcHJpbmcgUmluZyIgaXMgYWN0aXZlbHkgZXhl
+Y3V0aW5nIHZvaWNlIHBoaXNoaW5nICh2aXNoaW5nKSBhdHRhY2tzIHRhcmdldGluZyBNaWNyb3Nv
+ZnQgVGVhbXMgdXNlcnMgdG8gY29tcHJvbWlzZSBjb3Jwb3JhdGUgc2Vzc2lvbnMgYW5kIHNwcmVh
+ZCBtYWx3YXJlLCBhcyByZXBvcnRlZCBvbiBTZXB0ZW1iZXIgMiwgMjAyNi7CuTwvcD4KPGgzPk92
+ZXJ2aWV3PC9oMz4KPHA+VGhlIGNhbXBhaWduIHNwZWNpZmljYWxseSB0YXJnZXRzIHVzZXJzIG9m
+IHRoZSBNaWNyb3NvZnQgVGVhbXMgY29sbGFib3JhdGlvbiBzdWl0ZS7CuSBCeSBjb21iaW5pbmcg
+dm9pY2UgcGhpc2hpbmcgd2l0aCBzZXNzaW9uIGhpamFja2luZyB0ZWNobmlxdWVzLCB0aGUgYXR0
+YWNrZXJzIGFpbSB0byBnYWluIHJlbW90ZSBhY2Nlc3MgdG8gYWN0aXZlIHVzZXIgc2Vzc2lvbnMs
+IGRpc3RyaWJ1dGUgbWFsd2FyZSwgYW5kIHVsdGltYXRlbHkgdGFrZSBvdmVyIGNvcnBvcmF0ZSBp
+bmZyYXN0cnVjdHVyZS7CuTwvcD4KPGgzPlRoZSBCcmVhY2ggTWVjaGFuaXNtPC9oMz4KPHA+PHN0
+cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5WaXNoaW5nIGFuZCBTb2NpYWwgRW5naW5lZXJpbmc6
+PC9zdHJvbmc+IEF0dGFja2VycyBjb250YWN0IHRhcmdldHMgdmlhIHZvaWNlIGNhbGxzLCBpbXBl
+cnNvbmF0aW5nIElUIHN1cHBvcnQgb3IgdHJ1c3RlZCBlbnRpdGllcyB0byB0cmljayB0aGVtIGlu
+dG8gcGVyZm9ybWluZyBhY3Rpb25zIG9uIFRlYW1zLsK5PC9wPgo8cD48c3Ryb25nPuKAojwvc3Ry
+b25nPiA8c3Ryb25nPlNlc3Npb24gSGlqYWNraW5nOjwvc3Ryb25nPiBUaGUgZ3JvdXAgZXhwbG9p
+dHMgY29sbGFib3JhdGlvbiBmZWF0dXJlcyB0byBoaWphY2sgYWN0aXZlIHVzZXIgc2Vzc2lvbnMg
+YW5kIGJ5cGFzcyBtdWx0aS1mYWN0b3IgYXV0aGVudGljYXRpb24gKE1GQSkuwrk8L3A+CjxoMz5J
+bXBhY3QgYW5kIENvbnNlcXVlbmNlczwvaDM+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+IDxzdHJv
+bmc+U2Vzc2lvbiBUYWtlb3Zlcjo8L3N0cm9uZz4gQXR0YWNrZXJzIGdhaW4gZGlyZWN0IGFjY2Vz
+cyB0byBpbnRlcm5hbCBjb21tdW5pY2F0aW9uIGNoYW5uZWxzLCBhbGxvd2luZyB0aGVtIHRvIGlt
+cGVyc29uYXRlIGVtcGxveWVlcy48L3A+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+IDxzdHJvbmc+
+TWFsd2FyZSBEaXN0cmlidXRpb246PC9zdHJvbmc+IENvbXByb21pc2VkIGFjY291bnRzIGFyZSB1
+c2VkIHRvIGRpc3RyaWJ1dGUgbWFsd2FyZSBpbnRlcm5hbGx5LCBleHBsb2l0aW5nIHRoZSBoaWdo
+IGxldmVsIG9mIHRydXN0IHdpdGhpbiBUZWFtcy48L3A+CjxoMz5Qcm9wb3NlZCBDb250cm9sOiBN
+aXRpZ2F0aW5nIFRocmVhdHM8L2gzPgo8cD5UbyBhZGRyZXNzIHRoZSB2dWxuZXJhYmlsaXRpZXMg
+ZXhwb3NlZCBieSB0aGlzIGluY2lkZW50LCB0aGUgaW1wbGVtZW50YXRpb24gb2YgdGhlIGZvbGxv
+d2luZyBjb250cm9sIGZyYW1ld29yayBpcyBwcm9wb3NlZDo8L3A+CjxkaXYgY2xhc3M9ImNvbnRy
+b2wtYm94Ij48c3Ryb25nPkkuIEdvdmVybmFuY2UgJiBDb250YWlubWVudCAoUHJldmVudGlvbik6
+PC9zdHJvbmc+IENvbmR1Y3QgdGFyZ2V0ZWQgc2VjdXJpdHkgYXdhcmVuZXNzIHRyYWluaW5nIGZv
+Y3VzaW5nIG9uIHZpc2hpbmcgYW5kIGV4dGVybmFsIGNvbGxhYm9yYXRpb24gcmlza3MgaW4gTWlj
+cm9zb2Z0IFRlYW1zLjxicj4KPHN0cm9uZz5JSS4gSWRlbnRpdHkgJiBBY2Nlc3MgTWFuYWdlbWVu
+dCAoQ29udGFpbm1lbnQpOjwvc3Ryb25nPiBJbXBsZW1lbnQgc3RyaWN0IGV4dGVybmFsIGFjY2Vz
+cyBhbmQgZ3Vlc3QgYWNjZXNzIHBvbGljaWVzIHdpdGhpbiBNaWNyb3NvZnQgVGVhbXMgdG8gYmxv
+Y2sgdW5hdXRob3JpemVkIGV4dGVybmFsIGNvbW11bmljYXRpb25zLjxicj4KPHN0cm9uZz5JSUku
+IEluZnJhc3RydWN0dXJlIEludGVsbGlnZW5jZSAoRGV0ZWN0aW9uKTo8L3N0cm9uZz4gTW9uaXRv
+ciBUZWFtcyBsb2dzIGZvciBhbm9tYWxvdXMgc2Vzc2lvbiB0cmFuc2ZlcnMsIHJhcGlkIElQIGNo
+YW5nZXMsIG9yIHVudXN1YWwgZmlsZS1zaGFyaW5nIGFjdGl2aXRpZXMuPGJyPgo8c3Ryb25nPklW
+LiBPcGVyYXRpb25hbCBSZXNpbGllbmNlOjwvc3Ryb25nPiBFc3RhYmxpc2ggb3V0LW9mLWJhbmQg
+dmVyaWZpY2F0aW9uIHByb2NlZHVyZXMgZm9yIGFueSBzZW5zaXRpdmUgcmVxdWVzdHMgbWFkZSB2
+aWEgY29sbGFib3JhdGlvbiB0b29scy48YnI+CjxzdHJvbmc+Vi4gU2ltdWxhdGlvbiBlbnZpcm9u
+bWVudDo8L3N0cm9uZz4gUnVuIHNpbXVsYXRlZCB2aXNoaW5nIGFuZCBUZWFtcy1iYXNlZCBzb2Np
+YWwgZW5naW5lZXJpbmcgY2FtcGFpZ25zIHRvIHRlc3QgZW1wbG95ZWUgcmVzcG9uc2UuPC9kaXY+
+CjxoMz5Db25jbHVzaW9uPC9oMz4KPHA+Q29sbGFib3JhdGlvbiBwbGF0Zm9ybXMgYXJlIGluY3Jl
+YXNpbmdseSB0YXJnZXRlZCBhcyB0cnVzdGVkIHZlY3RvcnMgZm9yIHNvY2lhbCBlbmdpbmVlcmlu
+Zzsgcm9idXN0IGFjY2VzcyBjb250cm9scyBhbmQgZW1wbG95ZWUgdmlnaWxhbmNlIGFyZSBlc3Nl
+bnRpYWwgdG8gZGVmZW5kIHRoZXNlIGVudmlyb25tZW50cy48L3A+CjxoMz5GdXJ0aGVyIFJlYWRp
+bmc8L2gzPgo8cD5odHRwczovL3d3dy5kYXJrcmVhZGluZy5jb20vY3liZXJhdHRhY2tzLWRhdGEt
+YnJlYWNoZXMvdGhyZWF0LWdhbmctc3ByaW5ncy12aXNoaW5nLWF0dGFja3MtbWljcm9zb2Z0LXRl
+YW1zLXVzZXJzPC9wPgo8aDM+Rm9vdG5vdGVzPC9oMz4KPHA+WzFdIGh0dHBzOi8vd3d3LmRhcmty
+ZWFkaW5nLmNvbS9jeWJlcmF0dGFja3MtZGF0YS1icmVhY2hlcy90aHJlYXQtZ2FuZy1zcHJpbmdz
+LXZpc2hpbmctYXR0YWNrcy1taWNyb3NvZnQtdGVhbXMtdXNlcnM8L3A+CiAgICAgICAgICA8L3Rk
+PgogICAgICAgIDwvdHI+CgogICAgICAgIDx0cj48dGQ+PGhyIGNsYXNzPSJpbmNpZGVudC1zZXBh
+cmF0b3IiPjwvdGQ+PC90cj4KICAgICAgICA8dHI+CiAgICAgICAgICA8dGQgc3R5bGU9ImJhY2tn
+cm91bmQtY29sb3I6I2U1ZjRlZTtwYWRkaW5nOjE1cHggMzBweDtib3JkZXItdG9wOjJweCBzb2xp
+ZCAjMDA5MTVBOyI+CiAgICAgICAgICAgIDxoMiBzdHlsZT0iY29sb3I6IzAwOTE1QTttYXJnaW46
+MDtmb250LXNpemU6MThweDsiPjguIENpc2NvIFBhdGNoZXMgQ3JpdGljYWwgSU9TIFhSIGFuZCBO
+ZXh1cyBWdWxuZXJhYmlsaXRpZXMsIFdhcm5zIG9mIFVucGF0Y2hlZCBTZWN1cmUgRW1haWwgRmxh
+d3MgKFNlcHRlbWJlciAzLCAyMDI2KTwvaDI+CiAgICAgICAgICA8L3RkPgogICAgICAgIDwvdHI+
+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxlPSJwYWRkaW5nOjIwcHggMzBweCAxMHB4
+IDMwcHg7Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ibWV0YWRhdGEiPjxzdHJvbmc+UHJpbWFy
+eSBDYXRlZ29yeTo8L3N0cm9uZz4gU1VQUExZIENIQUlOPGJyPgo8c3Ryb25nPk5ld3MgTmF0dXJl
+Ojwvc3Ryb25nPiBNaXNlIMOgIGpvdXIgZGUgcGF0Y2g8YnI+CjxzdHJvbmc+VGltZWxpbmU6PC9z
+dHJvbmc+IEluY2lkZW50IERhdGU6IFNlcHRlbWJlciAzLCAyMDI2IHwgU291cmNlIFB1YmxpY2F0
+aW9uIERhdGU6IFNlcHRlbWJlciAzLCAyMDI2PGJyPgo8c3Ryb25nPkltcGFjdGVkIENvdW50cnk6
+PC9zdHJvbmc+IEdsb2JhbDxicj4KPHN0cm9uZz5HZW9sb2NhdGlvbiAvIENsb3VkIFJlZ2lvbjo8
+L3N0cm9uZz4gVW5rbm93bjxicj4KPHN0cm9uZz5MaXN0IG9mIENvbXBhbmllcyBJbXBhY3RlZDo8
+L3N0cm9uZz4gQ2lzY288L2Rpdj4KPHA+Q2lzY28gcmVsZWFzZWQgY3JpdGljYWwgc2VjdXJpdHkg
+cGF0Y2hlcyBvbiBTZXB0ZW1iZXIgMywgMjAyNiwgZm9yIHJlbW90ZSBjb2RlIGV4ZWN1dGlvbiBh
+bmQgYXV0aGVudGljYXRpb24gYnlwYXNzIGZsYXdzIGluIElPUyBYUiBhbmQgTmV4dXMgc3dpdGNo
+ZXMsIHdoaWxlIHdhcm5pbmcgb2YgdW5wYXRjaGVkIGZsYXdzIGluIENpc2NvIFNlY3VyZSBFbWFp
+bC7CuTwvcD4KPGgzPk92ZXJ2aWV3PC9oMz4KPHA+VGhlIHVwZGF0ZXMgYWRkcmVzcyBjcml0aWNh
+bCB2dWxuZXJhYmlsaXRpZXMgaW4gY29yZSBlbnRlcnByaXNlIG5ldHdvcmtpbmcgaGFyZHdhcmUg
+KE5leHVzIGFuZCBJT1MgWFIpIHRoYXQgY291bGQgYWxsb3cgcmVtb3RlIGNvZGUgZXhlY3V0aW9u
+LsK5IENvbmN1cnJlbnRseSwgQ2lzY28gd2FybmVkIG9mIHB1YmxpY2x5IGRpc2Nsb3NlZCwgdW5w
+YXRjaGVkIFMvTUlNRSBmbGF3cyBpbiBDaXNjbyBTZWN1cmUgRW1haWwgdGhhdCBjb3VsZCBleHBv
+c2UgZW5jcnlwdGVkIGVtYWlsIGNvbnRlbnQgdG8gYXR0YWNrZXJzLsK5PC9wPgo8aDM+VGhlIEJy
+ZWFjaCBNZWNoYW5pc208L2gzPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPlJDRSBh
+bmQgQXV0aCBCeXBhc3M6PC9zdHJvbmc+IENyaXRpY2FsIGJ1Z3MgaW4gQ2lzY28gSU9TIFhSIGFu
+ZCBOZXh1cyBzd2l0Y2ggc29mdHdhcmUgYWxsb3cgdW5hdXRoZW50aWNhdGVkIHJlbW90ZSBhdHRh
+Y2tlcnMgdG8gZXhlY3V0ZSBjb2RlIG9yIGJ5cGFzcyBhdXRoZW50aWNhdGlvbi7CuTwvcD4KPHA+
+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5TL01JTUUgRGVjcnlwdGlvbiBGbGF3Ojwvc3Ry
+b25nPiBUaGUgdW5wYXRjaGVkIENpc2NvIFNlY3VyZSBFbWFpbCB2dWxuZXJhYmlsaXR5IGV4cGxv
+aXRzIFMvTUlNRSBpbXBsZW1lbnRhdGlvbiBmbGF3cyB0byBleHBvc2UgZW5jcnlwdGVkIGVtYWls
+IGNvbnRlbnQuwrk8L3A+CjxoMz5JbXBhY3QgYW5kIENvbnNlcXVlbmNlczwvaDM+CjxwPjxzdHJv
+bmc+4oCiPC9zdHJvbmc+IDxzdHJvbmc+TmV0d29yayBJbmZyYXN0cnVjdHVyZSBUYWtlb3Zlcjo8
+L3N0cm9uZz4gQ29tcHJvbWlzZSBvZiBjb3JlIHN3aXRjaGVzIChOZXh1cy9JT1MgWFIpIGNhbiBs
+ZWFkIHRvIGNvbXBsZXRlIGNvbnRyb2wgb3ZlciBuZXR3b3JrIHRyYWZmaWMgYW5kIGxhdGVyYWwg
+bW92ZW1lbnQuPC9wPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPkRhdGEgRXhwb3N1
+cmU6PC9zdHJvbmc+IFVucGF0Y2hlZCBlbWFpbCBmbGF3cyBhbGxvdyBhdHRhY2tlcnMgdG8gaW50
+ZXJjZXB0IGFuZCByZWFkIHNlbnNpdGl2ZSwgZW5jcnlwdGVkIGNvcnBvcmF0ZSBjb21tdW5pY2F0
+aW9ucy48L3A+CjxoMz5Qcm9wb3NlZCBDb250cm9sOiBNaXRpZ2F0aW5nIFRocmVhdHM8L2gzPgo8
+cD5UbyBhZGRyZXNzIHRoZSB2dWxuZXJhYmlsaXRpZXMgZXhwb3NlZCBieSB0aGlzIGluY2lkZW50
+LCB0aGUgaW1wbGVtZW50YXRpb24gb2YgdGhlIGZvbGxvd2luZyBjb250cm9sIGZyYW1ld29yayBp
+cyBwcm9wb3NlZDo8L3A+CjxkaXYgY2xhc3M9ImNvbnRyb2wtYm94Ij48c3Ryb25nPkkuIEdvdmVy
+bmFuY2UgJiBDb250YWlubWVudCAoUHJldmVudGlvbik6PC9zdHJvbmc+IFByaW9yaXRpemUgYW5k
+IGFwcGx5IENpc2NvJ3Mgc2VjdXJpdHkgcGF0Y2hlcyBmb3IgYWZmZWN0ZWQgTmV4dXMgYW5kIElP
+UyBYUiBzd2l0Y2hlcyBpbW1lZGlhdGVseS48YnI+CjxzdHJvbmc+SUkuIElkZW50aXR5ICYgQWNj
+ZXNzIE1hbmFnZW1lbnQgKENvbnRhaW5tZW50KTo8L3N0cm9uZz4gUmVzdHJpY3QgYWRtaW5pc3Ry
+YXRpdmUgYWNjZXNzIHRvIHN3aXRjaCBtYW5hZ2VtZW50IGludGVyZmFjZXMgdG8gaXNvbGF0ZWQg
+bWFuYWdlbWVudCBuZXR3b3JrcyAoT09CKS48YnI+CjxzdHJvbmc+SUlJLiBJbmZyYXN0cnVjdHVy
+ZSBJbnRlbGxpZ2VuY2UgKERldGVjdGlvbik6PC9zdHJvbmc+IE1vbml0b3IgbmV0d29yayB0cmFm
+ZmljIGZvciB1bmF1dGhvcml6ZWQgYWNjZXNzIGF0dGVtcHRzIHRvIHN3aXRjaCBjb25zb2xlcyBh
+bmQgYW5vbWFsb3VzIGVtYWlsIGRlY3J5cHRpb24gcGF0dGVybnMuPGJyPgo8c3Ryb25nPklWLiBP
+cGVyYXRpb25hbCBSZXNpbGllbmNlOjwvc3Ryb25nPiBJbXBsZW1lbnQgYWx0ZXJuYXRpdmUgZW5j
+cnlwdGlvbiBtZXRob2RzIGZvciBoaWdobHkgc2Vuc2l0aXZlIGNvbW11bmljYXRpb25zIHVudGls
+IHRoZSBTZWN1cmUgRW1haWwgZmxhdyBpcyBwYXRjaGVkLjxicj4KPHN0cm9uZz5WLiBTaW11bGF0
+aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBUZXN0IHN3aXRjaCBmaXJtd2FyZSB1cGRhdGVzIGlu
+IGEgc3RhZ2luZyBlbnZpcm9ubWVudCB0byBlbnN1cmUgbmV0d29yayBzdGFiaWxpdHkgYmVmb3Jl
+IHByb2R1Y3Rpb24gZGVwbG95bWVudC48L2Rpdj4KPGgzPkNvbmNsdXNpb248L2gzPgo8cD5TZWN1
+cmluZyBjb3JlIG5ldHdvcmsgaW5mcmFzdHJ1Y3R1cmUgYW5kIGVtYWlsIGdhdGV3YXlzIGlzIHBh
+cmFtb3VudDsgb3JnYW5pemF0aW9ucyBtdXN0IG1haW50YWluIGEgcmlnb3JvdXMgcGF0Y2ggbWFu
+YWdlbWVudCBsaWZlY3ljbGUgZm9yIG5ldHdvcmsgaGFyZHdhcmUgYW5kIG1vbml0b3IgdW5wYXRj
+aGVkIHNvZnR3YXJlIGFkdmlzb3JpZXMgY2xvc2VseS48L3A+CjxoMz5GdXJ0aGVyIFJlYWRpbmc8
+L2gzPgo8cD5odHRwczovL3d3dy5zZWN1cml0eXdlZWsuY29tL2Npc2NvLXdhcm5zLW9mLXVucGF0
+Y2hlZC1zZWN1cmUtZW1haWwtZmxhd3MtcGF0Y2hlcy1jcml0aWNhbC1zd2l0Y2gtdnVsbmVyYWJp
+bGl0aWVzLzwvcD4KPGgzPkZvb3Rub3RlczwvaDM+CjxwPlsxXSBodHRwczovL3d3dy5zZWN1cml0
+eXdlZWsuY29tL2Npc2NvLXdhcm5zLW9mLXVucGF0Y2hlZC1zZWN1cmUtZW1haWwtZmxhd3MtcGF0
+Y2hlcy1jcml0aWNhbC1zd2l0Y2gtdnVsbmVyYWJpbGl0aWVzLzwvcD4KICAgICAgICAgIDwvdGQ+
+CiAgICAgICAgPC90cj4KCiAgICAgICAgPHRyPjx0ZD48aHIgY2xhc3M9ImluY2lkZW50LXNlcGFy
+YXRvciI+PC90ZD48L3RyPgogICAgICAgIDx0cj4KICAgICAgICAgIDx0ZCBzdHlsZT0iYmFja2dy
+b3VuZC1jb2xvcjojZTVmNGVlO3BhZGRpbmc6MTVweCAzMHB4O2JvcmRlci10b3A6MnB4IHNvbGlk
+ICMwMDkxNUE7Ij4KICAgICAgICAgICAgPGgyIHN0eWxlPSJjb2xvcjojMDA5MTVBO21hcmdpbjow
+O2ZvbnQtc2l6ZToxOHB4OyI+OS4gT3ZlciAyMiwwMDAgTWljcm9zb2Z0IEV4Y2hhbmdlIFNlcnZl
+cnMgRXhwb3NlZCB0byBDcml0aWNhbCBBdXRoZW50aWNhdGlvbiBCeXBhc3MgQ1ZFLTIwMjYtNjI5
+MTEgKFNlcHRlbWJlciAyLCAyMDI2KTwvaDI+CiAgICAgICAgICA8L3RkPgogICAgICAgIDwvdHI+
+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxlPSJwYWRkaW5nOjIwcHggMzBweCAxMHB4
+IDMwcHg7Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ibWV0YWRhdGEiPjxzdHJvbmc+UHJpbWFy
+eSBDYXRlZ29yeTo8L3N0cm9uZz4gU1VQUExZIENIQUlOPGJyPgo8c3Ryb25nPk5ld3MgTmF0dXJl
+Ojwvc3Ryb25nPiBOb3V2ZWxsZSBhdHRhcXVlPGJyPgo8c3Ryb25nPlRpbWVsaW5lOjwvc3Ryb25n
+PiBJbmNpZGVudCBEYXRlOiBTZXB0ZW1iZXIgMiwgMjAyNiB8IFNvdXJjZSBQdWJsaWNhdGlvbiBE
+YXRlOiBTZXB0ZW1iZXIgMiwgMjAyNjxicj4KPHN0cm9uZz5JbXBhY3RlZCBDb3VudHJ5Ojwvc3Ry
+b25nPiBHbG9iYWwgKHByaW1hcmlseSBVbml0ZWQgU3RhdGVzIGFuZCBHZXJtYW55KTxicj4KPHN0
+cm9uZz5HZW9sb2NhdGlvbiAvIENsb3VkIFJlZ2lvbjo8L3N0cm9uZz4gVW5rbm93bjxicj4KPHN0
+cm9uZz5MaXN0IG9mIENvbXBhbmllcyBJbXBhY3RlZDo8L3N0cm9uZz4gTWljcm9zb2Z0IChFeGNo
+YW5nZSB1c2Vycyk8L2Rpdj4KPHA+RGFpbHkgc2NhbnMgZnJvbSB0aGUgU2hhZG93c2VydmVyIEZv
+dW5kYXRpb24gb24gU2VwdGVtYmVyIDIsIDIwMjYsIHJldmVhbGVkIHRoYXQgbmVhcmx5IDIyLDAw
+MCBNaWNyb3NvZnQgRXhjaGFuZ2Ugc2VydmVycyByZW1haW4gdW5wYXRjaGVkIGFnYWluc3QgYSBj
+cml0aWNhbCBhdXRoZW50aWNhdGlvbiBieXBhc3MgdnVsbmVyYWJpbGl0eSAoQ1ZFLTIwMjYtNjI5
+MTEpLsK5PC9wPgo8aDM+T3ZlcnZpZXc8L2gzPgo8cD5UaGUgdnVsbmVyYWJpbGl0eSwgZGVzY3Jp
+YmVkIGJ5IE1pY3Jvc29mdCBhcyBhbiAiYXV0aGVudGljYXRpb24gYnlwYXNzIGJ5IGNhcHR1cmUt
+cmVwbGF5LCIgcG9zZXMgYSBzZXZlcmUgdGhyZWF0IHRvIGVudGVycHJpc2UgZW1haWwgaW5mcmFz
+dHJ1Y3R1cmUuwrkgVGhlIFVuaXRlZCBTdGF0ZXMgYW5kIEdlcm1hbnkgYXJlIHRoZSBtb3N0IGFm
+ZmVjdGVkLCBob3N0aW5nIDYsMjAwIGFuZCA1LDEwMCB1bnBhdGNoZWQgc2VydmVycyByZXNwZWN0
+aXZlbHksIGxlYXZpbmcgdGhlbSBoaWdobHkgdnVsbmVyYWJsZSB0byBleHBsb2l0YXRpb24uwrk8
+L3A+CjxoMz5UaGUgQnJlYWNoIE1lY2hhbmlzbTwvaDM+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+
+IDxzdHJvbmc+Q2FwdHVyZS1SZXBsYXkgQXR0YWNrOjwvc3Ryb25nPiBDVkUtMjAyNi02MjkxMSBh
+bGxvd3MgYXR0YWNrZXJzIHRvIGNhcHR1cmUgYW5kIHJlcGxheSBhdXRoZW50aWNhdGlvbiB0b2tl
+bnMgdG8gYnlwYXNzIHNlY3VyaXR5IGNvbnRyb2xzIG9uIE1pY3Jvc29mdCBFeGNoYW5nZSBzZXJ2
+ZXJzLsK5PC9wPgo8cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPlVuYXV0aGVudGljYXRl
+ZCBBY2Nlc3M6PC9zdHJvbmc+IFN1Y2Nlc3NmdWwgZXhwbG9pdGF0aW9uIGdyYW50cyBhdHRhY2tl
+cnMgdW5hdXRob3JpemVkIGFjY2VzcyB0byBtYWlsYm94ZXMgYW5kIHNlcnZlciBjb25maWd1cmF0
+aW9ucyB3aXRob3V0IHZhbGlkIGNyZWRlbnRpYWxzLjwvcD4KPGgzPkltcGFjdCBhbmQgQ29uc2Vx
+dWVuY2VzPC9oMz4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5FbWFpbCBDb21wcm9t
+aXNlOjwvc3Ryb25nPiBBdHRhY2tlcnMgY2FuIHJlYWQsIHNlbmQsIGFuZCBtYW5pcHVsYXRlIGNv
+cnBvcmF0ZSBlbWFpbHMsIGxlYWRpbmcgdG8gYnVzaW5lc3MgZW1haWwgY29tcHJvbWlzZSAoQkVD
+KSBhbmQgZGF0YSB0aGVmdC48L3A+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+IDxzdHJvbmc+U2Vy
+dmVyIFRha2VvdmVyOjwvc3Ryb25nPiBUaGUgYXV0aGVudGljYXRpb24gYnlwYXNzIGNhbiBzZXJ2
+ZSBhcyBhIHN0ZXBwaW5nIHN0b25lIGZvciBmdWxsIHNlcnZlciBjb21wcm9taXNlIGFuZCBsYXRl
+cmFsIG1vdmVtZW50IHdpdGhpbiB0aGUgY29ycG9yYXRlIG5ldHdvcmsuPC9wPgo8aDM+UHJvcG9z
+ZWQgQ29udHJvbDogTWl0aWdhdGluZyBUaHJlYXRzPC9oMz4KPHA+VG8gYWRkcmVzcyB0aGUgdnVs
+bmVyYWJpbGl0aWVzIGV4cG9zZWQgYnkgdGhpcyBpbmNpZGVudCwgdGhlIGltcGxlbWVudGF0aW9u
+IG9mIHRoZSBmb2xsb3dpbmcgY29udHJvbCBmcmFtZXdvcmsgaXMgcHJvcG9zZWQ6PC9wPgo8ZGl2
+IGNsYXNzPSJjb250cm9sLWJveCI+PHN0cm9uZz5JLiBHb3Zlcm5hbmNlICYgQ29udGFpbm1lbnQg
+KFByZXZlbnRpb24pOjwvc3Ryb25nPiBJbW1lZGlhdGVseSB2ZXJpZnkgdGhlIHBhdGNoIHN0YXR1
+cyBvZiBhbGwgaW50ZXJuYWwgYW5kIGV4dGVybmFsLWZhY2luZyBNaWNyb3NvZnQgRXhjaGFuZ2Ug
+c2VydmVycyBhbmQgYXBwbHkgdGhlIENWRS0yMDI2LTYyOTExIHVwZGF0ZS48YnI+CjxzdHJvbmc+
+SUkuIElkZW50aXR5ICYgQWNjZXNzIE1hbmFnZW1lbnQgKENvbnRhaW5tZW50KTo8L3N0cm9uZz4g
+RW5mb3JjZSBzdHJpY3QgbXVsdGktZmFjdG9yIGF1dGhlbnRpY2F0aW9uIChNRkEpIGFuZCByZXN0
+cmljdCBhY2Nlc3MgdG8gRXhjaGFuZ2UgV2ViIFNlcnZpY2VzIChFV1MpLjxicj4KPHN0cm9uZz5J
+SUkuIEluZnJhc3RydWN0dXJlIEludGVsbGlnZW5jZSAoRGV0ZWN0aW9uKTo8L3N0cm9uZz4gTW9u
+aXRvciBFeGNoYW5nZSBsb2dzIGZvciBhbm9tYWxvdXMgYXV0aGVudGljYXRpb24gcGF0dGVybnMs
+IHBhcnRpY3VsYXJseSByZXBsYXkgaW5kaWNhdG9ycyBvciBsb2dpbnMgZnJvbSB1bmV4cGVjdGVk
+IElQcy48YnI+CjxzdHJvbmc+SVYuIE9wZXJhdGlvbmFsIFJlc2lsaWVuY2U6PC9zdHJvbmc+IE1h
+aW50YWluIHVwLXRvLWRhdGUsIGlzb2xhdGVkIGJhY2t1cHMgb2YgdGhlIEV4Y2hhbmdlIGRhdGFi
+YXNlIHRvIGVuc3VyZSByYXBpZCByZWNvdmVyeSBpbiB0aGUgZXZlbnQgb2YgYSBjb21wcm9taXNl
+Ljxicj4KPHN0cm9uZz5WLiBTaW11bGF0aW9uIGVudmlyb25tZW50Ojwvc3Ryb25nPiBSdW4gdnVs
+bmVyYWJpbGl0eSBzY2FucyBhZ2FpbnN0IGludGVybmFsIEV4Y2hhbmdlIGluZnJhc3RydWN0dXJl
+IHRvIGNvbmZpcm0gcGF0Y2ggZWZmaWNhY3kuPC9kaXY+CjxoMz5Db25jbHVzaW9uPC9oMz4KPHA+
+VGhlIGhpZ2ggbnVtYmVyIG9mIHVucGF0Y2hlZCBFeGNoYW5nZSBzZXJ2ZXJzIGdsb2JhbGx5IGhp
+Z2hsaWdodHMgYSBwZXJzaXN0ZW50IGdhcCBpbiBlbnRlcnByaXNlIHBhdGNoIG1hbmFnZW1lbnQs
+IHByZXNlbnRpbmcgYW4gYXR0cmFjdGl2ZSB0YXJnZXQgZm9yIG9wcG9ydHVuaXN0aWMgYW5kIHN0
+YXRlLXNwb25zb3JlZCB0aHJlYXQgYWN0b3JzLjwvcD4KPGgzPkZ1cnRoZXIgUmVhZGluZzwvaDM+
+CjxwPmh0dHBzOi8vd3d3LmhlbHBuZXRzZWN1cml0eS5jb20vMjAyNi8wOS8wMi9taWNyb3NvZnQt
+ZXhjaGFuZ2UtY3ZlLTIwMjYtNjI5MTEtY3JpdGljYWwtYXV0aGVudGljYXRpb24tYnlwYXNzLWZs
+YXcvPC9wPgo8aDM+Rm9vdG5vdGVzPC9oMz4KPHA+WzFdIGh0dHBzOi8vd3d3LmhlbHBuZXRzZWN1
+cml0eS5jb20vMjAyNi8wOS8wMi9taWNyb3NvZnQtZXhjaGFuZ2UtY3ZlLTIwMjYtNjI5MTEtY3Jp
+dGljYWwtYXV0aGVudGljYXRpb24tYnlwYXNzLWZsYXcvPC9wPgogICAgICAgICAgPC90ZD4KICAg
+ICAgICA8L3RyPgoKICAgICAgICA8dHI+PHRkPjxociBjbGFzcz0iaW5jaWRlbnQtc2VwYXJhdG9y
+Ij48L3RkPjwvdHI+CiAgICAgICAgPHRyPgogICAgICAgICAgPHRkIHN0eWxlPSJiYWNrZ3JvdW5k
+LWNvbG9yOiNlNWY0ZWU7cGFkZGluZzoxNXB4IDMwcHg7Ym9yZGVyLXRvcDoycHggc29saWQgIzAw
+OTE1QTsiPgogICAgICAgICAgICA8aDIgc3R5bGU9ImNvbG9yOiMwMDkxNUE7bWFyZ2luOjA7Zm9u
+dC1zaXplOjE4cHg7Ij4xMC4gUHVibGljIEV4cGxvaXQgUmVsZWFzZWQgZm9yIENyaXRpY2FsIENs
+ZW8gSGFybW9ueSBNYW5hZ2VkIEZpbGUgVHJhbnNmZXIgVnVsbmVyYWJpbGl0eSAoU2VwdGVtYmVy
+IDIsIDIwMjYpPC9oMj4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KICAgICAgICA8dHI+
+CiAgICAgICAgICA8dGQgc3R5bGU9InBhZGRpbmc6MjBweCAzMHB4IDEwcHggMzBweDsiPgogICAg
+ICAgICAgICA8ZGl2IGNsYXNzPSJtZXRhZGF0YSI+PHN0cm9uZz5QcmltYXJ5IENhdGVnb3J5Ojwv
+c3Ryb25nPiBTVVBQTFkgQ0hBSU48YnI+CjxzdHJvbmc+TmV3cyBOYXR1cmU6PC9zdHJvbmc+IE5v
+dXZlbGxlIGF0dGFxdWU8YnI+CjxzdHJvbmc+VGltZWxpbmU6PC9zdHJvbmc+IEluY2lkZW50IERh
+dGU6IFNlcHRlbWJlciAyLCAyMDI2IHwgU291cmNlIFB1YmxpY2F0aW9uIERhdGU6IFNlcHRlbWJl
+ciAyLCAyMDI2PGJyPgo8c3Ryb25nPkltcGFjdGVkIENvdW50cnk6PC9zdHJvbmc+IEdsb2JhbDxi
+cj4KPHN0cm9uZz5HZW9sb2NhdGlvbiAvIENsb3VkIFJlZ2lvbjo8L3N0cm9uZz4gVW5rbm93bjxi
+cj4KPHN0cm9uZz5MaXN0IG9mIENvbXBhbmllcyBJbXBhY3RlZDo8L3N0cm9uZz4gQ2xlbzwvZGl2
+Pgo8cD5BIHB1YmxpYyBleHBsb2l0IHdhcyByZWxlYXNlZCBvbiBTZXB0ZW1iZXIgMiwgMjAyNiwg
+Zm9yIGEgZnJlc2ggdnVsbmVyYWJpbGl0eSBpbiBDbGVvIEhhcm1vbnksIGEgd2lkZWx5IHVzZWQg
+TWFuYWdlZCBGaWxlIFRyYW5zZmVyIChNRlQpIHBsYXRmb3JtLCBhbGxvd2luZyByZW1vdGUgYXV0
+aGVudGljYXRpb24gYnlwYXNzLsK5PC9wPgo8aDM+T3ZlcnZpZXc8L2gzPgo8cD5UaGUgc2VjdXJp
+dHkgZGVmZWN0IGFsbG93cyByZW1vdGUgYXR0YWNrZXJzIHRvIGJ5cGFzcyBhdXRoZW50aWNhdGlv
+biBtZWNoYW5pc21zIHRocm91Z2ggYXJndW1lbnQgYmVhcmVyIG1hbmlwdWxhdGlvbi7CuSBNRlQg
+cGxhdGZvcm1zIGFyZSBoaWdoLXZhbHVlIHRhcmdldHMgZm9yIHRocmVhdCBhY3RvcnMgZHVlIHRv
+IHRoZSBzZW5zaXRpdmUgZmluYW5jaWFsIGFuZCBjdXN0b21lciBkYXRhIHRoZXkgcHJvY2Vzcywg
+bWFraW5nIHRoaXMgcHVibGljIGV4cGxvaXQgcmVsZWFzZSBhIGNyaXRpY2FsIHRocmVhdCB0byBi
+YW5raW5nIHN1cHBseSBjaGFpbnMuPC9wPgo8aDM+VGhlIEJyZWFjaCBNZWNoYW5pc208L2gzPgo8
+cD48c3Ryb25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPkFyZ3VtZW50IEJlYXJlciBNYW5pcHVsYXRp
+b246PC9zdHJvbmc+IEF0dGFja2VycyBtYW5pcHVsYXRlIGFyZ3VtZW50IHBhcmFtZXRlcnMgd2l0
+aGluIHRoZSBhdXRoZW50aWNhdGlvbiByZXF1ZXN0IHRvIGJ5cGFzcyBzZWN1cml0eSBjaGVja3Mu
+wrk8L3A+CjxwPjxzdHJvbmc+4oCiPC9zdHJvbmc+IDxzdHJvbmc+QXV0aGVudGljYXRpb24gQnlw
+YXNzOjwvc3Ryb25nPiBUaGlzIG1hbmlwdWxhdGlvbiBhbGxvd3MgdGhlIGF0dGFja2VyIHRvIGdh
+aW4gdW5hdXRob3JpemVkIGFjY2VzcyB0byB0aGUgTUZUIHBsYXRmb3JtIHdpdGhvdXQgdmFsaWQg
+Y3JlZGVudGlhbHMuPC9wPgo8aDM+SW1wYWN0IGFuZCBDb25zZXF1ZW5jZXM8L2gzPgo8cD48c3Ry
+b25nPuKAojwvc3Ryb25nPiA8c3Ryb25nPkRhdGEgRXhmaWx0cmF0aW9uOjwvc3Ryb25nPiBBdHRh
+Y2tlcnMgY2FuIGFjY2VzcyBhbmQgZG93bmxvYWQgaGlnaGx5IHNlbnNpdGl2ZSBmaWxlcywgaW5j
+bHVkaW5nIGZpbmFuY2lhbCB0cmFuc2FjdGlvbnMsIGN1c3RvbWVyIHJlY29yZHMsIGFuZCBwcm9w
+cmlldGFyeSBkYXRhLjwvcD4KPHA+PHN0cm9uZz7igKI8L3N0cm9uZz4gPHN0cm9uZz5TdXBwbHkg
+Q2hhaW4gRGlzcnVwdGlvbjo8L3N0cm9uZz4gQ29tcHJvbWlzZSBvZiB0aGUgTUZUIHBsYXRmb3Jt
+IGNhbiBkaXNydXB0IGNyaXRpY2FsIGZpbGUgdHJhbnNmZXIgd29ya2Zsb3dzIGJldHdlZW4gdGhl
+IGJhbmsgYW5kIGl0cyBwYXJ0bmVycy48L3A+CjxoMz5Qcm9wb3NlZCBDb250cm9sOiBNaXRpZ2F0
+aW5nIFRocmVhdHM8L2gzPgo8cD5UbyBhZGRyZXNzIHRoZSB2dWxuZXJhYmlsaXRpZXMgZXhwb3Nl
+ZCBieSB0aGlzIGluY2lkZW50LCB0aGUgaW1wbGVtZW50YXRpb24gb2YgdGhlIGZvbGxvd2luZyBj
+b250cm9sIGZyYW1ld29yayBpcyBwcm9wb3NlZDo8L3A+CjxkaXYgY2xhc3M9ImNvbnRyb2wtYm94
+Ij48c3Ryb25nPkkuIEdvdmVybmFuY2UgJiBDb250YWlubWVudCAoUHJldmVudGlvbik6PC9zdHJv
+bmc+IElkZW50aWZ5IGFsbCBpbnN0YW5jZXMgb2YgQ2xlbyBIYXJtb255IGluIHRoZSBiYW5rJ3Mg
+ZW52aXJvbm1lbnQgYW5kIGFwcGx5IHZlbmRvci1wcm92aWRlZCBwYXRjaGVzIGltbWVkaWF0ZWx5
+Ljxicj4KPHN0cm9uZz5JSS4gSWRlbnRpdHkgJiBBY2Nlc3MgTWFuYWdlbWVudCAoQ29udGFpbm1l
+bnQpOjwvc3Ryb25nPiBSZXN0cmljdCBhY2Nlc3MgdG8gdGhlIE1GVCBpbnRlcmZhY2UgdG8gYXV0
+aG9yaXplZCBJUCBhZGRyZXNzZXMgYW5kIHJlcXVpcmUgbXVsdGktZmFjdG9yIGF1dGhlbnRpY2F0
+aW9uIChNRkEpLjxicj4KPHN0cm9uZz5JSUkuIEluZnJhc3RydWN0dXJlIEludGVsbGlnZW5jZSAo
+RGV0ZWN0aW9uKTo8L3N0cm9uZz4gTW9uaXRvciBNRlQgbG9ncyBmb3IgdW51c3VhbCBmaWxlIGFj
+Y2VzcyBwYXR0ZXJucywgbWFzcyBkb3dubG9hZHMsIG9yIGFub21hbG91cyBhdXRoZW50aWNhdGlv
+biByZXF1ZXN0cy48YnI+CjxzdHJvbmc+SVYuIE9wZXJhdGlvbmFsIFJlc2lsaWVuY2U6PC9zdHJv
+bmc+IEltcGxlbWVudCBlbmQtdG8tZW5kIGVuY3J5cHRpb24gZm9yIGFsbCBmaWxlcyB0cmFuc2Zl
+cnJlZCB2aWEgTUZULCBlbnN1cmluZyBkYXRhIHJlbWFpbnMgcHJvdGVjdGVkIGV2ZW4gaWYgdGhl
+IHBsYXRmb3JtIGlzIGNvbXByb21pc2VkLjxicj4KPHN0cm9uZz5WLiBTaW11bGF0aW9uIGVudmly
+b25tZW50Ojwvc3Ryb25nPiBUZXN0IHRoZSBwdWJsaXNoZWQgZXhwbG9pdCBpbiBhIHNlZ3JlZ2F0
+ZWQgc3RhZ2luZyBlbnZpcm9ubWVudCB0byB2ZXJpZnkgdGhlIGVmZmVjdGl2ZW5lc3Mgb2YgZGV0
+ZWN0aW9uIHNpZ25hdHVyZXMuPC9kaXY+CjxoMz5Db25jbHVzaW9uPC9oMz4KPHA+TWFuYWdlZCBG
+aWxlIFRyYW5zZmVyIHBsYXRmb3JtcyByZW1haW4gYSBjcml0aWNhbCBwb2ludCBvZiB2dWxuZXJh
+YmlsaXR5IGluIGVudGVycHJpc2Ugc3VwcGx5IGNoYWluczsgcHJvYWN0aXZlIHBhdGNoaW5nIGFu
+ZCBzdHJpY3QgYWNjZXNzIGNvbnRyb2xzIGFyZSB2aXRhbCB0byBzYWZlZ3VhcmRpbmcgc2Vuc2l0
+aXZlIGRhdGEuPC9wPgo8aDM+RnVydGhlciBSZWFkaW5nPC9oMz4KPHA+aHR0cHM6Ly93d3cuc2Vj
+dXJpdHl3ZWVrLmNvbS9leHBsb2l0LXB1Ymxpc2hlZC1mb3ItZnJlc2gtY2xlby1oYXJtb255LXZ1
+bG5lcmFiaWxpdHkvPC9wPgo8aDM+Rm9vdG5vdGVzPC9oMz4KPHA+WzFdIGh0dHBzOi8vd3d3LnNl
+Y3VyaXR5d2Vlay5jb20vZXhwbG9pdC1wdWJsaXNoZWQtZm9yLWZyZXNoLWNsZW8taGFybW9ueS12
+dWxuZXJhYmlsaXR5LzwvcD4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KCiAgICAgICAg
+PHRyPgogICAgICAgICAgPHRkIHN0eWxlPSJiYWNrZ3JvdW5kOiNmOWY5Zjk7cGFkZGluZzoyMHB4
+IDMwcHg7dGV4dC1hbGlnbjpjZW50ZXI7Ij4KICAgICAgICAgICAgPHAgc3R5bGU9Im1hcmdpbjow
+O2ZvbnQtc2l6ZToxNHB4O2xpbmUtaGVpZ2h0OjEuNTtjb2xvcjojNTU1NTU1OyI+CiAgICAgICAg
+ICAgICAgRm9yIGFkZGl0aW9uYWwgaW5mb3JtYXRpb24sIHBsZWFzZSBjb250YWN0IHRoZSA8c3Ry
+b25nPkVtZXJnaW5nIFRlY2hub2xvZ3kgUmlzayBhbmQgSW50ZWxsaWdlbmNlPC9zdHJvbmc+IHRl
+YW0uCiAgICAgICAgICAgIDwvcD4KICAgICAgICAgIDwvdGQ+CiAgICAgICAgPC90cj4KICAgICAg
+ICA8dHI+CiAgICAgICAgICA8dGQgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6I2VlZWVlZTtwYWRk
+aW5nOjIwcHg7dGV4dC1hbGlnbjpjZW50ZXI7Ij4KICAgICAgICAgICAgPHAgc3R5bGU9Im1hcmdp
+bjowO2ZvbnQtc2l6ZToxMXB4O2NvbG9yOiM5OTk5OTk7Ij5TeW50aGVzaXMgYnkgRW1lcmdpbmcg
+VGVjaG5vbG9neSBSaXNrIGFuZCBJbnRlbGxpZ2VuY2U8L3A+CiAgICAgICAgICA8L3RkPgogICAg
+ICAgIDwvdHI+CiAgICAgIDwvdGFibGU+CiAgICA8L3RkPgogIDwvdHI+CjwvdGFibGU+CjwvYm9k
+eT4KPC9odG1sPg==
 
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">5. Malicious .git Configurations Enable Remote Code Execution in AI Coding Agents - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> AI<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Anthropic (Claude), OpenAI (Codex), Cursor, and others</div>
-<p>On September 2, 2026, Manifold Security disclosed eight security flaws across seven command-line AI coding agents, including Claude, Codex, and Cursor, that allow malicious repositories to execute arbitrary code on developer machines¹.</p>
-<h3>Overview</h3>
-<p>The vulnerabilities stem from AI agents executing Git commands within untrusted repositories¹. If a repository contains a malicious `.git` configuration, the AI agent runs the attacker-specified commands outside its sandbox without prompting the user for approval¹. Four of these flaws remained unpatched at the time of publication¹.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Git Config Abuse</strong>: The repository's Git configuration names a malicious command that the AI agent automatically executes during repository analysis¹.</p>
-<p><strong>•</strong> <strong>Sandbox Escape</strong>: The command executes with the privileges of the local developer, completely bypassing the AI agent's sandbox and security prompts¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Developer Workstation Compromise</strong>: Attackers can gain full control of developer machines simply by convincing them to run an AI agent on a malicious repository.</p>
-<p><strong>•</strong> <strong>Supply Chain Poisoning</strong>: Compromised developer environments can be used to inject malicious code into the bank's proprietary software repositories.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Establish strict policies governing the use of CLI-based AI coding assistants on untrusted or external repositories.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Run AI coding agents within isolated, non-privileged containerized environments (e.g., Docker) rather than directly on host developer machines.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Monitor developer workstations for anomalous child processes spawned by AI agent binaries or Git processes.<br>
-<strong>IV. Operational Resilience:</strong> Implement mandatory code review and automated static analysis for all code generated or touched by AI agents.<br>
-<strong>V. Simulation environment:</strong> Create a secure sandbox to test AI agents against known malicious `.git` configurations to validate detection rules.</div>
-<h3>Conclusion</h3>
-<p>AI coding assistants introduce novel attack vectors; developers must treat repositories analyzed by AI agents with the same caution as running untrusted executables.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html</p>
-<h3>Footnotes</h3>
-<p>[1] https://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html</p>
-          </td>
-        </tr>
-
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">6. "Spring Ring" Vishing Campaign Targets Microsoft Teams for Session Hijacking - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> CLOUD<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Microsoft</div>
-<p>On September 2, 2026, security researchers warned of an active vishing (voice phishing) campaign dubbed "Spring Ring" targeting Microsoft Teams users to hijack active sessions and compromise corporate infrastructure¹.</p>
-<h3>Overview</h3>
-<p>The "Spring Ring" threat group utilizes voice phishing to trick employees into granting access or executing commands within Microsoft Teams¹. Once inside, the attackers hijack active user sessions, distribute malware, and attempt to take over critical enterprise infrastructure¹.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Vishing Social Engineering</strong>: Attackers contact targets via voice calls, impersonating IT support or trusted personnel, to guide them through a compromise chain¹.</p>
-<p><strong>•</strong> <strong>Session Hijacking</strong>: The threat actors exploit the communication to gain remote access to active Microsoft Teams sessions, bypassing standard MFA controls¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Internal Malware Propagation</strong>: Attackers use the trusted Teams accounts to send malicious files and links to other employees, accelerating internal compromise¹.</p>
-<p><strong>•</strong> <strong>Infrastructure Takeover</strong>: Access to Teams sessions can lead to broader lateral movement and potential takeover of cloud and on-premises infrastructure¹.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Conduct targeted security awareness training focusing on vishing tactics and verifying external callers.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Implement strict session lifetime limits and conditional access policies for Microsoft Teams.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Monitor Teams logs for anomalous login locations, concurrent sessions, and unauthorized external domain interactions.<br>
-<strong>IV. Operational Resilience:</strong> Establish an out-of-band verification channel (e.g., internal directory lookup) for employees to verify IT support requests.<br>
-<strong>V. Simulation environment:</strong> Conduct simulated vishing exercises targeting high-risk departments (e.g., Helpdesk, Finance) to measure response readiness.</div>
-<h3>Conclusion</h3>
-<p>Collaboration platforms like Microsoft Teams are increasingly targeted via social engineering, requiring robust session management and out-of-band verification.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://www.darkreading.com/cyberattacks-data-breaches/threat-gang-springs-vishing-attacks-microsoft-teams-users</p>
-<h3>Footnotes</h3>
-<p>[1] https://www.darkreading.com/cyberattacks-data-breaches/threat-gang-springs-vishing-attacks-microsoft-teams-users</p>
-          </td>
-        </tr>
-
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">7. Dropbox Accounts Compromised via Exploitation of Lenovo Email Verification Flaw - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> CLOUD<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Dropbox, Lenovo</div>
-<p>On September 2, 2026, Dropbox began warning users that unauthorized parties had accessed their accounts by exploiting a flaw in Lenovo's email verification process¹.</p>
-<h3>Overview</h3>
-<p>Threat actors exploited a vulnerability in Lenovo's registration system to create fraudulent Lenovo IDs using target email addresses without requiring verification¹. These fraudulent IDs were then used to gain unauthorized access to linked Dropbox accounts¹.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Email Verification Bypass</strong>: Attackers registered fraudulent Lenovo IDs using third-party email addresses, bypassing the verification step due to a flaw in Lenovo's system¹.</p>
-<p><strong>•</strong> <strong>SaaS Integration Abuse</strong>: The fraudulent Lenovo IDs were leveraged to authenticate and gain access to the victims' Dropbox accounts¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Data Exfiltration</strong>: Unauthorized access to Dropbox accounts could lead to the exposure and theft of sensitive corporate and personal files¹.</p>
-<p><strong>•</strong> <strong>Credential Stuffing / Pivot</strong>: Attackers can use the compromised accounts to gather intelligence for further targeted attacks against the organization.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Review and restrict third-party Single Sign-On (SSO) integrations (like Lenovo ID) for corporate SaaS accounts.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Enforce mandatory multi-factor authentication (MFA) directly on Dropbox, independent of federated identity providers.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Audit Dropbox access logs for unusual login locations, unrecognized devices, or bulk file downloads.<br>
-<strong>IV. Operational Resilience:</strong> Maintain offline or segregated backups of critical documents stored in cloud collaboration platforms.<br>
-<strong>V. Simulation environment:</strong> Test federated identity configurations in a staging environment to ensure verification bypasses are blocked.</div>
-<h3>Conclusion</h3>
-<p>Flaws in federated identity providers can compromise downstream SaaS accounts, highlighting the need for independent MFA controls on critical cloud storage.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://www.bleepingcomputer.com/news/security/dropbox-accounts-breached-through-lenovo-email-verification-flaw/</p>
-<h3>Footnotes</h3>
-<p>[1] https://www.bleepingcomputer.com/news/security/dropbox-accounts-breached-through-lenovo-email-verification-flaw/</p>
-          </td>
-        </tr>
-
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">8. Over 22,000 Microsoft Exchange Servers Vulnerable to Critical Authentication Bypass (CVE-2026-62911) - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> VULNERABILITY<br>
-<strong>News Nature:</strong> Mise à jour de patch<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global (primarily US and Germany)<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Microsoft</div>
-<p>On September 2, 2026, the Shadowserver Foundation reported that nearly 22,000 Microsoft Exchange servers remain unpatched against a critical authentication bypass vulnerability (CVE-2026-62911)¹.</p>
-<h3>Overview</h3>
-<p>CVE-2026-62911 is a critical capture-replay authentication bypass vulnerability in Microsoft Exchange¹. Despite patches being available, thousands of servers globally-led by the US and Germany-remain exposed to potential takeover¹.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Capture-Replay Authentication Bypass</strong>: Attackers exploit CVE-2026-62911 by capturing and replaying authentication tokens to bypass security controls on the Exchange server¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Server Takeover</strong>: Successful exploitation allows unauthenticated attackers to gain administrative access to the Exchange server.</p>
-<p><strong>•</strong> <strong>Email Espionage and Lateral Movement</strong>: Attackers can read sensitive corporate communications and use the compromised server as a launchpad for internal network attacks.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Immediately identify and patch all on-premises Microsoft Exchange servers to resolve CVE-2026-62911.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Implement network-level authentication (NLA) and restrict access to Exchange management interfaces.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Monitor Exchange IIS logs for anomalous authentication requests and replay-attack signatures.<br>
-<strong>IV. Operational Resilience:</strong> Accelerate plans to migrate legacy on-premises email infrastructure to secure cloud-based alternatives (e.g., Exchange Online with strict conditional access).<br>
-<strong>V. Simulation environment:</strong> Use vulnerability scanners in a test environment to verify that Exchange servers are fully patched and no longer vulnerable to token replay.</div>
-<h3>Conclusion</h3>
-<p>The persistence of unpatched Exchange servers globally represents a significant systemic risk, as these servers are highly targeted for corporate espionage.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://www.helpnetsecurity.com/2026/09/02/microsoft-exchange-cve-2026-62911-critical-authentication-bypass-flaw/</p>
-<h3>Footnotes</h3>
-<p>[1] https://www.helpnetsecurity.com/2026/09/02/microsoft-exchange-cve-2026-62911-critical-authentication-bypass-flaw/</p>
-          </td>
-        </tr>
-
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">9. OpenAI's Astra Model Achieves Autonomous Zero-Day Discovery and Exploitation - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> AI<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> OpenAI</div>
-<p>On September 2, 2026, OpenAI's "Astra" model became the first AI model to cross a critical cybersecurity threshold by demonstrating the ability to independently find and exploit zero-day vulnerabilities¹.</p>
-<h3>Overview</h3>
-<p>The "critical" designation is applied when an AI model can autonomously discover and exploit zero-day vulnerabilities across many well-defended systems¹. This milestone highlights the rapid evolution of offensive AI capabilities, significantly reducing the time and effort required for threat actors to launch sophisticated attacks.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Autonomous Vulnerability Discovery</strong>: The Astra model analyzes target systems to identify previously unknown (zero-day) software flaws¹.</p>
-<p><strong>•</strong> <strong>Automated Exploit Generation</strong>: Once a flaw is found, the model independently generates and executes functional exploit code to compromise the target¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Asymmetric Threat Landscape</strong>: Threat actors leveraging similar autonomous AI models can discover and exploit zero-days at a scale and speed that human defenders cannot match.</p>
-<p><strong>•</strong> <strong>Rapid Perimeter Degradation</strong>: Traditional patch-management cycles may become obsolete if AI-driven exploits are generated instantly upon software release.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Establish an AI Risk Governance framework to monitor the deployment of advanced AI models within the enterprise.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Implement zero-trust architecture to limit the blast radius of any single compromised system, assuming zero-days will be exploited.<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Deploy AI-driven anomaly detection systems capable of identifying automated, machine-speed scanning and exploitation attempts.<br>
-<strong>IV. Operational Resilience:</strong> Transition to continuous, automated security validation and real-time configuration hardening.<br>
-<strong>V. Simulation environment:</strong> Utilize defensive AI models to continuously scan internal codebases for vulnerabilities before they can be discovered by offensive AI agents.</div>
-<h3>Conclusion</h3>
-<p>The crossing of this critical threshold by OpenAI's Astra marks a paradigm shift in cybersecurity, where defensive strategies must transition from reactive patching to proactive, AI-driven resilience.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://www.securityweek.com/openais-astra-becomes-first-model-to-cross-critical-cybersecurity-threshold/</p>
-<h3>Footnotes</h3>
-<p>[1] https://www.securityweek.com/openais-astra-becomes-first-model-to-cross-critical-cybersecurity-threshold/</p>
-          </td>
-        </tr>
-
-        <tr><td><hr class="incident-separator"></td></tr>
-        <tr>
-          <td style="background-color:#e5f4ee;padding:15px 30px;border-top:2px solid #00915A;">
-            <h2 style="color:#00915A;margin:0;font-size:18px;">10. Active Exploit Published for Cleo Harmony Authentication Bypass Vulnerability - September 2, 2026</h2>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:20px 30px 10px 30px;">
-            <div class="metadata"><strong>Primary Category:</strong> SUPPLY CHAIN<br>
-<strong>News Nature:</strong> Nouvelle attaque<br>
-<strong>Timeline:</strong> Incident Date: September 2026 | Source Publication Date: September 2, 2026<br>
-<strong>Impacted Country:</strong> Global<br>
-<strong>Geolocation / Cloud Region:</strong> Unknown<br>
-<strong>List of Companies Impacted:</strong> Cleo</div>
-<p>On September 2, 2026, security researchers published a functional exploit for a newly disclosed authentication bypass vulnerability in Cleo Harmony, a widely used enterprise managed file transfer (MFT) platform¹.</p>
-<h3>Overview</h3>
-<p>The vulnerability allows remote, unauthenticated attackers to bypass authentication mechanisms through argument bearer manipulation¹. The release of a public exploit significantly increases the risk of active exploitation against organizations using Cleo Harmony for secure data transfers.</p>
-<h3>The Breach Mechanism</h3>
-<p><strong>•</strong> <strong>Argument Bearer Manipulation</strong>: Attackers manipulate specific arguments within the authentication request to bypass the platform's security checks¹.</p>
-<p><strong>•</strong> <strong>Unauthenticated Access</strong>: Successful exploitation grants the attacker administrative access to the MFT platform without requiring valid credentials¹.</p>
-<h3>Impact and Consequences</h3>
-<p><strong>•</strong> <strong>Data Theft and Interception</strong>: Attackers can access, modify, or exfiltrate sensitive financial and customer data transferred via the MFT platform.</p>
-<p><strong>•</strong> <strong>Supply Chain Compromise</strong>: Compromising an MFT platform allows attackers to inject malicious files into automated data pipelines shared with banking partners.</p>
-<h3>Proposed Control: Mitigating Threats</h3>
-<p>To address the vulnerabilities exposed by this incident, the implementation of the following control framework is proposed:</p>
-<div class="control-box"><strong>I. Governance & Containment (Prevention):</strong> Immediately identify all instances of Cleo Harmony and apply the latest security patches or workarounds.<br>
-<strong>II. Identity & Access Management (Containment):</strong> Restrict access to Cleo Harmony interfaces using IP whitelisting and multi-factor authentication (MFA).<br>
-<strong>III. Infrastructure Intelligence (Detection):</strong> Monitor MFT logs for unusual authentication attempts, particularly those involving manipulated bearer tokens or arguments.<br>
-<strong>IV. Operational Resilience:</strong> Implement end-to-end encryption for all sensitive files, ensuring that even if the MFT platform is compromised, the data remains unreadable.<br>
-<strong>V. Simulation environment:</strong> Run the published exploit in a controlled staging environment to verify the effectiveness of detection rules and patches.</div>
-<h3>Conclusion</h3>
-<p>Managed File Transfer (MFT) platforms are critical supply chain nodes; the publication of active exploits requires immediate mitigation to prevent data exfiltration.</p>
-<h3>Further Reading</h3>
-<p><strong>•</strong> https://www.securityweek.com/exploit-published-for-fresh-cleo-harmony-vulnerability/</p>
-<h3>Footnotes</h3>
-<p>[1] https://www.securityweek.com/exploit-published-for-fresh-cleo-harmony-vulnerability/</p>
-          </td>
-        </tr>
-
-        <tr>
-          <td style="background:#f9f9f9;padding:20px 30px;text-align:center;">
-            <p style="margin:0;font-size:14px;line-height:1.5;color:#555555;">
-              For additional information, please contact the <strong>Emerging Technology Risk and Intelligence</strong> team.
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color:#eeeeee;padding:20px;text-align:center;">
-            <p style="margin:0;font-size:11px;color:#999999;">Synthesis by Emerging Technology Risk and Intelligence</p>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-</body>
-</html>
+--===============6061532349283962307==--

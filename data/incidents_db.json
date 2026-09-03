@@ -2029,5 +2029,131 @@
             "CTRL-NOUVEAU-5522",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260903-D28467": {
+        "date": "2026-09-03",
+        "title": "CrowdStrike Falcon Sensor Zero-Day Privilege Escalation Vulnerability \"FalconFlank\" Disclosed (September 3, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-6010",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-1104",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-B39082": {
+        "date": "2026-09-03",
+        "title": "SonicWall SMA 1000 Series VPN Zero-Day Vulnerabilities Actively Exploited in the Wild (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-500",
+            "CTRL-DET-7042",
+            "CTRL-RES-7043",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260903-23A0A3": {
+        "date": "2026-09-03",
+        "title": "BGP Hijacking Campaign Targets Softaculous and Virtualizor Updates (August 28, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9425",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1102",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-7301",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-5643C6": {
+        "date": "2026-09-03",
+        "title": "FBI Investigates Massive Breach of 153 Million Driver's Licenses Stolen from ID Verification Service (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-4004",
+            "CTRL-NOUVEAU-5104",
+            "CTRL-NOUVEAU-6319",
+            "CTRL-NOUVEAU-3482",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-6067BC": {
+        "date": "2026-09-03",
+        "title": "Malicious Git Configurations Enable Remote Code Execution in AI Coding Agents (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-RES-7033",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-NOUVEAU-4489",
+            "CTRL-DET-3003",
+            "CTRL-DET-400",
+            "CTRL-IAM-2005",
+            "CTRL-NOUVEAU-1109",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-3F468F": {
+        "date": "2026-09-03",
+        "title": "Dropbox Accounts Compromised via Exploitation of Lenovo Email Verification Flaw (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9341",
+            "CTRL-IAM-500",
+            "CTRL-DET-7012",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-BA76E3": {
+        "date": "2026-09-03",
+        "title": "\"Spring Ring\" Threat Group Targets Microsoft Teams Users in Sophisticated Vishing Campaign (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4001",
+            "CTRL-NOUVEAU-8402",
+            "CTRL-NOUVEAU-4410",
+            "CTRL-NOUVEAU-8403",
+            "CTRL-NOUVEAU-2001",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-3E578C": {
+        "date": "2026-09-03",
+        "title": "Cisco Patches Critical IOS XR and Nexus Vulnerabilities, Warns of Unpatched Secure Email Flaws (September 3, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-5521",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260903-75F4B5": {
+        "date": "2026-09-03",
+        "title": "Over 22,000 Microsoft Exchange Servers Exposed to Critical Authentication Bypass CVE-2026-62911 (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-500",
+            "CTRL-NET-200",
+            "CTRL-DET-7037",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260903-1E3139": {
+        "date": "2026-09-03",
+        "title": "Public Exploit Released for Critical Cleo Harmony Managed File Transfer Vulnerability (September 2, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-5522",
+            "CTRL-NOUVEAU-1103",
+            "CTRL-SIM-300"
+        ]
     }
 }
