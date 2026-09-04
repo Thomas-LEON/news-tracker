@@ -2068,5 +2068,229 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1010": {
+        "name": "Dual-Authorization & Out-of-Band Financial Transfer Verification",
+        "prerequisites": [
+            "Out-of-band communication channels",
+            "Defined financial authorization thresholds",
+            "Staff training on verification procedures"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-1020": {
+        "name": "Context-Aware MFA for Core Financial Environments",
+        "prerequisites": [
+            "Identity Provider (IdP) integration",
+            "Contextual access policy engine",
+            "MFA token enrollment"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1030": {
+        "name": "Financial Transaction Switch Behavioral Anomaly Detection",
+        "prerequisites": [
+            "Transaction switch log integration",
+            "SIEM or anomaly detection engine",
+            "Baseline of normal transaction velocity"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1040": {
+        "name": "Payment Gateway Isolation & Containment Playbooks",
+        "prerequisites": [
+            "Network segmentation capabilities",
+            "Incident response team training",
+            "Documented gateway isolation procedures"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-2020": {
+        "name": "Workload Identity Federation (OIDC) for IaC Pipelines",
+        "prerequisites": [
+            "Cloud provider OIDC support",
+            "CI/CD runner integration",
+            "IAM role configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-2030": {
+        "name": "Edge Infrastructure Configuration & Audit Log Monitoring",
+        "prerequisites": [
+            "Edge provider API access",
+            "Centralized log management (SIEM)",
+            "Alerting rules for config changes"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-2050": {
+        "name": "Supply-Chain Compromise Simulation Drills",
+        "prerequisites": [
+            "Adversarial simulation framework",
+            "Incident response team participation",
+            "Staging environment for drills"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Low",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-3010": {
+        "name": "Remote Browser Isolation (RBI)",
+        "prerequisites": [
+            "RBI solution procurement",
+            "Secure web gateway integration",
+            "Endpoint proxy configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3040": {
+        "name": "Enterprise Browser Extension & Web-Filtering Policies",
+        "prerequisites": [
+            "Group Policy Object (GPO) management",
+            "Web filtering gateway",
+            "Approved extension registry"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-4010": {
+        "name": "Third-Party Vendor Risk Management & Incident Disclosure Governance",
+        "prerequisites": [
+            "Vendor risk assessment framework",
+            "Standardized security contract clauses",
+            "Vendor audit program"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4020": {
+        "name": "Role-Based Access Control & Client-Side Encryption for Hosted Files",
+        "prerequisites": [
+            "Directory services integration",
+            "Client-side encryption software",
+            "Data classification policy"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-4050": {
+        "name": "Supply-Chain Data Breach Tabletop Exercises",
+        "prerequisites": [
+            "Tabletop scenario development",
+            "Key stakeholder availability",
+            "Incident response plan"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Low",
+            "Availability": "Low"
+        },
+        "damage_level": "Low"
+    },
+    "CTRL-NOUVEAU-5020": {
+        "name": "Strict Email Authentication Protocols (DMARC, DKIM, SPF)",
+        "prerequisites": [
+            "DNS control access",
+            "Email gateway configuration",
+            "DMARC reporting tool"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5050": {
+        "name": "Business Email Compromise (BEC) Spear-Phishing Simulations",
+        "prerequisites": [
+            "Phishing simulation platform",
+            "Targeted user lists",
+            "Post-simulation training curriculum"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Low",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-6030": {
+        "name": "Network Switch Management Interface Logging & Monitoring",
+        "prerequisites": [
+            "Syslog server configuration",
+            "Network device log enablement",
+            "SIEM parsing rules"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6040": {
+        "name": "Network Device Configuration Backup & Baseline Management",
+        "prerequisites": [
+            "Configuration backup tool",
+            "Secure backup storage",
+            "Baseline comparison scripts"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
     }
 }

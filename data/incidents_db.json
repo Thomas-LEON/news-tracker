@@ -2155,5 +2155,75 @@
             "CTRL-NOUVEAU-1103",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260904-3F3A1A": {
+        "date": "2026-09-04",
+        "title": "Threat Group \"Breeze Comet\" Direct Attacks on Global and Brazilian Financial Systems (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1010",
+            "CTRL-NOUVEAU-1020",
+            "CTRL-NOUVEAU-1030",
+            "CTRL-NOUVEAU-1040",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260904-F05E4B": {
+        "date": "2026-09-04",
+        "title": "Supply Chain Attack: Coder Registry Infrastructure Compromised to Deliver Malicious Terraform Modules (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-5291",
+            "CTRL-NOUVEAU-2020",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-IAM-7011",
+            "CTRL-IAM-7016",
+            "CTRL-NOUVEAU-2050"
+        ]
+    },
+    "INC-20260904-BC51CB": {
+        "date": "2026-09-04",
+        "title": "Google Patches Actively Exploited Chrome V8 Zero-Day Vulnerability CVE-2026-85046 (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-3010",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-3040",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260904-973B1A": {
+        "date": "2026-09-04",
+        "title": "Thomson Reuters C-Track Court Software Breach Exposes Sensitive Records Across US and Canada (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4010",
+            "CTRL-NOUVEAU-4020",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-NOUVEAU-8103",
+            "CTRL-NOUVEAU-4050"
+        ]
+    },
+    "INC-20260904-B483BD": {
+        "date": "2026-09-04",
+        "title": "\"Phantom Deal\" Campaign Targets Enterprises with Highly Customized M&A Financial Scams (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1010",
+            "CTRL-NOUVEAU-5020",
+            "CTRL-NOUVEAU-8401",
+            "CTRL-NOUVEAU-8402",
+            "CTRL-NOUVEAU-5050"
+        ]
+    },
+    "INC-20260904-489C14": {
+        "date": "2026-09-04",
+        "title": "HPE Releases Security Advisory for Critical Remote Code Execution Flaw in ArubaOS-CX (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NOUVEAU-6030",
+            "CTRL-NOUVEAU-6040",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }
