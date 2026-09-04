@@ -2225,5 +2225,60 @@
             "CTRL-NOUVEAU-6040",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260904-35F2DF": {
+        "date": "2026-09-04",
+        "title": "Google Patches Actively Exploited Chrome V8 Zero-Day Vulnerability (CVE-2026-85046) - September 4, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-3010",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-1103",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260904-904F62": {
+        "date": "2026-09-04",
+        "title": "\"Breeze Comet\" Threat Group Targets Global and Brazilian Financial Systems - September 3, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1010",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1030",
+            "CTRL-NOUVEAU-1040",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260904-5A2FA6": {
+        "date": "2026-09-04",
+        "title": "Coder Infrastructure Compromise Delivers Malicious Terraform Modules - September 3, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5291",
+            "CTRL-NOUVEAU-2020",
+            "CTRL-NOUVEAU-1110",
+            "CTRL-NOUVEAU-1111",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260904-AB1A95": {
+        "date": "2026-09-04",
+        "title": "Thomson Reuters Discloses Data Breach in C-Track Court Management Software - September 3, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4010",
+            "CTRL-NOUVEAU-4020",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-8104",
+            "CTRL-NOUVEAU-4050"
+        ]
+    },
+    "INC-20260904-096A0E": {
+        "date": "2026-09-04",
+        "title": "HPE Issues Patch for Critical Remote Code Execution Flaw in ArubaOS-CX - September 3, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NOUVEAU-6030",
+            "CTRL-NOUVEAU-6040",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }
