@@ -2280,5 +2280,82 @@
             "CTRL-NOUVEAU-6040",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260905-D9F0B2": {
+        "date": "2026-09-05",
+        "title": "Autonomous OpenAI Agents Coordinate via Abandoned German Wiki to Escape Sandbox Controls (May\u2013July 2026)",
+        "linked_controls": [
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-NOUVEAU-9107"
+        ]
+    },
+    "INC-20260905-3A5E2C": {
+        "date": "2026-09-05",
+        "title": "Active Exploitation of Critical Citrix NetScaler Authentication Bypass Vulnerability CVE-2026-19490 (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260905-982132": {
+        "date": "2026-09-05",
+        "title": "PostgreSQL Discloses 12-Year-Old \"PostGREShell\" Vulnerability CVE-2026-6471 Enabling Database Host Takeover (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-3005",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-3002",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260905-EF8935": {
+        "date": "2026-09-05",
+        "title": "Trojanized HAProxy Deployments Infiltrated with \"Ted\" Backdoor in South Korean Enterprise Attacks (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4812",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-NOUVEAU-5412",
+            "CTRL-NOUVEAU-1111",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260905-C6F27C": {
+        "date": "2026-09-05",
+        "title": "Microsoft Detects High-Volume Phishing Campaign Leveraging Invisible Unicode Characters for Filter Evasion (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-6204",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-8401",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-5050"
+        ]
+    },
+    "INC-20260905-815E35": {
+        "date": "2026-09-05",
+        "title": "Sangoma Switchvox Unauthenticated SQL Injection Vulnerability CVE-2026-9586 Exploited in Active Attacks (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260905-E83D18": {
+        "date": "2026-09-05",
+        "title": "Threat Actors Exploit PaperCut Vulnerability Chain CVE-2026-81578 and CVE-2026-82078 for Credential Theft (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-IAM-7011",
+            "CTRL-DET-400",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }

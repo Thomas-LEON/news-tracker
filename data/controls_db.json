@@ -2292,5 +2292,33 @@
             "Availability": "High"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5412": {
+        "name": "File Integrity Monitoring (FIM) & System Binary Auditing",
+        "prerequisites": [
+            "Endpoint agent deployment",
+            "Baseline binary hash database",
+            "SIEM event forwarding"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6204": {
+        "name": "Secure Email Gateway Unicode Normalization & Character Sanitization",
+        "prerequisites": [
+            "Secure Email Gateway infrastructure",
+            "Character set parsing rules",
+            "Mail flow inspection policy"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }
