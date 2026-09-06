@@ -2357,5 +2357,41 @@
             "CTRL-NET-200",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260906-D1ACCA": {
+        "date": "2026-09-06",
+        "title": "JetBrains Discloses Cadence Environment Breach via Unpatched TeamCity Flaw and AWS Credential Exposure (September 5, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1111",
+            "CTRL-NOUVEAU-2020",
+            "CTRL-NOUVEAU-8820",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-9019",
+            "CTRL-NOUVEAU-2050"
+        ]
+    },
+    "INC-20260906-2A8833": {
+        "date": "2026-09-06",
+        "title": "Active Exploitation of Unpatched Zero-Day Backdooring Magento and Adobe Commerce Platforms (September 5, 2026)",
+        "linked_controls": [
+            "CTRL-DET-7042",
+            "CTRL-NET-200",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-5412",
+            "CTRL-NOUVEAU-1040",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260906-CABAF8": {
+        "date": "2026-09-06",
+        "title": "Broadcom Patches Critical Hypervisor Escape Vulnerability CVE-2026-59346 in VMware Workstation and Fusion (September 5, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-6712",
+            "CTRL-SIM-300"
+        ]
     }
 }

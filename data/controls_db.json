@@ -2320,5 +2320,33 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8820": {
+        "name": "Cloud Management Plane Anomaly & API Threat Detection",
+        "prerequisites": [
+            "CloudTrail & GuardDuty ingestion enabled",
+            "SIEM alert rule integration",
+            "Baseline behavioral profiling for cloud workloads"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6712": {
+        "name": "Dedicated Physical Sandbox Isolation for Untrusted Workloads",
+        "prerequisites": [
+            "Hardware lab procurement",
+            "Physical network air-gapping",
+            "Strict workstation access policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }
