@@ -2348,5 +2348,19 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8150": {
+        "name": "Remote Administration Tool Capability & Feature Lockdown",
+        "prerequisites": [
+            "RMM and remote support tool inventory",
+            "Centralized administrative console access",
+            "Granular session policy configuration engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }

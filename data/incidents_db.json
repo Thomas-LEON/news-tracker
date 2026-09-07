@@ -2393,5 +2393,38 @@
             "CTRL-NOUVEAU-6712",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260907-E35C87": {
+        "date": "2026-09-07",
+        "title": "Public Disclosure of Zero-Day Local Privilege Escalation Vulnerability in CrowdStrike Falcon Agent (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1113",
+            "CTRL-NOUVEAU-6010",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260907-A0F7FF": {
+        "date": "2026-09-07",
+        "title": "Active Exploitation of Critical Unauthenticated RCE Vulnerability in N-able N-central (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-8304",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260907-F1E941": {
+        "date": "2026-09-07",
+        "title": "Active Malware Delivery via ConnectWise ScreenConnect Remote File Transfer Flaw (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8150",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-5412",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-5312"
+        ]
     }
 }
