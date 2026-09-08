@@ -2362,5 +2362,47 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3006": {
+        "name": "Cloud KMS Envelope Encryption & Secrets-at-Rest Governance",
+        "prerequisites": [
+            "Key Management Service (KMS/HSM) integration",
+            "Enterprise data classification baseline",
+            "Automated cryptographic key rotation policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-4412": {
+        "name": "External Attack Surface Management (EASM) & Shadow Asset Discovery",
+        "prerequisites": [
+            "Authoritative corporate IP and domain asset registry",
+            "Automated perimeter reconnaissance tooling",
+            "Security Operations Center triage and remediation workflows"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8105": {
+        "name": "Third-Party Data Retention Minimization & Automated Purge",
+        "prerequisites": [
+            "Contractual Data Processing Agreements (DPA)",
+            "Automated partner data lifecycle purge APIs",
+            "Vendor data retention compliance auditing"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Low",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }

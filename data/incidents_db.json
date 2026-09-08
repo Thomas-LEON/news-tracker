@@ -2459,5 +2459,48 @@
             "CTRL-NOUVEAU-3004",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260908-2A12BF": {
+        "date": "2026-09-08",
+        "title": "Microsoft 365 Executive Targeting via BigBear 2.0 PhaaS and IT Help Desk Vishing Campaigns (September 2026)",
+        "linked_controls": [
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-2001",
+            "CTRL-NOUVEAU-5050"
+        ]
+    },
+    "INC-20260908-32A5FE": {
+        "date": "2026-09-08",
+        "title": "220 Million Traveler and Crew Records Exposed in Vietnam-Linked APIS Cloud Database (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4411",
+            "CTRL-NOUVEAU-3005",
+            "CTRL-NOUVEAU-3006",
+            "CTRL-NOUVEAU-4412"
+        ]
+    },
+    "INC-20260908-75CBC2": {
+        "date": "2026-09-08",
+        "title": "Unauthenticated MikroTik RouterOS Flaw Chain Exploited in Remote Device Hijacking (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260908-3CF7D5": {
+        "date": "2026-09-08",
+        "title": "Trezor Customer Data Exposure Expands to 81,000 via ShipMonk Third-Party Breach (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8101",
+            "CTRL-NOUVEAU-8105",
+            "CTRL-NOUVEAU-8102",
+            "CTRL-NOUVEAU-8103",
+            "CTRL-NOUVEAU-4050"
+        ]
     }
 }
