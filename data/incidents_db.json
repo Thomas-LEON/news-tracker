@@ -2426,5 +2426,38 @@
             "CTRL-NOUVEAU-8801",
             "CTRL-NOUVEAU-5312"
         ]
+    },
+    "INC-20260908-7D0330": {
+        "date": "2026-09-08",
+        "title": "Microsoft 365 Executive Targeting: Help Desk Vishing and BigBear 2.0 AitM Phishing Campaigns (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-2001",
+            "CTRL-IAM-500",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-5050"
+        ]
+    },
+    "INC-20260908-9E9466": {
+        "date": "2026-09-08",
+        "title": "Active Hijacking of MikroTik Network Routers via Unauthenticated RouterOS Vulnerability Chain (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8831",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260908-1F4948": {
+        "date": "2026-09-08",
+        "title": "Vietnam-Linked APIS Cloud Infrastructure Exposes 220 Million International Traveler Records (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4411",
+            "CTRL-NOUVEAU-9019",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-NOUVEAU-3004",
+            "CTRL-SIM-300"
+        ]
     }
 }
