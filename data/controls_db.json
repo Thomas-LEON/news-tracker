@@ -2544,5 +2544,33 @@
             "Availability": "Critical"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5584": {
+        "name": "Real-Time Blockchain & Treasury Outflow Monitoring",
+        "prerequisites": [
+            "Node Telemetry Pipeline",
+            "Treasury Wallet Registry",
+            "Threshold Alerting Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9110": {
+        "name": "Autonomous AI Incident Response Playbooks",
+        "prerequisites": [
+            "SOAR Platform Integration",
+            "AI Telemetry Feeds",
+            "Automated Containment Hooks"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
     }
 }

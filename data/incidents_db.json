@@ -2620,5 +2620,115 @@
             "CTRL-NOUVEAU-3040",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260909-B09B13": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Slim Spider Targets Brazilian Financial Institutions and Steals Crypto Custody Secrets (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1030",
+            "CTRL-NOUVEAU-7121",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-4010",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-45EEAF": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : SAP Patches Maximum Severity \"OVERPASS\" Kernel Flaw CVE-2026-44756 (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260909-C1AB05": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Sophos Discloses Fileless PHP Web Shell and Linux Rootkit Targeting F5 BIG-IP APM (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7124",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-7123",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-6712"
+        ]
+    },
+    "INC-20260909-CC18DF": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Microsoft Defender \"ShieldCrash\" Zero-Day Exploit Released by Researcher (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-NOUVEAU-1104",
+            "CTRL-END-6009",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-88FA33": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Microsoft Patches Record 974 Flaws Including Two Exploited Zero-Days (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9016",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-7129",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260909-3217F4": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Google Patches Seventh Chrome Zero-Day CVE-2026-87491 Exploited in the Wild (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3040",
+            "CTRL-NOUVEAU-3010",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-20F6E8": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : OpenAI ChatGPT Indirect Prompt Injection Flaw Exfiltrates Connected Gmail Data (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-IAM-2002",
+            "CTRL-DET-7022",
+            "CTRL-NOUVEAU-8402",
+            "CTRL-RES-7033"
+        ]
+    },
+    "INC-20260909-8DBB64": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Google Threat Intelligence Group Discloses Autonomous AI Multi-Agent Credential Harvesting Campaign (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9110",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9108",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-45D68F": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : US Agencies Warn of Chinese Systematic Distillation of American AI Models (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-7126",
+            "CTRL-NOUVEAU-7127",
+            "CTRL-NOUVEAU-7128",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-619F53": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Liquid Network Hackers Return $263 Million in Bitcoin Following Federation Wallet Drain (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5582",
+            "CTRL-NOUVEAU-7121",
+            "CTRL-NOUVEAU-5584",
+            "CTRL-NOUVEAU-9921",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }
