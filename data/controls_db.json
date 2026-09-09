@@ -2404,5 +2404,145 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7120": {
+        "name": "Digital Asset Custody & Key Management Governance",
+        "prerequisites": [
+            "Cryptographic asset inventory",
+            "Key management compliance policies",
+            "Third-party custody audit framework"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-7121": {
+        "name": "Hardware Security Module (HSM) & Multi-Party Computation (MPC) Custody",
+        "prerequisites": [
+            "Dedicated HSM infrastructure",
+            "Multi-sign quorum definition",
+            "Role-based signing approval workflow"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-7122": {
+        "name": "Read-Only Database Failover & Maintenance Continuity",
+        "prerequisites": [
+            "Database replication architecture",
+            "Automated failover routing",
+            "Application read-only mode support"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7123": {
+        "name": "Volatile Memory & Runtime Process Integrity Inspection",
+        "prerequisites": [
+            "RAM acquisition tooling",
+            "Kernel process hooking detection",
+            "Live memory analysis capabilities"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-7124": {
+        "name": "Automated Edge Appliance Volatile Memory Purge & Re-Imaging",
+        "prerequisites": [
+            "Automated firmware orchestration",
+            "High-availability appliance clustering",
+            "Golden image repository"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7125": {
+        "name": "Secondary Agent Threat Detection Failover",
+        "prerequisites": [
+            "Multi-EDR agent deployment capability",
+            "Dynamic agent orchestration pipeline",
+            "Unified telemetry aggregation"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7126": {
+        "name": "AI Model API Customer Verification & KYC Framework",
+        "prerequisites": [
+            "Developer KYC onboarding process",
+            "API quota tiers definition",
+            "Identity verification gateway"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7127": {
+        "name": "Distributed Multi-Account API Fingerprinting & Orchestration Detection",
+        "prerequisites": [
+            "Client device & network fingerprinting",
+            "Centralized API gateway logging",
+            "Correlation analytics engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7128": {
+        "name": "AI Model Output Watermarking & Defensive Noise Perturbation",
+        "prerequisites": [
+            "Model inference middleware pipeline",
+            "Cryptographic watermarking algorithm",
+            "Extraction attack detection telemetry"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7129": {
+        "name": "Phased Rolling Patch Deployment & Availability Framework",
+        "prerequisites": [
+            "Staged deployment infrastructure",
+            "Automated rollback scripts",
+            "Health check metric monitors"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "High"
     }
 }

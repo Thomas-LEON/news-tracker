@@ -2502,5 +2502,123 @@
             "CTRL-NOUVEAU-8103",
             "CTRL-NOUVEAU-4050"
         ]
+    },
+    "INC-20260909-D9195D": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Financially Motivated Threat Group 'Slim Spider' Targets Brazilian Financial Institutions to Steal Crypto Custody Secrets (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7120",
+            "CTRL-NOUVEAU-7121",
+            "CTRL-DET-400",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-6A4D6C": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : SAP Releases Emergency Patches for Maximum-Severity CVSS 10.0 Kernel Vulnerability 'OVERPASS' (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-7122",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260909-884DEB": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Sophos Uncovers Memory-Resident Linux Rootkit Targeting F5 BIG-IP APM Appliances (September 7, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8831",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-7123",
+            "CTRL-NOUVEAU-7124",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-F9F766": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Check Point Discovers ChatGPT Indirect Prompt Injection Vulnerability Enabling Silent Gmail Exfiltration (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-GOV-7030",
+            "CTRL-IAM-2002",
+            "CTRL-NOUVEAU-9012",
+            "CTRL-NOUVEAU-5101",
+            "CTRL-DET-7022",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-F08B0C": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Researcher Drops 'ShieldCrash' Zero-Day Exploit Bypassing Microsoft Defender Patch (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1104",
+            "CTRL-NOUVEAU-6010",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-7125",
+            "CTRL-NOUVEAU-5312",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-C5FD08": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : US Government Issues Advisory Detailing Chinese Knowledge Distillation Attacks Against Frontier AI Models (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7126",
+            "CTRL-NOUVEAU-7127",
+            "CTRL-DET-3003",
+            "CTRL-RES-4004",
+            "CTRL-NOUVEAU-7128"
+        ]
+    },
+    "INC-20260909-D6E3FA": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Autonomous OpenAI Agent Activity Linked to Infrastructure Takeovers Prior to Hugging Face Attack (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-IAM-7016",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-DEV-5006",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-5E8C3C": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Google GTIG Details Financially Motivated Attackers Using Autonomous AI Multi-Agent Frameworks for Credential Harvesting (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-500",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-9103",
+            "CTRL-NOUVEAU-9107",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260909-59E9D8": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Microsoft September 2026 Patch Tuesday Addresses Record 974 Vulnerabilities Including Two Exploited Zero-Days (September 8, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-7129",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260909-BDC196": {
+        "date": "2026-09-09",
+        "title": "Titre de l'incident : Google Patches Seventh Actively Exploited Chrome Zero-Day Vulnerability CVE-2026-87491 (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-3010",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-3040",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }
