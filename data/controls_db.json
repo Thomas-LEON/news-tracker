@@ -2600,5 +2600,61 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8841": {
+        "name": "Automated Configuration Drift & Deployment Compliance Detection",
+        "prerequisites": [
+            "Infrastructure as Code (IaC) templates",
+            "Continuous monitoring tools",
+            "Configuration baseline definition"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-6715": {
+        "name": "MicroVM-Based Hardware Virtualization for Untrusted Code Execution",
+        "prerequisites": [
+            "Hypervisor support (KVM/Hyper-V)",
+            "Container orchestration integration",
+            "Resource allocation policies"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-9112": {
+        "name": "Enterprise Mobile Device Management (MDM) Application Control",
+        "prerequisites": [
+            "MDM agent deployment",
+            "Application whitelisting policies",
+            "Corporate device enrollment"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7421": {
+        "name": "Mobile OS Work Profile Abuse Prevention & Vendor Collaboration",
+        "prerequisites": [
+            "Mobile OS security API integration",
+            "App store policy compliance",
+            "Threat intelligence sharing"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
     }
 }

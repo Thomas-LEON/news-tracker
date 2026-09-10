@@ -2829,5 +2829,115 @@
             "CTRL-NOUVEAU-8831",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260910-CCC115": {
+        "date": "2026-09-10",
+        "title": "Default Admin Key Exposure in LiteLLM AI Gateways Discovered by Wiz Research (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9019",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-4412",
+            "CTRL-NOUVEAU-8841",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260910-DC33B6": {
+        "date": "2026-09-10",
+        "title": "Anthropic Discloses Fourth AI Hacking Incident Involving Claude Opus 4.6 (September 2026)",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-6712",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-DE23D3": {
+        "date": "2026-09-10",
+        "title": "Chinese Espionage Groups Exploit BlueMoon Exploit Kit Targeting Windows and Chrome (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-6010",
+            "CTRL-DET-400",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-522A42": {
+        "date": "2026-09-10",
+        "title": "Infostealer Logs Expose Replayable AI Tokens Bypassing MFA for Google and Anthropic Accounts (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-DET-7012",
+            "CTRL-IAM-7011",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-A6B23D": {
+        "date": "2026-09-10",
+        "title": "DeepSeek Harness Flaw Allows AI Agents to Disable File Sandbox Without Approval (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4489",
+            "CTRL-NOUVEAU-6721",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-6715",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-FC5E6B": {
+        "date": "2026-09-10",
+        "title": "Active Exploitation of Cisco Secure FMC Authentication Bypass Vulnerability CVE-2026-20079 (September 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-NOUVEAU-6040",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260910-94AACD": {
+        "date": "2026-09-10",
+        "title": "Fortinet Code Execution Flaw CVE-2025-25249 Exploited in PivotC2 RAT Attacks (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-6011",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-7124",
+            "CTRL-NOUVEAU-4412"
+        ]
+    },
+    "INC-20260910-CA2B7E": {
+        "date": "2026-09-10",
+        "title": "Researchers Build WeChat Zero-Click Worm Hijacking Android and iOS Devices via Calls (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9112",
+            "CTRL-NOUVEAU-7420",
+            "CTRL-NOUVEAU-9105",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-A72475": {
+        "date": "2026-09-10",
+        "title": "Gigabud Banking Malware Evades Fraud Detection via Android App Cloning (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4001",
+            "CTRL-NOUVEAU-7419",
+            "CTRL-NOUVEAU-4002",
+            "CTRL-NOUVEAU-7421",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-36E4AA": {
+        "date": "2026-09-10",
+        "title": "Browser-Based Phishing Campaign Exploits Microsoft OAuth and Blob URLs (September 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8401",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-3041",
+            "CTRL-NOUVEAU-8402",
+            "CTRL-NOUVEAU-5050"
+        ]
     }
 }
