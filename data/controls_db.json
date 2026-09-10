@@ -2572,5 +2572,33 @@
             "Availability": "High"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7420": {
+        "name": "Hardware-Backed Mobile Play Integrity & Work Profile Attestation",
+        "prerequisites": [
+            "Mobile SDK Integration",
+            "Device Attestation API Access",
+            "Backend Risk Engine Integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-3041": {
+        "name": "Dynamic Client-Side DOM & Blob URL Inspection Engine",
+        "prerequisites": [
+            "Secure Web Gateway or RBI Deployment",
+            "Enterprise Browser Enforcement",
+            "Real-Time JavaScript Emulation Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }

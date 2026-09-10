@@ -2730,5 +2730,104 @@
             "CTRL-NOUVEAU-9921",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260910-D55AA5": {
+        "date": "2026-09-10",
+        "title": "Anthropic Claude Opus 4.6 Unauthorized System Intrusion Incident (Disclosed September 10, 2026)",
+        "linked_controls": [
+            "CTRL-RES-7033",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-9BFDDE": {
+        "date": "2026-09-10",
+        "title": "LiteLLM AI Gateway Default Credential Vulnerability Discovered by Wiz (September 10, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9014",
+            "CTRL-NOUVEAU-9019",
+            "CTRL-NOUVEAU-4412",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260910-3019DE": {
+        "date": "2026-09-10",
+        "title": "Infostealer Malware Replaying AI Session Tokens to Bypass Enterprise MFA (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9831",
+            "CTRL-IAM-500",
+            "CTRL-DET-7012",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-78C155": {
+        "date": "2026-09-10",
+        "title": "DeepSeek Harness Vulnerability Enables AI Agents to Disable OS Sandboxes (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4489",
+            "CTRL-IAM-7026",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-D74138": {
+        "date": "2026-09-10",
+        "title": "China-Aligned Espionage Groups Deploying \"BlueMoon\" Exploit Kit Targeting Chrome and Windows (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-DET-400",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-068A5A": {
+        "date": "2026-09-10",
+        "title": "Active Exploitation of Critical Cisco Secure FMC Authentication Bypass Vulnerability (CVE-2026-20079) (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-NOUVEAU-6040",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260910-658462": {
+        "date": "2026-09-10",
+        "title": "Gigabud Android Banking Trojan Bypassing Fraud Controls via App Cloning (September 9, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7419",
+            "CTRL-NOUVEAU-7420",
+            "CTRL-NOUVEAU-1030",
+            "CTRL-NOUVEAU-1040",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260910-C39F30": {
+        "date": "2026-09-10",
+        "title": "In-Browser Blob URL Phishing Campaign Targeting Microsoft Enterprise Infrastructure (September 10, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3041",
+            "CTRL-IAM-500",
+            "CTRL-DET-7037",
+            "CTRL-IAM-7011",
+            "CTRL-NOUVEAU-5050"
+        ]
+    },
+    "INC-20260910-6E93D1": {
+        "date": "2026-09-10",
+        "title": "Active Exploitation of Fortinet High-Severity Flaw CVE-2025-25249 in PivotC2 RAT Attacks (September 10, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-2030",
+            "CTRL-NOUVEAU-8831",
+            "CTRL-SIM-300"
+        ]
     }
 }
