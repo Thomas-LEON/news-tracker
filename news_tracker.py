@@ -627,6 +627,16 @@ def convert_to_html_report(final_report, threat_score, date_str):
     return html
 
 def main():
+    today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+    md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
+    
+    # Auto-skip if running via GitHub Actions and a manual report already exists for today
+    if os.environ.get("GITHUB_ACTIONS") == "true" and os.path.exists(md_filename):
+        print(f"Skipping automated run: The report Daily_Threat_Intel_{today_str}.md was already generated manually today.")
+        import sys
+        sys.exit(0)
+
     print("Recherche des actualites (Threat Intel & Cyber) des dernieres 24h...")
     articles = fetch_recent_news()
     if not articles:
