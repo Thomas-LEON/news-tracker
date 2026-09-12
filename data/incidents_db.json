@@ -2939,5 +2939,25 @@
             "CTRL-NOUVEAU-8402",
             "CTRL-NOUVEAU-5050"
         ]
+    },
+    "INC-20260912-F3B831": {
+        "date": "2026-09-12",
+        "title": "GitLab Critical Path Traversal Vulnerability CVE-2026-85706 (September 11, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-4122",
+            "CTRL-NOUVEAU-4922"
+        ]
+    },
+    "INC-20260912-32E8E9": {
+        "date": "2026-09-12",
+        "title": "Brevo Data Breach Impacting Trezor, BitBox, and CoinTracking Users (September 11, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-4010",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9430",
+            "CTRL-NOUVEAU-8103"
+        ]
     }
 }

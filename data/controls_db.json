@@ -2656,5 +2656,19 @@
             "Availability": "Low"
         },
         "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-4922": {
+        "name": "Server Access & Audit Log Telemetry Analysis",
+        "prerequisites": [
+            "Centralized Log Management",
+            "Log Retention Policy",
+            "SIEM Detection Rules"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
     }
 }
