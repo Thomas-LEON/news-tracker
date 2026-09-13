@@ -2959,5 +2959,27 @@
             "CTRL-NOUVEAU-9430",
             "CTRL-NOUVEAU-8103"
         ]
+    },
+    "INC-20260913-757B09": {
+        "date": "2026-09-13",
+        "title": "Revolut Customer Data Breach via Fraudulent Government Requests (September 12, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9841",
+            "CTRL-NOUVEAU-3005",
+            "CTRL-NOUVEAU-8401",
+            "CTRL-NOUVEAU-8410",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260913-0DC315": {
+        "date": "2026-09-13",
+        "title": "Microsoft Cloud Account Hijacking via Passkey Phishing Campaigns (August 3-5, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-5011",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-8801",
+            "CTRL-NOUVEAU-5051"
+        ]
     }
 }

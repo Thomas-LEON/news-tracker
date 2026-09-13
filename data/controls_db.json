@@ -2670,5 +2670,61 @@
             "Availability": "Low"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9841": {
+        "name": "Out-of-Band Legal & Regulatory Request Verification Protocol",
+        "prerequisites": [
+            "Regulatory contact directory establishment",
+            "Secondary authentication channel implementation",
+            "Legal desk workflow definition"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8410": {
+        "name": "Authority Impersonation & Social Engineering Awareness Training",
+        "prerequisites": [
+            "Role-based employee profiling",
+            "Impersonation threat landscape curriculum",
+            "LMS tracking integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5011": {
+        "name": "MFA Number Matching & Push Notification Hardening",
+        "prerequisites": [
+            "Compatible identity provider deployment",
+            "Authenticator app rollout",
+            "User enrollment configuration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5051": {
+        "name": "Passkey & MFA Fatigue Phishing Simulation Drills",
+        "prerequisites": [
+            "Phishing simulation platform",
+            "Passwordless attack scenario templates",
+            "Targeted employee roster"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "Medium"
     }
 }
