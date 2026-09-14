@@ -1,5 +1,4 @@
 import re
-import pytest
 
 # Regex used to extract auditable metrics from LLM draft report
 METRICS_PATTERN = r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*'

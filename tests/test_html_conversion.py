@@ -2,7 +2,9 @@ import sys
 from pathlib import Path
 import pytest
 
-sys.path.insert(0, 'C:/Users/Karine/.gemini/antigravity/scratch/news-tracker')
+repo_root = str(Path(__file__).resolve().parent.parent)
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
 from news_tracker import _md_section_to_html, convert_to_html_report
 
 SAMPLE_REPORT = '''🟠 **Threat Score:** 60/100

@@ -1,10 +1,13 @@
 import sys
-import os
-sys.path.insert(0, 'C:/Users/Karine/.gemini/antigravity/scratch/news-tracker')
+from pathlib import Path
+
+repo_root = str(Path(__file__).resolve().parent.parent)
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
 
 import datetime
 import re
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import pytest
 
 import news_tracker
@@ -129,7 +132,6 @@ def test_plaintext_stripping():
     **bold** becomes bold, ## Heading becomes Heading, --- becomes separator line.
     Tested inline without importing, testing regex logic directly.
     """
-    import re
     # Test bold and italic stripping
     txt = '**bold text** and *italic*'
     txt = re.sub(r'\*\*([^*]+)\*\*', r'\1', txt)
@@ -174,7 +176,6 @@ def test_toc_generation():
     verify the TOC generation logic produces 1. Title One\n2. Title Two\n.
     Tested inline testing regex and formatting logic directly.
     """
-    import re
     final_report = 'Some text\n## Title One\nBody\n---\n## Title Two\nBody'
     titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
     assert titles == ['Title One', 'Title Two']

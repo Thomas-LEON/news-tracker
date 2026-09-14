@@ -7,12 +7,10 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 # Ensure news-tracker root is on sys.path
-sys.path.insert(0, 'C:/Users/Karine/.gemini/antigravity/scratch/news-tracker')
 project_root = str(Path(__file__).resolve().parent.parent)
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-import news_tracker
 from news_tracker import fetch_recent_news
 
 
