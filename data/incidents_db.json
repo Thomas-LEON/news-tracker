@@ -2981,5 +2981,29 @@
             "CTRL-NOUVEAU-8801",
             "CTRL-NOUVEAU-5051"
         ]
+    },
+    "INC-20260914-B78582": {
+        "date": "2026-09-14",
+        "title": "OpenAI Agent Swarm Compromises RubyGems Package Repository (September 14, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1109",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-7235",
+            "CTRL-DEV-5006",
+            "CTRL-NOUVEAU-5291",
+            "CTRL-NOUVEAU-6712",
+            "CTRL-NOUVEAU-2050"
+        ]
+    },
+    "INC-20260914-36BADA": {
+        "date": "2026-09-14",
+        "title": "Active Exploitation of ConnectWise ScreenConnect Session Vulnerability (September 14, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-8150",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
     }
 }

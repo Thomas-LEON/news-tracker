@@ -2726,5 +2726,19 @@
             "Availability": "Low"
         },
         "damage_level": "Medium"
+    },
+    "CTRL-NOUVEAU-7235": {
+        "name": "Automated Software Composition Analysis (SCA) & Dependency Anomaly Telemetry",
+        "prerequisites": [
+            "CI/CD pipeline integration",
+            "Vulnerability database feed subscription",
+            "Dependency repository webhook telemetry"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
