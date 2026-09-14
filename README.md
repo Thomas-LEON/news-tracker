@@ -88,17 +88,27 @@ The repository includes a `.github/workflows/daily-tracker.yml` that runs every 
 ```text
 news-tracker/
 ├── .github/workflows/
-│   └── daily-tracker.yml        # GitHub Actions CI/CD Pipeline
+│   ├── daily-tracker.yml        # GitHub Actions Bot Pipeline
+│   └── ci.yml                   # CI Pipeline (Tests, Linting, Security)
 ├── data/
 │   ├── controls_db.json         # Relational database of mitigating controls
 │   └── incidents_db.json        # Relational database of tracked incidents
 ├── reports/                     # Auto-generated daily markdown reports
+├── newsletters/                 # Auto-generated daily .eml email formats
+├── plaintext/                   # Auto-generated daily .txt plain text formats
+├── tests/                       # Comprehensive Pytest suite
 ├── news_tracker.py              # Core logic & AI prompt engineering
 ├── requirements.txt             # Python dependencies
+├── CONTRIBUTING.md              # Engineering Standards Guidelines
 ├── SOP.md                       # Standard Operating Procedure (Internal Docs)
 └── README.md
 ```
 
+## 🏛️ Engineering Standards & Contributing
+This project enforces strict engineering standards including mandatory branching strategies, conventional commits, automated CI pipelines, and a minimum of **80% test coverage**. 
+
+Before contributing, please read the [CONTRIBUTING.md](CONTRIBUTING.md) guidelines.
+
 ---
 
-*Built by [Thomas LEON](https://www.linkedin.com/in/thomas-leon-893316262/) · Emerging Technologies & Threat Intelligence*
+*Built by [Thomas LEON](https://www.linkedin.com/in/thomas-leon-893316262/) - Emerging Technologies & Threat Intelligence*
