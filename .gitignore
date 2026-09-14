@@ -3,6 +3,9 @@ __pycache__/
 .pytest_cache/
 htmlcov/
 .coverage
+.coverage.*
 parsed*.txt
 analyze_*.py
 *.egg-info/
+.agents/
+ORIGINAL_REQUEST.md
