@@ -41,7 +41,7 @@ def fetch_recent_news():
     recent_articles = []
     now = datetime.datetime.now(datetime.timezone.utc)
     yesterday = now - datetime.timedelta(days=1)
-    
+
     for feed_url in RSS_FEEDS:
         try:
             feed = feedparser.parse(feed_url)
@@ -58,7 +58,7 @@ def fetch_recent_news():
                         })
         except Exception as e:
             print(f"Erreur lors de la lecture du flux {feed_url}: {e}")
-            
+
     return recent_articles
 
 def get_previously_covered_incidents(days=3):
@@ -67,9 +67,9 @@ def get_previously_covered_incidents(days=3):
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     if not os.path.exists(output_dir):
         return covered
-        
+
     now = datetime.datetime.now()
-    for i in range(1,days + 1):
+    for i in range(1, days + 1):
         target_date = (now - datetime.timedelta(days=i)).strftime("%Y-%m-%d")
         filepath = os.path.join(output_dir, f"Daily_Threat_Intel_{target_date}.md")
         if os.path.exists(filepath):
@@ -86,22 +86,22 @@ def generate_executive_summary(articles, covered_incidents=None):
     """Utilise l'IA pour trier les articles et générer un Executive Summary."""
     if not articles:
         return "Aucun incident ou article majeur détecté dans les dernières 24 heures."
-    
+
     try:
         # Configuration pour le nouveau package google.genai
         # Contournement SSL local (Windows/Zscaler/proxy...) : On utilise httpx_client
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})
-        
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})  # nosec B501
+
         prompt = """
         Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
         Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier JUSQU'A 10 incidents ou menaces majeurs.
         Si AUCUN article ne correspond aux critères stricts ci-dessous, ou si tu n'as pas de preuves concrètes dans les articles fournis, tu DOIS IMPÉRATIVEMENT répondre uniquement par le mot "SKIPPED". Ne comble JAMAIS les vides par l'invention.
-        
+
         CRITERES STRICTS D'INCLUSION (Un article doit valider l'un de ces points pour etre retenu) :
         1. Impact direct / indirect Banque : Attaques ciblant le secteur financier, vos fournisseurs (Supply Chain, editeurs logiciels), ou fuites de donnees reglementees (RGPD).
         2. Gros acteurs technologiques : Tout incident impliquant les geants du Cloud (AWS, Azure, GCP) ou de l'IA (OpenAI, Anthropic...).
         3. Infrastructures critiques : Failles majeures touchant des technos d'entreprise classiques.
-        
+
         CRITERES STRICTS D'EXCLUSION (Ignore IMPERATIVEMENT ces articles, c'est du bruit. DROP-LES) :
         1. ZERO HALLUCINATION : Ne génère rien qui ne soit pas explicitement écrit dans l'article. Ne comble pas les trous.
         2. ZERO EXTRAPOLATION : Ne transforme JAMAIS un simple tutoriel de sécurité ou un article de conseil en une campagne d'attaque active. Contente-toi des faits stricts.
@@ -115,20 +115,20 @@ def generate_executive_summary(articles, covered_incidents=None):
         1. Threat Capability (TC) : 1-3 = Vulnérabilité connue et patchée / Attaque basique (scan automatisé, phishing générique) | 4-7 = Attaque sophistiquée nécessitant une action humaine (social engineering ciblé ayant mené à un breach confirmé, exploitation de failles complexes) | 8-10 = Zero-Day critique en cours d'exploitation, Zero-click, Nation-State.
         2. Event Frequency (EF) : 1-3 = Ne cible pas du tout le secteur bancaire/IA | 4-7 = Campagne mondiale opportuniste (la banque peut être touchée) | 8-10 = Le secteur financier ou l'infrastructure Cloud/IA de la banque est la cible directe.
         3. Business Impact (BI) : 1-3 = Impact négligeable, perturbation d'un service mineur | 4-7 = Indisponibilité prolongée, vol de données non-critiques | 8-10 = Risque systémique mondial, vol massif de données financières, faillite, exposition réglementaire GDPR/DORA majeure.
-        
+
         REGLE D'ESCALADE OBLIGATOIRE - SECTEUR FINANCIER :
         Si une institution financière (banque, fintech, néo-banque, processeur de paiement, plateforme crypto, assurance) est DIRECTEMENT victime d'un breach confirmé avec fuite de données clients :
         - EF DOIT être >= 8 (le secteur financier EST la cible directe).
         - BI DOIT être >= 8 (fuite de données financières réglementées = exposition GDPR/DORA automatique).
         - TC DOIT être >= 5 (un social engineering ayant réussi à breacher une institution financière n'est PAS une attaque basique).
         Exemples concrets : Revolut, Monzo, N26, Wise, Stripe, PayPal, une banque traditionnelle breachée = MINIMUM TC:5 EF:8 BI:8 = Score 69/100.
-        
+
         Tu dois juste fournir les notes dans CE FORMAT EXACT pour la première ligne de ton rapport :
         *(Auditable Metrics - Threat Capability: X/10 | Event Frequency: Y/10 | Business Impact: Z/10)*
-        
+
         Ensuite, saute une ligne et commence à lister les incidents.
 
-        
+
         Pour CHAQUE incident retenu, tu DOIS IMPERATIVEMENT utiliser LA STRUCTURE EXACTE suivante. Separe chaque incident par une ligne de separation horizontale (---).
 
         ## Titre de l'incident : Doit INCLURE les noms des acteurs impliques (ex: OpenAI et HuggingFace) et la date la plus precise possible
@@ -175,27 +175,27 @@ def generate_executive_summary(articles, covered_incidents=None):
         **Footnotes**
         [1. Lien de la source 1]
         [2. Lien de la source 2]
-        
+
         Redige l'integralite du rapport en Anglais. Utilise un ton tres professionnel, "Executive", analytique et concis.
         Utilise des footnotes (indices comme ceci : ¹ ²) dans le texte pour lier aux sources de la section Footnotes de chaque incident.
         N'oublie pas de bien separer chaque incident avec '---'.
-        
+
         Voici les articles bruts :
         """
-        
+
         for i, art in enumerate(articles):
             soup = BeautifulSoup(art['summary'], 'html.parser')
             clean_summary = soup.get_text()[:400]
             prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Date de publication: {art.get('published', 'Inconnue')}\n  Extrait: {clean_summary}\n"
-            
+
         if covered_incidents:
             prompt += "\n\nCRITERE D'EXCLUSION ABSOLU (DOUBLONS DEJA TRAITES) :\n"
             prompt += "Les incidents suivants ont DEJA ete traites dans nos rapports des jours precedents. Tu ne DOIS PAS les inclure dans ton rapport d'aujourd'hui (certains flux RSS font remonter de vieux articles). Ignore-les totalement :\n"
             for ci in covered_incidents:
                 prompt += f"- {ci}\n"
-                
+
         models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
-        
+
         for model_name in models_to_try:
             try:
                 print(f"Tentative de generation avec le modele {model_name}...")
@@ -210,9 +210,9 @@ def generate_executive_summary(articles, covered_incidents=None):
             except Exception as e:
                 print(f"Echec avec le modele {model_name}: {e}")
                 continue
-                
+
         return "Erreur : Impossible de generer le rapport avec les modeles Gemini disponibles (3.6, 3.5, 3.1-lite)."
-        
+
     except Exception as e:
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
 
@@ -249,8 +249,8 @@ TA MISSION :
 
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})
-        
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})  # nosec B501
+
         for model_name in models_to_try:
             try:
                 print(f"Tentative d'audit avec {model_name}...")
@@ -259,7 +259,7 @@ TA MISSION :
                     contents=prompt,
                     config=types.GenerateContentConfig(temperature=0.0)
                 )
-                
+
                 raw_text = response.text.strip()
                 if raw_text.startswith("```markdown"):
                     raw_text = raw_text[11:]
@@ -267,12 +267,12 @@ TA MISSION :
                     raw_text = raw_text[3:]
                 if raw_text.endswith("```"):
                     raw_text = raw_text[:-3]
-                    
+
                 return raw_text.strip()
             except Exception as e:
                 print(f"Echec de l'audit avec {model_name}: {e}")
                 continue
-                
+
         return draft_report
     except Exception as e:
         print(f"Erreur globale lors de l'audit : {e}")
@@ -286,24 +286,24 @@ def update_databases(report_content, today_str):
     """
     data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
     os.makedirs(data_dir, exist_ok=True)
-    
+
     controls_db_path = os.path.join(data_dir, "controls_db.json")
     incidents_db_path = os.path.join(data_dir, "incidents_db.json")
-    
+
     # Load existing DBs
     controls_db = {}
     if os.path.exists(controls_db_path):
         with open(controls_db_path, "r", encoding="utf-8") as f:
             controls_db = json.load(f)
-            
+
     incidents_db = {}
     if os.path.exists(incidents_db_path):
         with open(incidents_db_path, "r", encoding="utf-8") as f:
             incidents_db = json.load(f)
-            
+
     # Build a simplified list of existing controls to send to the LLM
     existing_controls_list = [{"id": k, "name": v["name"]} for k, v in controls_db.items()]
-    
+
     prompt = f"""Tu es un analyste expert en Risk Management.
 Voici le rapport quotidien Cyber :
 ---
@@ -341,8 +341,8 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
 """
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})
-        
+        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})  # nosec B501
+
         raw_output = None
         for model_name in models_to_try:
             try:
@@ -357,11 +357,11 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
             except Exception as model_err:
                 print(f"[DB Update] Echec avec {model_name}: {model_err}")
                 continue
-        
+
         if not raw_output:
             print("[DB Update] Aucun modèle disponible pour la mise à jour des bases JSON.")
             return
-        
+
         # Extraction robuste : on cherche le premier '{' et le dernier '}' dans la réponse,
         # sans dépendre du formatage Markdown (backticks) que l'IA peut oublier.
         start_idx = raw_output.find('{')
@@ -371,31 +371,31 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
             return
         clean_json_str = raw_output[start_idx:end_idx + 1]
         parsed_data = json.loads(clean_json_str)
-        
+
         # Merge new controls
         if "new_controls" in parsed_data:
             for c_id, c_data in parsed_data["new_controls"].items():
                 if c_id not in controls_db:
                     controls_db[c_id] = c_data
-                    
+
         # Add incidents
         if "incidents" in parsed_data:
             for inc in parsed_data["incidents"]:
-                inc_id = f"INC-{today_str.replace('-','')}-{uuid.uuid4().hex[:6].upper()}"
+                inc_id = f"INC-{today_str.replace('-', '')}-{uuid.uuid4().hex[:6].upper()}"
                 incidents_db[inc_id] = {
                     "date": today_str,
                     "title": inc.get("title", "Unknown Incident"),
                     "linked_controls": inc.get("controls", [])
                 }
-                
+
         # Save DBs
         with open(controls_db_path, "w", encoding="utf-8") as f:
             json.dump(controls_db, f, indent=4)
         with open(incidents_db_path, "w", encoding="utf-8") as f:
             json.dump(incidents_db, f, indent=4)
-            
+
         print("Base de données JSON (Controls & Incidents) mise à jour avec succès.")
-        
+
     except Exception as e:
         print(f"Erreur lors de la mise à jour des bases JSON : {e}")
 
@@ -407,7 +407,7 @@ def _md_section_to_html(section_text):
     in_control = False
     metadata_lines = []
     control_lines = []
-    
+
     for line in lines:
         stripped = line.strip()
         if not stripped:
@@ -420,7 +420,7 @@ def _md_section_to_html(section_text):
                 html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
                 control_lines = []
             continue
-        
+
         # Detect metadata block start
         if stripped == '**Incident Metadata:**':
             in_metadata = True
@@ -431,7 +431,7 @@ def _md_section_to_html(section_text):
             cleaned = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', cleaned)
             metadata_lines.append(cleaned)
             continue
-            
+
         # Detect section headers like **Overview**, **The Breach Mechanism**, etc.
         header_match = re.match(r'^\*\*(.+?)\*\*\s*$', stripped)
         if header_match and not stripped.startswith('- '):
@@ -451,7 +451,7 @@ def _md_section_to_html(section_text):
             else:
                 html_parts.append(f'<h3>{title}</h3>')
                 continue
-        
+
         # Bullet points
         if stripped.startswith('- '):
             content = stripped[2:]
@@ -461,7 +461,7 @@ def _md_section_to_html(section_text):
                 continue
             html_parts.append(f'<p><strong>•</strong> {content}</p>')
             continue
-        
+
         # Footnotes / Sources section
         if stripped.startswith('[') and re.match(r'^\[\d+\.?\s', stripped):
             url_match = re.search(r'(https?://\S+)', stripped)
@@ -471,7 +471,7 @@ def _md_section_to_html(section_text):
                 domain_name = domain.group(1) if domain else url
                 html_parts.append(f'<a href="{url}">{domain_name}</a><br>')
             continue
-        
+
         # Regular paragraph - convert bold
         para = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', stripped)
         # Convert markdown links
@@ -479,18 +479,18 @@ def _md_section_to_html(section_text):
         # Replace em dashes
         para = para.replace(' — ', ' - ').replace('—', '-')
         html_parts.append(f'<p>{para}</p>')
-    
+
     # Flush any remaining control box
     if in_control and control_lines:
         html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
     if in_metadata and metadata_lines:
         html_parts.append('<div class="metadata">' + '<br>\n'.join(metadata_lines) + '</div>')
-    
+
     return '\n'.join(html_parts)
 
 def convert_to_html_report(final_report, threat_score, date_str):
     """Convertit le rapport Markdown final en HTML newsletter stylée."""
-    
+
     # Determine score color
     if threat_score <= 50:
         score_class = "score-green"
@@ -501,16 +501,16 @@ def convert_to_html_report(final_report, threat_score, date_str):
     else:
         score_class = "score-red"
         score_emoji = "&#128308;"  # 🔴
-    
+
     # Extract incident titles for TOC
     titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
-    
+
     # Build TOC HTML
     toc_html = ""
     for idx, title in enumerate(titles, 1):
         clean_title = title.strip().replace('—', '-')
         toc_html += f'<div class="toc-item"><span class="toc-number">{idx}.</span> {clean_title}</div>\n'
-    
+
     # Split report into incident sections
     # Remove everything before the first ## (score line, TOC, etc.)
     first_incident = final_report.find('## ')
@@ -518,17 +518,17 @@ def convert_to_html_report(final_report, threat_score, date_str):
         incidents_text = final_report
     else:
         incidents_text = final_report[first_incident:]
-    
+
     # Split by --- separator
     raw_sections = re.split(r'\n---\n', incidents_text)
-    
+
     # Build incidents HTML
     incidents_html = ""
     for idx, section in enumerate(raw_sections, 1):
         section = section.strip()
         if not section:
             continue
-        
+
         # Extract title from ## header
         title_match = re.match(r'^## (.+)', section)
         if title_match:
@@ -537,11 +537,11 @@ def convert_to_html_report(final_report, threat_score, date_str):
         else:
             incident_title = f"Incident {idx}"
             section_body = section
-        
+
         body_html = _md_section_to_html(section_body)
-        
+
         separator = '<tr><td><hr class="incident-separator"></td></tr>' if idx > 1 else ''
-        
+
         incidents_html += f"""
         {separator}
         <tr>
@@ -555,14 +555,14 @@ def convert_to_html_report(final_report, threat_score, date_str):
           </td>
         </tr>
 """
-    
+
     # Format the date nicely
     try:
         date_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d")
         formatted_date = date_obj.strftime("%B %d, %Y")
-    except:
+    except Exception:
         formatted_date = date_str
-    
+
     # Assemble the full HTML
     html = f"""<!DOCTYPE html>
 <html>
@@ -630,14 +630,14 @@ def convert_to_html_report(final_report, threat_score, date_str):
 </table>
 </body>
 </html>"""
-    
+
     return html
 
 def main():
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
-    
+
     # Auto-skip if running via GitHub Actions and a manual report already exists for today
     if os.environ.get("GITHUB_ACTIONS") == "true" and os.path.exists(md_filename):
         print(f"Skipping automated run: The report Daily_Threat_Intel_{today_str}.md was already generated manually today.")
@@ -649,15 +649,15 @@ def main():
     if not articles:
         print("Aucun article recent trouve.")
         return
-        
+
     print(f"{len(articles)} articles trouves.")
-    
+
     print("Recherche des anciens rapports pour eviter les doublons...")
     covered = get_previously_covered_incidents(days=3)
-    
+
     print("Analyse par l'IA et redaction de l'Executive Summary (Brouillon)...")
     draft_report = generate_executive_summary(articles, covered_incidents=covered)
-    
+
     if "SKIPPED" in draft_report.strip().upper():
         print("L'IA n'a trouvé aucun incident majeur qualifié aujourd'hui. Fin du script.")
         return
@@ -665,13 +665,13 @@ def main():
     # Extraire le Threat Score du BROUILLON (avant l'audit, car l'auditeur peut reformater cette ligne)
     print("Calcul mathematique et deterministe du score de risque final...")
     match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', draft_report, re.IGNORECASE)
-    
+
     if match:
         tc = int(match.group(1))
         ef = int(match.group(2))
         bi = int(match.group(3))
         threat_score = int((tc + ef + bi) * 3.33)
-        threat_score = min(threat_score, 100) # Cap at 100
+        threat_score = min(threat_score, 100)  # Cap at 100
         # Color indicator based on score thresholds
         if threat_score <= 50:
             color_emoji = "🟢"
@@ -682,9 +682,9 @@ def main():
         score_line = f"{color_emoji} **Threat Score:** {threat_score}/100\n*(Auditable Metrics - Threat Capability: {tc}/10 | Event Frequency: {ef}/10 | Business Impact: {bi}/10)*\n\n"
     else:
         score_line = "🟢 **Threat Score:** 0/100\n\n"
-    
+
     final_report = verify_and_correct_report(draft_report, articles)
-    
+
     if "SKIPPED" in final_report.strip().upper():
         print("L'Auditeur IA a invalidé l'intégralité du brouillon (hors-sujet ou hallucinations). Aucun rapport ne sera publié.")
         return
@@ -705,15 +705,15 @@ def main():
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     os.makedirs(output_dir, exist_ok=True)
-    
+
     # Toujours sauvegarder le Markdown (pour GitHub et la DB)
     md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
     with open(md_filename, "w", encoding="utf-8") as f:
-        f.write(f"# Daily Threat Intel Report\n")
+        f.write("# Daily Threat Intel Report\n")
         f.write(f"**Date:** {datetime.datetime.now().strftime('%B %d, %Y')}\n\n")
         f.write(final_report)
     print(f"\nRapport Markdown sauvegarde : {md_filename}")
-    
+
     # Sauvegarder une copie en .txt dans un dossier plaintext/
     txt_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plaintext")
     os.makedirs(txt_dir, exist_ok=True)
@@ -727,45 +727,46 @@ def main():
     with open(txt_filename, "w", encoding="utf-8") as f:
         f.write(txt_content)
     print(f"Rapport Plaintext sauvegarde : {txt_filename}")
-    
+
     # Générer le fichier .eml dans un dossier séparé newsletters/
     if OUTPUT_FORMAT == "html":
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
-        
+
         nl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "newsletters")
         os.makedirs(nl_dir, exist_ok=True)
         html_content = convert_to_html_report(final_report, threat_score, today_str)
-        
+
         # Construire le .eml avec les en-têtes MIME
         try:
             date_obj = datetime.datetime.strptime(today_str, "%Y-%m-%d")
             formatted_date = date_obj.strftime("%B %d, %Y")
-        except:
+        except Exception:
             formatted_date = today_str
-        
+
         msg = MIMEMultipart("alternative")
         msg["Subject"] = f"Daily Threat Intel Report - {formatted_date}"
         msg["From"] = ""
         msg["To"] = ""
         msg["MIME-Version"] = "1.0"
-        
+
         # Partie text/plain (fallback)
         plain_text = "Please enable HTML to view this intelligence briefing."
         msg.attach(MIMEText(plain_text, "plain", "utf-8"))
-        
+
         # Partie text/html
         msg.attach(MIMEText(html_content, "html", "utf-8"))
-        
+
         eml_filename = os.path.join(nl_dir, f"Daily_Threat_Intel_{today_str}.eml")
         with open(eml_filename, "w", encoding="utf-8") as f:
             f.write(msg.as_string())
         print(f"Newsletter .eml sauvegardee : {eml_filename}")
-        
+
     print(f"\nTermine ! Format de sortie : {OUTPUT_FORMAT.upper()}")
-    
+
     print("\nMise à jour de la base de connaissances (Contrôles)...")
     update_databases(final_report, today_str)
+
 
 if __name__ == "__main__":
     main()
