@@ -194,7 +194,7 @@ def generate_executive_summary(articles, covered_incidents=None):
             for ci in covered_incidents:
                 prompt += f"- {ci}\n"
 
-        models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+        models_to_try = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
 
         for model_name in models_to_try:
             try:
@@ -247,7 +247,7 @@ TA MISSION :
 4. Rends UNIQUEMENT le rapport Markdown final corrigé. Si TOUTES les sections sont supprimées car elles étaient fausses, retourne UNIQUEMENT le mot "SKIPPED". Ne rajoute pas d'intro ou de conclusion.
 """
 
-    models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    models_to_try = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})  # nosec B501
 
@@ -339,7 +339,7 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     ]
 }}
 """
-    models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    models_to_try = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=360.0)})  # nosec B501
 
