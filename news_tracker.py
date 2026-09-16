@@ -714,20 +714,6 @@ def main():
         f.write(final_report)
     print(f"\nRapport Markdown sauvegarde : {md_filename}")
 
-    # Sauvegarder une copie en .txt dans un dossier plaintext/
-    txt_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plaintext")
-    os.makedirs(txt_dir, exist_ok=True)
-    txt_content = f"Daily Threat Intel Report\nDate: {datetime.datetime.now().strftime('%B %d, %Y')}\n\n{final_report}"
-    # Strip markdown formatting for plain text
-    txt_content = re.sub(r'\*\*([^*]+)\*\*', r'\1', txt_content)  # bold
-    txt_content = re.sub(r'\*([^*]+)\*', r'\1', txt_content)      # italic
-    txt_content = re.sub(r'^#{1,6}\s+', '', txt_content, flags=re.MULTILINE)  # headings
-    txt_content = txt_content.replace('---', '─' * 60)  # separators
-    txt_filename = os.path.join(txt_dir, f"Daily_Threat_Intel_{today_str}.txt")
-    with open(txt_filename, "w", encoding="utf-8") as f:
-        f.write(txt_content)
-    print(f"Rapport Plaintext sauvegarde : {txt_filename}")
-
     # Générer le fichier .eml dans un dossier séparé newsletters/
     if OUTPUT_FORMAT == "html":
         from email.mime.multipart import MIMEMultipart
