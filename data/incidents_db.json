@@ -3005,5 +3005,60 @@
             "CTRL-DET-400",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260916-3CC128": {
+        "date": "2026-09-16",
+        "title": "KREMLIN Banking Malware Campaign Targeting Brazilian Financial Institutions (September 15, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3040",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-DET-400",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260916-E3F065": {
+        "date": "2026-09-16",
+        "title": "Active Exploitation of Critical WSO2 API Manager JWT Bypass Flaw CVE-2026-5430 (September 16, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1050",
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-3001"
+        ]
+    },
+    "INC-20260916-70F4DB": {
+        "date": "2026-09-16",
+        "title": "Ransomware Groups Target Critical VMware vCenter Remote Code Execution Flaw (September 15, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1106",
+            "CTRL-NOUVEAU-1102",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260916-38BBF4": {
+        "date": "2026-09-16",
+        "title": "Human Threat Actor Exploits Marimo AI Notebook Vulnerability for Rapid Cloud Pivot (September 15, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-7040",
+            "CTRL-NOUVEAU-3101",
+            "CTRL-NOUVEAU-4489",
+            "CTRL-NET-200",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260916-693A3D": {
+        "date": "2026-09-16",
+        "title": "CenterPoint Energy Data Breach Exposes 7.5 Million Customer Records (September 15, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3006",
+            "CTRL-NOUVEAU-3005",
+            "CTRL-NOUVEAU-2002",
+            "CTRL-NOUVEAU-8104",
+            "CTRL-SIM-300"
+        ]
     }
 }

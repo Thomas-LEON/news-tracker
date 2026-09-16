@@ -2740,5 +2740,19 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-7040": {
+        "name": "Interactive AI Notebook Perimeter & Access Isolation",
+        "prerequisites": [
+            "Identity Provider SSO Integration",
+            "ZTNA Access Gateway",
+            "Containerized Notebook Deployment Baseline"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
