@@ -31,7 +31,7 @@ jobs:
       - name: Run News Tracker
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python news_tracker.py
+        run: python -u news_tracker.py
 
       - name: Commit and Push Report
         run: |
