@@ -81,6 +81,20 @@ The repository includes a `.github/workflows/daily-tracker.yml` that runs every 
 2. Add a repository secret named `GEMINI_API_KEY`.
 3. The pipeline will automatically commit a new `.md` report to the `reports/` folder every day.
 
+### 3. Manual vs. Automated Generation — Lock File System
+
+The script uses a **lock file system** to prevent the automated bot from ever overwriting a manually-generated report.
+
+| Scenario | Behaviour |
+|---|---|
+| **Bot runs first** (6:00 AM), you haven't generated manually | Bot generates the report + creates `locks/.lock_YYYY-MM-DD` (origin: `bot`) |
+| **You generate manually** at any point in the day | Script generates the report + creates/overwrites `locks/.lock_YYYY-MM-DD` (origin: `manual`) |
+| **Bot tries to run** after a manual generation | Bot reads the lock file → immediately exits with `[SKIP]`. Your report is safe. |
+| **You re-generate manually** after the bot already ran | Local run always bypasses the lock check (only the bot is blocked) → overwrites the bot's report. |
+
+> [!IMPORTANT]
+> Lock files live in the `locks/` directory and are committed to the repo. They are the source of truth for whether a report has been generated for a given day.
+
 ---
 
 ## 📁 Project Structure
