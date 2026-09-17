@@ -638,9 +638,17 @@ def main():
     output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
 
-    # Auto-skip if running via GitHub Actions and a manual report already exists for today
-    if os.environ.get("GITHUB_ACTIONS") == "true" and os.path.exists(md_filename):
-        print(f"Skipping automated run: The report Daily_Threat_Intel_{today_str}.md was already generated manually today.")
+    # --- LOCK FILE SYSTEM ---
+    # A lock file is written to the repo whenever a report is generated (manually or by bot).
+    # The bot checks for it AFTER git checkout, so it always sees a manually-committed lock.
+    # Rule: if GITHUB_ACTIONS=true and a lock exists for today → skip. Never overwrite manual reports.
+    locks_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "locks")
+    lock_filename = os.path.join(locks_dir, f".lock_{today_str}")
+
+    if os.environ.get("GITHUB_ACTIONS") == "true" and os.path.exists(lock_filename):
+        with open(lock_filename, "r", encoding="utf-8") as f:
+            lock_origin = f.read().strip()
+        print(f"[SKIP] A lock file exists for {today_str} (origin: {lock_origin}). Automated run aborted to protect the existing report.")
         import sys
         sys.exit(0)
 
@@ -702,17 +710,21 @@ def main():
         toc += "\n---\n\n"
         final_report = final_report.replace(score_line, score_line + toc, 1)
 
-    today_str = datetime.datetime.now().strftime("%Y-%m-%d")
-    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
     os.makedirs(output_dir, exist_ok=True)
 
     # Toujours sauvegarder le Markdown (pour GitHub et la DB)
-    md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
     with open(md_filename, "w", encoding="utf-8") as f:
         f.write("# Daily Threat Intel Report\n")
         f.write(f"**Date:** {datetime.datetime.now().strftime('%B %d, %Y')}\n\n")
         f.write(final_report)
     print(f"\nRapport Markdown sauvegarde : {md_filename}")
+
+    # --- Écriture du lock file ---
+    os.makedirs(locks_dir, exist_ok=True)
+    origin = "manual" if os.environ.get("GITHUB_ACTIONS") != "true" else "bot"
+    with open(lock_filename, "w", encoding="utf-8") as f:
+        f.write(origin)
+    print(f"[LOCK] Lock file created for {today_str} (origin: {origin})")
 
     # Générer le fichier .eml dans un dossier séparé newsletters/
     if OUTPUT_FORMAT == "html":
