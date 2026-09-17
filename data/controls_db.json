@@ -2810,5 +2810,19 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8845": {
+        "name": "Post-Incident Network Access Policy Auditing",
+        "prerequisites": [
+            "Centralized policy logging",
+            "Established configuration baselines",
+            "Access control audit tools"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }

@@ -3125,5 +3125,27 @@
             "CTRL-GOV-7030",
             "CTRL-NOUVEAU-5312"
         ]
+    },
+    "INC-20260917-3F99A7": {
+        "date": "2026-09-17",
+        "title": "First Reported Data Breach Involving an Autonomous AI Agent (September 16, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-IAM-2002",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260917-08EA94": {
+        "date": "2026-09-17",
+        "title": "Active Exploitation of Cisco Identity Services Engine (ISE) Zero-Day (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1102",
+            "CTRL-NOUVEAU-1984",
+            "CTRL-NOUVEAU-8845"
+        ]
     }
 }
