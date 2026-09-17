@@ -2754,5 +2754,61 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-1984": {
+        "name": "Network Segmentation Fallback & Isolation Playbooks",
+        "prerequisites": [
+            "Network topology mapping",
+            "Defined isolation procedures",
+            "Automated firewall rule templates"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-4291": {
+        "name": "Browser-Based AI Assistant Access Restrictions",
+        "prerequisites": [
+            "Enterprise browser management",
+            "Application access control lists",
+            "API gateway integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-5812": {
+        "name": "AI Model Repository & Pipeline Write Restrictions",
+        "prerequisites": [
+            "Model registry deployment",
+            "IAM role definition for AI agents",
+            "CI/CD pipeline integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Critical",
+            "Availability": "High"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-5813": {
+        "name": "AI Model Weight & Configuration Integrity Monitoring",
+        "prerequisites": [
+            "Cryptographic hashing of model weights",
+            "Configuration drift detection tools",
+            "Real-time alerting system"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }

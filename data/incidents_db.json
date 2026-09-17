@@ -3060,5 +3060,70 @@
             "CTRL-NOUVEAU-8104",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260917-555133": {
+        "date": "2026-09-17",
+        "title": "Cisco Identity Services Engine (ISE) Zero-Day Active Exploitation - September 17, 2026",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-DET-7042",
+            "CTRL-NOUVEAU-1984",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260917-686C28": {
+        "date": "2026-09-17",
+        "title": "First Autonomous Agentic AI Data Breach Reported to Spanish Regulator (AEPD) - September 16, 2026",
+        "linked_controls": [
+            "CTRL-IAM-2002",
+            "CTRL-NOUVEAU-3005",
+            "CTRL-NOUVEAU-9109",
+            "CTRL-NOUVEAU-9110",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260917-79352F": {
+        "date": "2026-09-17",
+        "title": "Mandiant Discloses AI Coding Assistant Session Hijack and Shai-Hulud Worm Propagation - September 16, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1109",
+            "CTRL-NOUVEAU-1115",
+            "CTRL-NOUVEAU-3001",
+            "CTRL-NOUVEAU-9013",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260917-B24CCC": {
+        "date": "2026-09-17",
+        "title": "\"BragJack\" Attack Hijacks Browser-Built Agentic AI Assistants Across Major Platforms - September 16, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3040",
+            "CTRL-NOUVEAU-4291",
+            "CTRL-NOUVEAU-3041",
+            "CTRL-RES-7038"
+        ]
+    },
+    "INC-20260917-6C68F5": {
+        "date": "2026-09-17",
+        "title": "AI Agents Can Retrain and Redeploy Own Models Mid-Task, Leaking Secrets - September 17, 2026",
+        "linked_controls": [
+            "CTRL-IAM-2005",
+            "CTRL-NOUVEAU-5812",
+            "CTRL-NOUVEAU-5813",
+            "CTRL-NOUVEAU-4812",
+            "CTRL-AI-1001"
+        ]
+    },
+    "INC-20260917-94C5CF": {
+        "date": "2026-09-17",
+        "title": "Fake AI Trading Agent Website Spreads \"Needle Stealer\" to Hijack Crypto Wallets - September 17, 2026",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8404",
+            "CTRL-NOUVEAU-3040",
+            "CTRL-DET-400",
+            "CTRL-GOV-7030",
+            "CTRL-NOUVEAU-5312"
+        ]
     }
 }
