@@ -93,9 +93,16 @@ def generate_executive_summary(articles, covered_incidents=None):
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=120.0)})  # nosec B501
 
         prompt = """
-        Tu es un expert en Threat Intelligence et analyste des risques cyber (Emerging Tech & AI) au sein d'une grande institution BANCAIRE.
-        Voici une liste d'articles recuperes aujourd'hui. Ton role est d'identifier JUSQU'A 10 incidents ou menaces majeurs.
-        Si AUCUN article ne correspond aux critères stricts ci-dessous, ou si tu n'as pas de preuves concrètes dans les articles fournis, tu DOIS IMPÉRATIVEMENT répondre uniquement par le mot "SKIPPED". Ne comble JAMAIS les vides par l'invention.
+        ================================================================
+        MANDATORY LANGUAGE RULES — ABSOLUTE, NO EXCEPTIONS:
+        - The ENTIRE report MUST be written in ENGLISH. Zero French words allowed.
+        - ALWAYS write "AI" (NEVER "IA", "I.A.", or any other French abbreviation).
+        - If you catch yourself writing a French word, translate it immediately.
+        ================================================================
+
+        You are a Threat Intelligence expert and Cyber Risk Analyst (Emerging Tech & AI) at a major BANKING institution.
+        Here is a list of articles collected today. Your role is to identify UP TO 10 major incidents or threats.
+        If NO article meets the strict criteria below, or if you have no concrete proof in the provided articles, you MUST respond with the single word "SKIPPED". NEVER fill in the gaps with invention.
 
         CRITERES STRICTS D'INCLUSION (Un article doit valider l'un de ces points pour etre retenu) :
         1. Impact direct / indirect Banque : Attaques ciblant le secteur financier, vos fournisseurs (Supply Chain, editeurs logiciels), ou fuites de donnees reglementees (RGPD).
@@ -221,30 +228,38 @@ def verify_and_correct_report(draft_report, articles):
     Audite le rapport brouillon généré, supprime les incidents hors-sujet (géopolitique, régulation sans incident technique)
     et corrige scrupuleusement les dates des incidents en s'appuyant sur les articles originaux.
     """
-    print("\nLancement de l'Audit IA (Double Check)...")
-    prompt = f"""Tu es un Auditeur Cyber (Red Team / Fact Checker) extrêmement strict.
-On t'a soumis un brouillon de rapport Threat Intel, ainsi que les articles bruts d'origine.
-Ton rôle est de corriger les erreurs de l'IA qui a rédigé ce brouillon.
+    print("\nLaunching AI Audit (Double Check)...")
+    prompt = f"""================================================================
+MANDATORY LANGUAGE RULES — ABSOLUTE, NO EXCEPTIONS:
+- The ENTIRE output MUST be written in ENGLISH. Zero French words allowed.
+- ALWAYS write "AI" (NEVER "IA", "I.A.", or any other French abbreviation).
+- If you spot any French word in the draft, translate it as part of your corrections.
+================================================================
 
-Voici le brouillon :
+You are an extremely strict Cyber Auditor (Red Team / Fact Checker).
+You have been given a draft Threat Intel report and the original raw articles.
+Your role is to correct the errors made by the AI that wrote this draft.
+
+Here is the draft:
 ---
 {draft_report}
 ---
 
-Voici les articles bruts d'origine (pour vérifier les dates et les faits) :
+Here are the original raw articles (to verify dates and facts):
 ---
 """
     for i, art in enumerate(articles):
         soup = BeautifulSoup(art['summary'], 'html.parser')
         clean_summary = soup.get_text()[:300]
-        prompt += f"- Titre: {art['title']}\n  Lien: {art['link']}\n  Date/Source: {art['source']}\n  Extrait: {clean_summary}\n\n"
+        prompt += f"- Title: {art['title']}\n  Link: {art['link']}\n  Date/Source: {art['source']}\n  Extract: {clean_summary}\n\n"
 
     prompt += """
-TA MISSION :
-1. SUPPRESSION DES HALLUCINATIONS : Traque les CVE inventées ou les entreprises fictives. Si le brouillon parle d'une attaque qui n'existe ABSOLUMENT PAS dans les articles bruts, supprime toute la section.
-2. SUPPRESSION DES FAUX POSITIFS : Une panne informatique (Outage) sans preuve d'attaque n'est PAS un incident cyber. Un tutoriel de sécurité n'est PAS une campagne d'attaque active. Si le brouillon a extrapolé, supprime la section.
-3. VÉRIFICATION DES DATES : Ne supprime PAS une section si elle relate la *découverte récente* d'une fuite passée (ex: fuite AWS de 2023 révélée aujourd'hui). Supprime uniquement si l'article est un simple résumé ou rappel d'une vieille affaire sans aucun nouvel élément d'actualité.
-4. Rends UNIQUEMENT le rapport Markdown final corrigé. Si TOUTES les sections sont supprimées car elles étaient fausses, retourne UNIQUEMENT le mot "SKIPPED". Ne rajoute pas d'intro ou de conclusion.
+YOUR MISSION:
+1. HALLUCINATION REMOVAL: Track down invented CVEs or fictitious companies. If the draft mentions an attack that does NOT exist in the raw articles, delete the entire section.
+2. FALSE POSITIVE REMOVAL: An IT outage without proof of an attack is NOT a cyber incident. A security tutorial is NOT an active attack campaign. If the draft extrapolated, delete the section.
+3. DATE VERIFICATION: Do NOT delete a section if it relates to the *recent disclosure* of a past breach (e.g., a 2023 AWS leak revealed today). Only delete if the article is a simple recap of an old story with no new element.
+4. Return ONLY the final corrected Markdown report. If ALL sections were deleted because they were false, return ONLY the word "SKIPPED". Do not add any intro or conclusion.
+5. LANGUAGE CHECK: Correct any remaining French words or "IA" abbreviations — replace with their English equivalent. This is mandatory.
 """
 
     models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
