@@ -2824,5 +2824,19 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-9111": {
+        "name": "Geopolitical Risk-Aware Cloud Replication & Failover Policy",
+        "prerequisites": [
+            "Regional risk assessment",
+            "Multi-region architecture",
+            "Automated failover testing"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "Critical"
     }
 }

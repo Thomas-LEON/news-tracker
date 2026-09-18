@@ -3147,5 +3147,94 @@
             "CTRL-NOUVEAU-1984",
             "CTRL-NOUVEAU-8845"
         ]
+    },
+    "INC-20260918-8E8B8E": {
+        "date": "2026-09-18",
+        "title": "Revolut Data Breach Exposes High-Profile Accounts Following Five-Month Impersonation Campaign (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9841",
+            "CTRL-NOUVEAU-8410",
+            "CTRL-DET-2002"
+        ]
+    },
+    "INC-20260918-D37597": {
+        "date": "2026-09-18",
+        "title": "AWS Acknowledges Permanent Customer Data Loss in Bahrain and UAE Following Geopolitical Drone Strikes (September 15, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9111",
+            "CTRL-NOUVEAU-9013"
+        ]
+    },
+    "INC-20260918-7B1EA4": {
+        "date": "2026-09-18",
+        "title": "OpenAI Discloses Six Model Misalignment Incidents Involving Unauthorized Actions and API Key Harvesting (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1101",
+            "CTRL-IAM-7031",
+            "CTRL-DET-7022"
+        ]
+    },
+    "INC-20260918-406F4D": {
+        "date": "2026-09-18",
+        "title": "Brevo Supply-Chain Attack Leverages Stolen Cloudflare API Key to Inject ClickFix Malware (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-6201",
+            "CTRL-NOUVEAU-7301"
+        ]
+    },
+    "INC-20260918-3580B9": {
+        "date": "2026-09-18",
+        "title": "Critical Check Point Security Management Flaw Allows Unauthenticated Remote Code Execution as Root (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NET-200",
+            "CTRL-NOUVEAU-1102"
+        ]
+    },
+    "INC-20260918-F360CA": {
+        "date": "2026-09-18",
+        "title": "Critical Docker Sandboxes Flaw Enables macOS Host File System Escape (September 15, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-6010",
+            "CTRL-DET-400"
+        ]
+    },
+    "INC-20260918-1DEC59": {
+        "date": "2026-09-18",
+        "title": "China-Linked RatHat Android Malware Leverages AI Subsystem for Automated Device Control (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9105",
+            "CTRL-NOUVEAU-7419",
+            "CTRL-NOUVEAU-9112"
+        ]
+    },
+    "INC-20260918-B9917F": {
+        "date": "2026-09-18",
+        "title": "Critical Unbound DNSSEC Validator Flaw Allows Remote Code Execution (September 17, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-9421",
+            "CTRL-NOUVEAU-1104"
+        ]
+    },
+    "INC-20260918-AB6729": {
+        "date": "2026-09-18",
+        "title": "Critical Orkes Conductor Vulnerability CVE-2026-58138 Exploited in Active Attacks (September 18, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-1109",
+            "CTRL-NOUVEAU-1110"
+        ]
+    },
+    "INC-20260918-E6C5BB": {
+        "date": "2026-09-18",
+        "title": "State of MCP Configuration Report Reveals Widespread Exposure of AI Coding Tool Credentials on GitHub (September 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-9014",
+            "CTRL-NOUVEAU-9019",
+            "CTRL-NOUVEAU-1103"
+        ]
     }
 }
