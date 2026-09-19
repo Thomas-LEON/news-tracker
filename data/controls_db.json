@@ -2838,5 +2838,75 @@
             "Availability": "Critical"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8501": {
+        "name": "Automated Cloud API Fuzzing & Security Testing",
+        "prerequisites": [
+            "API Schema Specifications",
+            "Staging Environment Setup",
+            "Automated Fuzzing Engine Integration"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8502": {
+        "name": "AI Evaluation Target Domain Verification & Ownership Controls",
+        "prerequisites": [
+            "Domain Verification Protocol",
+            "Sandboxed Evaluation Framework",
+            "Outbound DNS Logging"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Medium",
+            "Integrity": "High",
+            "Availability": "High"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8503": {
+        "name": "Automated Identity Lifecycle & Departing Employee Access Revocation",
+        "prerequisites": [
+            "HRIS-IdP Integration",
+            "Automated Access Deprovisioning Workflows",
+            "SaaS OAuth Token Revocation Engine"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8504": {
+        "name": "Automated Employee Offboarding Access Audit & Verification",
+        "prerequisites": [
+            "Centralized Identity Provider",
+            "API Inventory of SaaS Tools",
+            "Automated Compliance Auditing Scripts"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "Medium",
+            "Availability": "Low"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8505": {
+        "name": "Linux Kernel Live Patching & Dynamic Kernel Update Infrastructure",
+        "prerequisites": [
+            "Live Patching Kernel Module Support",
+            "Centralized Patch Repository",
+            "Staging Validation Cluster"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Critical"
+        },
+        "damage_level": "Critical"
     }
 }

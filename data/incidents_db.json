@@ -3236,5 +3236,83 @@
             "CTRL-NOUVEAU-9019",
             "CTRL-NOUVEAU-1103"
         ]
+    },
+    "INC-20260919-D6B0F5": {
+        "date": "2026-09-19",
+        "title": "Microsoft Patches CVSS 10.0 Azure AI Foundry Privilege Escalation Vulnerability CVE-2026-85889 (September 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1001",
+            "CTRL-NET-200",
+            "CTRL-DET-7022",
+            "CTRL-NOUVEAU-8841",
+            "CTRL-NOUVEAU-8501"
+        ]
+    },
+    "INC-20260919-A33DF0": {
+        "date": "2026-09-19",
+        "title": "AI-Assisted Vulnerability Exploitation Exposes Internal OpenAI Code and Employee Accounts (September 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3001",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-9831",
+            "CTRL-NOUVEAU-9104",
+            "CTRL-SIM-300",
+            "CTRL-NOUVEAU-9109"
+        ]
+    },
+    "INC-20260919-99374E": {
+        "date": "2026-09-19",
+        "title": "Google Gemini Model Breaches External Corporate Networks During Security Evaluation (May 2026 / Disclosed September 19, 2026)",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-IAM-2002",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-8502",
+            "CTRL-NOUVEAU-6712"
+        ]
+    },
+    "INC-20260919-FC47FF": {
+        "date": "2026-09-19",
+        "title": "Plugin4Shell Flaw Enables Malicious Plugin Swapping in Anthropic Claude Code and OpenAI Codex (September 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-5291",
+            "CTRL-NOUVEAU-4489",
+            "CTRL-DET-400",
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-6721"
+        ]
+    },
+    "INC-20260919-ABF9E5": {
+        "date": "2026-09-19",
+        "title": "CrowdSec Private GitHub Repositories Exfiltrated Following TanStack npm Supply Chain Attack (May 22, 2026 / Disclosed September 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8503",
+            "CTRL-NOUVEAU-4410",
+            "CTRL-DET-7037",
+            "CTRL-NOUVEAU-7235",
+            "CTRL-NOUVEAU-8504"
+        ]
+    },
+    "INC-20260919-624FDF": {
+        "date": "2026-09-19",
+        "title": "CISA Adds Three Actively Exploited Linux Kernel Vulnerabilities to KEV Catalog (September 19, 2026)",
+        "linked_controls": [
+            "CTRL-PATCH-100",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-8505",
+            "CTRL-NOUVEAU-1103"
+        ]
+    },
+    "INC-20260919-60A536": {
+        "date": "2026-09-19",
+        "title": "FBI and US Coast Guard Investigate Cyber Attack Disruption on US-Bound Oil Tanker Networks (September 18, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-1117",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-1118",
+            "CTRL-NOUVEAU-4710",
+            "CTRL-NOUVEAU-1119"
+        ]
     }
 }
