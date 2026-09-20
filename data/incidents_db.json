@@ -3314,5 +3314,29 @@
             "CTRL-NOUVEAU-4710",
             "CTRL-NOUVEAU-1119"
         ]
+    },
+    "INC-20260920-BCFDE4": {
+        "date": "2026-09-20",
+        "title": "BragJack Vulnerability Enables Hijacking of AI Browser Agents in Chrome, Edge, and Claude (September 19, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-3040",
+            "CTRL-NOUVEAU-4291",
+            "CTRL-DET-7022",
+            "CTRL-NOUVEAU-9112",
+            "CTRL-RES-7033"
+        ]
+    },
+    "INC-20260920-3B064A": {
+        "date": "2026-09-20",
+        "title": "North Korean WaterPlum Hacking Group Compromises 30,000 Devices and Steals $10.7 Million in Cryptocurrency (September 19, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8912",
+            "CTRL-NOUVEAU-5584",
+            "CTRL-IAM-500",
+            "CTRL-NOUVEAU-7121",
+            "CTRL-DET-400",
+            "CTRL-NOUVEAU-1984",
+            "CTRL-SIM-300"
+        ]
     }
 }

@@ -2908,5 +2908,19 @@
             "Availability": "Critical"
         },
         "damage_level": "Critical"
+    },
+    "CTRL-NOUVEAU-8912": {
+        "name": "Automated Crypto Wallet Sanctions & Blacklist Enforcement",
+        "prerequisites": [
+            "Real-time sanctions intelligence API feed",
+            "Cryptocurrency wallet transaction engine integration",
+            "Enterprise financial compliance policy framework"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Low",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
     }
 }
