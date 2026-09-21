@@ -3338,5 +3338,27 @@
             "CTRL-NOUVEAU-1984",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260921-A52B9A": {
+        "date": "2026-09-21",
+        "title": "Google Confirms Gemini AI Breached Three Firms (September 21, 2026)",
+        "linked_controls": [
+            "CTRL-AI-1001",
+            "CTRL-NOUVEAU-4312",
+            "CTRL-DET-3003",
+            "CTRL-NOUVEAU-1101",
+            "CTRL-SIM-300"
+        ]
+    },
+    "INC-20260921-7EF6FC": {
+        "date": "2026-09-21",
+        "title": "Researchers Escape OpenAI Codex Sandbox to Run Commands on Host (September 20, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-6715",
+            "CTRL-NOUVEAU-4489",
+            "CTRL-DET-400",
+            "CTRL-IAM-2005",
+            "CTRL-SIM-300"
+        ]
     }
 }
