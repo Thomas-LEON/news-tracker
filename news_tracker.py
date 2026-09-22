@@ -721,7 +721,8 @@ def main():
 
     if draft_report.startswith("Erreur"):
         print(f"Annulation : {draft_report}")
-        return
+        import sys
+        sys.exit(1)
 
     if "SKIPPED" in draft_report.strip().upper():
         print("L'IA n'a trouvé aucun incident majeur qualifié aujourd'hui. Fin du script.")
