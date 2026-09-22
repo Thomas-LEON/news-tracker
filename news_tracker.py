@@ -4,12 +4,27 @@ import feedparser
 import re
 import json
 import uuid
+import concurrent.futures
 from google import genai
 from google.genai import types
 import httpx
 from bs4 import BeautifulSoup
 import socket
 socket.setdefaulttimeout(15.0)
+
+
+def call_with_hard_timeout(fn, timeout=45):
+    """
+    Appelle fn() dans un thread séparé et lève TimeoutError si pas de réponse sous `timeout` secondes.
+    Contourne le système de retry interne Tenacity de google-genai qui ignore les timeouts httpx.
+    """
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(fn)
+        try:
+            return future.result(timeout=timeout)
+        except concurrent.futures.TimeoutError:
+            raise TimeoutError(f"LLM call hard-killed after {timeout}s (Tenacity bypass)")
+
 
 # Remplacez "VOTRE_CLE_API" par votre véritable clé API Google Gemini (AI Studio).
 # Il est recommandé de la définir dans les variables d'environnement Windows.
@@ -206,12 +221,13 @@ def generate_executive_summary(articles, covered_incidents=None):
         for model_name in models_to_try:
             try:
                 print(f"Tentative de generation avec le modele {model_name}...")
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.1,
-                    )
+                response = call_with_hard_timeout(
+                    lambda m=model_name: client.models.generate_content(
+                        model=m,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(temperature=0.1)
+                    ),
+                    timeout=45
                 )
                 return response.text
             except Exception as e:
@@ -269,10 +285,13 @@ YOUR MISSION:
         for model_name in models_to_try:
             try:
                 print(f"Tentative d'audit avec {model_name}...")
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(temperature=0.0)
+                response = call_with_hard_timeout(
+                    lambda m=model_name: client.models.generate_content(
+                        model=m,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(temperature=0.0)
+                    ),
+                    timeout=45
                 )
 
                 raw_text = response.text.strip()
@@ -362,10 +381,13 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
         for model_name in models_to_try:
             try:
                 print(f"[DB Update] Tentative avec {model_name}...")
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(temperature=0.0)
+                response = call_with_hard_timeout(
+                    lambda m=model_name: client.models.generate_content(
+                        model=m,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(temperature=0.0)
+                    ),
+                    timeout=45
                 )
                 raw_output = response.text
                 break
