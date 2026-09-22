@@ -867,38 +867,38 @@ def main():
     print(f"[LOCK] Lock file created for {today_str} (origin: {origin})")
 
     # Générer le fichier .eml dans un dossier séparé newsletters/
-    if OUTPUT_FORMAT == "html":
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
-
-        nl_dir = os.path.join(root_dir, "newsletters")
-        os.makedirs(nl_dir, exist_ok=True)
-        html_content = convert_to_html_report(final_report, threat_score, today_str)
-
-        # Construire le .eml avec les en-têtes MIME
-        try:
-            date_obj = datetime.datetime.strptime(today_str, "%Y-%m-%d")
-            formatted_date = date_obj.strftime("%B %d, %Y")
-        except Exception:
-            formatted_date = today_str
-
-        msg = MIMEMultipart("alternative")
-        msg["Subject"] = f"Daily Threat Intel Report - {formatted_date}"
-        msg["From"] = ""
-        msg["To"] = ""
-        msg["MIME-Version"] = "1.0"
-
-        # Partie text/plain (fallback)
-        plain_text = "Please enable HTML to view this intelligence briefing."
-        msg.attach(MIMEText(plain_text, "plain", "utf-8"))
-
-        # Partie text/html
-        msg.attach(MIMEText(html_content, "html", "utf-8"))
-
-        eml_filename = os.path.join(nl_dir, f"Daily_Threat_Intel_{today_str}.eml")
-        with open(eml_filename, "w", encoding="utf-8") as f:
-            f.write(msg.as_string())
-        print(f"Newsletter .eml sauvegardee : {eml_filename}")
+    # if OUTPUT_FORMAT == "html":
+    #     from email.mime.multipart import MIMEMultipart
+    #     from email.mime.text import MIMEText
+    #
+    #     nl_dir = os.path.join(root_dir, "newsletters")
+    #     os.makedirs(nl_dir, exist_ok=True)
+    #     html_content = convert_to_html_report(final_report, threat_score, today_str)
+    #
+    #     # Construire le .eml avec les en-tetes MIME
+    #     try:
+    #         date_obj = datetime.datetime.strptime(today_str, "%Y-%m-%d")
+    #         formatted_date = date_obj.strftime("%B %d, %Y")
+    #     except Exception:
+    #         formatted_date = today_str
+    #
+    #     msg = MIMEMultipart("alternative")
+    #     msg["Subject"] = f"Daily Threat Intel Report - {formatted_date}"
+    #     msg["From"] = ""
+    #     msg["To"] = ""
+    #     msg["MIME-Version"] = "1.0"
+    #
+    #     # Partie text/plain (fallback)
+    #     plain_text = "Please enable HTML to view this intelligence briefing."
+    #     msg.attach(MIMEText(plain_text, "plain", "utf-8"))
+    #
+    #     # Partie text/html
+    #     msg.attach(MIMEText(html_content, "html", "utf-8"))
+    #
+    #     eml_filename = os.path.join(nl_dir, f"Daily_Threat_Intel_{today_str}.eml")
+    #     with open(eml_filename, "w", encoding="utf-8") as f:
+    #         f.write(msg.as_string())
+    #     print(f"Newsletter .eml sauvegardee : {eml_filename}")
 
     print(f"\nTermine ! Format de sortie : {OUTPUT_FORMAT.upper()}")
 
