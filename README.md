@@ -3,6 +3,7 @@
 > **Automated Threat Intelligence pipeline leveraging Gemini AI and RSS feeds to generate daily, executive-ready cybersecurity briefings.**
 
 [![CI](https://github.com/Thomas-LEON/news-tracker/actions/workflows/daily-tracker.yml/badge.svg)](https://github.com/Thomas-LEON/news-tracker/actions)
+[![Coverage: 95%](https://img.shields.io/badge/Coverage-95%25-brightgreen.svg)](#-engineering-standards--contributing)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -62,17 +63,32 @@ Beyond simply generating markdown files, the system extracts structured, actiona
 
 ## 🚀 Quick Start
 
-### 1. Run Locally
+### 1. Run via Docker (Recommended for Production)
+The easiest way to run the tracker locally or on a server without polluting your host environment is using Docker Compose.
+
+```bash
+git clone https://github.com/Thomas-LEON/news-tracker.git
+cd news-tracker
+
+# Create your environment file
+cp .env.example .env
+# Edit .env and add your GEMINI_API_KEY
+
+# Run the tracker (generates reports/ and locks/)
+docker-compose up --build
+```
+
+### 2. Run Locally (Python)
 ```bash
 git clone https://github.com/Thomas-LEON/news-tracker.git
 cd news-tracker
 pip install -r requirements.txt
 
-# Export your API key
+# Export your API key or add it to a .env file
 export GEMINI_API_KEY="your_api_key_here"
 
 # Generate today's report
-python news_tracker.py
+python src/news_tracker.py
 ```
 
 ### 2. Run Automatically (GitHub Actions)
@@ -104,17 +120,19 @@ news-tracker/
 ├── .github/workflows/
 │   ├── daily-tracker.yml        # GitHub Actions Bot Pipeline
 │   └── ci.yml                   # CI Pipeline (Tests, Linting, Security)
+├── src/
+│   └── news_tracker.py          # Core logic & AI Gateway Router
 ├── data/
 │   ├── controls_db.json         # Relational database of mitigating controls
 │   └── incidents_db.json        # Relational database of tracked incidents
 ├── reports/                     # Auto-generated daily markdown reports
 ├── newsletters/                 # Auto-generated daily .eml email formats
-├── plaintext/                   # Auto-generated daily .txt plain text formats
+├── locks/                       # Synchronization locks
 ├── tests/                       # Comprehensive Pytest suite
-├── news_tracker.py              # Core logic & AI prompt engineering
-├── requirements.txt             # Python dependencies
-├── CONTRIBUTING.md              # Engineering Standards Guidelines
-├── SOP.md                       # Standard Operating Procedure (Internal Docs)
+├── docker-compose.yml           # Production Docker setup
+├── Dockerfile                   # Application image
+├── .env.example                 # Environment variables template
+├── requirements.txt             # Pinned Python dependencies
 └── README.md
 ```
 

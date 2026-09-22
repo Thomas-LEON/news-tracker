@@ -18,16 +18,16 @@ from news_tracker import fetch_recent_news
 def mock_recent_feed():
     """Create a mock feed object containing one article published 1 hour ago."""
     mock_entry = MagicMock()
-    mock_entry.title = 'Test Article'
-    mock_entry.link = 'https://example.com/test'
-    mock_entry.get.return_value = 'Test summary'
+    mock_entry.title = "Test Article"
+    mock_entry.link = "https://example.com/test"
+    mock_entry.get.return_value = "Test summary"
     mock_entry.published_parsed = (
         datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=1)
     ).timetuple()
 
     mock_feed = MagicMock()
     mock_feed.entries = [mock_entry]
-    mock_feed.feed.get.return_value = 'Test Source'
+    mock_feed.feed.get.return_value = "Test Source"
     return mock_feed
 
 
@@ -35,16 +35,16 @@ def mock_recent_feed():
 def mock_old_feed():
     """Create a mock feed object containing one article published 3 days ago."""
     mock_entry = MagicMock()
-    mock_entry.title = 'Old Article'
-    mock_entry.link = 'https://example.com/old'
-    mock_entry.get.return_value = 'Old summary'
+    mock_entry.title = "Old Article"
+    mock_entry.link = "https://example.com/old"
+    mock_entry.get.return_value = "Old summary"
     mock_entry.published_parsed = (
         datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=3)
     ).timetuple()
 
     mock_feed = MagicMock()
     mock_feed.entries = [mock_entry]
-    mock_feed.feed.get.return_value = 'Test Source'
+    mock_feed.feed.get.return_value = "Test Source"
     return mock_feed
 
 

@@ -1,7 +1,7 @@
 import re
 
 # Regex used to extract auditable metrics from LLM draft report
-METRICS_PATTERN = r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*'
+METRICS_PATTERN = r"\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*"
 
 
 def calculate_score(tc: int, ef: int, bi: int) -> int:
@@ -12,11 +12,11 @@ def calculate_score(tc: int, ef: int, bi: int) -> int:
 def get_color(score: int) -> str:
     """Determine color classification based on score thresholds."""
     if score <= 50:
-        return 'green'
+        return "green"
     elif score <= 75:
-        return 'orange'
+        return "orange"
     else:
-        return 'red'
+        return "red"
 
 
 def extract_and_calculate_score(text: str) -> int:
@@ -63,27 +63,27 @@ def test_score_calculation_cap_at_100():
 
 def test_color_green():
     """Score 19 -> green"""
-    assert get_color(19) == 'green'
+    assert get_color(19) == "green"
 
 
 def test_color_orange():
     """Score 59 -> orange"""
-    assert get_color(59) == 'orange'
+    assert get_color(59) == "orange"
 
 
 def test_color_red():
     """Score 80 -> red"""
-    assert get_color(80) == 'red'
+    assert get_color(80) == "red"
 
 
 def test_color_boundary_50():
     """Score exactly 50 -> green"""
-    assert get_color(50) == 'green'
+    assert get_color(50) == "green"
 
 
 def test_color_boundary_75():
     """Score exactly 75 -> orange"""
-    assert get_color(75) == 'orange'
+    assert get_color(75) == "orange"
 
 
 def test_regex_extraction():

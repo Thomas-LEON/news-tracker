@@ -7,7 +7,7 @@ if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 from news_tracker import _md_section_to_html, convert_to_html_report
 
-SAMPLE_REPORT = '''🟠 **Threat Score:** 60/100
+SAMPLE_REPORT = """🟠 **Threat Score:** 60/100
 
 ## Test Incident Title (September 14, 2026)
 
@@ -19,7 +19,7 @@ This is a test overview paragraph.
 
 **Conclusion**
 This is a test conclusion.
-'''
+"""
 
 
 @pytest.fixture
@@ -31,6 +31,7 @@ def sample_report_text():
 # =====================================================================
 # Tests for _md_section_to_html
 # =====================================================================
+
 
 def test_converts_bold_text():
     """Verify that bold markdown text produces <strong> tags."""
@@ -84,44 +85,59 @@ def test_converts_footnotes():
 # Tests for convert_to_html_report
 # =====================================================================
 
+
 def test_html_contains_score_badge(sample_report_text):
     """Verify that output HTML contains score-badge class."""
-    html = convert_to_html_report(sample_report_text, threat_score=60, date_str="2026-09-14")
+    html = convert_to_html_report(
+        sample_report_text, threat_score=60, date_str="2026-09-14"
+    )
     assert "score-badge" in html
 
 
 def test_html_score_green(sample_report_text):
     """Verify that threat_score=40 applies the score-green class."""
-    html = convert_to_html_report(sample_report_text, threat_score=40, date_str="2026-09-14")
+    html = convert_to_html_report(
+        sample_report_text, threat_score=40, date_str="2026-09-14"
+    )
     assert "score-green" in html
 
 
 def test_html_score_orange(sample_report_text):
     """Verify that threat_score=60 applies the score-orange class."""
-    html = convert_to_html_report(sample_report_text, threat_score=60, date_str="2026-09-14")
+    html = convert_to_html_report(
+        sample_report_text, threat_score=60, date_str="2026-09-14"
+    )
     assert "score-orange" in html
 
 
 def test_html_score_red(sample_report_text):
     """Verify that threat_score=80 applies the score-red class."""
-    html = convert_to_html_report(sample_report_text, threat_score=80, date_str="2026-09-14")
+    html = convert_to_html_report(
+        sample_report_text, threat_score=80, date_str="2026-09-14"
+    )
     assert "score-red" in html
 
 
 def test_html_contains_toc(sample_report_text):
     """Verify that report with incident title produces toc-item containing the title."""
-    html = convert_to_html_report(sample_report_text, threat_score=60, date_str="2026-09-14")
+    html = convert_to_html_report(
+        sample_report_text, threat_score=60, date_str="2026-09-14"
+    )
     assert "toc-item" in html
     assert "Test Incident Title" in html
 
     # Also verify with a direct '## Incident Title' report
     custom_report = "## Incident Title\n\n**Overview**\nDetails"
-    custom_html = convert_to_html_report(custom_report, threat_score=50, date_str="2026-09-14")
+    custom_html = convert_to_html_report(
+        custom_report, threat_score=50, date_str="2026-09-14"
+    )
     assert "toc-item" in custom_html
     assert "Incident Title" in custom_html
 
 
 def test_html_contains_date(sample_report_text):
     """Verify that date_str='2026-09-14' formats and appears as 'September 14, 2026'."""
-    html = convert_to_html_report(sample_report_text, threat_score=60, date_str="2026-09-14")
+    html = convert_to_html_report(
+        sample_report_text, threat_score=60, date_str="2026-09-14"
+    )
     assert "September 14, 2026" in html

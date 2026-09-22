@@ -18,7 +18,7 @@ def tracker_env(tmp_path, monkeypatch):
     Configure news_tracker.__file__ to locate reports in tmp_path.
     Returns tmp_path as the base directory.
     """
-    fake_module_file = tmp_path / "news_tracker.py"
+    fake_module_file = tmp_path / "src" / "news_tracker.py"
     monkeypatch.setattr(news_tracker, "__file__", str(fake_module_file))
     return tmp_path
 
@@ -27,7 +27,9 @@ def create_daily_report(base_dir: Path, days_ago: int, content: str) -> Path:
     """Helper to create a Daily_Threat_Intel_<date>.md report file in reports/."""
     reports_dir = base_dir / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
-    target_date = (datetime.datetime.now() - datetime.timedelta(days=days_ago)).strftime("%Y-%m-%d")
+    target_date = (
+        datetime.datetime.now() - datetime.timedelta(days=days_ago)
+    ).strftime("%Y-%m-%d")
     report_file = reports_dir / f"Daily_Threat_Intel_{target_date}.md"
     report_file.write_text(content, encoding="utf-8")
     return report_file
@@ -58,9 +60,15 @@ def test_reads_yesterday_report(tracker_env):
 
 def test_reads_multiple_days(tracker_env):
     """Create fake .md files for the last 3 days and verify all titles from all 3 are returned."""
-    create_daily_report(tracker_env, days_ago=1, content="## Incident Day 1\nDetails day 1.")
-    create_daily_report(tracker_env, days_ago=2, content="## Incident Day 2\nDetails day 2.")
-    create_daily_report(tracker_env, days_ago=3, content="## Incident Day 3\nDetails day 3.")
+    create_daily_report(
+        tracker_env, days_ago=1, content="## Incident Day 1\nDetails day 1."
+    )
+    create_daily_report(
+        tracker_env, days_ago=2, content="## Incident Day 2\nDetails day 2."
+    )
+    create_daily_report(
+        tracker_env, days_ago=3, content="## Incident Day 3\nDetails day 3."
+    )
 
     result = get_previously_covered_incidents(days=3)
     assert set(result) == {"Incident Day 1", "Incident Day 2", "Incident Day 3"}

@@ -27,10 +27,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run News Tracker
+      - name: Lancer la gǸnǸration du rapport
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python -u news_tracker.py
+          OUTPUT_FORMAT: markdown
+        run: python src/news_tracker.py
 
       - name: Commit and Push Report
         run: |

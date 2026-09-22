@@ -1,5 +1,10 @@
 import os
+import sys
+import threading
 import datetime
+from dotenv import load_dotenv
+
+load_dotenv()  # Charge les variables depuis .env s'il existe
 import feedparser
 import re
 import json
@@ -10,10 +15,12 @@ from google.genai import types
 import httpx
 from bs4 import BeautifulSoup
 import socket
+
 socket.setdefaulttimeout(15.0)
 
 
 import threading
+
 
 def call_with_hard_timeout(fn, timeout=45):
     """
@@ -23,7 +30,7 @@ def call_with_hard_timeout(fn, timeout=45):
     """
     result = []
     exc = []
-    
+
     def worker():
         try:
             result.append(fn())
@@ -34,7 +41,7 @@ def call_with_hard_timeout(fn, timeout=45):
     t.daemon = True
     t.start()
     t.join(timeout)
-    
+
     if t.is_alive():
         raise TimeoutError(f"LLM call hard-killed after {timeout}s (Tenacity bypass)")
     if exc:
@@ -50,10 +57,16 @@ def call_llm_with_fallback(prompt, client, complexity="high", temperature=0.1):
     """
     if complexity == "high":
         # Tâches complexes nécessitant beaucoup de raisonnement
-        models_to_try = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+        models_to_try = [
+            "gemini-3.8-flash",
+            "gemini-3.7-flash",
+            "gemini-3.6-flash",
+            "gemini-3.5-flash",
+            "gemini-3.1-flash-lite",
+        ]
     else:
         # Tâches plus simples (vérification de dates, grammaire)
-        models_to_try = ['gemini-3.5-flash', 'gemini-3.1-flash-lite']
+        models_to_try = ["gemini-3.5-flash", "gemini-3.1-flash-lite"]
 
     # On utilise 45 secondes de hard timeout par modèle (Fail-Fast)
     for model_name in models_to_try:
@@ -63,9 +76,9 @@ def call_llm_with_fallback(prompt, client, complexity="high", temperature=0.1):
                 lambda m=model_name: client.models.generate_content(
                     model=m,
                     contents=prompt,
-                    config=types.GenerateContentConfig(temperature=temperature)
+                    config=types.GenerateContentConfig(temperature=temperature),
                 ),
-                timeout=45
+                timeout=45,
             )
             return response.text
         except Exception as e:
@@ -96,9 +109,10 @@ RSS_FEEDS = [
     "https://feeds.arstechnica.com/arstechnica/security",
     "https://www.helpnetsecurity.com/feed/",
     "https://thecyberwire.com/feeds/rss.xml",
-    "https://www.cybersecuritydive.com/feeds/news/"
+    "https://www.cybersecuritydive.com/feeds/news/",
 ]
 # ---------------------
+
 
 def fetch_recent_news():
     """Récupère les articles publiés dans les dernières 24h via les flux RSS."""
@@ -110,25 +124,34 @@ def fetch_recent_news():
         try:
             feed = feedparser.parse(feed_url)
             for entry in feed.entries:
-                if hasattr(entry, 'published_parsed') and entry.published_parsed:
-                    published = datetime.datetime(*entry.published_parsed[:6], tzinfo=datetime.timezone.utc)
+                if hasattr(entry, "published_parsed") and entry.published_parsed:
+                    published = datetime.datetime(
+                        *entry.published_parsed[:6], tzinfo=datetime.timezone.utc
+                    )
                     if published > yesterday:
-                        recent_articles.append({
-                            "title": entry.title,
-                            "link": entry.link,
-                            "summary": entry.get('summary', ''),
-                            "source": feed.feed.get('title', feed_url),
-                            "published": published.strftime("%Y-%m-%d %H:%M:%S UTC")
-                        })
+                        recent_articles.append(
+                            {
+                                "title": entry.title,
+                                "link": entry.link,
+                                "summary": entry.get("summary", ""),
+                                "source": feed.feed.get("title", feed_url),
+                                "published": published.strftime(
+                                    "%Y-%m-%d %H:%M:%S UTC"
+                                ),
+                            }
+                        )
         except Exception as e:
             print(f"Erreur lors de la lecture du flux {feed_url}: {e}")
 
     return recent_articles
 
+
 def get_previously_covered_incidents(days=3):
     """Recupere les titres des incidents traites dans les rapports des N derniers jours."""
     covered = []
-    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+    # Le script est dans src/, on remonte d'un niveau pour le root_dir
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    output_dir = os.path.join(root_dir, "reports")
     if not os.path.exists(output_dir):
         return covered
 
@@ -137,14 +160,15 @@ def get_previously_covered_incidents(days=3):
         target_date = (now - datetime.timedelta(days=i)).strftime("%Y-%m-%d")
         filepath = os.path.join(output_dir, f"Daily_Threat_Intel_{target_date}.md")
         if os.path.exists(filepath):
-            with open(filepath, 'r', encoding='utf-8') as f:
+            with open(filepath, "r", encoding="utf-8") as f:
                 content = f.read()
-                titles = re.findall(r'^## (.*)', content, re.MULTILINE)
+                titles = re.findall(r"^## (.*)", content, re.MULTILINE)
                 for t in titles:
                     clean_t = t.strip()
                     if clean_t:
                         covered.append(clean_t)
     return list(set(covered))
+
 
 def generate_executive_summary(articles, covered_incidents=None):
     """Utilise l'IA pour trier les articles et générer un Executive Summary."""
@@ -154,7 +178,10 @@ def generate_executive_summary(articles, covered_incidents=None):
     try:
         # Configuration pour le nouveau package google.genai
         # Contournement SSL local (Windows/Zscaler/proxy...) : On utilise httpx_client
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})  # nosec B501
+        client = genai.Client(
+            api_key=API_KEY,
+            http_options={"httpx_client": httpx.Client(verify=False, timeout=60.0)},
+        )  # nosec B501
 
         prompt = """
         ================================================================
@@ -255,7 +282,7 @@ def generate_executive_summary(articles, covered_incidents=None):
         """
 
         for i, art in enumerate(articles):
-            soup = BeautifulSoup(art['summary'], 'html.parser')
+            soup = BeautifulSoup(art["summary"], "html.parser")
             clean_summary = soup.get_text()[:400]
             prompt += f"\n- Titre: {art['title']}\n  Lien: {art['link']}\n  Source: {art['source']}\n  Date de publication: {art.get('published', 'Inconnue')}\n  Extrait: {clean_summary}\n"
 
@@ -265,10 +292,13 @@ def generate_executive_summary(articles, covered_incidents=None):
             for ci in covered_incidents:
                 prompt += f"- {ci}\n"
 
-        return call_llm_with_fallback(prompt, client, complexity="high", temperature=0.1)
+        return call_llm_with_fallback(
+            prompt, client, complexity="high", temperature=0.1
+        )
 
     except Exception as e:
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
+
 
 def verify_and_correct_report(draft_report, articles):
     """
@@ -296,7 +326,7 @@ Here are the original raw articles (to verify dates and facts):
 ---
 """
     for i, art in enumerate(articles):
-        soup = BeautifulSoup(art['summary'], 'html.parser')
+        soup = BeautifulSoup(art["summary"], "html.parser")
         clean_summary = soup.get_text()[:300]
         prompt += f"- Title: {art['title']}\n  Link: {art['link']}\n  Date/Source: {art['source']}\n  Extract: {clean_summary}\n\n"
 
@@ -310,14 +340,21 @@ YOUR MISSION:
 """
 
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})  # nosec B501
-        
-        raw_text = call_llm_with_fallback(prompt, client, complexity="low", temperature=0.0)
-        
+        client = genai.Client(
+            api_key=API_KEY,
+            http_options={"httpx_client": httpx.Client(verify=False, timeout=60.0)},
+        )  # nosec B501
+
+        raw_text = call_llm_with_fallback(
+            prompt, client, complexity="low", temperature=0.0
+        )
+
         if raw_text.startswith("Erreur"):
-            print("L'audit a echoue sur tous les modeles. Utilisation du rapport brouillon (non-audite).")
+            print(
+                "L'audit a echoue sur tous les modeles. Utilisation du rapport brouillon (non-audite)."
+            )
             return draft_report
-            
+
         raw_text = raw_text.strip()
         if raw_text.startswith("```markdown"):
             raw_text = raw_text[11:]
@@ -330,6 +367,7 @@ YOUR MISSION:
     except Exception as e:
         print(f"Erreur globale lors de l'audit : {e}")
         return draft_report
+
 
 def update_databases(report_content, today_str):
     """
@@ -355,7 +393,9 @@ def update_databases(report_content, today_str):
             incidents_db = json.load(f)
 
     # Build a simplified list of existing controls to send to the LLM
-    existing_controls_list = [{"id": k, "name": v["name"]} for k, v in controls_db.items()]
+    existing_controls_list = [
+        {"id": k, "name": v["name"]} for k, v in controls_db.items()
+    ]
 
     prompt = f"""Tu es un analyste expert en Risk Management.
 Voici le rapport quotidien Cyber :
@@ -392,9 +432,12 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     ]
 }}
 """
-    models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    models_to_try = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]
     try:
-        client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})  # nosec B501
+        client = genai.Client(
+            api_key=API_KEY,
+            http_options={"httpx_client": httpx.Client(verify=False, timeout=60.0)},
+        )  # nosec B501
 
         raw_output = None
         for model_name in models_to_try:
@@ -404,9 +447,9 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
                     lambda m=model_name: client.models.generate_content(
                         model=m,
                         contents=prompt,
-                        config=types.GenerateContentConfig(temperature=0.0)
+                        config=types.GenerateContentConfig(temperature=0.0),
                     ),
-                    timeout=45
+                    timeout=45,
                 )
                 raw_output = response.text
                 break
@@ -415,17 +458,21 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
                 continue
 
         if not raw_output:
-            print("[DB Update] Aucun modèle disponible pour la mise à jour des bases JSON.")
+            print(
+                "[DB Update] Aucun modèle disponible pour la mise à jour des bases JSON."
+            )
             return
 
         # Extraction robuste : on cherche le premier '{' et le dernier '}' dans la réponse,
         # sans dépendre du formatage Markdown (backticks) que l'IA peut oublier.
-        start_idx = raw_output.find('{')
-        end_idx = raw_output.rfind('}')
+        start_idx = raw_output.find("{")
+        end_idx = raw_output.rfind("}")
         if start_idx == -1 or end_idx == -1:
-            print(f"[DB Update] Impossible de trouver un objet JSON dans la réponse IA : {raw_output[:200]}")
+            print(
+                f"[DB Update] Impossible de trouver un objet JSON dans la réponse IA : {raw_output[:200]}"
+            )
             return
-        clean_json_str = raw_output[start_idx:end_idx + 1]
+        clean_json_str = raw_output[start_idx : end_idx + 1]
         parsed_data = json.loads(clean_json_str)
 
         # Merge new controls
@@ -437,11 +484,13 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
         # Add incidents
         if "incidents" in parsed_data:
             for inc in parsed_data["incidents"]:
-                inc_id = f"INC-{today_str.replace('-', '')}-{uuid.uuid4().hex[:6].upper()}"
+                inc_id = (
+                    f"INC-{today_str.replace('-', '')}-{uuid.uuid4().hex[:6].upper()}"
+                )
                 incidents_db[inc_id] = {
                     "date": today_str,
                     "title": inc.get("title", "Unknown Incident"),
-                    "linked_controls": inc.get("controls", [])
+                    "linked_controls": inc.get("controls", []),
                 }
 
         # Save DBs
@@ -455,9 +504,10 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     except Exception as e:
         print(f"Erreur lors de la mise à jour des bases JSON : {e}")
 
+
 def _md_section_to_html(section_text):
     """Convertit un bloc de texte Markdown d'un incident en HTML."""
-    lines = section_text.strip().split('\n')
+    lines = section_text.strip().split("\n")
     html_parts = []
     in_metadata = False
     in_control = False
@@ -469,80 +519,95 @@ def _md_section_to_html(section_text):
         if not stripped:
             if in_metadata:
                 in_metadata = False
-                html_parts.append('<div class="metadata">' + '<br>\n'.join(metadata_lines) + '</div>')
+                html_parts.append(
+                    '<div class="metadata">' + "<br>\n".join(metadata_lines) + "</div>"
+                )
                 metadata_lines = []
             if in_control:
                 in_control = False
-                html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
+                html_parts.append(
+                    '<div class="control-box">'
+                    + "<br>\n".join(control_lines)
+                    + "</div>"
+                )
                 control_lines = []
             continue
 
         # Detect metadata block start
-        if stripped == '**Incident Metadata:**':
+        if stripped == "**Incident Metadata:**":
             in_metadata = True
             continue
         if in_metadata:
             # Convert - **Key:** Value
-            cleaned = re.sub(r'^-\s*', '', stripped)
-            cleaned = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', cleaned)
+            cleaned = re.sub(r"^-\s*", "", stripped)
+            cleaned = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", cleaned)
             metadata_lines.append(cleaned)
             continue
 
         # Detect section headers like **Overview**, **The Breach Mechanism**, etc.
-        header_match = re.match(r'^\*\*(.+?)\*\*\s*$', stripped)
-        if header_match and not stripped.startswith('- '):
+        header_match = re.match(r"^\*\*(.+?)\*\*\s*$", stripped)
+        if header_match and not stripped.startswith("- "):
             title = header_match.group(1)
-            if 'Proposed Control' in title:
+            if "Proposed Control" in title:
                 in_control = True
-                html_parts.append(f'<h3>{title}</h3>')
+                html_parts.append(f"<h3>{title}</h3>")
                 continue
-            elif 'Conclusion' in title:
+            elif "Conclusion" in title:
                 # Close control box if still open
                 if in_control:
                     in_control = False
-                    html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
+                    html_parts.append(
+                        '<div class="control-box">'
+                        + "<br>\n".join(control_lines)
+                        + "</div>"
+                    )
                     control_lines = []
-                html_parts.append(f'<h3>{title}</h3>')
+                html_parts.append(f"<h3>{title}</h3>")
                 continue
             else:
-                html_parts.append(f'<h3>{title}</h3>')
+                html_parts.append(f"<h3>{title}</h3>")
                 continue
 
         # Bullet points
-        if stripped.startswith('- '):
+        if stripped.startswith("- "):
             content = stripped[2:]
-            content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', content)
+            content = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", content)
             if in_control:
                 control_lines.append(content)
                 continue
-            html_parts.append(f'<p><strong>•</strong> {content}</p>')
+            html_parts.append(f"<p><strong>•</strong> {content}</p>")
             continue
 
         # Footnotes / Sources section
-        if stripped.startswith('[') and re.match(r'^\[\d+\.?\s', stripped):
-            url_match = re.search(r'(https?://\S+)', stripped)
+        if stripped.startswith("[") and re.match(r"^\[\d+\.?\s", stripped):
+            url_match = re.search(r"(https?://\S+)", stripped)
             if url_match:
-                url = url_match.group(1).rstrip('])')
-                domain = re.search(r'https?://(?:www\.)?([^/]+)', url)
+                url = url_match.group(1).rstrip("])")
+                domain = re.search(r"https?://(?:www\.)?([^/]+)", url)
                 domain_name = domain.group(1) if domain else url
                 html_parts.append(f'<a href="{url}">{domain_name}</a><br>')
             continue
 
         # Regular paragraph - convert bold
-        para = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', stripped)
+        para = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", stripped)
         # Convert markdown links
-        para = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', para)
+        para = re.sub(r"\[(.+?)\]\((.+?)\)", r'<a href="\2">\1</a>', para)
         # Replace em dashes
-        para = para.replace(' — ', ' - ').replace('—', '-')
-        html_parts.append(f'<p>{para}</p>')
+        para = para.replace(" — ", " - ").replace("—", "-")
+        html_parts.append(f"<p>{para}</p>")
 
     # Flush any remaining control box
     if in_control and control_lines:
-        html_parts.append('<div class="control-box">' + '<br>\n'.join(control_lines) + '</div>')
+        html_parts.append(
+            '<div class="control-box">' + "<br>\n".join(control_lines) + "</div>"
+        )
     if in_metadata and metadata_lines:
-        html_parts.append('<div class="metadata">' + '<br>\n'.join(metadata_lines) + '</div>')
+        html_parts.append(
+            '<div class="metadata">' + "<br>\n".join(metadata_lines) + "</div>"
+        )
 
-    return '\n'.join(html_parts)
+    return "\n".join(html_parts)
+
 
 def convert_to_html_report(final_report, threat_score, date_str):
     """Convertit le rapport Markdown final en HTML newsletter stylée."""
@@ -559,24 +624,24 @@ def convert_to_html_report(final_report, threat_score, date_str):
         score_emoji = "&#128308;"  # 🔴
 
     # Extract incident titles for TOC
-    titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
+    titles = re.findall(r"^## (.*)", final_report, re.MULTILINE)
 
     # Build TOC HTML
     toc_html = ""
     for idx, title in enumerate(titles, 1):
-        clean_title = title.strip().replace('—', '-')
+        clean_title = title.strip().replace("—", "-")
         toc_html += f'<div class="toc-item"><span class="toc-number">{idx}.</span> {clean_title}</div>\n'
 
     # Split report into incident sections
     # Remove everything before the first ## (score line, TOC, etc.)
-    first_incident = final_report.find('## ')
+    first_incident = final_report.find("## ")
     if first_incident == -1:
         incidents_text = final_report
     else:
         incidents_text = final_report[first_incident:]
 
     # Split by --- separator
-    raw_sections = re.split(r'\n---\n', incidents_text)
+    raw_sections = re.split(r"\n---\n", incidents_text)
 
     # Build incidents HTML
     incidents_html = ""
@@ -586,17 +651,19 @@ def convert_to_html_report(final_report, threat_score, date_str):
             continue
 
         # Extract title from ## header
-        title_match = re.match(r'^## (.+)', section)
+        title_match = re.match(r"^## (.+)", section)
         if title_match:
-            incident_title = title_match.group(1).strip().replace('—', '-')
-            section_body = section[title_match.end():].strip()
+            incident_title = title_match.group(1).strip().replace("—", "-")
+            section_body = section[title_match.end() :].strip()
         else:
             incident_title = f"Incident {idx}"
             section_body = section
 
         body_html = _md_section_to_html(section_body)
 
-        separator = '<tr><td><hr class="incident-separator"></td></tr>' if idx > 1 else ''
+        separator = (
+            '<tr><td><hr class="incident-separator"></td></tr>' if idx > 1 else ""
+        )
 
         incidents_html += f"""
         {separator}
@@ -689,23 +756,25 @@ def convert_to_html_report(final_report, threat_score, date_str):
 
     return html
 
+
 def main():
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
-    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    output_dir = os.path.join(root_dir, "reports")
     md_filename = os.path.join(output_dir, f"Daily_Threat_Intel_{today_str}.md")
 
     # --- LOCK FILE SYSTEM ---
-    # A lock file is written to the repo whenever a report is generated (manually or by bot).
-    # The bot checks for it AFTER git checkout, so it always sees a manually-committed lock.
-    # Rule: if GITHUB_ACTIONS=true and a lock exists for today → skip. Never overwrite manual reports.
-    locks_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "locks")
+    locks_dir = os.path.join(root_dir, "locks")
     lock_filename = os.path.join(locks_dir, f".lock_{today_str}")
 
     if os.environ.get("GITHUB_ACTIONS") == "true" and os.path.exists(lock_filename):
         with open(lock_filename, "r", encoding="utf-8") as f:
             lock_origin = f.read().strip()
-        print(f"[SKIP] A lock file exists for {today_str} (origin: {lock_origin}). Automated run aborted to protect the existing report.")
+        print(
+            f"[SKIP] A lock file exists for {today_str} (origin: {lock_origin}). Automated run aborted to protect the existing report."
+        )
         import sys
+
         sys.exit(0)
 
     print("Recherche des actualites (Threat Intel & Cyber) des dernieres 24h...")
@@ -725,15 +794,22 @@ def main():
     if draft_report.startswith("Erreur"):
         print(f"Annulation : {draft_report}")
         import sys
+
         sys.exit(1)
 
     if "SKIPPED" in draft_report.strip().upper():
-        print("L'IA n'a trouvé aucun incident majeur qualifié aujourd'hui. Fin du script.")
+        print(
+            "L'IA n'a trouvé aucun incident majeur qualifié aujourd'hui. Fin du script."
+        )
         return
 
     # Extraire le Threat Score du BROUILLON (avant l'audit, car l'auditeur peut reformater cette ligne)
     print("Calcul mathematique et deterministe du score de risque final...")
-    match = re.search(r'\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*', draft_report, re.IGNORECASE)
+    match = re.search(
+        r"\*\(\s*Auditable Metrics\s*-\s*Threat Capability:\s*(\d+)/10\s*\|\s*Event Frequency:\s*(\d+)/10\s*\|\s*Business Impact:\s*(\d+)/10\s*\)\*",
+        draft_report,
+        re.IGNORECASE,
+    )
 
     if match:
         tc = int(match.group(1))
@@ -756,14 +832,16 @@ def main():
     final_report = verify_and_correct_report(draft_report, articles)
 
     if "SKIPPED" in final_report.strip().upper():
-        print("L'Auditeur IA a invalidé l'intégralité du brouillon (hors-sujet ou hallucinations). Aucun rapport ne sera publié.")
+        print(
+            "L'Auditeur IA a invalidé l'intégralité du brouillon (hors-sujet ou hallucinations). Aucun rapport ne sera publié."
+        )
         return
 
     # Injecter le score calculé en tête du rapport final audité
     final_report = score_line + final_report
 
     # Génération du sommaire (Table of Contents) - sans hyperliens
-    titles = re.findall(r'^## (.*)', final_report, re.MULTILINE)
+    titles = re.findall(r"^## (.*)", final_report, re.MULTILINE)
     if titles:
         toc = "**Executive Summary - Incidents:**\n"
         for idx, title in enumerate(titles, 1):
@@ -793,7 +871,7 @@ def main():
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
 
-        nl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "newsletters")
+        nl_dir = os.path.join(root_dir, "newsletters")
         os.makedirs(nl_dir, exist_ok=True)
         html_content = convert_to_html_report(final_report, threat_score, today_str)
 
