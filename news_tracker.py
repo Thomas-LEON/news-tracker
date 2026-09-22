@@ -719,6 +719,10 @@ def main():
     print("Analyse par l'IA et redaction de l'Executive Summary (Brouillon)...")
     draft_report = generate_executive_summary(articles, covered_incidents=covered)
 
+    if draft_report.startswith("Erreur"):
+        print(f"Annulation : {draft_report}")
+        return
+
     if "SKIPPED" in draft_report.strip().upper():
         print("L'IA n'a trouvé aucun incident majeur qualifié aujourd'hui. Fin du script.")
         return
@@ -742,6 +746,7 @@ def main():
             color_emoji = "🔴"
         score_line = f"{color_emoji} **Threat Score:** {threat_score}/100\n*(Auditable Metrics - Threat Capability: {tc}/10 | Event Frequency: {ef}/10 | Business Impact: {bi}/10)*\n\n"
     else:
+        threat_score = 0
         score_line = "🟢 **Threat Score:** 0/100\n\n"
 
     final_report = verify_and_correct_report(draft_report, articles)
