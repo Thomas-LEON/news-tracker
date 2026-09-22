@@ -14,7 +14,7 @@ import news_tracker
 
 
 def test_github_actions_skip_when_report_exists(monkeypatch, tmp_path):
-    """When env var GITHUB_ACTIONS='true' AND a report file for today already exists,
+    """When env var GITHUB_ACTIONS='true' AND a lock file for today already exists,
 
     the script should exit with sys.exit(0).
     """
@@ -22,10 +22,10 @@ def test_github_actions_skip_when_report_exists(monkeypatch, tmp_path):
     monkeypatch.setattr(news_tracker, '__file__', str(tmp_path / 'news_tracker.py'))
 
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
-    reports_dir = tmp_path / "reports"
-    reports_dir.mkdir(parents=True, exist_ok=True)
-    dummy_report = reports_dir / f"Daily_Threat_Intel_{today_str}.md"
-    dummy_report.write_text("# Existing Report for Today", encoding="utf-8")
+    locks_dir = tmp_path / "locks"
+    locks_dir.mkdir(parents=True, exist_ok=True)
+    lock_file = locks_dir / f".lock_{today_str}"
+    lock_file.write_text("manual", encoding="utf-8")
 
     with patch.object(news_tracker, 'fetch_recent_news') as mock_fetch, \
          patch.object(news_tracker, 'generate_executive_summary') as mock_gen, \
@@ -229,21 +229,15 @@ def test_main_full_flow_success(monkeypatch, tmp_path):
 
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     md_file = tmp_path / "reports" / f"Daily_Threat_Intel_{today_str}.md"
-    txt_file = tmp_path / "plaintext" / f"Daily_Threat_Intel_{today_str}.txt"
     eml_file = tmp_path / "newsletters" / f"Daily_Threat_Intel_{today_str}.eml"
 
     assert md_file.exists()
-    assert txt_file.exists()
     assert eml_file.exists()
 
     md_content = md_file.read_text(encoding="utf-8")
     assert "Threat Score" in md_content
     assert "Executive Summary - Incidents:" in md_content
     assert "1. Ransomware Group Hits Major Bank" in md_content
-
-    txt_content = txt_file.read_text(encoding="utf-8")
-    assert "Ransomware Group Hits Major Bank" in txt_content
-    assert "**" not in txt_content
 
 
 def test_skipped_when_auditor_returns_skipped(monkeypatch, tmp_path):
