@@ -13,17 +13,33 @@ import socket
 socket.setdefaulttimeout(15.0)
 
 
+import threading
+
 def call_with_hard_timeout(fn, timeout=45):
     """
-    Appelle fn() dans un thread séparé et lève TimeoutError si pas de réponse sous `timeout` secondes.
+    Appelle fn() dans un thread séparé (daemon) et lève TimeoutError si pas de réponse sous `timeout` secondes.
     Contourne le système de retry interne Tenacity de google-genai qui ignore les timeouts httpx.
+    Le thread est 'daemon' pour ne pas bloquer l'arrêt du script principal s'il reste bloqué.
     """
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        future = executor.submit(fn)
+    result = []
+    exc = []
+    
+    def worker():
         try:
-            return future.result(timeout=timeout)
-        except concurrent.futures.TimeoutError:
-            raise TimeoutError(f"LLM call hard-killed after {timeout}s (Tenacity bypass)")
+            result.append(fn())
+        except Exception as e:
+            exc.append(e)
+
+    t = threading.Thread(target=worker)
+    t.daemon = True
+    t.start()
+    t.join(timeout)
+    
+    if t.is_alive():
+        raise TimeoutError(f"LLM call hard-killed after {timeout}s (Tenacity bypass)")
+    if exc:
+        raise exc[0]
+    return result[0]
 
 
 # Remplacez "VOTRE_CLE_API" par votre véritable clé API Google Gemini (AI Studio).
