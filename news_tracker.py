@@ -42,6 +42,39 @@ def call_with_hard_timeout(fn, timeout=45):
     return result[0]
 
 
+def call_llm_with_fallback(prompt, client, complexity="high", temperature=0.1):
+    """
+    Routeur intelligent pour les appels LLM (LLM Gateway pattern).
+    Choisit la cascade de modèles en fonction de la complexité de la tâche,
+    et applique un Fail-Fast strict (timeout par modèle) pour contourner la surcharge.
+    """
+    if complexity == "high":
+        # Tâches complexes nécessitant beaucoup de raisonnement
+        models_to_try = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    else:
+        # Tâches plus simples (vérification de dates, grammaire)
+        models_to_try = ['gemini-3.5-flash', 'gemini-3.1-flash-lite']
+
+    # On utilise 45 secondes de hard timeout par modèle (Fail-Fast)
+    for model_name in models_to_try:
+        try:
+            print(f"Tentative de generation avec le modele {model_name}...")
+            response = call_with_hard_timeout(
+                lambda m=model_name: client.models.generate_content(
+                    model=m,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=temperature)
+                ),
+                timeout=45
+            )
+            return response.text
+        except Exception as e:
+            print(f"Echec avec le modele {model_name}: {e}")
+            continue
+
+    return "Erreur : Impossible de generer le rapport avec les modeles Gemini disponibles (Fail-Fast applique sur tous les modeles de la cascade)."
+
+
 # Remplacez "VOTRE_CLE_API" par votre véritable clé API Google Gemini (AI Studio).
 # Il est recommandé de la définir dans les variables d'environnement Windows.
 API_KEY = os.environ.get("GEMINI_API_KEY", "VOTRE_CLE_API")
@@ -232,25 +265,7 @@ def generate_executive_summary(articles, covered_incidents=None):
             for ci in covered_incidents:
                 prompt += f"- {ci}\n"
 
-        models_to_try = ['gemini-3.1-pro', 'gemini-3.6-flash', 'gemini-3.5-flash']
-
-        for model_name in models_to_try:
-            try:
-                print(f"Tentative de generation avec le modele {model_name}...")
-                response = call_with_hard_timeout(
-                    lambda m=model_name: client.models.generate_content(
-                        model=m,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(temperature=0.1)
-                    ),
-                    timeout=180
-                )
-                return response.text
-            except Exception as e:
-                print(f"Echec avec le modele {model_name}: {e}")
-                continue
-
-        return "Erreur : Impossible de generer le rapport avec les modeles Gemini disponibles (3.6, 3.5, 3.1-lite)."
+        return call_llm_with_fallback(prompt, client, complexity="high", temperature=0.1)
 
     except Exception as e:
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
@@ -294,36 +309,24 @@ YOUR MISSION:
 5. LANGUAGE CHECK: Correct any remaining French words or "IA" abbreviations — replace with their English equivalent. This is mandatory.
 """
 
-    models_to_try = ['gemini-3.1-pro', 'gemini-3.6-flash', 'gemini-3.5-flash']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})  # nosec B501
+        
+        raw_text = call_llm_with_fallback(prompt, client, complexity="low", temperature=0.0)
+        
+        if raw_text.startswith("Erreur"):
+            print("L'audit a echoue sur tous les modeles. Utilisation du rapport brouillon (non-audite).")
+            return draft_report
+            
+        raw_text = raw_text.strip()
+        if raw_text.startswith("```markdown"):
+            raw_text = raw_text[11:]
+        elif raw_text.startswith("```"):
+            raw_text = raw_text[3:]
+        if raw_text.endswith("```"):
+            raw_text = raw_text[:-3]
 
-        for model_name in models_to_try:
-            try:
-                print(f"Tentative d'audit avec {model_name}...")
-                response = call_with_hard_timeout(
-                    lambda m=model_name: client.models.generate_content(
-                        model=m,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(temperature=0.0)
-                    ),
-                    timeout=180
-                )
-
-                raw_text = response.text.strip()
-                if raw_text.startswith("```markdown"):
-                    raw_text = raw_text[11:]
-                elif raw_text.startswith("```"):
-                    raw_text = raw_text[3:]
-                if raw_text.endswith("```"):
-                    raw_text = raw_text[:-3]
-
-                return raw_text.strip()
-            except Exception as e:
-                print(f"Echec de l'audit avec {model_name}: {e}")
-                continue
-
-        return draft_report
+        return raw_text.strip()
     except Exception as e:
         print(f"Erreur globale lors de l'audit : {e}")
         return draft_report
