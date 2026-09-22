@@ -201,7 +201,7 @@ def generate_executive_summary(articles, covered_incidents=None):
             for ci in covered_incidents:
                 prompt += f"- {ci}\n"
 
-        models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+        models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
 
         for model_name in models_to_try:
             try:
@@ -262,7 +262,7 @@ YOUR MISSION:
 5. LANGUAGE CHECK: Correct any remaining French words or "IA" abbreviations — replace with their English equivalent. This is mandatory.
 """
 
-    models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})  # nosec B501
 
@@ -354,7 +354,7 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
     ]
 }}
 """
-    models_to_try = ['gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
+    models_to_try = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     try:
         client = genai.Client(api_key=API_KEY, http_options={'httpx_client': httpx.Client(verify=False, timeout=60.0)})  # nosec B501
 
