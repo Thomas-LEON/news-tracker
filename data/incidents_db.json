@@ -3360,5 +3360,16 @@
             "CTRL-IAM-2005",
             "CTRL-SIM-300"
         ]
+    },
+    "INC-20260922-236330": {
+        "date": "2026-09-22",
+        "title": "BigCommerce Merchants Data Breach via Compromised Ribon Apps (September 21, 2026)",
+        "linked_controls": [
+            "CTRL-NOUVEAU-8106",
+            "CTRL-NOUVEAU-8107",
+            "CTRL-NOUVEAU-6201",
+            "CTRL-NOUVEAU-4050",
+            "CTRL-NOUVEAU-8303"
+        ]
     }
 }

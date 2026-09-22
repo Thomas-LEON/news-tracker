@@ -2922,5 +2922,33 @@
             "Availability": "Medium"
         },
         "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8106": {
+        "name": "Third-Party Application Vetting & Periodic Security Audit Framework",
+        "prerequisites": [
+            "Vendor risk assessment policy",
+            "Automated audit logging",
+            "Compliance documentation repository"
+        ],
+        "cia_impact": {
+            "Confidentiality": "High",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "High"
+    },
+    "CTRL-NOUVEAU-8107": {
+        "name": "Third-Party API Least-Privilege & MFA Enforcement",
+        "prerequisites": [
+            "API gateway integration",
+            "Identity provider support",
+            "Vendor account management policy"
+        ],
+        "cia_impact": {
+            "Confidentiality": "Critical",
+            "Integrity": "High",
+            "Availability": "Medium"
+        },
+        "damage_level": "Critical"
     }
 }
