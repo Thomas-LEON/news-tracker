@@ -69,21 +69,27 @@ def call_llm_with_fallback(prompt, client, complexity="high", temperature=0.1):
         models_to_try = ["gemini-3.5-flash", "gemini-3.1-flash-lite"]
 
     # On utilise 45 secondes de hard timeout par modèle (Fail-Fast)
+    import time
     for model_name in models_to_try:
-        try:
-            print(f"Tentative de generation avec le modele {model_name}...")
-            response = call_with_hard_timeout(
-                lambda m=model_name: client.models.generate_content(
-                    model=m,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(temperature=temperature),
-                ),
-                timeout=45,
-            )
-            return response.text
-        except Exception as e:
-            print(f"Echec avec le modele {model_name}: {e}")
-            continue
+        max_retries = 3 if model_name in ["gemini-3.8-flash", "gemini-3.7-flash"] else 1
+        for attempt in range(max_retries):
+            try:
+                print(f"Tentative de generation avec le modele {model_name} (Essai {attempt + 1}/{max_retries})...")
+                response = call_with_hard_timeout(
+                    lambda m=model_name: client.models.generate_content(
+                        model=m,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(temperature=temperature),
+                    ),
+                    timeout=60,
+                )
+                return response.text
+            except Exception as e:
+                print(f"Echec avec le modele {model_name} (Essai {attempt + 1}/{max_retries}): {e}")
+                if attempt < max_retries - 1:
+                    print("Attente de 25s pour purger le quota RPM (Rate Limit)...")
+                    time.sleep(25)
+                continue
 
     return "Erreur : Impossible de generer le rapport avec les modeles Gemini disponibles (Fail-Fast applique sur tous les modeles de la cascade)."
 
@@ -118,7 +124,7 @@ def fetch_recent_news():
     """Récupère les articles publiés dans les dernières 24h via les flux RSS."""
     recent_articles = []
     now = datetime.datetime.now(datetime.timezone.utc)
-    yesterday = now - datetime.timedelta(days=1)
+    yesterday = now - datetime.timedelta(days=2)
 
     for feed_url in RSS_FEEDS:
         try:
@@ -439,23 +445,31 @@ Tu DOIS retourner UNIQUEMENT un objet JSON valide, sans balises Markdown, struct
             http_options={"httpx_client": httpx.Client(verify=False, timeout=60.0)},
         )  # nosec B501
 
+        import time
         raw_output = None
         for model_name in models_to_try:
-            try:
-                print(f"[DB Update] Tentative avec {model_name}...")
-                response = call_with_hard_timeout(
-                    lambda m=model_name: client.models.generate_content(
-                        model=m,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(temperature=0.0),
-                    ),
-                    timeout=45,
-                )
-                raw_output = response.text
+            max_retries = 3 if model_name in ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash"] else 1
+            for attempt in range(max_retries):
+                try:
+                    print(f"[DB Update] Tentative avec {model_name} (Essai {attempt + 1}/{max_retries})...")
+                    response = call_with_hard_timeout(
+                        lambda m=model_name: client.models.generate_content(
+                            model=m,
+                            contents=prompt,
+                            config=types.GenerateContentConfig(temperature=0.0),
+                        ),
+                        timeout=60,
+                    )
+                    raw_output = response.text
+                    break
+                except Exception as model_err:
+                    print(f"[DB Update] Echec avec {model_name} (Essai {attempt + 1}/{max_retries}): {model_err}")
+                    if attempt < max_retries - 1:
+                        print("[DB Update] Attente de 25s pour purger le quota RPM (Rate Limit)...")
+                        time.sleep(25)
+                    continue
+            if raw_output:
                 break
-            except Exception as model_err:
-                print(f"[DB Update] Echec avec {model_name}: {model_err}")
-                continue
 
         if not raw_output:
             print(
