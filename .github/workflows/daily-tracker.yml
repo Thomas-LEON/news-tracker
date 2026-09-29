@@ -2,7 +2,7 @@ name: Daily Threat Intel Tracker
 
 on:
   schedule:
-    - cron: '0 6 * * *' # Tous les jours à 06:00 UTC
+    - cron: '0 11 * * *' # Tous les jours à 06:00 UTC
   workflow_dispatch: # Permet de lancer manuellement depuis l'interface GitHub
 
 jobs:
@@ -27,11 +27,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Lancer la gǸnǸration du rapport
+      - name: Lancer la generation du rapport
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 300
+          command: python src/news_tracker.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OUTPUT_FORMAT: markdown
-        run: python src/news_tracker.py
+          GITHUB_ACTIONS: 'true'
 
       - name: Commit and Push Report
         run: |

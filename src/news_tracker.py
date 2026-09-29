@@ -124,7 +124,7 @@ def fetch_recent_news():
     """Récupère les articles publiés dans les dernières 24h via les flux RSS."""
     recent_articles = []
     now = datetime.datetime.now(datetime.timezone.utc)
-    yesterday = now - datetime.timedelta(days=2)
+    yesterday = now - datetime.timedelta(days=1)
 
     for feed_url in RSS_FEEDS:
         try:
@@ -176,7 +176,7 @@ def get_previously_covered_incidents(days=3):
     return list(set(covered))
 
 
-def generate_executive_summary(articles, covered_incidents=None):
+def generate_executive_summary(articles, covered_incidents=None, client=None):
     """Utilise l'IA pour trier les articles et générer un Executive Summary."""
     if not articles:
         return "Aucun incident ou article majeur détecté dans les dernières 24 heures."
@@ -306,7 +306,7 @@ def generate_executive_summary(articles, covered_incidents=None):
         return f"Erreur lors de l'appel a l'API IA : {e}\nAvez-vous bien configure la cle d'API GEMINI_API_KEY ?"
 
 
-def verify_and_correct_report(draft_report, articles):
+def verify_and_correct_report(draft_report, articles, client=None):
     """
     Audite le rapport brouillon généré, supprime les incidents hors-sujet (géopolitique, régulation sans incident technique)
     et corrige scrupuleusement les dates des incidents en s'appuyant sur les articles originaux.
@@ -787,8 +787,6 @@ def main():
         print(
             f"[SKIP] A lock file exists for {today_str} (origin: {lock_origin}). Automated run aborted to protect the existing report."
         )
-        import sys
-
         sys.exit(0)
 
     print("Recherche des actualites (Threat Intel & Cyber) des dernieres 24h...")
@@ -802,13 +800,18 @@ def main():
     print("Recherche des anciens rapports pour eviter les doublons...")
     covered = get_previously_covered_incidents(days=3)
 
+    print("Initialisation du client API IA...")
+    verify_ssl = False if os.environ.get("GITHUB_ACTIONS") != "true" else True
+    client = genai.Client(
+        api_key=API_KEY,
+        http_options={"httpx_client": httpx.Client(verify=verify_ssl, timeout=120.0)},
+    )
+
     print("Analyse par l'IA et redaction de l'Executive Summary (Brouillon)...")
-    draft_report = generate_executive_summary(articles, covered_incidents=covered)
+    draft_report = generate_executive_summary(articles, covered_incidents=covered, client=client)
 
     if draft_report.startswith("Erreur"):
         print(f"Annulation : {draft_report}")
-        import sys
-
         sys.exit(1)
 
     if "SKIPPED" in draft_report.strip().upper():
@@ -843,7 +846,7 @@ def main():
         threat_score = 0
         score_line = "🟢 **Threat Score:** 0/100\n\n"
 
-    final_report = verify_and_correct_report(draft_report, articles)
+    final_report = verify_and_correct_report(draft_report, articles, client=client)
 
     if "SKIPPED" in final_report.strip().upper():
         print(
@@ -917,7 +920,7 @@ def main():
     print(f"\nTermine ! Format de sortie : {OUTPUT_FORMAT.upper()}")
 
     print("\nMise à jour de la base de connaissances (Contrôles)...")
-    update_databases(final_report, today_str)
+    update_databases(final_report, today_str, client=client)
 
 
 if __name__ == "__main__":
